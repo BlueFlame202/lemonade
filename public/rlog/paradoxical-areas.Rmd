@@ -1,0 +1,201 @@
+---
+title: "Paradoxical Areas: Part 1"
+author: "Aathreya Kadambi"
+date: "June 4, 2024 and June 26, 2024"
+header-includes:
+- \usepackage{NotesTemplateF}
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+    code_folding: show
+  pdf_document: default
+---
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(plotly)
+```
+
+<style>
+    body { 
+      background-color: rgb(224, 244, 255); 
+      font-family: Montserrat;
+    }
+    .toc-content { 
+      height: 100%;
+      background-color: white; 
+    }
+</style>
+
+<a href="https://aathreyakadambi.vercel.app/blog">Click here to teleport back to Lemonade!</a>
+
+Welcome to an rlog post! I think it's one of my first ones, so on this one I'll be flexing some of the cool capabilities of R markdown for math-related blogging. 😏
+
+Areas are weird. Intuitively, I associate area with an idea of how much of something that can be exposed, for example to sunlight. In that sense, it feels like area should be tied to the total amount of points in something. On the other hand, check this out. Consider the following shapes:
+
+* An upper hemisphere:
+$$U^+ = \{(x,y,z) : x^2+ y^2 + z^2 = 1, 1 \ge z > 0\}$$
+* An open cone:
+$$V^+ = \{(x,y,z) : x^2 + y^2 = (1 - z)^2, 1 \ge z > 0\}$$
+
+The upper hemisphere has area $2\pi$, while the open cone has area $\pi\sqrt{2}$. So far so good. But wait. Notice the following: we can take "$z$-slices" of each of these shapes, corresponding to a certain selection of $z = z_0$. Define:
+$$S_{z} = \{(x,y,z) : x^2 + y^2 + z^2 = 1\}$$
+$$T_z = \{(x,y,z) : x^2 + y^2 = (1 - z)^2\}$$
+which are each slices of the hemisphere and cone respectively. Now notice that $S_z$ and $T_{1 - \sqrt{1-z^2}}$ are both circles of radius $\sqrt{1-z^2}$. We can write:
+$$U^+ = \bigsqcup_{z \in (0,1]} S_z$$
+$$V^+ = \bigsqcup_{z\in (0,1]} T_{1-\sqrt{1-z^2}}$$
+so now we have written both $U^+$ and $V^+$ of unions of circles of the same radius, just at different heights. In this sense, we can sort of squish one vertically down into the other. How does area tie into how we assemble these circles into the cone or the sphere? It seems like the way we pack them directly impacts the area of the resulting solid. 
+
+## Is It That Weird?
+
+I couldn't figure out a better way to display my inner dialogue aside from a ficticious symposium, so here goes:
+
+Bibbily Bob: Areas are weird. Isn't it weird how it seems like $U^+$ and $V^+$ can be seemingly broken into the same sort of shapes just squished together differently?
+
+Alicity Alice: That isn't weird....
+
+Bibbily Bob: In what sense is it natural?
+
+Alicity Alice: Well, for one, any segment of $\mathbb{R}$ is in bijection with any other segment of $\mathbb{R}$. What you did above isn't really weird at all. You established a bijective correspondence between the slices $S_z$ and $T_z$, but that's sort of the same thing, it shouldn't tell us anything aout the areas! The segment $[0,1]$ is in correspondence with $[0,2]$ just by sending every point to twice that point, and they obviously don't have the same length!
+
+Bibbily Bob: I agree, but it still isn't natural to me. Showing one example of weirdness doesn't justify weirdness everywhere. The fact that any segment of $\mathbb{R}$ is in correspondence with any other segment of $\mathbb{R}$ is a weird property to me; it feels like a violation of the conservation of mass or perhaps a conservation of volume in the case of incompressible things. 
+
+Alicity Alice: I mean, maybe it doesn't really appeal to that sort of intuition, but a cone or sphere in the sense of $U^+$ or $V^+$ could never exist in real life, right? In real life, particles can't get arbitrarily close to each other without experiencing massive forces. In the case of the segment, if we had a rope, the reason we wouldn't be able to suddenly stretch it into a larger piece of rope is that beyond a certain point, the molecules would be too far apart to hold together, and the rope would snap. I think what you're looking for is the term "isometry". Things which are isometric, which is more restrictive than a bijective correspondence, have the same areas. 
+
+Bibbily Bob: Oh interesting, yeah you're right. Although... when I learned it, isometries were practically defined to preserve areas or lengths or metrics. I wonder what about them really makes them do that though, or find another property that's equivalent to being isometric.
+
+## Integration
+
+In calculus, we are generally taught how to use our theory of integration to compute these areas. Let's start with the hemisphere. We can break the surface of the hemisphere into little chunks
+
+Then, these chunks have area roughly which is $2\pi\sqrt{1-z^2}\; ds$, where $s$ is the arc length on the circle corresponding to some infinitessimal $dz$. In particular, the arc length along the circle is just $ds = \sqrt{1+(\frac{-z}{\sqrt{1-z^2}})^2}\; dz$. In other words, our area is simply:
+$$\int_A 2\pi \sqrt{1-z^2} \; ds = \int_0^1 2\pi \; dz = 2\pi.$$
+For the cone, the chunks have area $2\pi (1-z) \; ds$, where $ds = \sqrt{2}\; dz$. Thus, our area is
+$$\int_A 2\pi (1-z) \; ds = \int_0^1 2\sqrt{2} \pi (1-z) \; dz = 2\sqrt{2}\pi (1 - \frac{1}{2}) = \pi\sqrt{2}$$
+so our calculus does indeed predict this difference in areas. 
+
+Notice that there is another subtlety even in this integration technique, though. One might think that $ds \approx dz$, especially as they approach zero, but of course, when we take the limit as they approach infinity, the two end up being different:
+$$\int_0^1 2\pi \sqrt{1-z^2} \; dz = \frac{\pi}{2}$$
+so we lost a ton of area with this approximation! Where did all that area go? Let's visualize both approximations. First, the one where we use $ds$:
+
+```{r}
+# Got some help from ChatGPT and then manually tweaked for generating 3D fully-interactive plots! ;)
+radius <- 1
+n <- 20
+
+phi_seq <- seq(0, 2*pi, length.out = n)
+z_seq <- seq(0, radius, length.out = n)
+
+phi_mesh <- matrix(rep(phi_seq, each = n), n, n)
+z_mesh <- matrix(rep(z_seq, times = n), n, n)
+
+x <- sqrt(radius^2 - z_mesh^2) * cos(phi_mesh)
+y <- sqrt(radius^2 - z_mesh^2) * sin(phi_mesh)
+z <- z_mesh
+
+sphere_plot <- plot_ly() %>%
+  add_surface(x = ~x, y = ~y, z = ~z, showscale = FALSE, opacity = 0.5, colorscale = list(c(0, 1), c("blue", "blue")))
+
+for (i in 1:(n-1)) {
+  for (j in 1:(n-1)) {
+    sphere_plot <- sphere_plot %>%
+      add_trace(
+        x = c(x[i,j], x[i+1,j]), 
+        y = c(y[i,j], y[i+1,j]), 
+        z = c(z[i,j], z[i+1,j]), 
+        type = 'scatter3d', mode = 'lines', line = list(color = 'lightgreen')
+      ) %>%
+      add_trace(
+        x = c(x[i,j], x[i,j+1]), 
+        y = c(y[i,j], y[i,j+1]), 
+        z = c(z[i,j], z[i,j+1]), 
+        type = 'scatter3d', mode = 'lines', line = list(color = 'lightgreen')
+      )
+  }
+}
+
+sphere_plot %>%
+  layout(title = "Riemann Sum Approximation of Sphere Surface Area", showlegend=FALSE)
+
+```
+
+And second, the one where we use $dz$:
+```{r}
+
+sphere_plot <- plot_ly()
+
+for (i in 1:(n-1)) {
+  for (j in 1:(n-1)) {
+    sphere_plot <- sphere_plot %>%
+      add_trace(
+        x = c(x[i,j], x[i,j+1]), 
+        y = c(y[i,j], y[i,j+1]), 
+        z = c(z[i,j], z[i,j+1]), 
+        type = 'scatter3d', mode = 'lines', line = list(color = 'red')
+      )
+    if (i > 1) {
+      sphere_plot <- sphere_plot %>%
+        add_trace(
+          x = c(x[i,j], x[i,j]), 
+          y = c(y[i,j], y[i,j]), 
+          z = c(z[i-1,j], z[i,j]), 
+          type = 'scatter3d', mode = 'lines', line = list(color = 'red')
+        ) %>%
+        add_trace(
+          x = c(x[i,j], x[i,j+1]), 
+          y = c(y[i,j], y[i,j+1]), 
+          z = c(z[i-1,j], z[i-1,j+1]), 
+          type = 'scatter3d', mode = 'lines', line = list(color = 'red')
+        )
+    }
+  }
+}
+
+sphere_plot %>%
+  layout(title = "Fake Riemann Sum Approximation of Sphere Surface Area", showlegend=FALSE)
+```
+
+From certain views, it looks like the area should be a pretty good approximation, especially as we take the limit as $dz$ goes to infinity. From an overhead view though, it definitely looks like a massive portion of the surface is missing! Try moving around the plot above with your mouse.
+
+That being said, I think the fact that this approximation won't work might actually be a bit subtle. As we take $dz$ to be infinitessimal, it looks like every slice should eventually become a part of the Riemann sum, which is what we want right? For instance, if $\Delta z$ is the gap, then for any circle (at rational height $\dfrac{p}{q}$) in one of the gaps between pieces, we can just take $\Delta z = \frac{1}{q}$, and that circle will be included in the approximation. In some sense, taking $z = \frac{1}{n}$ such that $n$ is highly divisible should get very close to the actual area of the sphere. Namely, if we take $z_n = \frac{1}{p_1^n...,p_n^n}$ where $p_1,p_2,\dots$ is an enumeration of all primes, then it does seem that as $n$ goes to infinity, every circle contained on the sphere should eventually be a part of the approximation.
+
+## To Summarize
+
+I've taken too long to continue this post, so I'm going to stop here for now and make a Part 2 for a further investigation of these ideas. I hope you're at least convinced by this point that the notion of area is indeed a weird one. 
+
+What I'm looking for here is kind of a relationship between some sort of notion of "continuity" of the approximation and the amount of area that will be missed when we take the Riemann sum. For example, the first approxiamtion we took was continuous in the sense that if we project onto the $x-z$ axis, we are approximating the curve $\sqrt{1-x^2}$ by a piecewise linear function. On the other hand, the other approximation was with a step function. Perhaps this was where the area lost? Perhaps not. In any case, a much more careful analysis needs to be done. It would be nice if we could actually account for the lost $\frac{3\pi}{2}$ with our analysis.
+
+For the original idea from the start of this post, I hope to make a future post classifying isometries to further understand them. Can we study the analytic properties of these functions? These ideas about integration as well as metrics seem related, as we might see in future posts.
+
+There is actually one more "paradox" which I have heard recently, which is the idea that as $n$ goes to infinity, the volume of the $n$-dimensional hypersphere goes to zero. Perhaps we can also consider this statement more carefully in a future post.
+
+Overall, despite having studied calculus, analysis, some geometry, and measure theory, I have still not put the ideas together in my head. There seem to be so many related notions:
+
+- Metrics
+- Measures
+- Forms
+- Lengths, Areas, Volumes, ...
+
+and so it would be nice to have a handful of theorems to relate all of these things together concisely. Hopefully, I'll be able to figure these ideas out in the coming posts. See you soon!
+
+<a href="https://aathreyakadambi.vercel.app/blog">Click here to teleport back to Lemonade!</a>
+
+
+
+<!-- ## Minimizing Curvature -->
+
+<!-- It is interesting how even very curvy shapes can be broken up into collections of lines.  -->
+
+
+<!-- ## Classification of Isometries -->
+
+
+
+
+
+
+

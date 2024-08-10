@@ -1,0 +1,1 @@
+{"otherData": {},"traceEvents":[{"cat":"function","dur":341790,"name":"void __cdecl rsqrtimp2Test(void)","ph":"X","pid":0,"tid":3656067514,"ts":2866604518864},{"cat":"function","dur":381494,"name":"auto __thiscall <lambda_e50bb0391560382068f24bb760fae6fb>::operator ()<float(__cdecl *)(float)>(float (__cdecl *)(float)) const","ph":"X","pid":0,"tid":529972557,"ts":2866604539799}]}

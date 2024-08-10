@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Coolest Proof</title>
+    <script>$(window).on('load', function() {$('#nav-blog').addClass('active')});</script>
+    <script src="../../components/postcard.js" type="text/javascript" defer></script>
+    <link href="styles/css/app.css" rel="stylesheet">
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../../deps/jquery-3.7.0/jquery-3.7.0.min.js"></script>
+    <script src="../../components/navflame.js"  type="text/javascript" defer></script>
+  </head>
+  <body>
+    <nav-flame></nav-flame>
+    <div class="main-body">
+        <h1 class="display-1">The Coolest Proof</h1>
+        <p id="date"><b>July 9, 2023</b></p>
+
+        <p>I was trying to solve Problem 5 from Chapter 1 of Rudin's <i>Rudin and Complex Analysis</i>. The problem is as follows: consider measurable functions $f$ and $g$ from some measurable space to the extended real numbers. Show that the set $\{x : f(x) < g(x)\}$ is measurable.</p>
+
+        <p>My first proof came from considering the difference $f - g$ which is measurable, and then using the definition of a measurable function which gives that the preimage of any open set is a measurable set. However, this proof wasn't super satisfying to me since it basically relied on the previous theorem that $f - g$ is measurable, and doesn't rely only on the definitions of sigma algebras and measurable spaces (and the respective continuous/measurable functions). Overall, for a while I held onto this strong inkling that there must be a better, more set-union-intersectiony topology-esque proof. But I thought about it, and for some reason I couldn't find it.</p>
+
+        <p>Today I was talking to my dad about it, and I finally suddenly discovered this proof: notice that 
+            $$\{x : f(x) < g(x)\} = \bigcup_{r \in \mathbb{Q}} (f^{-1}(A) \cap g^{-1}(B))$$
+            where $A$ is the interval $[-\infty,r)$ and $B$ in the interval $(r,\infty]$. $f^{-1}$ and $g^{-1}$ denote getting preimages. Since $A$ and $B$ are open, their preimages are measurable, and the rest follows from from the properties of sigma algebras.
+        </p>
+
+        <p>I really like this proof a lot more because it doesn't use anything about the field structure of the real numbers, and only uses stuff about the topology of $\mathbb{R}$. Overall, I was also really proud of myself for coming up with this type of set-based topology-esque proof, since I haven't really made my own before and generally always just read them in textbooks.</p>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,160 @@
+---
+title: "Sahai's Challenge"
+author: "Aathreya Kadambi"
+date: "May 2024"
+header-includes:
+- \usepackage{NotesTemplateF}
+output:
+  pdf_document: default
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: paged
+    code_folding: show
+---
+
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+<style>
+    body { 
+      background-color: rgb(224, 244, 255); 
+      font-family: Montserrat;
+    }
+    .toc-content { 
+      height: 100%;
+      background-color: white; 
+    }
+</style>
+
+# Problem 1
+
+**Problem.** Abbey and Beth are friends. So are Carl and Dan. They are having a little dispute about fairness and they ask you to resolve it.
+    
+Whenever Carl and Dan go out to eat each Saturday, they take strict turns paying the tab. If Carl payed last time, Dan will pay this time and vice versa. But they don't bother about consciously keeping track of money and will order a big dish randomly from the menu and share it equally. Big dish prices are uniformly distributed on [5,10].
+
+Abbey and Beth take a different approach to fairness. They too go out to eat and take strict turns paying the bill. But they order small dishes separately. Whenever one of them calculates that she is currently more than \$10 behind in her fair share of payments, she will order the salad for \$1. Otherwise she randomly picks a dish from the small dish menu where the prices are uniformly distributed on [2.5,5].
+
+Carl and Dan believe that Abbey and Beth are being overly cautious and advise them to trust in the power of averaging to make things work out in the end. Abbey and Beth are skeptical and do not want to risk their friendship.
+
+Assume that if at any time the balance of payments becomes skewed by more than M times the maximum price of a dish in one direction, then unconscious feelings of being cheated will manifest and the friendship will grow distant.
+
+\begin{itemize}
+    \item Setup a model for AB behavior and CD behavior.
+    \item What is the probability that one of Carl and Dan will eventually feel cheated as a function of M? Abbey and Beth?
+    \item As M increases, approximately how does the time till friendship strain increase?
+    \item What if there is inflation in the system and the price of dishes goes up by five percent per year?
+    \item What if there was deflation in the system and the price of dishes dropped by five percent per year?
+\end{itemize}
+
+
+\begin{itemize}
+    \item \textbf{Model for AB behavior and CD behavior}
+\end{itemize}
+
+For this problem, let $U(a,b)$ represent a uniformly distributed random variable on the interval $[a,b]$.
+
+### A First Model for AB Behavior
+
+
+To model AB behavior, let $p_t$ be the cost of the bill the $t$th time they go out, for $t = 1,2,...$. If Abbey pays the first time, the amount each of them will have payed by time $t$ is:
+$$A_t = \sum_{j = 1}^{(t+1)/2} p_{2j-1}$$
+$$B_t = \sum_{j=1}^{t/2} p_{2j}$$
+Now $p_t$ is given by the following function:
+$$p_t = \left\{\begin{array}{cc}
+    1 + U(2.5,5) & |A_{t-1} - B_{t-1}| \ge 10 \\
+    2U(2.5,5) & \text{ else}
+\end{array}\right.$$
+Substituting our expressions for $A_t$ and $B_t$, we can also express this as:
+$$p_t = \left\{\begin{array}{cc}
+    1 + U(2.5,5) & |\sum_{j=1}^{t/2} p_{2j-1} - \sum_{k=1}^{(t-1)/2} p_{2j}| \ge 10 \\
+    2U(2.5,5) & \text{ else}
+\end{array}\right.$$
+
+I am not sure if there is a good way to find a closed-form expression for this, but we can certainly simulate the results by computing $p_t$ for $t = 1,...,T$ for large $T$, and then computing $A_t$ and $B_t$.
+
+### A Better Model for AB Behavior
+
+Another approach is as follows. Instead of storing the data of the cost of the bill the $t$th time they go out, we only keep track of $A$ and $B$. For simplicity, define:
+$$o(t) = \left\{\begin{array}{cc}
+    0 & \text{ if $t$ is even} \\
+    1 & \text{ if $t$ is odd}
+\end{array}\right.$$
+and 
+$$f(a,b) = \left\{ \begin{array}{cc}
+    0 & \text{ if $|a-b| \ge 10$}\\
+    1 & \text{ if $|a-b| < 10$}
+\end{array}\right.$$
+so that
+\begin{align*}
+    A_t &= A_{t-1} + o(t) (f(A_{t-1},B_{t-1})U(2.5, 5) + U(2.5, 5) + 1-f(A_{t-1},B_{t-1}))\\
+    &= A_{t-1} + o(t) ((f(A_{t-1},B_{t-1}) + 1)(U(2.5, 5) - 1) + 2)
+\end{align*}
+and B's behavior is the same, except she pays on the opposite turns:
+\begin{align*}
+    B_t &= B_{t-1} + (1-o(t)) (f(A_{t-1},B_{t-1})U(2.5, 5) + U(2.5, 5) + 1-f(A_{t-1},B_{t-1}))\\
+    &= B_{t-1} + (1-o(t)) ((f(A_{t-1},B_{t-1}) + 1)(U(2.5, 5) - 1) + 2)
+\end{align*}
+Notice that the difference between their payments, $d_t=  A_t - B_t$, can be modeled as:
+\begin{align*}
+    d_t &= A_t - B_t = (A_{t-1} - B_{t-1}) + (2o(t) - 1)(f(A_{t-1},B_{t-1})U(2.5, 5) + U(2.5, 5) + 1-f(A_{t-1},B_{t-1}))\\
+    &= d_{t-1} + (2o(t) - 1)(f(d_{t-1})U(2.5, 5) + U(2.5, 5) + 1-f(d_{t-1}))
+\end{align*}
+where we have noted that with a bit of abuse of notation, we can also view $f(a,b)$ as a function of just their difference:
+$$f(d) = \left\{\begin{array}{cc}
+    0 & \text{ if $|d| \ge 10$} \\
+    1 & \text{ else}
+\end{array}\right.$$
+Abbey and Beth will feel cheated if $|d_t| > 5M$ since $5$ is the maximum price of any dish they get. Before continuing with their behavior, I will switch to CD Behavior since it seems easier.
+
+### A Model for CD Behavior
+
+If we let $C_t$ and $D_t$ be defined similarly as $A_t$ and $B_t$ for Carl and Dan, we have similar relations:
+$$C_t = C_{t-1} + o(t)(U(5,10))$$
+$$D_t = D_{t-1} + (1-o(t))(U(5,10))$$
+$$d_t = d_{t-1} + (2o(t) - 1)(U(5,10)) = d_{t-1} + (-1)^{t-1}U(5,10)$$
+Here is a simulation of this process:
+```{r}
+n = 1000
+
+d = runif(n, 5, 10)
+for (i in 2:n) 
+{
+  d[i] = d[i-1] + (-1)^i * d[i]
+}
+plot(1:n, d, type='l')
+```
+
+
+We have that the variance is:
+$$\sigma_{d,t}^2 = \sigma_{d,t-1}^2 + (2o(t) - 1)^2\frac{25}{12} = \sigma_{d,t-1}^2 + \frac{25}{12} \Rightarrow \sigma_{d,t}^2 = \frac{25t}{12}$$
+since $2o(t) - 1 \in \{-1,1\}$ and the mean is
+$$\mu_{d,t} = \mu_{d,t-1} + \frac{15}{2}(2o(t) - 1),$$
+so 
+$$\mu_{d,t} = \mu_{d,t-2} = \mu_{d,{t\text{ mod }2}}.$$
+For even $t$, this means that $\mu_{d,t} = \mu_{d,0}$, 
+
+Note that by Chebyshev's inequality, for even $t$,
+$$\mathbb{P}(|d_t| \ge 10M) \le \dfrac{\sigma_{d,t}^2}{100M^2} = \dfrac{t}{48M^2}$$
+so
+$$\mathbb{P}(|d_t| < 10M) \ge 1- \dfrac{t}{48M^2}$$
+
+
+What we want to find is $\mathbb{P}(|d_t| \ge 10M\text{ for some }t)$. This is $1 - \mathbb{P}(|d_t| < 10M\text{ for all }t)$. Let $f(x)$ be the solution to the problem such that $d_0 = x$, and let $g(x)$ be the solution but so that the first random variable is negative rather than positive. We have that using the fact that $U$ satisfies a uniform distribution, we can compute $f(x)$ by considering the probabilities after one step:
+$$f(x) = \int_5^{10} g(x+y)\;dy$$
+$$g(y) = \int_5^{10} f(y-z)\;dz$$
+so that $f$ satisfies:
+$$f(x) = \int_5^{10} \int_5^{10} f(x+y-z)\;dz\;dy$$
+
+It would be nice if we could identify some kinds of symmetry relationships with $f$. We would expect that $f(x) = g(-x)$ (if we just started with Dan at zero rather than Carl), but this isn't really very useful, because we already can get that from the above. We do have some important boundary conditions though:
+$$f(x) = 0\text{ for all }x\text{ such that }|x| \ge 10M$$
+
+Is there a nonzero solution? Another idea is that $h(x) := f(x) + g(x) = g(-x) + f(-x) = h(-x)$, so $h$ defined as $f +g$ is an odd function. It would be nice if we could use that somehow. Note that we have:
+$$h(x) = f(x) + g(x) = \int_5^{10} g(x+y) + f(x-y)\;dy$$
+
+$$f(x) = \int_{-5}^5 (5-|t|)f(x+t) \; dt = \int_0^5 (5-t)(f(x+t) + f(x-t))\;dt$$
+

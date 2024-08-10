@@ -1,0 +1,165 @@
+---
+layout: ../../layouts/BlogPostLayout.astro
+title: "Motivating Ladder Operators"
+description: "Trying to understand ladder operators better."
+image: "/img/pics/IMG_4612.jpg"
+author: "Aathreya Kadambi"
+date: "August 5, 2024"
+---
+
+Recently I've been reading about spin and angular momentum operators in quantum mechanics, which both satisfy some very nice commutation relations:
+<div style="text-align: center">$$[A_i, A_j] = i\hbar\epsilon_{ijk} A_k$$</div>
+for $A = L$ or $A = S$. Somehow, we are repeatedly able to use so called ladder operators to find that an operator can only take on a discrete set of eigenvalues. Apparently the two index cards in the picture above weren't enough to figure it all out, so I've decided to utilize my new ability to make KaTeX+MDX blog posts.
+
+## Contents
+
+1. [Jumbled Thoughts](#jumbled-thoughts)
+1. [A Path to The Essence (Possibly)](#a-path-to-the-essence-possibly)
+1. [Random Scratch Work](#random-scratch-work)
+
+## Jumbled Thoughts
+
+I'll start out with a vague (potentially nonsensical) description of what I think is so interesting about the ladder operators technique, and then try to generalize it. We are able to construct so called "ladder operators" which are such that when you act them on an eigenvector $f$ of $A$ with eigenvalue $\mu$, they have the property that they return a new eigenvector of $A$ with eigenvalue $\mu \pm c$. Namely,
+<div style="text-align: center">$$A_3 (A_{\pm} f) = (\lambda + c)(A_{\pm} f).$$</div>
+Somehow, with this clever operator, we are able to actually discover that the set of eigenvalues of $A_3$ are discrete. Here the choice of $3$ seems soemwhat arbitrary, it's just to mimic the way it is done with $L_z$ or $S_z$.
+
+
+To me, it seems that the crux of the ladder argument is the above, that we can find an operator that "bumps up" an eigenvector to another eigenvector with increased eigenvalue. By doing this, we are actually breaking up $\R$ (the set of all possible eigenvalues) into a bunch of little ladders and offsets: $c\Z + r$ where $r \in [0, c)$. Denote by $E_\lambda(\Omega)$ the set of all eigenvectors of $\Omega$ corresponding to an eigenvalue $\lambda$. Then $A_{\pm}$ give us maps:
+<div style="text-align: center">$$A_{\pm} : E_{\lambda}(A_3) \rightarrow E_{\lambda \pm c}(A_3).$$</div>
+
+The other big trick is having an operator $A^2 := A_1^2 + A_2^2 + A_3^2$ that commutes with $A_3$:
+<div style="text-align: center">$$[A_3, A^2] = [A_3, A_1^2] + [A_3, A_2^2] = i\hbar A_1A_2 + i\hbar A_2A_1 - i\hbar A_2A_1 - i\hbar A_1A_2 = 0.$$</div>
+This allows us to restrict our attention to just simultaneous eigenvectors of both $A^2$ and $A_3$, which allow us to fix an eigenvalue of $A^2$ and focus on eigenvalues of $A_3$. Somehow, with this fact, we are able to bound the eigenvalues of $A_3$, and combined with the previous ladder operators, we are able to actually *discover* that the eigenvalues of both $A^2$ and $A_3$ are discrete! A big step in this is the fact that:
+<div style="text-align: center">$$A_{\mp}A_{\pm} = A^2 - A_3^2 \pm i\hbar A_3,$$</div>
+which ends up following from the commutation relation and the construction of $A^2$.
+
+How does it all just work out so perfectly?
+
+If I want to claim that it worked out so perfectly, I should identify what parts seem so coincidental. To me, it seems magical that we can discover that the collection of eigenvalues is discrete in nature from the initial commutation relationship. This leads me to wonder... is there a general use case for these ladder operators? It seems to me that there are a few crucial steps in this process:
+1. Bound the eigenvalues of the operator in question.
+2. Relate eigenvalues by the ladder operators $A_{\pm}$.
+3. It must be that $A_{\pm}^k f = 0$ for some $k$. 
+4. If $k$ is chosen minimally, it must mean that $\lambda \pm kc = 0$, so that $\lambda = \mp kc$ with $k \in \Z$.
+
+One thing that particularly intruiges me is the possibility that the discretness comes from the very fact that we can bound the eigenvalues.
+
+To examine this further, we can try to compare this to the discreization of energy for the particle in a box. In that case, the idea was to factor the hamiltonian operator: $H \sim A^\dagger A$. Here again, we try to factor $L^2 \sim A^\dagger A$. In the case of the hamiltonian, we were left with something of the form:
+<div style="text-align: center">$$H = A^\dagger A + \frac{1}{2}\hbar\omega I = A^\dagger A + p(I)$$</div>
+where $p$ is a polynomial and notice that $[H, I] = 0$. In the angular momentum case, we were left with 
+<div style="text-align: center">$$L^2 = A^\dagger A + L_3^2 \mp i\hbar L_3 = A^\dagger A + p(L_3)$$</div>
+where $p$ is again a polynomial and notice that $[L^2, L_3] = 0$. Very interesting indeed. But this doesn't shed light on why they increment and decrement the eigenvalues of eigenvectors. Maybe we just find operators that both increment/decrement the eigenvalues *and* satisfy the above properties?
+
+We can actually see the "ladderness" of the ladder operators from the commutation relationship they have with the operator in question. In particular,
+<div style="text-align: center">$$[H, A_{\pm}] = \pm \hbar\omega A_{\pm}$$</div>
+and for the angular momentum case,
+<div style="text-align: center">$$[L^2, A_{\pm}] = \pm 0\cdot A_{\pm}$$</div>
+but we do have that:
+<div style="text-align: center">$$[L_3, A_{\pm}] = \pm \hbar A_{\pm}.$$</div>
+Mhm. Very peculiar indeed.
+
+I think a very integral part of these ladder operators is that they satisfy:
+$$[A, D_{\pm}] = \pm c D_{\pm}$$
+for some $c$. This is important, because then:
+<div style="text-align: center">$$A(D_{\pm}f) = ([A, D_{\pm}] + D_{\pm}A)f = (\lambda \pm c)(D_{\pm}f).$$</div>
+where $f \in E_{\lambda}(A)$. This encapsulates the idea that the ladder operator $D$ will increase of decrease the eigenvalue.
+
+Now I'll get into what I think may be the essence behind thesse ladder operator methods.
+
+## A Path to the Essence (Possibly)
+
+To start, I'll define ladder operator:
+
+**Definition.** Consider any Hermitian operator $A$. We say that an operator $L$ is **a ladder operator for $A$ of step size $c$** if 
+<div style="text-align: center">$$[A, L] = cL.$$</div>
+
+
+<div class="theorem">
+**Theorem.** Consider any Hermitian operator $A$. If $L$ is a ladder operator for $A$ of step size $c$, then $L^\dagger$ is a ladder operator for $A$ of step size $-c^*$.
+</div>
+
+*Proof.*
+<div style="text-align: center">$$[A, L^\dagger] = AL^\dagger - L^\dagger A = (LA - AL)^\dagger = (-[A, L])^\dagger = -c^*L.$$</div>
+<div style="text-align: right">$\blacksquare$</div>
+
+<div class="theorem">
+**Theorem.** Suppose $A$ is a Hermitian operator and $L$ is a ladder operator for $A$ of step size $c$ where $c \in \R$. Then $[A, LL^\dagger] = 0$.
+</div>
+
+*Proof.*
+<div style="text-align: center">$$[A, LL^\dagger] = L[A,L^\dagger] + [A,L]L^\dagger = -cLL^\dagger + cLL^\dagger = 0$$</div>
+<div style="text-align: right">$\blacksquare$</div>
+
+
+<div class="theorem">
+**Theorem.** Suppose every eigenvalue of $A$ satisfies $\lambda \le \lambda_{\max}$ for some eigenvalue $\lambda_{\max}$. Then if $L$ is a ladder operator for $A$ of step size $c \in \R^+$, and $q(A) + L^\dagger L = B$ for some operator $B$ which commutes with $A$ where $p$ and $q$ are polynomials, the only possible eigenvalues of $A$ are those in $\lambda_{\max} - c\mathbb{N}$.
+</div>
+*Proof.*
+
+If $\lambda_{\max}$ is an eigenvalue, consider a corresponding eigenvector $v$ which is also an eigenvector of $B$ with eigenvalue $\mu$ (I think you might need that $B$ is self-adjoint for this, although I need to check again later). Then
+<div style="text-align: center">$$A(Lv) = (LA + [A, L])v = (LA + cL)v = LAv + cLv= \lambda_{\max} Lv + cLv = (\lambda_{\max} + c)Lv$$</div>
+but $\lambda_{\max} + c$ cannot be an eigenvalue. Thus, it must be that $Lv = 0$, or equivalently, $\|Lv\| = 0$. Now notice that:
+<div style="text-align: center">$$\|Lv\| = \langle v, L^\dagger L v\rangle$$</div>
+Now notice that
+<div style="text-align: center">$$L^\dagger Lv = (q(A) - B)v = q(A)v - B v = q(\lambda_{\max})v - \mu v = (q(\lambda_{\max}) - \mu) v$$</div>
+so that
+<div style="text-align: center">$$0 = \|Lv\| = q(\lambda_{\max}) - \mu$$</div>
+so $q(\lambda_{\max}) = \mu$.
+
+
+Hmm... there is something still missing here. The thing is, in the case of the energy eigenvalues, we can actually find $B$ as the identity operator so $\mu = 1$, and $\lambda_{\min}$ is some constant value. In the case of the angular momentum operator, we made $A$ the $L^2$ operator and $B$ the $L_z$ operator. However, this isn't quite the result I wanted. I was hoping for something more like "boundedness translates into discreteness," but it looks like somehow, these polynomials end up messing things around. 
+
+It feels like beyond this step, the path diverges. Like in the case of the hamiltonian operator for the particle in a box, the fact that $Lv = 0$ can be used to simplify the Shrodinger equation, and in the case of the angular momentum operator, we were able to use the identity of the polynomial in combination with the reverse statement with a $\lambda_{\min}$ to discritize the angular momentum. It seems that things may be more complicated than I thought. One similarity I do see, though, is that we have $I = L^\dagger L + p(H)$ and $L^2 = A^\dagger A + q(L_z)$, and $I$ and $L^2$ are similar in that they commute with everything else, $L$ and $A$ are the respective ladder operators of $H$ and $L_z$, and $q$ and $p$ are polynomials. I feel like there has to be something there.
+
+I'll have to think about it more, and I'll make an update in a future post!
+
+
+## Random Scratch Work
+
+<div class="remark">
+**Remark.** Warning, the following stuff probably has errors, which is why it is down here. But the errors did help me realize and understand things better.
+</div>
+
+We use the well-ordering principle (or equivalently, we could frame this via induction). Let $S \subseteq \N$ be the set of all $n \ge 0$ such that the only eigenvalue of $A$ in $\lambda_{\max} - c[n, n+1)$ is $\lambda_{\max} - n$. Now let $S^c = \mathbb{N}\backslash S$. Suppose for contradiction that $S^c$ is nonempty. By the well-ordering principle, there exists a smallest value $m$ in $S^c$. Then there must be an eigenvalue in $\lambda_{\max} - c[m, m+1)$ which is not $\lambda_{\max} - cm$. Denote it by $\lambda_{\max} - c(m+r)$, where $r \in [0,1)$. Denote the corresponding eigenvector by $v$. 
+
+Now, if $Lv \neq 0$,
+<div style="text-align: left">$$A(Lv) = (LA + [A, L])v = (LA + cL)v = LAv + cLv$$</div>
+<div style="text-align: right">$$= (\lambda_{\max} - c(m+r))Lv + cLv = (\lambda_{\max} - c(m+r-1))Lv$$</div>
+but $\lambda_{\max} - c(m-1+r) < \lambda_{\max} - c(m+r)$. 
+
+If $m = 0$, then $\lambda_{\max} - c(m-1+r) = \lambda_{\max} + c(1-r) > \lambda_{\max}$, which can't possibly be an eigenvalue because $\lambda_{\max}$ was the largest eigenvalue, which is a contradiction. If $m \ge 1$, $m-1$ is in $S^c$ as well, which is a contradiction of the minimality of $m$. 
+
+So since both cases lead to contradiction, it must be that $Lv = 0$, or equivalently, $\|Lv\| = 0$. Now notice that:
+<div style="text-align: center">$$\|Lv\| = \langle v, L^\dagger L v\rangle$$</div>
+Now notice that
+<div style="text-align: center">$$L^\dagger Lv = (A - p(B))v = Av - p(B) v = (\lambda_{\max} - c(m+r))v - p(\mu)v = (\lambda_{\max} - c(m+r) - p(\mu)) v$$</div>
+so that
+<div style="text-align: center">$$0 = \|Lv\| = \lambda_{\max} - c(m+r) - p(\mu)$$</div>
+
+In either case, we have achieved a contradiction, so $S^c$ is indeed empty, and so $S = \N$. Thus, for all $n$, the only eigenvalue of $A$ in $\lambda_{\max} - c[n, n+1)$ is $\lambda_{\max} - n$, so indeed, the only possible eigenvalues of $A$ are those in $\lambda_{\max} - c\mathbb{N}$
+<div style="text-align: right">$\blacksquare$</div>
+
+By essentially the same proof but using $L^\dagger$ in place of $L$, we also have that:
+<div class="theorem">
+**Theorem.** Suppose every eigenvalue of $A$ satisfies $\lambda \ge \lambda_{\min}$ for some $\lambda_{\min}$. Then if $L$ is a ladder operator for $A$ of step size $c \in \R^+$, the only possible eigenvalues of $A$ are those in $\lambda_{\min} + c\mathbb{N}$.
+</div>
+
+So indeed, *the boundedness of the eigenvalues of an operator translates directly into discreteness*! I should specify that by discrete, I mean that there is a minimum distance between two points in the set, or even more strongly, that the set is a subset of $c\Z$ for some $c$. Even more interestingly, this result seems to suggest that *there cannot be two ladder operators of step sizes different in magnitude same operator*. That does seem magical. (Just kidding, I had an error in this proof)
+
+In other words, to identify whether an operator is discrete, you simply need to 
+1. Find a ladder operator for it with step size $c$.
+2. Find the minimum and/or maximum eigenvalues for the operator.
+
+And boom. You have now shown that the eigenvalues of this operator are precisely those in the set: 
+<div style="text-align: center">$\{\lambda_{\min} + ck : k\in \Z, 0 \le k \le \frac{\lambda_{\max} - \lambda_{\min}}{c}\}$</div>
+This actually motivates setting up a "quantum number" for it. We might call it $l$, and take $l = \frac{\lambda}{c}$. This way, the eigenvalues of the operator are those in the set:
+<div style="text-align: center">$\{l \in \Z : l_{\min} \le l \le l_{\max}\}$</div>
+where $l_{\min} = \frac{\lambda_{\min}}{c}$ and $l_{\max} = \frac{\lambda_{\max}}{c}$..
+
+
+If we then have bounds on the maximum and minimum possible eigenvalues for $A_i$ (here $A_i$ is self-adjoint so that all eigenvalues are real, which is an ordered set), we can actually see that there must be some maximal number of times that we can apply $A_{\pm}$ to an eigenvector $f$ of $A$ until we obtain zero. Else, we would have discovered a new eigenvector corresponding to a large enough or small enough eigenvalue, which is not possible. So there must be extreme eigenstates of $A_i$ which can be obtained by repeated application of the ladder operators, such that $A_{\pm} f = 0$, or equivalently, $\|A_{\pm} f\| = 0$.
+
+This is where the magical part happens. It just so happens that $A_+$ and $A_-$ are adjoints of each other, and so it is possible to write:
+<div style="text-align: center">$$\|A_\pm f\| = \langle A_\pm f, A_\pm f\rangle = \langle f, A_{\mp}A_{\pm} f\rangle.$$</div>
+It just so happens that $f$ is also an eigenvector of $A_{\mp}A_{\pm}$ (whad'ya know?) so that now, $\|A_{\pm} f\|$ is equal to the eigenvalue of $f$ with respect to $A_{\mp}A_{\pm}$. In the case of the angular momentum and spin operators, this gives us equations which the extreme states must satisfy. There is one last trick, which is that any two extreme states part of the same chain must differ by an element of $c\Z$, by the nature of the construction of the ladder operators. If we then factor out the right things, we obtain the fact that *the set of eigenvalues of the operator $A_i$ is discrete*.
+
+There is actually another trick that I glossed over, which was the trick of using some other operator that commutes with $A_i$; we use something like $L^2$ or $S^2$, which gives us a vehicle to do things, because somehow, we can express $A_{\mp}A_{\pm}$ in terms of $A^2$ and $A_i$.

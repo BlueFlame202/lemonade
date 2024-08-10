@@ -1,0 +1,72 @@
+---
+import Navbar from "../components/Navbar";
+// import TextTypeEffect from "../components/TextTypeEffect";
+import NewsWidget from "../components/NewsWidget.astro";
+import Footbar from "../components/Footbar.astro"
+
+import '@fontsource/pt-sans'
+import '../styles/globals.css'
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Aathreya Kadambi's Website</title>
+	</head>
+	<body>
+    <div class="definitelyNotANotVeryHiddenComment"><!-- Oh hey, fancy seeing you here. Hmmm, I wonder, what would you do if I told you that I hid a(nother) comment in here? Who knows though, I might be trolling. :P --></div>
+    <main>
+      <Navbar active="home" client:load />
+      <div class="container-fluid flex flex-wrap bg-white">
+        <div class="flex justify-center items-center w-full md:w-1/4 hidden md:flex">
+          <div class="w-full mx-4 relative pb-[100%] overflow-hidden">
+            <img src="/img/aathreyakadambi-circle.png" alt="A picture of me" class="absolute object-cover top-0 left-0" />
+          </div>
+        </div>
+
+        <div class="w-full md:w-3/4 gx-5">
+          <div class="mx-4 text-container">
+            <p id="sn" class="text-6xl display-4 mb-0 mt-12">Welcome!</p>
+            <h1 id="quotep1">to Aathreya Kadambi's Blog!</h1>
+          </div>
+          <blockquote class="mx-4 blockquote text-left">
+            <p class="mb-3"><i id="quotep2"></i></p> <!-- Used to be: (Goals ⇒ Actions, Actions ⇒ Goals) ⇒ Goals ⇔ Actions. -->
+          </blockquote>
+        </div>
+        <div class="order-2 md:order-1 w-full md:w-1/4 gx-5">
+          <NewsWidget></NewsWidget>
+        </div>
+        <div class="order-1 md:order-2 w-full md:w-3/4 gx-5">
+          <div class="mx-4 pb-5">
+            <blockquote class="italic text-lg text-gray-600">
+              <p>Lemonade is a sweet homemade drink made in many parts of the world. Different people make their lemonade differently; it&apos;s one of those things that everyone can take and make their own. On hot summer days, it&apos;s not uncommon to see children setting up lemonade stands on the street for some extra change, for fun, or to give to charity. In fact, lemonade is so positively rooted in our culture that it has even become embedded into the common saying: &quot;when life gives you lemons, make lemonade&quot;. Even when life does not give you lemons, it never hurts to make a nice, cold, and refreshing glass of lemonade.</p>
+              <footer class="mt-4 text-right text-gray-500">- DNM</footer> 
+              <div class="definitelyNotANotVeryHiddenComment">
+                <!-- Wow, nice job finding this comment! ;) As a reward, I\'ll tell you what DNM is. Originally, DNM meant "Definitely Not Me". But it also means Deep \'N Meaningful: https://medium.com/@MissGenY/why-you-should-have-ye-old-dnm-24eb7707c98d. Idk. Interestnig perspectives. What do you think? By the way, there aren\'t too many other easter eggs in this HTML, because the HTML is compiled and generated automatically by Next.js. This comment was just something I forcefully injected for fun. :P See you around! Oh... just one more thing. Check this out: https://youtu.be/dQw4w9WgXcQ. -->
+              </div>
+            </blockquote>
+            <div>
+              <p id="blurb">Hi! You&apos;ve reached my latest website! I&apos;m Aathreya. Who am I? Hopefully we&apos;ll both be able to understand the answer a little better through this website! 😃 There isn&apos;t too much to see here yet, but I&apos;ll be periodically pushing updates here, so be on the lookout! Here&apos;s some info on the pages in the navigation:</p>
+              <p id="blog-blurb"><b id="blog-bb">Blog:</b> Posts related to things that I&apos;m thinking about. Mostly related to notes and observations on problems that I&apos;m working on.</p>
+              <p id="notes-blurb"><b id="notes-bb">Notes:</b> Contains my notes on things that I have learned throughout my life. Notes are still being uploaded.</p>
+              <p id="projects-blurb"><b id="projects-bb">Projects:</b> I&apos;m usually working on some kind of project. While this section currently does not exist, I hope to fill it with interesting things I do soon!</p>
+              <p id="sea-blurb"><b id="sea-bb">🌊:</b> A 3D project I want to eventually build!</p>
+              <p id="cv-blurb"><b id="cv-bb">CV:</b> Please email me at <a href="mailto:aathreyakadambi@gmail.com">aathreyakadambi@gmail.com</a> for my CV if you are interested!</p>
+              <p id="end-blurb">If you would like to see some of my older blogs, please check out:</p>
+              <ul>
+                  <li><a href="https://inthesolved.wordpress.com/" id="solved-link">The Solved:</a> <span id="list-element-3">An Older Blog of Mine (there&apos;s a part of this blog on AoPS too!)</span></li>
+                  <li><a href="https://intheunsolved.wordpress.com/" id="unsolved-link">The Unsolved:</a> <span id="list-element-2">An Older Blog of Mine</span></li>
+              </ul>
+            </div>
+          </div>
+          <br />
+        </div>
+      </div>
+    </main>
+    <Footbar></Footbar>
+    </div>
+	</body>
+</html>

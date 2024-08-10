@@ -1,0 +1,18 @@
+---
+import ClassicLayout from "../layouts/BaseLayout.astro";
+import ProjectPage from "../components/ProjectPost";
+
+const projects = [
+    { title: 'Two Thousand and Two Nights', content: 'Math through stories: making an effort to understand and remember all of mathematics.', websiteLink: './projects/two-thousand-and-two-nights', websiteIcon: '/img/icons/lemonade-mark/AK-circle.png', websiteName: 'Website', status: 'Started', backgroundImage: '/img/pics/solar-eclipse-partial-2.JPG' },
+    { title: 'Algae', content: 'An open source algorithms package inspired by my algorithms and numerical analysis classes at Berkeley.', githubLink: 'https://github.com/BlueFlame202/algae', status: 'Started', backgroundImage: '/img/pics/algae-placeholder.jpeg' },
+    { title: 'Cats and Monsters', content: 'A quick game I made at the end of my data structures class. I was proud of the 2D lighting and shadows.', websiteLink: 'https://www.youtube.com/watch?v=0chMA3DOxe0&t=3s', websiteIcon: '/img/icons/youtube/social/1024px/white/youtube_social_circle_white.png', websiteName: 'Video', status: 'Completed', backgroundImage: '/img/pics/game-pic.png' },
+    { title: 'p-Adic Numbers and Analysis', content: 'A presentation I made at the end of my complex analysis class. I always loved p-adic valuation because it makes some proofs prettier.', websiteLink: 'https://www.ocf.berkeley.edu/~aathreyak/orange-juice/classes/final-projects/UCB_MATH_H185_Final_Project_Notes.pdf', websiteIcon: '/img/icons/document-icon.png', websiteName: 'Notes', status: 'Completed', backgroundImage: '/img/pics/p-adic-numbers-paper.png' },
+    { title: 'Guitar Pickup Coils', content: 'Perhaps one of my favorite class projects, Yuhao Gong and I investigated pickup coils for guitars. I love guitars.', websiteLink: 'https://aathreyakadambi.vercel.app/classes/final-projects/pick-up-coils.pdf', websiteIcon: '/img/icons/document-icon.png', websiteName: 'Presentation', status: 'Completed', backgroundImage: '/img/pics/IMG_8868.jpg' }, // , websiteLink2: 'https://aathreyakadambi.vercel.app/classes/final-projects/5bl-project-proposal.pdf', websiteIcon2: '/img/icons/document-icon.png', websiteName2: 'Project Proposal'
+    { title: 'DARTH VADER', content: 'A simple extension to expand the lexicon of VADER to increase sensitivity on certain corpora of text and tweets. Made during URAP at Berkeley.', githubLink: 'https://github.com/BlueFlame202/darth-vader-py', status: 'Completed', backgroundImage: '/img/pics/tweet-deadness.png' },
+    { title: 'VADER C++', content: 'A C++ version of the VADER sentiment tool, useful for quickly processing tweet sentiments. Made during URAP at Berkeley.', githubLink: 'https://github.com/BlueFlame202/vader-cpp', status: 'Completed', backgroundImage: '/img/pics/vader-cpp.png' },
+];
+---
+<ClassicLayout title="Projects">
+    <p class="mb-6">This page includes many of my favorite projects! I&apos;m starting to document these in 2024, so some projects I did from before 2024 may not be included here; I&apos;m still adding things when I get a chance! :)</p>
+    <ProjectPage posts={projects} />
+</ClassicLayout>

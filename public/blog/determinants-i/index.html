@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>P.E.K.K.A.s and Determinants</title>
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">    
+    <link href="../bstyles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../components/navflame.js" type="text/javascript" defer></script>
+    <script>$(window).on('load', function() {$('#nav-blog').addClass('active')});</script>
+    <script src="../../components/postcard.js" type="text/javascript" defer></script>
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <nav-flame></nav-flame>
+    <div class="main-body">
+        <h1 class="display-1">P.E.K.K.A.s and Determinants</h1>
+        <p id="date"><b>January 15, 2023</b></p>
+        <div class="problem">
+            <i>"Is P.E.K.K.A a knight? A samurai? A robot? No one knows!"</i>
+            <div align="right">- Clash of Clans Loading Screen Hint</div>
+        </div>
+
+        <p>What do a P.E.K.K.A. (from the amazing game Clash of Clans) and a determinant (from the amazing mathematics) have in common? </p>
+        <p>No one knows what they are!</p> 
+        <p>Just kidding, there are many people that could say they know what a determinant is. Yet different people might say different things! And maybe it's just me, but after all of the exterior algebra wedge product tensors math that we did at the end of my linear algebra class, I've been utterly unconfident in my grasp of determinants. First of all, what even is a determinant? Is it the combinatorially-inspired formula for matrices? Is it a measure of the "dialation factor" of a linear map? Is it a geometrically inspired measure of $n$-dimensional volume or size? There are so many perspectives on what a determinant really is, and I want to take a deeper look at these perspectives in this post.</p>
+        <p>That being said, it's been a while since my last post, so for now, I'll just give an introduction to this big dilemma, and in future posts I'll dive in deeper.</p>
+
+        <h2 class="display-4">Table of Contents</h3>
+            <ul class="toc-list" role="list">
+              <li>
+                <a href="#definitions">
+                  <span class="title">Definitions</span>
+                </a>
+              </li>
+              <li>
+                <a href="#dilemma">
+                  <span class="title">My Dilemma</span>
+                </a>
+              </li>
+    
+              <li>
+                <a href="#problems">
+                  <span class="title">Problems from Putnam</span>
+                </a>
+              </li>
+              <li>
+                <a href="#links">
+                  <span class="title">Useful Links</span>
+                </a>
+              </li>
+            </ul>
+
+        <h2 class="display-4" id="definitions">Definitions</h2>
+        <p>There are several definitions I have seen for what a determinant means. In order to understand these, there are two structures we must first understand: matrices and linear maps. Secretly (or not so secretly), these two things are actually identical structures in math in that they behave in exactly the same way. Below, I made a simple crash course on the fundamental definitions for each structure. I will do my best to introduce the prerequisite definitions below, but without significant mathematical maturity, having prior seen what is below is practically necessasry.</p>
+        <p>We start with a matrix. In plain English, a matrix is an "array" of numbers. These numbers could be real, complex, or numbers mod 2 for example (more generally, they could belong to any field). We can precisely define a matrix as follows:</p>
+
+        <p><b>Definition (Matrix).</b> Consider a collection of values $a_{ij}$ for $1 \le i \le m$ and $1 \le j \le n$. We say that these values form the matrix $A$, which can be denoted as:
+        $$\begin{bmatrix} a_{11} & a_{12} & ... & a_{1n} \\ a_{21} & a_{22} & ... & a_{2n} \\ ... & ... & ... & ... \\ a_{m1} & a_{m2} & ... & a_{mn} \end{bmatrix}$$</p>
+
+        <div class="remark">
+            <b>Remark.</b> Some authors may conveniently use $A_{ij}$ rather than $a_{ij}$ to make it more clear to which matrix the elements belong.
+        </div>
+        <p>
+            Additionally, matrices are related via the following operations:
+        </p><p>
+            Matrix Addition:
+            $$\begin{bmatrix} a_{11} & a_{12} & ... & a_{1n} \\ a_{21} & a_{22} & ... & a_{2n} \\ ... & ... & ... & ... \\ a_{m1} & a_{m2} & ... & a_{mn} \end{bmatrix} + \begin{bmatrix} b_{11} & b_{12} & ... & b_{1n} \\ b_{21} & b_{22} & ... & b_{2n} \\ ... & ... & ... & ... \\ b_{m1} & b_{m2} & ... & b_{mn} \end{bmatrix} = \begin{bmatrix} c_{11} & c_{12} & ... & c_{1n} \\ c_{21} & c_{22} & ... & c_{2n} \\ ... & ... & ... & ... \\ c_{m1} & c_{m2} & ... & c_{mn} \end{bmatrix} \Leftrightarrow c_{ij} = a_{ij} + b_{ij}\;\forall\; 1 \le i \le m, 1 \le j \le n$$
+            </p><p>Matrix Multiplication:
+            $$\begin{bmatrix} a_{11} & a_{12} & ... & a_{1n} \\ a_{21} & a_{22} & ... & a_{2n} \\ ... & ... & ... & ... \\ a_{m1} & a_{m2} & ... & a_{mn} \end{bmatrix} \begin{bmatrix} b_{11} & b_{12} & ... & b_{1p} \\ b_{21} & b_{22} & ... & b_{2p} \\ ... & ... & ... & ... \\ b_{n1} & b_{n2} & ... & b_{np} \end{bmatrix} = \begin{bmatrix} c_{11} & c_{12} & ... & c_{1n} \\ c_{21} & c_{22} & ... & c_{2n} \\ ... & ... & ... & ... \\ c_{m1} & c_{m2} & ... & c_{mn} \end{bmatrix} \Leftrightarrow c_{ij} = \sum_{k = 1}^n a_{ik} b_{kj} \;\forall\; 1 \le i \le m, 1 \le j \le n$$
+        </p>
+        <p>Matrix Multiplication may seem a bit weird at first, but the motivation for this method of multiplication comes from the relationship between matrices and linear maps, or some would motivate it as a straightforward extension of the dot product (the story of how dot products and in general inner products are related to the linear maps perspective of linear algebra is very interesting in my opinion and is a good idea for a future post).</p>
+        <p>To understand linear maps, we must first understand maps as defined on vector spaces. It can be difficult to motivate vector spaces without introducing the notion of groups and fields, but for those who have not seen the formal definition of a field, it is a structure with similar properties to that of the integers. A vector space, then, is a collection of "vectors" (which are related by an addition operator and satisfy commutativity, associativity, and closure (so that the sum of any two vectors is also a vector in the vector space)) and "scalars" which are elements of a field. Vectors are generally denoted with arrows or bolding, and there are two distributive laws: $a(\textbf{v} + \textbf{u}) = a\textbf{v} + a\textbf{u}$, and $(a+b)\textbf{v} = a\textbf{v} + b\textbf{v}$. A map is simply an object that for each element $a$ in a vector space $A$, assigns an element $b$ in the vector space $B$ (and assigns only one element in $B$ to each element in $A$). We can denote a map using:
+            $$f : A \rightarrow B$$ 
+            $$a \mapsto b$$ 
+        Now, 
+        </p>
+        <p>
+            <b>Definition (Linear Map).</b> A map $f : A \rightarrow B$ is linear if $f(\textbf{x} + \textbf{y}) = f(\textbf{x}) + f(\textbf{y})$ for all $\textbf{x},\textbf{y} \in A$ and $f(c\textbf{x}) = cf(\textbf{x})$ for scalar $c$.
+        </p>
+        <p>The two structures above may seem extremely different, but in reality, they are exactly the same. However, that is the subject of most introductory linear algebra textbooks and courses, and below we will hope that the reader has seen the material, or has had sufficient time and mathematical maturity to play with the ideas above.</p>
+
+        <p>There are a few definitions of the determinant that I am currently aware of, depending on where you look. Two of them, I take from <i>Linear Algebra Done Right</i> by Sheldon Axler (LADR), but in general these definitions are canonical and repeated everywhere. However, what I have found (at least so far in my math lifetime) is that people generally pick the definition that is most convenient for the problem they are trying to solve; while we discussed how each definition is equivalent in my linear algebra class, I believe there are fundamental ideas behind this notion of a "determinant" that I have yet to pick up on. And that's where these (plural implying future posts) blog posts come in.</p>
+
+        <p>First we have an algebray definition of determinant for linear maps: (taken from LADR)</p>
+        <p><b>Definition (Definition of Determinant for Linear Maps).</b> Suppose $T$ is a linear map from a vector space $V$ over a field $\mathbb{F}$ to itself (more generally this is called a <b>linear operator</b>). If $\mathbb{F} = \mathbb{C}$, then the <b>determinant of $T$</b> $\det T$ is the product of the eigenvalues of $T$, with each eigenvalue repeated according to its multiplicity. If $\mathbb{F} = \mathbb{R}$, then instead of the eigenvalues of $T$, we take the eigenvalues of $T_{\mathbb{C}}$ ($T_{\mathbb{C}}$ is the "complexification of $T$", and is essentially the same as treating $i$ as a scalar).</p>
+
+        <p>Next we have a combinatoricsy definition of determinant for matrices: (taken from LADR)</p>
+        <p><b>Definition (Definition of Determinant for Matrices).</b> Suppose $A$ is an $n$-by-$n$ matrix 
+        $$A = \begin{bmatrix} A_{11} & ... & A_{1n} \\ ... & & ... \\ A_{n1} & ... & A_{nn}\end{bmatrix}$$ 
+        Then the <b>determinant of $A$</b>, $\det A$, is defined by
+        $$\det A = \sum_{(m_1,...,m_n) \in \text{perm }n} (\text{sign}(m_1,...,m_n))A_{m_1,1}...A_{m_n,n}$$</p>
+
+        <p>And finally we have a totally weird algebray geometry-y definition:</p>
+        <p><b>Definition (Definition of Determinant from Wedge Products).</b> This is honestly so complicated that I will leave this to your imagination for now. Or maybe I will update this post later today.</p>
+
+        <h2 class="display-4" id="dilemma">My Dilemma</h2>
+       <p>So these definitions exist. Maybe you're thinking "but what's the big deal?" The problem is that now we have three definitions of the same thing! For the determinant to be well-defined, we'll need to thoroughly relate these definitions. In doing so, I believe that we'll be able to see amazing connections between our different theories, just as having various equations for the area of a triangle can help one see connections in Euclidean geometry.</p>
+
+       <p>And these connections are what I seek to find in the posts that follow. Email me at aathreyakadambi@gmail.com to discuss these ideas or to share any websites, blog posts, or other media on this topic! I look forward to it.</p>
+
+       <h2 class="display-4" id="problems">Problems from Putnam</h2>
+            <p>Before I end this post, I want to discuss what started it: Putnam. Right after my linear algebra course ended, I had begun writing my own linear algebra resource which I believed covered linear algebra well (and in my opinion obviously the best). Over time, however, I realized the nature of the task, and I went on hiatus. While in the Putnam class at my university though, I came to realize that I have only a surface-level handle of determinants. However, for the purposes of Putnam, the section on determinants from my professor's (Alexander Givental) linear algebra book allowed us to solve all of the questions we needed to solve. Here are some of those problems, which generally are solved easily using theory following the definition of determinant for matrices (to be added).</p>
+
+
+            <h2 class="display-4" id="links">Useful Links</h2>
+            <p>Below, I compiled some links I found particularly interesting throughout this project.</p>
+        <ul>
+          <li><a href="https://inthesolved.wordpress.com/mat-217-notes/">Shameless plug of my unrefined linear algebra notes (parts of which ended up unfortunately being on paper when my computer died)</a></li>
+          <li><a href="https://math.stackexchange.com/questions/684332/why-is-there-no-generalization-of-the-determinant-to-infinite-dimensional-vector">A stack exchange thread on why determinants are used for finite dimensional vector spaces only.</a></li>
+          <li><a href="https://people.maths.ox.ac.uk/hitchin/files/LectureNotes/Projective_geometry/Chapter_3_Exterior.pdf">Some notes on exterior algebra I'll need to use to brush up! I really need to study projective geometry seriously... it seems super super cool and I always loved it when studying for olympiads.</a></li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>

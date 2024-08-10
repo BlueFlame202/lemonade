@@ -1,0 +1,91 @@
+/* body {
+    background-color: var(--bf-primary-highlight);
+} */
+
+.main-body {
+    padding: 10%;
+    padding-top: 1px;
+    padding-bottom: 10%;
+    background-color: white;
+}
+
+.cover-image {
+    width: 100%;
+    height: 30vh;
+    background-size:cover;
+    background-position:center;
+}
+
+b {
+    color: var(--bs-emphasis-color);
+}
+
+#frontmatter {
+    margin-top: 0;
+    color: var(--bs-heading-color,inherit)
+}
+
+/* I was too lazy to do their fancy smanchy Bootstrap way of getting different colors, will have to update eventually*/
+
+.strat {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 0px solid #00ffff;
+    border-top-width: 0.25rem;
+    border-bottom-width: 0.25rem;
+    border-radius: 0.25rem;
+    background: linear-gradient(rgba(127,255,208,0.25), rgba(127,255,208,0.15));;
+}
+
+.skill {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 0px solid #ff0000;
+    border-top-width: 0.25rem;
+    border-bottom-width: 0.25rem;
+    border-radius: 0.25rem;
+    background: linear-gradient(rgba(255,0,0,0.15), rgba(255,0,0,0.10));;
+}
+
+.theorem {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 0px solid #cf02cf;
+    border-top-width: 0.25rem;
+    border-bottom-width: 0.25rem;
+    border-radius: 0.25rem;
+    background: linear-gradient(rgba(255,0,255,0.15), rgba(255,0,255,0.10));;
+}
+
+.interesting {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 0px solid #00ff00;
+    border-left-width: 0.25rem;
+    border-radius: 0.25rem;
+    background: linear-gradient(rgba(0,255,0,0.15), rgba(0,255,0,0.10));;
+}
+
+.problem {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 0px solid #000000;
+    border-left-width: 0.25rem;
+    border-radius: 0.25rem;
+    background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15));;
+}
+
+.remark {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 0px solid #fff200;
+    border-left-width: 0.25rem;
+    border-radius: 0.25rem;
+    background: linear-gradient(90deg, rgba(255,242,0,0.35), rgba(0,0,0,0));;
+}

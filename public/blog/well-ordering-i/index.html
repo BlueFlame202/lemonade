@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cuts and the Well-Ordering Principle</title>
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">    
+    <link href="../bstyles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../components/navflame.js" type="text/javascript" defer></script>
+    <script>$(window).on('load', function() {$('#nav-blog').addClass('active')});</script>
+    <script src="../../components/postcard.js" type="text/javascript" defer></script>
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <nav-flame></nav-flame>
+    <div class="main-body">
+        <h1 class="display-1">Cuts and the Well-Ordering Principle</h1>
+        <p id="date"><b>February 13, 2023</b></p>
+        
+        <p>Today a friend reminded me that I still haven't finished reading Baby Rudin, so I decided that today I absolutely HAD to revisit analysis and solidify it in my head as much as I've solidified Linear Algebra.</p>
+
+        <p>Of course, though, only halfway through the Chapter 1 Exercises, I've already found myself distracted by the amazing black hole of self-symmetrical mathematical doom, as I now have added to my (probably over a hundred) tabs the following:
+            <ol>
+                <li><a href="https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers">https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Peano_axioms">https://en.wikipedia.org/wiki/Peano_axioms</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory</a></li>
+                <li><a href="https://www.google.com/search?q=real+number+system+of+size+aleph+2&rlz=1C5CHFA_enUS1022US1022&oq=real+number+system+of+size+aleph+2&aqs=chrome..69i57j33i160l3j33i299.8909j0j7&sourceid=chrome&ie=UTF-8">Google Search: real number system of size aleph 2</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Transcendental_number">https://en.wikipedia.org/wiki/Transcendental_number</a></li>
+                <li><a href="https://math.stackexchange.com/questions/15811/generalization-of-a-ring">https://math.stackexchange.com/questions/15811/generalization-of-a-ring</a></li>
+            </ol>
+        </p>
+
+        <p>I have some interesting questions, so I thought it would be best to document them before I go to bed.</p>
+
+        <h2 class="display-4">Table of Contents</h3>
+            <ul class="toc-list" role="list">
+              <li>
+                <a href="#black-hole">
+                  <span class="title">The Amazing Black Hole of Self-Symmetrical Mathematical Doom</span>
+                </a>
+              </li>
+              <li>
+                <a href="#cos-emotions">
+                  <span class="title">The $\cos$ Wave of Emotions</span>
+                </a>
+              </li>
+    
+              <li>
+                <a href="#rabbit-hole">
+                  <span class="title">Flashlight into a Rabbit Hole</span>
+                </a>
+              </li>
+              <li>
+                <a href="#links">
+                  <span class="title">Useful Links</span>
+                </a>
+              </li>
+            </ul>
+
+        <h2 class="display-4" id="black-hole">The Amazing Black Hole of Self-Symmetrical Mathematical Doom</h2>
+        <p>It all started with Theorem 1.36. Why does the least upper bound of an upper-bounded nonempty set of real numbers exist, from the theorem of Dedekind and the Dedekind cut formulation of real numbers? But before I could even start reading the proof, it suddenly struck me how similar the least upper bound property was to the well ordering principle.</p>
+
+        <p>In hindsight, the similarity is pretty straightforward, and maybe it was even how Dedekind came up with the formulation (although his formulation feels pretty natural to me anyway (haha get it natural))... I have yet to read Dedekind's original works. In any case, the statements are strikingly similar. The Well-Ordering Principle states that
+            $$S \neq \varnothing, S \subseteq \mathbb{N} \Rightarrow \exists a \in S, \forall b \in S, a \le b$$
+        Define a <b>negative cut</b> to be a subset $S$ of the rational numbers such that $\mathbb{Q} \backslash S$ is a Dedekind cut. It is fairly simple to see that real numbers can be associated with negative cuts rather than the Dedekind cuts themselves. The Least Upper Bound Property states that (or at least the following is equivalent to the least upper bound property):
+        $$S \neq \varnothing, S \text{ negative cut} \subseteq \mathbb{Q} \Rightarrow \exists a \in S, \forall b \in S, a \le b$$
+        My question was then... does a similar property exist for higher levels of sets? For example, the Well-Ordering Principle could be stated for the integers (naturals extended to a ring) as: <i>Let $S$ be a nonempty set of integers which is bounded above. Then the set of upper bounds of $S$ has a minimum.</i> It is simple to see how similar this is to the Least Upper Bound Property: <i>Let $S$ be a nonempty set of reals which is bounded above. Then the set of upper bounds of $S$ has a minimum.</i> The fact that these properties are so similar suggests a generalization.
+        </p>
+
+        <h2 class="display-4" id="cos-emotions">The $\cos$ Wave of Emotions</h2>
+
+        <p>Before I go into other thoughts, it's interesting how the ZF construction of the natural numbers is similar to the construction of the real numbers. For one, it's interesting that in both case, relations are essentially given by subsets. We have:
+            $$0 \subset 1 \subset 2 \subset ... $$
+        and for real numbers, if $x$ and $y$ are cuts with $x < y$,
+        $$x \subset y$$
+        which obviously is not a coincidence.
+        </p>
+
+       <p>At first, I considered extensions from $\mathbb{R}$ to $\mathbb{C}$. But $\mathbb{C}$ is very weird... it doesn't even have order! But then I realized... $\mathbb{C}$ sort of takes ordered pairs of reals just like $\mathbb{Q}$ takes ordered pairs of integers. Even then, though, they seem to be symmetric or nice in different ways. For example, $\mathbb{Q}$ when identified with $\mathbb{Z}^2$ is essentially created with the product:
+        $$\dfrac{a}{1} \cdot \dfrac{1}{a} = \dfrac{1}{1} = \dfrac{a}{a} \Leftrightarrow (a,1)(1,a) = (1,1) = (a,a)$$
+        which is essentially how $\dfrac{1}{a}$ is defined. For complex numbers, when viewed as real numbers, we have:
+        $$(0+1i)(0+1i) = -1+0i \Leftrightarrow (0,1)(0,1) = (-1,0)$$
+        which is essentially how the complex numbers arise. We can view complex numbers as closing real numbers with respect to multiplicative inversal with respect to $-1$, in addition to 1. This seems to give the xomplex numbers a weird circular swirly structure that I have yet to fully understand. In any case, the swirliness of complex numbers makes it symmetrical and nice in a way that isn't exactly like the rational numbers (at least I think for now), so I'm not sure how easy it would be to try and generalize things with this path.
+       </p>
+
+       <p>
+        I then thought, wait... so $\mathbb{Z}$ is closed under additive inverses, $\mathbb{Q}$ is closed under multiplicative inverses (and multiplication is repeated addition), so what happens when we view $\mathbb{R}$ (or I guess $\mathbb{C}$?) as closed under power inverses? But the first issue that comes up is that not all real numbers are even algebraic. In fact, according to Wikipedia there are only countably many algebraic numbers (which makes sense but...). If there are so many (uncountably many) numbers that aren't even closed under powers, how does everything explode so much in the construction of the real numbers? Does this mean everything can't necessarily be generalized repeatedly to create "higher order" number systems? What if we constrain to just algebraic numbers? Why even is $\pi$ transcendental? Too many questions and it's wayyy past when I planned to sleep....
+       </p>
+
+       <h2 class="display-4" id="rabbit-hole">Flashlight into a Rabbit Hole</h2>
+            <p>I still feel like the Well-Ordering Principle/LUB Property idea should be generalizable so that repeatedly inducing this axiom on sets should generate more and more complex sets in some way. However, I'm not exactly sure how. Also, so many numbers fall out of geometry. For example, ratios, real numbers, and even transcendentals can be constructed in geometrical settings. Not everything can be constructed, but where exactly are these numbers coming from, and in what ways are they closing old number systems? Can we generate much bigger and much more complex sets that are meaningful and produce a better understanding of other lower order sets? For example, the LUB property expands the rational numbers from a size of $\aleph_0$ to $\aleph_1$. Does generating a set of size $\aleph_2$ with the property make a meaningful set upon which we can do some sort of deeper analysis?</p>
+
+
+            <h2 class="display-4" id="links">Useful Links</h2>
+            <p>This time, I put my links at the top of this post. But for repetitions, here they are again: 
+                <ol>
+                    <li><a href="https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers">https://en.wikipedia.org/wiki/Set-theoretic_definition_of_natural_numbers</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Peano_axioms">https://en.wikipedia.org/wiki/Peano_axioms</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory">https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory</a></li>
+                    <li><a href="https://www.google.com/search?q=real+number+system+of+size+aleph+2&rlz=1C5CHFA_enUS1022US1022&oq=real+number+system+of+size+aleph+2&aqs=chrome..69i57j33i160l3j33i299.8909j0j7&sourceid=chrome&ie=UTF-8">Google Search: real number system of size aleph 2</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Transcendental_number">https://en.wikipedia.org/wiki/Transcendental_number</a></li>
+                    <li><a href="https://math.stackexchange.com/questions/15811/generalization-of-a-ring">https://math.stackexchange.com/questions/15811/generalization-of-a-ring</a></li>
+                </ol>
+            </p>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>

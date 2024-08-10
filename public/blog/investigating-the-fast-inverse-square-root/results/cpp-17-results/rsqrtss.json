@@ -1,0 +1,1 @@
+{"otherData": {},"traceEvents":[{"cat":"function","dur":91624,"name":"void __cdecl rsqrtTest(void)","ph":"X","pid":0,"tid":2880859051,"ts":2865598750283},{"cat":"function","dur":216684,"name":"auto __thiscall <lambda_e50bb0391560382068f24bb760fae6fb>::operator ()<float(__cdecl *)(float)>(float (__cdecl *)(float)) const","ph":"X","pid":0,"tid":733412263,"ts":2865598755968}]}

@@ -1,0 +1,314 @@
+% Made by: Aathreya Kadambi
+% This is actually my first package :D
+% Important note: Many of these commands that I made were based off or taken from code snippets that I found on stack exchange.
+%
+%	VERSION 3.0
+%
+% I basically took this structure off of https://tex.stackexchange.com/questions/8750/make-your-own-sty-files.
+
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{NotesTemplate}
+  [2023/16/07 v3.0 LaTeX package for Note taking in any Subject.]
+
+% PACKAGES
+%\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{ulem}
+\RequirePackage{url}
+\RequirePackage{tikz}
+\RequirePackage{tikz-cd}
+\tikzset{commutative diagrams/.cd}
+\RequirePackage{hyperref}
+\RequirePackage{wrapfig}
+\RequirePackage{indentfirst}
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{ragged2e}
+\RequirePackage{mathtools}
+\RequirePackage{enumitem}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[inline]{asymptote}
+%\RequirePackage[a4paper, margin=1in]{geometry}
+\RequirePackage{tcolorbox}
+\RequirePackage[sfdefault]{biolinum}
+%\RequirePackage[sfdefault]{FiraSans}
+%\RequirePackage{noto}
+\RequirePackage{mathrsfs}
+\RequirePackage{multicol}
+
+\tcbuselibrary{skins}
+
+% V2.2 Updates
+\RequirePackage{textgreek}
+\RequirePackage{xspace}
+%\RequirePackage{quiver}
+\RequirePackage{bbm}
+\RequirePackage[all]{xy}
+\RequirePackage{graphicx} % Required for inserting images
+
+% USER DEFINED VARIABLES
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Primes}{\mathbb{P}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Hart}{\mathbb{H}}
+
+% Categories
+\newcommand{\Cat}{\mathsf{Cat}}
+\newcommand{\CAT}{\mathsf{CAT}}
+\newcommand{\CatC}{\mathsf{C}} % REDEFINED compared to previous (unpublished) versions!
+\newcommand{\CatD}{\mathsf{D}}
+\newcommand{\CatE}{\mathsf{E}}
+\newcommand{\CSet}{\mathsf{Set}}
+\newcommand{\CGrp}{\mathsf{Grp}}
+
+% lendshow is for ending lemmas or small results and tendshow is for theorems, corollaries, or other large results
+\newcommand{\lendshow}{\hfill\null $\square$\\}
+\newcommand{\tendshow}{\hfill\null $\blacksquare$\\}
+\newcommand{\QED}{\hfill\null Q.E.D.}
+\newcommand{\EL}{\hfill\null End Lemma.}
+
+\newcommand{\orb}{\text{Orb}}
+\newcommand{\card}{\text{card}}
+\newcommand{\cross}{\times}
+
+\definecolor{dr}{RGB}{175, 0, 0}
+\definecolor{Aquamarine}{HTML}{00B5BE}
+\definecolor{NiceBlue}{HTML}{00FFFF}
+
+\newcommand{\imp}[1]{\textcolor{dr}{#1}}
+
+\newcommand{\myeq}[1]{\stackrel{\mathclap{\normalfont\mbox{\tiny{$#1$}}}}{=}} % For projective geometry
+\newcommand{\myequiv}[1]{\stackrel{\mathclap{\normalfont\mbox{\tiny{$#1$}}}}{\equiv}}
+
+% Functions
+\def\Span{\qopname\relax m{span}}
+\def\rref{\qopname\relax m{rref}}
+\def\trace{\qopname\relax m{trace}}
+\def\Null{\qopname\relax m{null}}
+\def\range{\qopname\relax m{range}}
+\def\Aut{\qopname\relax m{Aut}}
+\def\lcm{\qopname\relax m{lcm}}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\rank}{rank}
+
+% TIKZ Shortcuts
+\newcommand{\Tgrid}[4]{\draw[step=1cm, gray, very thin, ->] (#1, #2) grid (#3, #4); \draw (#1, 0) -- (#3, 0); \draw (0, #2) -- (0, #4);}
+\newcommand{\Tplane}[4]{\draw[<->] (#1, 0) -- (#3, 0); \draw[<->] (0, #2) -- (0, #4);}
+
+\renewcommand{\theequation}{\thechapter.\arabic{equation}}
+
+% COLORFUL BOXES (L means legacy)
+
+\newtcolorbox{problem}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline north = {0.7pt}{0pt}{black},
+   borderline south = {0.7pt}{0pt}{black},
+   interior style = {top color=black!7, bottom color=black!7},
+   #1
+}
+
+\newtcolorbox{strat}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline north = {0.7pt}{0pt}{NiceBlue},
+   borderline south = {0.7pt}{0pt}{NiceBlue},
+   interior style = {top color=Aquamarine!7, bottom color=Aquamarine!7},
+   #1
+}
+
+\newtcolorbox{skill}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline north = {1.6pt}{0pt}{red},
+   borderline south = {1.6pt}{0pt}{red},
+   interior style = {top color=red!15, bottom color=red!10},
+   #1
+}
+
+\newtcolorbox{theorem}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline west = {0.9pt}{1pt}{Fuchsia},
+   interior style = {top color=Fuchsia!7, bottom color=Fuchsia!7},
+   #1
+}
+
+\newtcolorbox{remark}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline west = {0.9pt}{0.5pt}{Yellow},
+   interior style = {left color=Yellow!15, right color=white},
+   #1
+}
+
+\newtcolorbox{interesting}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline west = {0.9pt}{0.5pt}{green},
+   interior style = {top color=green!15, bottom color=green!10},
+   #1
+}
+
+\newtcolorbox{Strat}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline north = {1.6pt}{0pt}{NiceBlue},
+   borderline south = {1.6pt}{0pt}{NiceBlue},
+   interior style = {top color=Aquamarine!25, bottom color=Aquamarine!15},
+   #1
+}
+
+\newtcolorbox{Skill}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline north = {1.6pt}{0pt}{red},
+   borderline south = {1.6pt}{0pt}{red},
+   interior style = {top color=red!15, bottom color=red!10},
+   #1
+}
+
+\newtcolorbox{Theorem}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline north = {1.6pt}{0pt}{Fuchsia},
+   borderline south = {1.6pt}{0pt}{Fuchsia},
+   interior style = {top color=Fuchsia!15, bottom color=Fuchsia!10},
+   #1
+}
+
+\newtcolorbox{Interesting}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline west = {1.6pt}{0pt}{green},
+   interior style = {top color=green!15, bottom color=green!10},
+   #1
+}
+
+\newtcolorbox{Problem}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline west = {1.6pt}{0.5pt}{black},
+   interior style = {top color=black!15, bottom color=black!15},
+   #1
+}
+
+\newtcolorbox{Remark}[1][]{
+   enhanced, 
+   frame hidden, 
+   borderline west = {1.6pt}{0.5pt}{Yellow},
+   interior style = {left color=Yellow!35, right color=white},
+   #1
+}
+
+% Legacy Boxes
+\newsavebox{\labox}
+\newenvironment{StratL}
+{
+	\newcommand{\colboxcolor}{E0F6FF}
+	\newcommand{\bordercolor}{00FFFF}
+	\begin{lrbox}{\labox}
+		\begin{minipage}{\dimexpr\columnwidth-2\fboxsep\relax}
+		}
+		{
+		\end{minipage}
+	\end{lrbox}
+	\begin{center}
+		{\setlength{\fboxsep}{2.8pt}\setlength{\fboxrule}{1.8pt}
+			\fcolorbox[HTML]{\bordercolor}{\colboxcolor}{\usebox{\labox}}}
+	\end{center}
+}
+
+\newenvironment{SkillL}
+{
+	\newcommand{\colboxcolor}{FFE0E0}
+	\newcommand{\bordercolor}{FF0000}
+	\begin{lrbox}{\labox}
+		\begin{minipage}{\dimexpr\columnwidth-2\fboxsep\relax}
+		}
+		{
+		\end{minipage}
+	\end{lrbox}
+	\begin{center}
+		{\setlength{\fboxsep}{2.8pt}\setlength{\fboxrule}{1.8pt}
+			\fcolorbox[HTML]{\bordercolor}{\colboxcolor}{\usebox{\labox}}}
+	\end{center}
+}
+
+\newenvironment{InterestingL}
+{
+	\newcommand{\colboxcolor}{E0FFE0}
+	\newcommand{\bordercolor}{00FF00}
+	\begin{lrbox}{\labox}
+		\begin{minipage}{\dimexpr\columnwidth-2\fboxsep\relax}
+		}
+		{
+		\end{minipage}
+	\end{lrbox}
+	\begin{center}
+		{\setlength{\fboxsep}{2.8pt}\setlength{\fboxrule}{1.8pt}
+			\fcolorbox[HTML]{\bordercolor}{\colboxcolor}{\usebox{\labox}}}
+	\end{center}
+}
+
+\newenvironment{ProblemL}
+{
+	\newcommand{\colboxcolor}{EEEEEE}
+	\newcommand{\bordercolor}{777777}
+	\begin{lrbox}{\labox}
+		\begin{minipage}{\dimexpr\columnwidth-2\fboxsep\relax}
+		}
+		{
+		\end{minipage}
+	\end{lrbox}
+	\begin{center}
+		{\setlength{\fboxsep}{2.8pt}\setlength{\fboxrule}{1.8pt}
+			\fcolorbox[HTML]{\bordercolor}{\colboxcolor}{\usebox{\labox}}}
+	\end{center}
+}
+
+\newenvironment{ColorBoxL}[2]
+{
+	\newcommand{\colboxcolor}{#1}
+	\newcommand{\bordercolor}{#2}
+	\begin{lrbox}{\labox}
+		\begin{minipage}{\dimexpr\columnwidth-2\fboxsep\relax}
+		}
+		{
+		\end{minipage}
+	\end{lrbox}
+	\begin{center}
+		{\setlength{\fboxsep}{2.8pt}\setlength{\fboxrule}{1.8pt}
+			\fcolorbox[HTML]{\bordercolor}{\colboxcolor}{\usebox{\labox}}}
+	\end{center}
+}
+
+% The following snippet makes it possible to make colorful bullet points
+\newlist{coloritemize}{itemize}{1}
+\setlist[coloritemize]{label=\textcolor{itemizecolor}{\textbullet}}
+\colorlet{itemizecolor}{.} % This is the command for changing color
+
+% The following snippets make it possible to use a cooler font that I particularly like
+\newenvironment{KoolFont}{\fontfamily{lmss}\selectfont}{}
+
+\newcommand{\KF}[1]{{\fontfamily{lmss}\selectfont #1}}
+\newcommand{\KFB}[1]{\textbf{\KF{#1}}}
+
+% The following snippet makes the augmented matrices work correctly with [ccc|c] thing
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\endinput
+%%
+%% End of file `NotesTemplate.sty'.

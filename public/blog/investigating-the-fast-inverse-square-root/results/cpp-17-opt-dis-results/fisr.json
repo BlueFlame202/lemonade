@@ -1,0 +1,1 @@
+{"otherData": {},"traceEvents":[{"cat":"function","dur":367326,"name":"void __cdecl fisrTest(void)","ph":"X","pid":0,"tid":2409572076,"ts":2866275661026},{"cat":"function","dur":350132,"name":"auto __thiscall <lambda_e50bb0391560382068f24bb760fae6fb>::operator ()<float(__cdecl *)(float)>(float (__cdecl *)(float)) const","ph":"X","pid":0,"tid":1714446964,"ts":2866275685749}]}
