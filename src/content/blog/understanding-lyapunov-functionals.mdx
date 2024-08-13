@@ -1,0 +1,111 @@
+---
+layout: ../../layouts/BlogPostLayout.astro
+title: "Understanding Lyapunov Functions"
+description: "Apparently Lyapunov functionals are great."
+image: "/img/pics/20240810-funny-do-not-peel-peel-thing.jpg"
+author: "Aathreya Kadambi"
+date: "August 11, 2024"
+---
+
+
+To explain the photo, I was flying, and I just wanted to point out how confusing these baggage tags are. Just look at this one:
+<center>
+    <img src="/img/pics/20240810-funny-do-not-peel-peel-thing.jpg" style="width: 50%"></img>
+    <div style="font-size: 10pt">Text that says "Peel here" that has "DO NOT PEEL" directly above it<br />with three big arrows pointing towards "Peel here".</div>
+</center>
+😩 It's actually impossible to put these baggage tags on your bags, I'm telling you. After a long period of thought where I noticed that you could either do it as a sort of Mobius strip or just a regular cylindric shell thingy, I finally got it on. On other confusing things, check out this article on how to write good captions, yet none of the numerous images in the article have any captions in the traditional sense: <a href="https://www.schoolwebmasters.com/how-to-write-a-caption" target="_blank">https://www.schoolwebmasters.com/how-to-write-a-caption</a>. It's actually a good and thorough article. But really what I was trying to figure out was whether or not I should start off my caption with "Caption:" or "Figure:" or just start it off by writing what I had to say. I still don't know, but I've been told my flight is boarding in less than an hour, so I'm trying to finish this post. 🥶 Edit: I ended up taking a bit longer anyway hehe.
+
+Anyways, I decided I needed to study Lyapunov functions, since I heard that they can be useful in showing existence and uniqueness! I'll take this opportunity to make a blog post, and maybe tomorrow I'll make some notes!
+
+## Resources
+
+Here are the resources I'm looked at to study Lyapunov functions:
+- [x] Of course, <a href="https://en.wikipedia.org/wiki/Lyapunov_function" target="_blank">the Wikipedia article</a>.
+    - This one wasn't really clear to me to be honest. It was really hard to read and I didn't understand it much.
+- [x] Two great YouTube videos: <a href="https://www.youtube.com/watch?v=uXAx_641FPM" target="_blank">here</a> and <a href="https://www.youtube.com/watch?v=WNc7jWAKFTg" target="_blank">here</a> (there was another one in the playlist between these two)
+    - These made a lot more sense to me. Still though, I didn't have the definitions of asymptotic stability and stuff. I think I would have to watch some of the earlier lectures in this series for that, maybe I will at some point.
+- [x] <a href="https://mathworld.wolfram.com/LyapunovFunction.html" target="_blank">The Wolfram article</a>
+- [x] <a href="https://web.stanford.edu/class/ee363/lectures/lyap.pdf" target="_blank">This Stanford presentation on "Lyapunov theory"</a>
+    - This one finally had definitions for G.A.S., L.A.S., etc. (although technically I haven't seen the definition for trajectory, for example, but I can take a guess).
+
+## My Intuitive Understanding
+
+My understanding of Lyapunov functionals is in two pieces:
+1. Lyopunov functionals take the issue of convergence/boundedness/other properties in a higher dimensional space by considering convergence/boundedness/other properties in 1D space. We do this through the use of a cleverly constructed functional $V$. Properties of our original trajectory $x$ can be concluded by asking that similar properties hold for the composition $V \circ x$.
+2. Lyapunov functionals sort of mimic this idea of "potential energy". Intuitively, things should go from areas of higher to lower potential, and just like how we have a good idea of how particles move given the equipotential contours, we have a good idea of how the curve should flow given the contours of the Lyapunov functional.
+
+Pretty cool! In the cases of some theorems, the use of Lyapunov functionals and drawing these contours around the convergence points kind of reminds me of null homotopic maps, although I think this relationship is more or less a vague and pointless idea for now. I'll think about it a bit more, maybe I'll make another blog post if there really is something interesting there.
+
+##  Notions of Stability
+
+The idea behind stability is that all "trajectories" converge to the same unique point. If this happens for literally every trajectory, we call it "global asymptotic stability", or G.A.S., and if this only happens within a certain neighborhood of the limit point $x_e$, we call it "local asymptotic stability", or L.A.S..
+
+<div class="remark">
+    <b>Remark.</b> People generally say something like <i>"that was gas"</i> to indicate that something was absolutely amazing or fire. We should normalize <i>"that was las"</i> for something that isn't gas, but still pretty awesome.
+</div>
+
+Something else that might be of interest is this (a screenshot taken from the Stanford presentation):
+<center>
+    <img src="/img/pics/weird-symbol-in-lyapunov-stability-doc.png" style="width: 60%;"></img>
+</center>
+although I'm only 75% sure I know what that weird $\mathfrak{R}\lambda_i$ symbol means. I think $\mathfrak{R}\lambda_i(A)$ means the $i$th eigenvalue of $A$, which would make sense since if all the eigenvalues of the matrix are less than zero, then $\cdot{x}$ will be in a direction "opposite" (sort of) to $x$, so that one might expect $\|x\|$ to get smaller over time. Not totally sure what the $\mathfrak{R}$ means though. Shoot me an email if you know and want to tell me, and I'll update this post! 
+
+The reason for introducing these notions of stability is that we can make Lyapunov theorems that allow us to conclude things about stability if certain Lyapunov functions exist.
+
+## Lyapunov Theorems
+
+Now it will be useful to actually define a system. Consider a generic system 
+$$\dot{x} = f(x)$$
+with $f : \R^n \rightarrow \R^n$ a function of $x$ and $x : \R \rightarrow \R^n$ a function of time $t$. 
+
+Throughout the following ideas, we will be alluding to "Lyapunov functionals" $V : \R^n \rightarrow \R$. Please note that we will define $\dot{V}$ as $\dot{V} = \nabla V^T f$, so that $\frac{d}{dt}(V \circ x) = \dot{V}$.
+
+According to the Stanford presentation, a typical Lyapunov theorem does the following for us:
+* establishes that trajectories of a system satisfy some properties,
+* as long as there exists some Lyapunov function $V$ satisfying conditions on $V$ and $\dot{V}$.
+
+Here are some Lyapunov theorems that give us boundedness, GAS, and LAS.
+
+<div class="theorem">
+    <b>Theorem (A Lyapunov boundedness theorem from the Stanford PDF).</b>
+    * Trajectories of a system are bounded,
+    * as long as there exists a Lyapunov function $V$ such that all the sublevel sets of $V$ are bounded and $\dot{V}(z)$ is nonnegative for all $z$.
+</div>
+<i>Proof (from the Stanford PDF).</i>
+
+Consider any arbitrary trajectory $x$. If there is a Lyapunov function $V$ with the properties in the second bullet, then for all $t$,
+<center>$$V(x(t)) - V(x(0)) = \int_0^t \frac{d}{dt}(V\circ x) (s) \; ds = \int_0^t \dot{V}(x) \; ds \le 0.$$</center>
+In other words, $Vx(t) \le Vx(0)$ for all $t$. So $x(t)$ is in the sublevel set $\{ y : V(y) \le Vx(0)\}$, so $x(t)$ is bounded by the same constant that bounds the sublevel set.
+<div style="text-align: right">$\blacksquare$</div>
+
+Here are some other results from the Stanford PDF. The proofs are fairly straightforward from the intuitive understanding above.
+
+<div class="theorem">
+    <b>Theorem (GAS by Lyapunov).</b>
+    * The system is GAS,
+    * as long as there exists a postive definite Lyapunov function $V$ such that $\dot{V}(z)$ is strictly negative for all nonzero $z$ and zero when $z = 0$.
+</div>
+
+<div class="theorem">
+    <b>Theorem (GES by Lyapunov).</b> Consider $\alpha > 0$.
+    * The system is globally exponentially stable (GES),
+    * as long as there exists a positive definite Lyapunov functional $V$ such that $\dot{V}(z) \le -\alpha V(z)$ for all $z$.  
+</div>
+*Proof Sketch.* I actually have to do a proof, but in my head, I think this would use Grönwall's inequality. Intuitively, I'm not actually immediately sure why it was needed that $\alpha > 0$. I'll have to try the proof.
+
+
+<div class="theorem">
+    <b>Theorem (GAS by Lasalle).</b>
+    * The system is GAS,
+    * as long as there exists a positive definite Lyapunov functional $V$ such that the only trajectory satisfying $\dot{w} = f(w)$ and $\dot{V}(w) = 0$ is $w(t) = 0$ for all $t$.
+</div>
+
+<div class="theorem">
+    <b>Theorem (Not GAS by Lyapunov).</b>
+    * The system is not GAS,
+    * as long as there exists $\dot{V} \le 0$ wherever $V \le 0$, and there is a $w$ such that $V(w) \le V(0)$.
+</div>
+
+and more. So far so interesting, I'll have to try playing around with it more, and maybe I'll make some notes on it! 
+
+See you soon!
