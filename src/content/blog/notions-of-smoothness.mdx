@@ -1,0 +1,56 @@
+---
+layout: ../../layouts/BlogPostLayout.astro
+title: "Notions of Smoothness"
+description: "Different but equally interesting intuitions."
+image: "/img/pics/20240811-clouds.jpg"
+author: "Aathreya Kadambi"
+date: "August 11, 2024"
+---
+
+I've found that in different classes I've taken, there are different philosophies on what smoothness is. In my time series class, we thought of smoothness as this idea of how "flat" a function was. A function whose derivative changes too rapidly develops this *sharpness*, for example look at this picture:
+
+Au contraire, smoothness in mathematics is more about continuity and differentiability. For example, check out this function:
+
+It has a *sharp corner* because its first derivative isn't continuous. Another example is:
+
+which isn't smooth because it oscillates way too much that it gets sharp at $x = 0$. 
+
+Clearly, both ideas match our intuitive ideas about smoothness on the basic examples above. Where they differ is when we think about extreme cases, and in the ways they quantify and classify smoothness.
+
+## Statistician's Smoothness 
+
+Formally, we might define smoothness as
+
+*Definition (Statistician's Smoothness).* We say a function $f(x)$ is $n$-smooth if $\frac{d^nf}{dx^n}$ is bounded, namely, there exists $C$ such that $|\frac{d^nf}{dx^n}| \le C$. 
+
+Although I have mainly seen this definition used with $n = 1$ or $n = 2$, I am just extrapolating.
+
+<div class="remark">
+*Remark.* We didn't cover any extensions in class so I don't know if this is "official" in some sense, but I think a natural extension for other curves and surfaces is that the tangent space has curvature which is counted below.
+</div>
+
+This is a good definition in most cases, but isn't intuitive in others. For example, consider $f(x) = e^x$. This isn't smooth according to a statistician! It does look smooth to me though.
+
+## Mathematician's Smoothness
+
+A mathematician's definition would allow for $e^x$ to be smooth. Formally, a mathematician would likely give you the following definition for smooth:
+
+*Definition (Mathematician's Smoothness).* We say a function $f(x)$ is $n$-smooth if $\frac{d^k f}{dx^k}$ exists for all $k \le n$.
+
+On the other hand, there are many functions which look not so smooth but would be smooth under this definition. For example, check out this plot:
+
+<center>
+<iframe src="https://www.desmos.com/calculator/fkpgafwtm8?embed" width="50%" style="border: 1px solid #ccc"></iframe>
+</center>
+
+The red curve is $\frac{1}{1+e^{-1000000x}}$, and the blue curve is $x^{1000}$. These are both smooth to a mathematician, but from a birds eye veiw, look to have sharp corners. Now of course, if you zoom in close enough, it starts to look smooth, but on a big picture level, one could say that this looks sharp. And it is, in the sense of the statistician's notion.
+
+## Relationship
+
+I think both ideas are pretty interesting and intuitive in their own rights. At the very least, they both require the existence of the $n$th derivative. On the other hand, notice that $n$-smoothness doesn't necessarily imply $n-1$-smoothness in the statistician's case, while it does in the mathematician's case. I think it make more sense in the statistician's case to consider both the number of derivatives taken but also the constant that is bounding the function. Then, on compact sets, one might notice that the constant grows as $n$ becomes lower, but since differentiable functions are continuous, they must be bounded, so we would have the reverse implication. 
+
+The statistician's perspective is useful when we want to identify means. For functions which have finite mean, the idea is that by sufficiently restricting the derivative of approximating functions, the best approximator will look sort of like the mean of the function over time. I guess it makes a lot more sense in a time series context, so it might just sound like im blabbering on right now.
+
+The reason I thought about this initially was that we might sometimes want to penalize the magnitude of the second derivative of a function as a method of regularization, or to identify the trend in seasonal-trend decomposition, for example. But this doesn't really allow us to recognize exponential trends as well, even though they are quite smooth! On the other hand, it is difficult to penalize based on the mathematician's notion of smoothness, since for digital signals, we could either have a interpolation which is smooth, or a piecewise linear and completely not smooth interpolation. The mathematician's definition only makes sense when we have some kind of notion of "continuity" in th first place.
+
+For mathematicians who believe in "continuous differentiability" instead of just differentiability for smoothness, I think this more closely matches the idea from statisticians. On compact sets at least, this would mean that a mathematician's $n$-smoothness would imply the statistician's $n$-smoothness, and it would then be interesting to consider the constant which bounds the derivative. 
