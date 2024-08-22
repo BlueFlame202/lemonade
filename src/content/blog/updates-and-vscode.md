@@ -5,8 +5,13 @@ description: "I can't decide if I like nature, and also I learned of a cool feat
 image: "/img/pics/20240821-updates-and-vscode.jpg"
 author: "Aathreya Kadambi"
 slug: "updates-and-vscode"
-date: "April 27, 2024"
+date: "August 21, 2024"
 ---
+
+Here's some music you can listen to while reading if you're logged into Spotify:
+<div>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2jT56M56Al1GemYd1FRZ7Z?utm_source=generator" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
 
 Coming back from a family trip to Ricketts Glen State Park,<br/>
 I felt like a guy who <br/>
