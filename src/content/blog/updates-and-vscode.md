@@ -20,7 +20,7 @@ To quote the latest advertisement from Wix's marketing team, if you want to beco
 
 I've become pretty well-versed in making blogs. So I decided to try a prototype with Wordpress (yeap, my go to for prototyping websites), called <i>Citrus Sojourns</i>.
 
-It would be great. It'd become a beacon of hope, bringing solarpunk visions to life and utilizing futuristic tech in conjunction with nature, curating knowledge about plants, invasive species, gems, and rocks, and all in all, "apply technology in harmony with nature". That's the goal, I guess. And to have fun.
+It would be great. It'd become a beacon of hope, bringing solarpunk visions to life and utilizing futuristic tech in conjunction with nature, curating knowledge about plants, invasive species, gems, and rocks, and all in all, "applying technology in harmony with nature". That's the goal, I guess. And to have fun.
 
 As I developed the idea a bit more, though, I stumbled on a reel: 
 <center>
