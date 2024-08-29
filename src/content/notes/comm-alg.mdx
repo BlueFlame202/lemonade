@@ -1,0 +1,110 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "MATH A250A Notes: Commutative Algebra"
+description: ""
+image: "/img/pics/20240427-berkeley-hort.jpg"
+writer: "Aathreya Kadambi"
+lecturer: Professor Richard Borcherds
+slug: "comm-alg"
+date: "Fall 2024"
+---
+
+{/* 
+bcourses.berkeley.edu/courses/1534968
+*/}
+
+This fall I'm auditing Borcherd's MATH 250A class because I didn't understand Galois theory well enough last year, and because I heard he's doing a section of representation theory. Hopefully this time I'll learn the subject of algebra better.
+
+Story 1: What is a Group?
+--------------------------------------
+
+The concrete definition of a group is that they are symmetries of mathematical objects. The order is the number of elements. In the case of a cube, for example, there might be 24 rotations or 48 rotations + reflections. A bijection is a map preserving structure.
+
+
+The abstract definition of a group is that they are sets with additional structure. They have identity, associative composition, and inverses.
+
+<div class="problem">
+**Problem.** Given an asbstract group $G$, find an object $X$ whose symmetries are <s>exactly</s> *isomorphic to* $G$.
+</div>
+
+To consider this question, we will actually look at the Cayley graph. This is a colored, directed graph. Now we will think of the points of this graph as points which make up the group $G$, which is exactly the set $S$. 
+
+To understand how $G$ acts on $S$, we consider the ***left action of $G$ on $S$***. This is a map $G \times S \rightarrow S$ satisfying that it is "associative", and the identity of the group acts to preserve elements of $S$.
+
+We say that an action is ***faithful*** if whenever $g(s) = s$ for all $s \in S$, then $g = 1$.
+
+We want the action of $G$ on $S$ to be faithful. If not, $G$ is a subset of all symmetries (bijections) of the set $S$. The problem is to then add extra structures to $S$ to cut down the symmetry group to $G$. The extra structure that we will add is that we will add a right action of $G$ on $S$. We need to check that this action preserves the structure, or that
+$$(gs)h = g(sh)$$
+which follows from the associative law of $G$. The left action commutes with the right action, but note that it does not commute with the left action.
+
+Now we can display this as acolored graph called a Cayley graph:
+
+CAYLEY GRAPH: For each $g \in G$ and $s \in S$, draw a line from $s$ to $sg$ and color with color $g$.
+
+As an example, we can look at the Cayley graph of the Klein-4 group. Now he drew the multiplication table out, and said that this is one of the worst ways to study a group. Never use multiplication table because for small enough groups that it's not super tedious (groups of order up to 4), it's not very useful, and for groups of order larger than 4, it isn't very revealing.
+
+As you can see from the graph, you don't want to draw the Cayley graph for graphs of moer than four elements because it gets too messy. This group is abelian so you can follow these lines to get the action of the group.
+
+*What we have shown in solving this problem is that abstract groups are the same as symmetries of tmathematical objects.* What we still need to check is that any symmetry of a Cayley graph is of the form $s \mapsto gs$ for some $g \in G$. This is left as an exercise. Take $g = s(1)$.
+
+To study groups it will be important to stuy actions. There are really 8 actions that we study. There are 4 left actions and 4 right actions:
+1. Left Action: $g(s) = s$
+2. Right Action: $(s)g = s$
+3. Left Action: $g(s) = gs$
+4. Right Action: $(s)g = sg$
+5. Left Action: $g(s) = sg^{-1}$
+6. Right Action: $(s)g = g^{-1} s$
+7. Left Action: $g(s) = gsg^{-1}$
+8. Right Action: $(s)g = g^{-1}sg$
+
+Our goal now will be to
+1. Classify all groups,
+2. Find all representations of a group.
+
+A representation is an action on a math object preserving structure. The permutation representation is where $G$ acts on a set, and a linear representatioon is where $G$ acts on a vector space.
+
+If you go to a Lie groups course, you will find that we can give a classification of all compact Lie groups. 
+
+Say we have a cube. We can have an action on the 8 corners, or on the 6 sides for example. We can also get a permutation representation on the 4 diagonals. If we want to look for linear representation, we can have trivial actions, where for example we act on every element trivially, or the natural action is another example.
+
+Here is a catalog of all groups:
+* Order 1: Trivial
+* Order 2: $\Z/2\Z$
+* Order $p$, with $p$ prime: For this, we use Lagrange's theorem, which is that the order of $g \in G$ divides $|G|$. Then the only groups are $\Z/p\Z$ because there must be an element of order $p$.
+
+Suppose $G$ acts transitively on a set $S$, namely if $s_1, s_2 \in S$, $g(s_1) = s_2$ for some $g \in G$. 
+
+A key theorem is that if for some $s \in S$, $H$ is the elements fixing $S$, then $|G| = |H||S|$. This is just that rectangle picture from my old algebra notebook. In particular, we have that $|H|$ divides $|G|$. In fact, if $H$ is *any* subgroup of $G$, then $|H| \;|\; |G|$.
+
+An exercise is to check that $G$ acts on $S$ transitively, subgroup fixing the point is $H$. 
+
+We've classified all groups of prime order. What we are going to do now is to use the formula $|G| = |H||S|$, which will be useful for finding the order of a group $G$.
+
+<div class="problem">
+**Example.** Find the order of $\text{GL}_3(F_2)$, where $F_2$ is the field $\Z/2\Z$ of order 2. <br /><br />
+
+In general, we will find $\text{GL}_n(F_p)$ because it actually isn't much harder. We can actually find the order of this group by repeatedly using $|G| = |H||S|$.
+</div>
+
+* Order 4: There are a few options here. One, $\Z/ 4\Z$. Otherwise, we must have no elements of order 4, so all eleemnts must be of order 1 or 2. As such, $G$ is abelian. We find that the other option for $G$ is $G \cong \Z/2\Z \oplus \Z/2\Z$. As a warning, there are two different extensions of $\Z/2\Z$ by $\Z/2\Z$, meaning that there are two maps like this:
+$$0 \rightarrow \Z/2\Z \rightarrow \Z/4\Z \rightarrow \Z/2\Z \rightarrow 0,$$
+$$0 \rightarrow \Z/2\Z \rightarrow \Z/2\Z\times \Z/2\Z \rightarrow \Z/2\Z \rightarrow 0.$$
+This is called a short exact sequence. What $0 \rightarrow A \rightarrow B \rightarrow C \rightarrow 0$ means is that $A$ is a subgroup of $B$ and the quotient group $B/A$ is $C$. A standard mistake to make is that $B$ is always $A \times C$, but this is not always true. This is quite a common problem in mathematics, we are given what $A$ and $C$ are, and we want to find what $B$ is.
+
+<div class="remark">
+**Remark.** It need not be that if all elements have order 1 or 3, $G$ is abelian. For example, one can consider
+$$\begin{pmatrix} 1 & * & * \\ 0 & 1 & * \\ 0 & 0 & 1 \end{pmatrix} \in \text{GL}_3(F_3)$$
+which is a group of order 27 and is not abelian, but all elements have order three since $F_3$ is the finite field with three elements.
+</div>
+
+There was a stackexchange apparently with thigns misunderstood from their undergrad, and the biggest thing was the previously mentioned thing, that $B$ is not necessarily $A \times C$.
+
+<div class="remark">
+**Remark.** I sorta wish Eisenbud had taught it like this, although I guess looking back at the future of the past from the future gives you 20-20 vision.
+</div>
+
+We can consider other examples of products and sums of groups, like infinite products of groups.
+
+If you take a solid, $G$ being the group of rotations and reflections which has order 48, we can write it as $G = \{1, -1\} \times \text{Rotations}$ where $\text{Rotations}$ has order 24.  Even for an icosahedron as well, but not for the tetrahedron, it cannot be written as a product, because $-1$ is not a symmetry.
+
+Cayley, the person who practically founded group theory, had a somewhat notorious paper where he said there are three groups of order 6. He didn't notice that it was also a product of two groups, so that is clearly an easy mistake to make. It is not obvious that a circle (how we normally think of cyclic groups) can be decomposed like that. 

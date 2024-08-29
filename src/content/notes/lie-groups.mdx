@@ -1,0 +1,67 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "MATH A261A Notes: Lie Groups"
+description: ""
+image: "/img/pics/20240427-berkeley-hort.jpg"
+writer: "Aathreya Kadambi"
+lecturer: "Professor Utiralova"
+slug: "lie-groups"
+date: "Fall 2024"
+---
+
+This fall I'm auditing a lie groups class by Professor Utiralova at Berkeley! I've had a class by Professor Utiralova before and I really enjoyed her class last time.
+
+{/* Logistics
+
+- graded based on homeworks, take home exam 
+- recordings for the class
+
+*/}
+
+Story 1: Overview of Differential Geometry
+--------------------------------------------
+
+Relevant lectures: Lecture 1
+
+Goal of the class: study symmetrie sof geometric objects, and as we know, these are groups. To study infinite groups, we will need some extra structure because they are otherwise difficult to study. We can in general consider any category, for example $\text{\textsc{Top}}$ or $\text{\textsc{Man}}$ or other things.
+
+The story starts by understanding the idea of groups in other categories aside from <span style="font-variant: small-caps">Set</span>. This is why we define the notion of a ***group object***. Essentially, we take the categorical definition of groups based on these diagrams for associativity, identity, and inverses with maps $m$ (multiplication), $e$ (identity), and $i$ (inverses). Note that in order for identity to work, we must have a final object in the category $\mathcal{C}$, and in order to have $G \times G$, we want it to have finite products.
+
+This first story will now be about the categories of $\text{\textsc{Top}}$ or $\text{\textsc{Man}}$. 
+
+A ***topological space*** $X$ is a set with a topology $\mathcal{U}$ on $X$. $\mathcal{U}$ is a collection of so-called *open subsets* of $X$, satisfying the well-known actions. The morphisms between topological spaces are continuous maps, which are maps so that preimages of open sets are open. Given two topological spaces, we can make a ***product topology*** $X \times Y$ whose open sets are unions of sets $U \times V$ where $U$ is open in $X$ and $V$ is open in $Y$. We can also take subsets $Z$ of a topological space $X$, and we get a topological subspace by intersecting $Z$ with open sets of $X$. There are some other notions we will need, namely neighborhoods, and the idea of a base for a topological space.
+
+In our class, we want a bit more structure than this, although people could study groups in this category: topological groups. Some examples are $\R$ with addition, of which $(\mathbb{Q}, +)$ is a subspace, or the complex unit circle endowed with multiplication. 
+
+But what we would like to study are topological manifolds. 
+
+A Hausdorff space is one where for all $x\neq y$ in $X$, there exist disjoint neighborhoods of $x$ and $y$. This allows us to create a notion of convergence:
+
+A sequence $(x_n)$ converges to $x \in X$ if for every neighborhood $U$ of $x$, all but finitely many of $x_n$'s lie in $U$. Then we write $\lim_{n\rightarrow \infty} x_n = x$.
+
+We have two more important concepts:
+- $X$ is ***compact*** if any open cover of $X$ has a finite subcover,
+- $f \in \text{Mor}(X, Y)$ is a ***homeomorphism*** if it has a continuous inverse.
+
+A ***topological manifold*** is a topological space $X$ of dimension $n$ is a Hausdorff topological space admitting a countable basis which is locally homeomorphic to $\R^n$. 
+
+Another way to say this is that there is an open cover $\{\mathcal{U}_\alpha : \alpha \in A\}$ such that there exists a continuous injective map $\phi_{\alpha} : \mathcal{U}_\alpha \rightarrow \R^n$ such that $\phi_{\alpha} : \mathcal{U} \rightarrow \phi_{\alpha}(\mathcal{U})$ is a homeomorphism.
+
+<div class="remark">
+**Remark.** $\R^n$ and $\R^m$ are homeomorphic if and only if $n = m$. Also, all open subsets of $\R^n$ are homeomorphic to $\R^n$.
+</div>
+
+$(\mathcal{U},\phi)$ as before is called an open chart. $\{(\mathcal{U}_\alpha, \phi_{\alpha}), \alpha \in A\}$ which covers $X$ is called an ***atlas***. If we have two atlases $(U, \phi)$ and $(V, \psi)$ open charts, then we get these ***transition maps*** between $\phi(U \cap V)$ and $\psi(U \cap V)$, $\psi \circ \phi^{-1}$ and $\phi \circ \psi^{-1}$.
+
+<div class="problem">
+**Examples.** 
+1. $\R^n$
+2. Sphere $S^n$ 
+3. $S^1$ with one point removed (either the top or the bottom) with stereographic projection
+
+We can actually do some computations with this last example. We can say $S^1$ is $[0, 2\pi]$ with the two points $0$ and $2\pi$ glued together. Then we could either have a map $\tan(\theta)$ or $\cot(\theta)$ from this space to $\R$.Then we get maps from $\R / \{0\}$ to $\R / \{0\}$ defined by $\cot^{-1}(\tan(\theta))$ and $\tan^{-1}(\cot(\theta))$.
+</div>
+
+Now we can look at analytic and smooth manifolds.
+
+***Definition.*** An atlas on a topological manifold $X$ of dimension $n$ is ***of regularity $\mathcal{C}^k$***, ***real analytic***, or ***complex analytic*** (if $n = 2m$) if the transition maps are of this regularity class.

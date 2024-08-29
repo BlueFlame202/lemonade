@@ -1,0 +1,66 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "Center for Integrative Planetary Studies Seminar"
+description: ""
+image: "/img/pics/20240427-berkeley-hort.jpg"
+writer: "Aathreya Kadambi"
+lecturer: Professor Philip Marcus and Others
+slug: "cips-seminar-fa-2024"
+date: "Fall 2024"
+---
+
+{/* 
+
+*/}
+
+This fall I'm thinking of joining this CIPS seminar. I think the wonderful thing about seminars is that they illustrate how dependent human hearing and perception is on you actually knowing context and background well.
+
+
+3D Models and Solutions to the Equations of Motion of Julipter's Great Red Spot
+---------------------------------------------------------------------------------
+
+Why is the GRS of interest?
+
+Vortices widely exist in systems of geophysical fluid dynamics. The GRS is the oldest and largest known vortex.
+
+*Voyager* fly-bys imaged cloud motions of this thing and these were turned into velocity vectors. It also found a cool temperature *anomaly* at the top of the GRS. At berkeley Advected Corrected Image Velocimetry was used to make much denser velocity maps. 
+
+Something about getting unstratified and the nstratified when going from bottom to top or something.
+
+We are not going to take into account any dynamical effects. Zonal flows are amazingly steady in time. Measuring them now is very similar to measuring them in like the 1970s. In the James Web Telescope, they didn't see much variation in the zonal flows between the top and bottom of the red spot. 
+
+Some graphs with Pressure on the $y$ axis and other things on the $x$ axis, for example temperature. Something about the Brunt-Vaisala frequency 👀. Something oscillates vertically, and when that frequency goes to zero, we get something else. So apparently this frequency square, $N^2$, determines the convective zone or something like that, although I low key don't really know what that is or what is oscillating vertically or anything tbh.
+
+Between 700 millibar apparently there is no reliable data. The hubble telescope monitors moving clouds, and that's what we want to do. To find out the cloud height requires cloud modeling and radiative transfer. AYY stuff that I like. But then he said some stuff that I don't completely get. I don't really know what "Cloud Decks" are though. 
+
+Now we're going to talk about the good, the bad, and the ugly about 2D, Quasi-Geostrophic, an 3D Boussinesq Numerical Simluations. hehehe. 
+
+Quasigeostrophic approximation comes in two flavors, assumes there is a bound between horizontal pressure gradients, and accelerations due to the corillosi effects. If you combine with vertical hydrostatic equillibrium, you get Thermal Wind Equation. That relates some stuff oof he changed the slide....
+
+The Good: 2D Moore-Saffman Relation. A good homework problem for first year graduate fluid dynamics students. Only important parameters of the flow are $\sigma$, the shear of Zonal Flow, and $\omega$, the vorticity of vortex. Aspect ratio $\frac{L_x}{L_y} \approx 1 + \frac{\sigma}{\omega}$. It turns out when you do 3D numerical calculations, you get something that I didn't totally hear gg. There was some picture of a cylinder shaped thing.
+
+The Bad: Stability. Rayleigh theorem wrt angular momentum is not valid in 2D. Not stable if radii is something.
+
+I had to respond to someone for a second and missed something oof.
+
+What makes 3D numerical simulations possible: big time steps, some other things. We use spectral analysis. High spatial resolution spectral code $384^3$ spectral collation points or something. Equivalent to $4000^3$ finite-difference points, equivalent to less 100km in latitude and longitude and 0.15 km in vertical. Previous studies use EPIC.
+
+Create 2D equilibria that solve the Euler equation, equation of state, continuity equation, dissipationless energy equation (with no vertical velocity). Stack the 2D solutions on top of each otehr to get a 3D flow. This 3D approximation of a vortex solves all the equations of motion except the neergy equation. Solutions t the initial value code are *not* unique. There can be many, steady stable vortices with different heights of their midplanes, different horizontal areas, strengths and vertical thicknesses Stacking layering across the rotational axis are stable, but the other way are not stable. Another factor that goes into stacking is constant area vortex (CA) versus constant velocity vortex (CV).
+
+Which model is close to equilibrium? 
+
+Something about 3D hollow vortices and making things hollow. Global circulation models had a big dilemma because older chips couldnt resolve the physics that was going on. Then everyone's tsuff started to match up.
+
+The goal after getting some hollow vorticees things was to get vortices at some cloud deck level that can reproduce the hollow vorticity field in some of the pitures or something. So apparently there are types of cloud decks, like HST and JWST cloud decks.
+
+All small vortices in on jupyter are surrounded by bright rings in this picture but no the red spot. 
+
+Some vortices are stable and hollow, but others are stable and non-hollow. What we find is that our hollow vortex, when we change a parameter, will become non-hollow, and when we change it even more it will become un-hollow. Apparently that migh be important and stuff. 
+
+New Temperature Observations show that the cold lid is much lower in the atmosphere than we had assumed. Something about moving vortices closer to the convective zone. There are some parts, dynamical top, cold lid, midplane, hot floor, and dynmaical bottom. we measure pressure differences and stuff and temperature differences and see what happens.
+
+Apparently, stability requires 
+$$D_{\text{top}} > |(g/T)(\Delta T)_{\text{top}} / N^2_{\text{top}}|$$
+at the top and exactly the same at the bottom but with $\text{bot}$ instead of $\text{top}$. So like as $N$ goes to zero, we get closer and closer to unstableness.
+
+Very little wiggle room in GRS parameters so that it is almost unique.

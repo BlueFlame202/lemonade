@@ -1,0 +1,52 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "MECENG 106 Notes: Fluid Dynamics"
+description: ""
+image: "/img/pics/20240427-berkeley-hort.jpg"
+writer: "Aathreya Kadambi"
+lecturer: Professor Phil Marcus
+slug: "fluid-dynamics"
+date: "Fall 2024"
+---
+
+This fall I'm taking a fluid dynamics class by Professor Phil Marcus at Berkeley! Coincidentally, I actually was really interested in his research on Jupyter's red spot and these related problems in freshman year, although I ended up going down a different road for a while. Excited to learn fluid dynamics.
+
+Story 1: Dimensions
+-----------------------------------------
+
+Relevant lectures: Lecture 1
+
+The lecture notes have anything you need to succeed. You are also strongly recommended to work in teams on the homework. Homework are combination of graded and self-graded. Feel free to go to any discussion section.
+
+When you write down equations, you should keep track of the dimensions of the quanities in the equation. If you are taking the $\sin$ or $\log$ of something, it better be dimensionless.
+
+Dimensional analysis is very important. In fact, people were able to find the energy in the atomic bomb (which was a well-kept secret) based on the speed of the shock wave.
+
+Dimensions are things like length, time, mass, etc.. It is important to distinguish these things from units, which we use to measure these dimensions.
+
+<div class="remark">
+**Remark.** I'll leave out the examples and discussion of dimensional analysis and units and things like that, since one can find good treatment of that subject in practically any thick science textbook. One thing I will mention is that apparently there's actually a unit of temperature called "Rankine". I've never seen that before.
+</div>
+
+Story 2: Properties of Fluids
+-----------------------------------------
+
+Relevant lectures: Lecture 1
+
+Our properties are going to be functions of space and time: $\textbf{x} \in \R^3$ and $t \in \R$. Here are some important properties:
+
+The following properties live in $\text{Maps}(\R^3\times \R, \R)$.
+- Temperature: $\text{Temp}$. 
+- Mass Density: $\rho = \frac{\text{mass}}{\text{Volume}}$. It has dimensions $ML^{-3}$ in MLT units.
+- Pressure: $P = \frac{\text{force}}{\text{area}}$. It has dimensions $ML^{-1}T^{-2}$ in MLT units.
+- Velocity: $V$. It has dimensions $LT^{-2}$.
+
+<div class="remark">
+**Remark.** Notice how we are treating these quantities in a continuum. I was thinking about it, and I guess this means in terms of temperature for example, we can treat each particle or molecule as a Dirac function, and the temperature in a region is the expected value of the temperature in that region when one integrates. That feels somewhat nice because it gives this intutiion of temperature over a region being looking at space in a lower resolution.
+</div>
+
+In fluid dynamics, we will write the ideal gas law as:
+<center>$P = R\rho T$</center>
+$R$ is called the gas constant, and the other quantities were discussed above.
+
+In physics we generally use the form $PV = nRT$. So what is the relationship between these two forms? In physics one has to look up the molecular weights and stuff, and in MechE, we have to look up individual gas constants for each gas.
