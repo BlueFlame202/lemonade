@@ -1,0 +1,169 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "Classical Spaces and Groups"
+description: "Lecture 1 in Algebraic Topology."
+image: "/img/pics/IMG_4768.jpg"
+writer: Aathreya Kadambi
+lecturer: Professor Alexander Givental and Fomenko and Fuchs
+date: "September 2, 2024"
+---
+
+import Torus3D from '/src/components/three/Torus3D';
+
+What are Classical Spaces?
+-------------------------------------------------
+
+We recall a few examples of classical spaces here, but more will be discussed throughout this post.
+
+There are linear spaces $\R^n$, $\mathbb{C}^n$, and $\mathbb{H}^n$ (real, complex, and quaternionic) $n$-dimensional spaces.
+
+We call $\{x_1^2 + \dots + x_n^2 \le 1\} := D^n$ the ***disk*** and $\partial D^n = S^{n-1}$ the ***sphere***. We can call:
+$$\R^1 \subseteq \R^2 \subseteq \dots \bigcup \R^n =: \R^{\infty}$$
+so $\R^{\infty}$ is the set of infinite sequence with almost all terms being zero. This contains $D^{\infty}$, the boundary of which is $S^{\infty}$.
+
+The $n$-torus is $T^n = \underbrace{S^1 \times ... S^1}_{n\text{ times}}$.
+
+<Torus3D client:load />
+
+All of these spaces have *topologies* on them, which are ideas of closeness and which points are close to each other. This much will be assumed to be familiar to the reader.
+
+What are (Compact) Classical Groups?
+-------------------------------------------------
+
+Here are the classical groups:
+
+<div class="remark">
+**Remark.** I once posted <a href="https://math.stackexchange.com/questions/4740380/origins-behind-different-terms-for-the-same-thing-in-linear-algebra">this question on StackExchange</a>, related to differences between different versions of terminology. At least the relationship between the terms "orthogonal" and "unitary" has become more clear to me after this discussion.
+</div>
+
+- Real Versions:
+    - Orthogonal Group: $O_n := \{V \in \R^{n\times n} : V^{\top}V = I\}$,
+    - Special Orthogonal Group: $SO_n = \{V : V^{\top}V = I, \det V = 1\}$. 
+- Complex Versions: (we can also consider $\mathbb{C}^n$ with hermitian inner product)
+    - Unitary Group: $U_n = \{U \in \mathbb{C}^{n\times n} : \overline{U}^\top U = I\}$
+    - Special Unitary Group: $SU_n = \{U \in \mathbb{C}^{n\times n} : \overline{U}^\top U = I, \det U = 1\}$
+- Quaternionic Versions: (we can consider the inner product $\langle q, q'\rangle = \sum q_i^* q_i'$ where $q_i^*$ is quaternionic conjugation which we will soon see)
+    - $Sp_n$: (Compact) Symplectic group
+
+How can we understand the quaternionic versions? As an example, we can consider $Sp_1$:
+
+<div class="problem">
+**Example (Understanding $Sp_1$).** Consider $\mathbb{H} = \{a + bi + cj + dk\}$ with $i^2 = j^2 = k^2 = ijk = -1$.
+
+<div class="remark">
+**Remark.** If you go to dublin on some bridge you will actually see that equation written on the bridge. On this bridge this guy was trying invent some kind of multiplication in three dimensional space but it failed so he did it in four dimensional space. I'll have to look into this later lol.
+<center><a title="Cone83, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Inscription_on_Broom_Bridge_(Dublin)_regarding_the_discovery_of_Quaternions_multiplication_by_Sir_William_Rowan_Hamilton.jpg"><img width="512" alt="Inscription under Broom Bridge (Dublin)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Inscription_on_Broom_Bridge_%28Dublin%29_regarding_the_discovery_of_Quaternions_multiplication_by_Sir_William_Rowan_Hamilton.jpg/512px-Inscription_on_Broom_Bridge_%28Dublin%29_regarding_the_discovery_of_Quaternions_multiplication_by_Sir_William_Rowan_Hamilton.jpg?20171217132604" /></a>
+Cone83, CC <a href="https://creativecommons.org/licenses/by-sa/4.0">BY-SA 4.0</a>, via Wikimedia Commons
+</center>
+</div>
+
+The quaternion conjugate of $a + bi + cj + dk$ is $a - bi - cj - dk$. It is not hard to check that
+<center>$$qq^* = q^* q = a^2 + b^2 + c^2 + d^2.$$</center>
+The result is a four dimensional division algebra, associative algebra. Maybe there is a better point of view on this, where instead of taking a four-tuple of real numbers, we can think of it as a pair of complex numbers:
+<center>$$\mathbb{H} = \{z + wj : z, w \in \mathbb{C}, j^2 = -1, ji = -ij \}$$</center>
+I'll check this later. With this rule, we can compute products:
+<center>$$(x+yj)(z+wj) = (xz - y\overline{w}) + (xw + y\overline{z})j$$</center>
+You can think of this as working with some two by two matrix:
+<center>$$\begin{bmatrix} x & y \end{bmatrix} \begin{bmatrix} z & w \\ -\overline{w} & \overline{z} \end{bmatrix}$$</center>
+The second row is actually hermitian conjugate to the first one. Something about a length so you need to multiply by a unit complex number. The length of the first vector being one means the second row will also have length 1. The determinant of this matrix is 
+$$z\overline{z} + w \overline{w} = qq^* = \|q\|^2$$
+
+
+Now we can consider unit quaternions, which form a subgroup because of closure. The group $Sp_1$ is a group of unit quaternions:
+$$Sp_1 = \{u \in \mathbb{H} \mid \|u \|=  1\}.$$
+If you forget about quaternions and just look in complex space, this is the same as $SU_2$ by associating with $z + wj$ this matrix. Geometrically, it is the same as a three-sphere, $S^3$.
+
+$x \mapsto uxu^{-1}$, $\mathbb{H} \rightarrow \mathbb{H}$. $SU_2 \rightarrow SO_3$. Why $\det$ has to be one? That was asked by him but I'm not actually sure what he was talking about.
+<div class="strat">
+**Strat.** The reason the length-preserving maps are also inner product presreving also comes down to just SAS criterion being equivalent to SSS criterion! The inner product is like the angle, and the lengths are norms.
+</div>
+
+
+Now we want to keep the rule that linear transformations are written by multiplying by quaternionic matrices. We better introduce multiplication by scalars by right multiplication. That would guarantee that it commutes with multiplying by matrices on the left. There are two notions of right and left vector spaces, and quaternions stick as right vector spaces.
+
+We need to familiarize ourselves with quaternionic spaces.
+</div>
+
+What we will need to do is a bunch of different types of manifolds. We can think of $O_n$ as the space of orthonormal bases in $\R^n$. These are matrices whose columns form an orthonormal basis. Similarly, $U_n$ will be the orthonomral bases in $\mathbb{C}^n$. We can generalize this though, as orthonormal $k$-frames in $\R^n$, or in $\mathbb{C}^n$, or in $\mathbb{H}^n$.
+
+We call this a ***Stiefel manifold*** $V(n,k)$, $\mathbb{C}V(n,k)$, and $\mathbb{H}V(n,k)$. You can transform any frame to another one by orthogonal transformation. 
+$$V(n,k) = O_n/O_k.$$
+The stabilizer of the $k$-frames is $O_k$. The stabilizer looks like:
+$$\begin{bmatrix}A & 0 \\ 0 & B \end{bmatrix}$$
+where $A$ is some block matrix orthonormal preserving the first one, and $B$ is something preserving the second one. Whenever we have some topological space $X$, we can havea quotient space $X/\sim$. Then there is a canonical projection from $X$ to $X/\sim$.
+
+If we require continuity so that preimages of open sets are open, we can create a topology with the most open sets so that this is continuous. We call this the *weak topology*. The weakest topology is no topology at all. The maximal supply of open sets is the weakest topology. In general,
+
+
+What is $V(n, 1)$? It is $S^{n-1}$. $\mathbb{C}V(n,1)$ is the ones so that $|z_1|^2 + \dots + |z_n|^2 = 1$, which becomes $S^{2n-1}$ because it is $\sum x_i^2 + \sum y_i^2 = 1$. Finally, $\mathbb{H}V(n,1) = S^{4n-1}$.
+
+<div class="problem">
+**Question.** Why when we define as a quotient topology, versus why when we define as the subset topology, why do they define the same topology for $V(n,k)$?
+</div>
+
+Flag manifolds
+---------------------
+
+We will now talk about these. It is called a flag manifold because it can be drawn as a point, line, nd plane together form a sort of flag. A flag manifold is like:
+$$\{\R^n \supseteq \R^{k_s} \supseteq \dots \supseteq \R^{k_2} \supseteq \R^{k_1}\} = F(n;k_1,k_2;...,k_s)$$
+You can transform any flag to any flag. What is the stabilizer of a particular flag? Well in $GL_n(R)$, the block of upper triangular matrices will preserve these spaces, so it would be 
+$$GL_n(\R)/\{\text{upper diagonal matrices\}} = O_n / O_{k_1} \times O_{k_2 - k_1} \times \dots \times O_{n - k_s}.$$
+
+We can also do this in the complex or quaternionic cases.
+
+Complete flags:
+$$F_n = \{\R^1 \subseteq \R^2 \subseteq \dots \subseteq \R^{n-1} \subseteq \R^n\} = F(n, 1,2,...,n-1)$$
+so the actual flag drawwing is $F_3$. We have that 
+$$\dim F_3 = 3$$
+$$\dim F_2 = 1$$
+and so on continuing as triangular numbers. 
+
+<div class="remark">
+**Remark.** Can we not just think of $F_n$ as $R_1 \times R_2 \times ... \times R_n$?
+</div>
+
+Grassman manifolds
+-------------------------
+
+$G(n,k)$ or $\mathbb{C}G(n,k)$ or $\mathbb{H}G(n,k)$ is $\{\text{$k$-dim subspaces in an $n$-dim space}\}$. This is 
+$$O_n / O_k \times O_{n-k} \cong G(n,n-k)$$
+$GL_n(\R)$ has two connected components with positive and negative determinant. The determinant determines the orientation. Choice of sign for each side of the determinants is the choice of orientaiton (I think). Maybe clarify this in OH.
+
+$G(n,1)$ is also known by definition as projective space: $\R P^{n-1}$. It is called the real projective space of dimension $n-1$. 
+$$G(n,1) = \R P^{n-1} = S^{n-1}/\pm 1$$
+$$\mathbb{C} P^{n-1} = S^{2n-1}/U_1$$
+$$\mathbb{H} P^{n-1} = S^{4n-1}/Sp_1$$
+
+So we have
+$$\R P^1 = S^1$$
+$$\mathbb{C} P^1 = S^2 = \mathbb{C} \cup \infty$$
+In the quaternionic case it is also $\mathbb{H} \cup \infty$.
+
+Now we say $G_+(n,k)$ is the $k$-dimensional oriented subspaces in an $n$-dimensional ambient space.
+
+<div class="example">
+**Example.** $G_+(4,2) \cong S^2 \times S^2$. "Plucker embedding of the grassmanian". They must be independent, so at least one of the two by two determinants we get when laying out the two 4 dimensional vectors should be independent. We can get other bases by multiplying by a two by two matrix. When we do that, the six determinants get mulitplied by the determinant of this new matrix. This gives us a map
+$$G(4,2) \rightarrow \R P^5.$$
+
+There is an easy way to find the dimension of a grassmanian manifold. Many can be represented by maps from $\R^k$ to $\R^{n-k}$. Then we get the dimension should be $n(n-k)$.
+<div class="remark">
+**Remark.** I thought the dimension of $G(4, 2)$ should be 6 because you need to pick two unit vectors, each should have 3 parameters to obtain the unit vectors (given by three angles).
+</div>
+
+It turns out that you can put two copies of the 2 by 4 matrix together to get a4 by 4 thing, which gives this equation:
+$$0 = 2(\Delta_{12}\Delta_{34} - \Delta_{13}\Delta_{24} + \Delta_{13}\Delta_{23})$$
+given by Laplace? theory.
+
+We still want to understand the geometry of this. This is a quadratic form in six-variables. The idea is that the best way we can transform this into is into sums of squares. Linear algebra is about this, and there is such as inversion theorem that nay quadratic form can be transformed into sums of squares with signs (this is just diagonalization I think). For example,
+$$uv = (\frac{u+v}{2})^2 - (\frac{u-v}{2})^2$$
+After these changes of coordinates in each variables individually, we get:
+$$x_1^2 + x_2^2 + x_3^2 - y_1^2 - y_2^2 - y_3^2 = 0$$
+so that
+$$x_1^2 + x_2^2 + x_3^2 = y_1^2 + y_2^2 + y_3^2 = 1$$
+so this is just a pair of unit vectors, $S^2 \times \S^2$.
+
+So now what is $G_+$? It is not just one dimensional space but half of it, with a direction. So we proved that
+$$S^2 \times S^2 = G_+(4,2).$$
+So $G(4,2) = S^2 \times S^2 / ((x,y) - (-y,x))$.
+</div>
+

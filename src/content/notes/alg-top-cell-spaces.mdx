@@ -1,0 +1,74 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "Cell Spaces"
+description: "Lecture 3 in Algebraic Topology."
+image: "/img/pics/IMG_4768.jpg"
+writer: Aathreya Kadambi
+lecturer: Professor Alexander Givental and Fomenko and Fuchs
+date: "September 3, 2024"
+---
+
+<h2>CW-Complexes (Cell Spaces)</h2>
+
+We can start with $\text{sk}_0X \subseteq \text{sk}_1X...\subseteq \text{sk}_nX \subseteq ... = X$.
+
+Cells are essentially sort of disks. Once you have one skeleton, you can define:
+<center>$$\text{sk}_nX := \text{sk}_{n-1} X \cup_{\alpha : \varphi_\alpha} D_\alpha^n$$</center>
+where $\varphi_\alpha : \partial D_\alpha^n \rightarrow \text{sk}_{n-1}X$. Essentially, we are attaching the boundary poitns of higher dimensional disks to the previous lower dimensional disks. We just said we need a continuous map between the boundary and the previous skeleton right, so we need a topology now. We say that $F$ is closed iff its intersection with every cell is closed. 
+
+<div class="problem">
+**Exercise.** Show:
+- A finite CW-complex (finitely many cells, not necessarily finitely many sets?) is compact. 
+- If a subset $F$ of a CW-complex is compact, then it intersects finitely many cells.
+</div>
+
+<div class="remark">
+**Remark.** The second issue is not assigned as homework because it is actually very similar to the homework problem about $\R^\infty$.
+</div>
+
+What if to a set $X$ we want to assign a $CW$-structure? Then, we write a disjoint union:
+<center>$$X = \bigsqcup_{\mu} \dot{D}_\mu^{n(\mu)}$$</center>
+with $\sigma_\mu : D_\mu^{n(\mu)} \rightarrow X$, $\sigma_\mu|_{\partial D_\mu} := \varphi_{\mu}$. I believe the dot above the $D$ means "open".
+
+There are some axioms:
+- ***C(losure finite).*** The boundary of a cell lies in finitely many cells of lower dimension. (this automatically happens above with the first definition)
+- ***W(eak topology).*** Closed subsets are exactly those which have closed intersection with every cell.
+
+It turns out that this idea of weak topology doesn't match up with other ideas. For example, we consider the sequence of 1-cells attaching $(0,0)$ to $(1,\frac{1}{n})$ along with the segment from $(0,0)$ to $(1,0)$. This is compact initially, but it is not compact with respect to the weak topology because the bottom segment doesn't really have to be there like that, it can be anywhere, it is more like a boquet of 1-cells tied together at a point.
+
+We can again make $CX$ and $\Sigma X$, and if we take a CW-subcomplex $A \subseteq X$, we can consider a quotient space $X / A$. If $A$ is a CW-subcomplex of both $X$ and $Y$, we can create a sort of structure by gluing them together so that we get some stuff in $X$ but not in $A$, $A$, and the stuff in $Y$ not in $A$.
+
+We can also consider the product of two discs, $D_\alpha^n \times D_\beta^m \simeq D^{n+m} \rightarrow X \times Y$. It might happen, though, that our W axiom is not satisfied in this case.
+
+<div class="problem">
+**Exercise.** If one of $X$ and $Y$ is finite or both are countable, then $X \times Y$ is a CW-complex.
+</div>
+
+Similar issues/results hold for smash products and joins.
+
+<h2>Real Examples of Cell Spaces</h2>
+
+<h3>Basic Examples</h3>
+
+$D^n/\partial D^n = S^n$
+I feel like this makes sense, but needs proof potentially.
+
+We can think of a line in $\R^3$ not through theo rigin, and imagine lines through the origin intersecting this line, then there are lines for all the points in the other line and a line parallel to it. Something about that, then we said:
+$$\R P^1 \subseteq \R P^2 \subseteq ... \subseteq \R P^n \subseteq ... \R P^\infty$$
+and we can do the same things in $\mathbb{C}$ or $\mathbb{H}$.
+
+He also drew something with $S^n \rightarrow \R P^n$ and something about $S^\infty$. The thing about spheres is that its not stable since you cannot build up $S^n$ from $S^{n-1}$ if you just attach a cell to a point, like the easiest way to get $S^2$ is to attach a $2$-cell to a point, but it doesn't let you construct $S^3$ without erasing a previous cell.T It is better thus to go to projective space first (or something).
+
+<h3>Grassmanians</h3>
+
+We can tabulate the vectors that make up the frame into a $k\times n$ table. Then, we can proceed to sort of reduce this via row reduction to get reduced row echelon form of the matrix. From this we can reorder things and shift htings around and we get so called Young diagrams. I think based on adding each independent vector to our set, we get a flag. So there are ${n \choose k}$ different cells that make up the Grassmanian. But bro I still don't get why every cell corresponds to a particular increasing sequence with terms between $1$ and $k$.
+
+We can actually consider also this limit:
+<center>$$G(n,k) \subseteq G(n+1,k) \subseteq ... \subseteq G(\infty,k)$$</center>
+and you can also consider the embedding:
+<center>$$G(n,k) \hookrightarrow G(n+1,k+1)$$</center>
+so we get some two-dimensional table of Grassmanians and the tables all agree.
+
+<div class="remark">
+**Remark.** My guy just wrote $G(\infty,k) \hookrightarrow G(\infty + 1, k+1) \hookrightarrow ...$ on the board so I think I can officially say I am confused without seeming silly.
+</div>

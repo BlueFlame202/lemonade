@@ -1,0 +1,255 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "MATH 206 Notes: Functional Analysis"
+description: ""
+image: "/img/pics/20240427-berkeley-hort.jpg"
+writer: "Aathreya Kadambi"
+lecturer: Professor Algebraic Topology
+slug: "functional-anal"
+date: "Fall 2024"
+---
+
+{/* 
+
+*/}
+
+I'm taking algebraic topology by Professor Zworski! 
+
+Story 1: Linear Algebra
+-------------------------------------------------
+
+Relevant Lectures: Lecture 1
+
+We started out by defining cosets and quotient spaces, and then the first isomorphism theorem for vector spaces. Hahaha this is a homework problem I did for COMPSCI 189 yesterday! 
+
+*We study the rest of mathematics because linear algebra is too hard.* - Taylor, according to Zworski.
+
+<div class="theorem">
+**Zworski's Favorite Fact from Linear Algebra (Shur's Complement Formula).** Suppose $\begin{bmatrix} T_{11} & T_{12} \\ T_{21} & T_{22}\end{bmatrix}$ is invertible, so 
+$$\begin{bmatrix} T_{11} & T_{12} \\ T_{21} & T_{22}\end{bmatrix}^{-1} = \begin{bmatrix} S_{11} & S_{12} \\ S_{21} & S_{22}\end{bmatrix},$$
+$S_{ij} : W_j \rightarrow V_i$. Then [$T_{11}$ is invertible if and only if $S_{22}$ is invertible]. In that case,
+$$T_{11}^{-1} = S_{11} - S_{12} S_{22}^{-1}S_{21}.$$
+</div>
+
+Why is this interesting? Suppose we start with $P : H_1 \rightarrow H_2$ and we can find $R_{-} : H_- \rightarrow H_2$ and $R_+ : H_1 \rightarrow H_+$ such that
+$$\begin{pmatrix} P & R_{-} \\ R_+ & 0 \end{pmatrix} : H \oplus H_- \rightarrow H\oplus H_+$$
+is invertible and
+$$\begin{pmatrix} P & R_- \\ R_+ & 0 \end{pmatrix}^{-1} = \begin{pmatrix} E & E_+ \\ E_- & E_{-+}\end{pmatrix} : H_2 \oplus H_+ \rightarrow H_1 \oplus H_-$$
+then $P$ is invertible if and only if the stuff from the theorem. Then we have reduced the invertibility of $P$ to something else. It is used in linear algebra for reducing huge systems in linear algebra to much smaller finite ones.
+
+This problem of something is called a Grushih problem. "The key here is stability under perturbations and so on". Although I have no clue what perturbations he is talking about.
+
+<div class="problem">
+**Example.** Take $P = \lambda - J$ where $J$ is a Jordan block matrix (has an off-diagonal of ones).
+
+<div class="remark">
+**Remark.** There are two types of multiplicity for the eigenvalues of the jordan block matrix. The geometric and algebraic multiplicities are 1 and $n$. We can try to find $R_+$ and $R_-$. 
+</div>
+
+We would lke to compute the determinant of 
+$$\begin{pmatrix} \lambda - J & e_n \\ e_1 & 0 \end{pmatrix}$$
+where $e_n$ and $e_1$ are the basis vectors. Then this matrix is invertible since it has determinant $-1$, so we can reduce its invertibility so another property. We can choose this $R_-$ and $R_+$ because one of them lies in the kernel of $J$ and the other lies in the kernel of $J^+$. In the generral case though, it is an art.
+</div>
+
+Story 2: Dimension
+-----------------------------------------
+
+Relevant Lectures: 1
+
+Dimension of $V$ being $n$ is the same as saying there exists a corresponding basis of $n$ vectors for $V$. This is for finite idmensional vector spaes, and if this is not possible, we say that the dimension is infinite. Hormander actually has another different amusing definition of dimension for vector spaces. 
+
+Equivalently, $\dim$ is a functor from the category of vector spaces to $\N$ such that 
+- $\dim K^n = n$,
+- $T : V_1 \rightarrow V_2$ is surjective is equvialent to $\dim V_1 \ge \dim V_2$,
+- $T : V_2 \rightarrow V_1$ is injective is equivalent to $\dim V_1 \le \dim V_2$.
+Zworski kept laughing while writing this.
+
+<div class="problem">
+**Example.** $\dim (V_1/\ker T) = \dim \text{Im }T$.
+</div>
+
+We say:
+$$\text{Rank }T = \dim \text{Im }T = \text{codim } \ker T$$
+where $\text{codim } W = \dim V/W$ with $W \subseteq V$.
+
+<div class="theorem">
+**Theorem.** Suppose $W \subseteq V$. The n $\dim W + \text{codim } W = \dim V$.
+</div>
+*Proof.*
+
+Since $\dim W \le \dim V$ and $\text{codim } W \le \dim V$, we can assume that $\dim W$ and $\text{codim } W$ are finite, because otherwise we just have infinities summing together.
+
+$T_1 : K^n \rightarrow V$ and $T_2 : K^m \rightarrow V/W$ bijection. There exists $\tilde{T}_2 : K^m \rightarrow V$ such that $\tilde{T}_2 \circ \pi = T_2$, $\pi : V \rightarrow V/W$.  The tilde mappings are called "lifts" of the non-tilde mappings. 
+$$T_2 e_j = x_j + W, \tilde{T}_2(\sum a_j e_j) := \sum a_j x_j$$
+$e_j$ a basis of $K^m$.
+
+$$T: T_1 \oplus \tilde{T}_2 : K^{n+m} \ni (a,b) \mapsto T_1 a + \tilde{T}_2 b \in V$$
+
+<div class="theorem">
+**Claim.** $T$ is an isomorphism.
+- $T(a,b) = 0$, $0 = \pi(T_1 + \tilde{T}_2 b) = T_2 b \Rightarrow b = 0\Rightarrow T_1 a = 0$ 
+- Suppose $x \in V$, $T_2$ is surjective, $x = \sum b_j x_j + y$, $y \in W$. But $T_1$ is surjective so there exists $a$ such that $T_1 a = y$.
+</div>
+
+<div class="theorem">
+**Theorem.** Take $T : V_1 \rightarrow V_2$. Then, $\dim \text{Im }T + \dim \ker T = \dim V_1$, and $\text{codim } \text{Im }T + \text{codim } \ker T = \dim V_2$.
+</div>
+
+<div class="remark">
+**Remark.** These are both the same infinite dimensions but in infinite dimensions, one might be trivial and the other is useful. Apparently long ago in Zworski's linear algebra class they did this proof via row and column operations to prove an equivalent statement that the row major is the same as the column major. With algebra we can do it much easier.
+</div>
+
+If $\dim V_j < \infty$, then we define the index:
+$$\text{ind}(T) L= \dim \ker T - \text{codim } \text{Im }T = \dim V_1 - \dim V_2$$
+
+Story 3: Index of a Transformation
+----------------------------------
+
+Relevant Lectures: Lecture 1, Lecture 2
+
+Suppose $\dim \ker T < \infty$ or $\dim (V_2/\text{Im }T) < \infty$. Then 
+$$\text{ind}(T) = \dim \ker T - \text{codim } \text{Im }T$$
+
+<div class="theorem">
+**Theorem 1.** Suppose that $T_1 : V_1 \rightarrow V_2$ and $T_2 : V_2 \rightarrow V_3$. Suppose that $\dim \ker T_j < \infty$ or $\dim \text{coker} T_j < \infty$ ($\text{coker} T = V_2/\text{Im }T$). Then the index of $T_2T_1$ is well defined and
+$$\text{ind}(T_2T_1) = \text{ind}(T_1) + \text{ind}(T_2)$$
+follows from the definition of the index. 
+</div>
+
+<div class="theorem">
+**Theorem 2.** If $S : V_1 \rightarrow V_2$ has finite rank and $\text{ind }T$ is defined, then $\text{ind}$ of $T+ S$ is well defined and $\text{ind}(T+ S) = \text{ind}(T)$.
+</div>
+
+
+$$0 \rightarrow V_0 \xrightarrow{T_0} V_1 \xrightarrow{T_1} \dots \xrightarrow{T_{N-1}} V_N \rightarrow 0$$
+is called a ***complex*** if $T_{k+1}T_k = 0$ or $\ker T_{k+1} \supseteq \text{Im }T_k$.
+
+An example of a complex from MATH 53:
+<div class="problem">
+**Example.** $V_0 = V_3 = C^\infty(\R^3, \R)$, $V_1 = V_2 = C^\infty(\R^3, \R^3)$, $T_0 = \nabla$, $T_1 = \nabla \times$, $T_2 = \nabla \cdot$. For sophisticated people, this is a special example of the de Rham complex.
+</div>
+
+A complex is called exact if $\text{Im }T_k = \ker T_{k+1}$.
+
+<div class="problem">
+**Example.** The complex from the previous example is actually exact! Lol this is related to the question I asked the quantum mechanics professor.
+</div>
+
+<div class="problem">
+**Example (Exact sequences).**
+- $N = 0$, then $T_0$ is a bijection.
+- $N = 1$, $0 \rightarrow W \hookrightarrow V \xrightarrow{\pi} V/W \rightarrow 0$
+</div>
+
+<div class="theorem">
+**Theorem.** For exact complexes,
+$$\sum \dim V_{2j} = \sum \dim V_{2j +1}.$$
+If $\dim V_j < \infty$, then $\sum (-1)^j \dim V_j = 0$.
+</div>
+
+This result will allow us to show Theorem 2 by constructing an appropriate exact complex.
+
+*Proof.*
+
+Let $R_{k+1} = \ker T_{k+1} = \text{Im }T_k$. Then 
+$$\dim V_k = \dim R_k + \dim R_{k+1}$$
+Now,
+$$\sum \dim V_{2k} = \sum \dim R_{2k} + \dim  R_{2k+1} == \sum \dim V_{2k+1}$$
+
+<div class="remark">
+**Remark.** Another method is to actually shorten the exact sequence by taking quotients and then do stuff.
+</div>
+
+
+Story 4: Fedholm Operations
+------------------------------
+
+Recall that an operator $T : V_1 \rightarrow V_2$ is Fredholm when $\dim \ker T < \infty$ and $\dim \text{coker } T < \infty$.
+<center>$$\text{ind}(T) = \dim \ker T - \dim \text{coker } T$$</center>
+
+<div class="problem">
+**Example.** $V_1 = V_2 = \{a = a_1a_2a_3...a_j \in K\}$. 
+<center>$$T_na = a_{n+1}a_{n+2}...\qquad n \in \Z, a_l = 0, l \le 0$$</center>
+To be honest I'm a bit unsure on what was going on here.
+</div>
+
+<center>$\dim \ker T_n = \left\{ \begin{array}\{0\} & n \le 0 \\ n & n > 0 \end{array} \right.$</center>
+
+Last time, we said $V_1 \supseteq V$ and $x \not\in V_1$ implies there is a hyperplane $V_2$ such that $V_2$ contains $V_1$ and $x$ isn't in $V_2$.
+
+<div class="theorem">
+**Theorem.** Suppose $W_1 \subseteq V$, $\dim W_1 < \alpha$. Then $\exists$ $W_2$ such that $W_1 \cap W_2 = \{0\}$, $W_1 + W_2 = V$, and $\text{codim }W_2 = \dim W_1$. 
+</div>
+*Proof Sketch.*
+
+Take $x \in W_1 \backslash \{0\}$. There is a hyperplane $H_1$ such that $x \not \in H_1$, so that $H_1 + W_1 = V$, and so 
+<center>$$\dim (W_1 \cap H_1) + \text{codim }H_1 = \text{codim }(W_1 + H_1) + \dim W_1$$</center>
+so $\dim(W_1 \cap H_1) = \dim W_1 - 1$. So now repeating this process, we can find:
+<center>$$\dim(W_1 \cap H_1 \cap H_2 \cap ... \cap H_k) = \dim W_1 - k$$</center>
+for $0 \le k \le \dim W_1 = d$, so that $W_2 = H_1 \cap ... \cap H_d$. Now we get:
+<center>$$\dim (W_1 \cap W_2) + \text{codim }W_2 = \text{codim}(W_1 + W_2) + \dim W_1$$</center>
+and now $\dim (W_1 \cap W_2) = 0$. Also,
+<center>$$\text{codim}(H_1 \cap H_2) \le \text{codim}(H_1 \cap H_2) + \text{codim}(H_1 + H_2) = \text{codim}(H_1) + \text{codim}(H_2)$$</center>
+so inductively, 
+<center>$$\text{codim }W_2 \le \sum_{j=1}^d \text{codim }H_j = d$$</center>
+and also
+<center>$$\text{codim }W_2 \ge \dim W_1 = d$$</center>
+so $\text{codim }W_2 = d$.
+
+<div class="theorem">
+**Theorem.** $T : V_1 \rightarrow V_2$ is a Fredholm operator if and only if there exist $R_- : V_- \rightarrow V_2$, $R_+ : V_+ \rightarrow V_1$ such that $\begin{pmatrix} T & R_- \\ R_+ & 0 \end{pmatrix}^{-1} = \begin{pmatrix} E & E_+ \\ E_- & E_{-+}\end{pmatrix}$ exists and $E_{-+}$ is a Fredholm operator in which case $\text{ind }T = \text{ind }E_{-+}$
+</div>
+
+For the first direction, we use Theorem 1 to get a $W_2$ satisfying $\ker T \cap W_2 = 0$, $W_2 + \ker T = V$, $\dim \ker T = n_+$. Lte $x_1,\dots,x_{n_+}$ be a basis of $\ker T$. There exists $L_j : V_1 \rightarrow K$ such that $L_j(x_i) = \delta_{ij}$, $y \in V_1$, $y = \sum a_j x_j + \overline{y}$, $\overline{y} \in W_2$, $L_j(y) = a_j$.
+
+$V_+ := K^{n_+}$, $R_+ : V_1 \rightarrow K^{n_+}$. $y \mapsto (L_1(y),...,L_{n_+}(y))$.
+
+Choose a basis of $V_2/\text{Im }T$. 
+
+Similarly, we do $V_= := K^{n_-}$, and $(b_1,...,b_{n_-}) \mapsto \sum_{j=1}^{n_-} b_j y_j$.
+
+We now wish to show that $R_+$ is surjective. So 
+<center>$\begin{pmatrix} T & R_{-} \\ R_{+} & 0\end{pmatrix} : V_1 \oplus V_- \rightarrow V_2 \oplus V_+$</center>
+is surjective. So what we have shown (I've omitted most of the proof about $Tu + \sum_{j=1}^n b_j y_j = 0$ and stuff) is that if the operator is Fredholm, then we can set up this thing so that it is invertible. We also get that $E_{-+} : K^{n_+} \rightarrow K_{n_-}$ is clearly Fredholm since $n_+$ and $n_-$ are finite.
+
+
+To show the other direction, first we observed that $R_+$ is surjective and $R_-$ is injective by actually multiplying out 
+$$\begin{pmatrix}T & R_- \\ R_+ & 0 \end{pmatrix}\begin{pmatrix} E & E_+ \\ E_- & E_{-+} \end{pmatrix}$$
+and 
+$$\begin{pmatrix} E & E_+ \\ E_- & E_{-+} \end{pmatrix}\begin{pmatrix}T & R_- \\ R_+ & 0 \end{pmatrix}.$$
+
+Then, we took $\begin{pmatrix} u \\ u_-\end{pmatrix} \in V_1 \oplus V_-$ and $\begin{pmatrix} v \\ v_+\end{pmatrix} \in V_2 \oplus V_+$, and saw that $Tu = v$, $u_- = 0$, $Ev + E_+ v_+ = u$ and $E_- v + E_{-+} v_+ = 0$.
+
+Since $v$ is in the image of $T$, $E_-v$ is in the image of $E_{-+}$. This allows us to make a well defined map from $E_- : \text{Im }T \rightarrow \text{Im }E_{-+}$:
+<center>$$E_-^\# : V_2/\text{Im }T \rightarrow V_- / \text{Im }E_{-+}$$</center>
+Then by playing around with the above results, we get injectivity. It is also surjective, so the dimensions of $V_-/\text{Im }E_{-+}$ and $V_2/\text{Im }T$ are isomorphic.
+
+Now we can define a map $E_+ : \ker E_{-+} \rightarrow \ker T$. We get $E_+$ is injective on all of $V_+$ and thus on $\ker E_{-+}$ from the fact that $R_+ E_+$ is identity. Surjectivity comes from the same two equations in the iff statement.
+
+The main helpful idea was that $Tu = v, u_- = 0$ was equivalent to $Ev + E_+ v_+ = u$ and $E_- v + E_{-+} v_+ = 0$.
+
+<div class="theorem">
+**Theorem.** If $\text{ind }T = 0$, then there exists $S$ finite rank such that $T + S$ is invertible. 
+</div>
+
+We can purturb our operator by a finite rank operator and stuff.
+
+*Proof similar to above.*
+
+We can write $V_1 \simeq \ker T \oplus W_1$ and $V_2 \simeq W_2 \oplus \text{Im }T$, so that the matrix of $T$ is 
+<center>$$T = \begin{pmatrix} 0 & 0 \\ 0 &\tilde{T} \end{pmatrix}$$</center>
+<center>$$S = \begin{pmatrix} \tilde{S} & 0 \\ 0 & 0 \end{pmatrix}$$</center>
+with $\tilde{T} : W_1 \rightarrow \text{Im }T$ and $\tilde{S} : \ker T \rightarrow W_2$ invertible.
+
+Convex Sets
+-------------------------
+
+Now we take $K = \R$.
+
+A convex set $A \subseteq V$, $K = \R$ is convex if for all $x, y\in A$, $\R \supseteq \{t \in \R : x + ty \in A\}$ is an interval in $\R$.
+
+The reason we define it weirdly like this as opposed to the canonical definition is that we want to say that a convex set is linearly open if that interval is open.
+
+<div class="theorem">
+**Geometric Hahn-Banach Theorem.** If $\{0 \} \not\in A$ and $A$ is a convex linearly open set, then there exists a hyperplane $V$ such that $V \cap A = \varnothing$. In more generality, if $V_1 \cap A = \varnothing$ and .., 
+</div>

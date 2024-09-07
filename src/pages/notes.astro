@@ -1,16 +1,75 @@
 ---
 import ClassicLayout from "../layouts/BaseLayout.astro";
+import BlogPage from "../components/BlogPost";
+
+const ana_notes = [
+    { title: 'Functional Analysis', content: 'Where linear algebra and analysis meet.', link: 'notes/functional-anal', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
+    { title: 'Fluid Dynamics', content: 'The study of words and strings.', link: 'notes/comm-alg', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
+    { title: 'CIPS Seminar', content: 'Center for Integrative Planetary Studies Seminar.', link: 'notes/cips-seminar-fa-2024', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' }
+]
+
+const alg_notes = [
+    { title: 'Algebraic Topology', content: 'The algebra of shapes.', link: 'notes/alg-top', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
+    { title: 'Lie Groups', content: 'Mixing continuity and symmetry together.', link: 'notes/lie-groups', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
+    { title: 'Commutative Algebra', content: 'The study of words and strings.', link: 'notes/comm-alg', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
+]
+
+const opt_ml_notes = [
+    { title: 'Machine Learning', content: 'Introductory methods and background.', link: 'notes/machine-learning', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
+    { title: 'Convex Optimization', content: 'Officially Solvable Convex Problems.', link: 'notes/convex-opt', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
+]
+
+const philosophy_notes = [
+    { title: 'Philosophy of Probability', content: 'Inductive Logic.', link: 'notes/philosophy-of-probability', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
+]
 ---
 <ClassicLayout title="Notes">
     <p id="date"><b>Project</b></p>
     
-    <h3>Graduate Level Math</h3>
+    As of Fall 2024, I've decided to try and make notes that make better use of multimedia. After my recent switch to AstroJS, markdown, and <a href="https://mdxjs.com/" target="_blank">MDX</a>, I can include much more sophisticated visuals even in my digital notes. I've started notes for each of the subjects I'm taking classes for or auditing, which you can find here!
+
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#personal">Personal Expositions</a></li>
+        <li><a href="#courses">Course/Seminar Notes</a></li>
+        <li><a href="#older">Older Notes</a></li>
+    </ol>
+
+    <h2 id="personal">Personal Expositions</h2>
 
 
+    <h2 id="courses">Course/Seminar Notes</h2>
+
+    These notes follow the flow and storyline of a course I took at UC Berkeley, but I enhanced them with my own research, studies, and thoughts outside of class.
+
+    <h3>Math/Physics/Engineering</h3>
+    <h4>Analytic in Nature</h4>
+    <BlogPage posts={ana_notes} />
     
-    <h3>Undergraduate Level Math</h3>
+    <h4>Algebraic in Nature</h4>
+    <BlogPage posts={alg_notes} />
+
+    <h3>Computer Science</h3>
+    <h4>Images and Vision</h4>
+
+    <h4>Optimization and Machine Learning</h4>
+    <BlogPage posts={opt_ml_notes} />
+
+    <h3>Philosophy</h3>
+    <BlogPage posts={philosophy_notes} />
+
+
+    <h4></h4>
+
+    <h2 id="older">Older Notes</h2>
+
+    In the past, my notes were okay, but not the best quality. I started to notice in graduate classes that the method of notes I had used previously started to distract me from having enough time to think deeply about what was being said in the moment. As such, in future notes, I decided to stop taking verbatim notes or copying as much as I could down during class, and instead just noting down the most important terms, theorems, statements, whatever the case might be, and refining them outside of class. I hope this will be a better form of notetaking that will result in better and more original notes.
+
+    <h3>Math: Longer Expositions</h3>
 
     <ul>
+    <li>Mathematical Methods of Optimization (UC Berkeley MATH 170): <a href="/notes/UCB-MATH-170-Notes/index.html">Teleport!</a></li>
+    <li>Abstract Algebra (UC Berkeley MATH 113): <a href="/notes/UCB-MATH-113-Notes/index.html">Teleport!</a></li>
     <li>Linear Algebra (Princeton MAT 217): <a href="/notes/lin-alg">Teleport!</a></li>
     <li>Linear Algebra (MIT OCW 18.06): <a href="https://inthesolved.wordpress.com/linear-algebra-notes/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
     <li>Multivariable Calculus (High School): <a href="https://inthesolved.wordpress.com/mutivariable-calculus-notes-hs/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
@@ -18,15 +77,50 @@ import ClassicLayout from "../layouts/BaseLayout.astro";
     <li>AP Calculus BC (High School): <a href="https://inthesolved.wordpress.com/ap-calculus-bc-notes/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
     </ul>
 
-    <h3>High School Math</h3>
+    <h3>Math: Shorter Worksheets/Notes</h3>
+
+    <ul>
+    <li>The Combo Formula Sheet: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/07/the-combo-formula-sheet.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    <li>A Guide to Recurrence Relations: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/08/recurrence_relations_mostly_done.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    <li>Weird Functions: Strategies: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/07/weird-functions-1.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    <li>Arithmetic and Geometric Progressions: Strategies: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/06/arithmetic_and_geometric_progressions.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    </ul>
+
+    <h3>Computer Science</h3>
+
+    <ul>
+        <li>Notes for USACO: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2021/04/notes_for_usaco-2.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+        <li>Basics of Programming 1: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/07/codivate-lesson-1.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+        <li>Basics of Programming 2: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/07/codivate-lesson-2.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    </ul>
 
 
-    <h3>Undergraduate Level Computer Science</h3>
+    <h3>Physics</h3>
 
+    <ul>
+    <li>Honors Physics Notes (High School): <a href="https://inthesolved.wordpress.com/honors-physics-notes/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    <li>A few Electromagnetism Notes: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/08/electromagnetics_i_lectures_1_4__ee3310_.pdf">Teleport!</a></li>
+    </ul>
 
-    <h3>Undergraduate Level Physics</h3>
+    <h3>Chemistry</h3>
 
+    <ul>
+    <li>General Chemistry Notes (High School): <a href="https://inthesolved.wordpress.com/general-chemistry-notes/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    <li>Principles of Chemical Science (MIT OCW 5.111) <a href="https://inthesolved.wordpress.com/notes-on-principles-of-chemical-science/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    <li>Brief Notes on Steady State Kinetics: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/08/steady_states.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    </ul>
 
+    <h3>Biology</h3>
+
+    <ul>
+    <li>An MIT OCW Biology Course (High School): <a href="https://inthesolved.wordpress.com/mit-ocw-introductory-biology-7-016/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    </ul>
+
+    <h3>Language and Literature</h3>
+
+    <ul>
+    <li>AP Lang (High School): <a href="https://inthesolved.wordpress.com/ap-language-and-composition-hs/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
+    </ul>
 
     <p></p>
 </ClassicLayout>

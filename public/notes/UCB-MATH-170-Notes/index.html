@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UCB MATH 170 Notes</title>
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="../nstyles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="../../components/navflame.js"  type="text/javascript" defer></script>
+    <script>$(window).on('load', function() {$('#nav-notes').addClass('active')});</script>
+  </head>
+  <body>
+    <nav-flame></nav-flame>
+    <div class="main-body">
+    <h1 id="sitename" class="display-2">UCB MATH 170 Notes</h1>
+    
+    <p>These are notes from MATH 170, at UC Berkeley. The course is taught by Franzisca Weber. Note that I missed around 2 classes which probably threw off the lecture numbers.</p>
+
+    <h2 class="display-4">Table of Contents</h2>
+      <ul>
+        <li><a href="#lec-1">Lecture 1</a></li>
+        <li><a href="#lec-2">Lecture 2</a></li>
+        <li><a href="#lec-3">Lecture 3</a></li>
+        <li><a href="#lec-4">Lecture 4</a></li>
+        <ol>
+            <a href="#variations">Variations</a>
+        </ol>
+        <li><a href="#lec-5">Lecture 5</a></li>
+        <li><a href="#lec-6">Lecture 6</a></li>
+        <ol>
+            <a href="#equality-constraints">Minimization with Equality Constraints</a>
+        </ol>
+        <li><a href="#lec-7">Lecture 7: Interpretations of Constrainted Optimization</a></li>
+        <li><a href="#lec-8">Lecture 8</a></li>
+        <li><a href="#lec-9">Lecture 9</a></li>
+        <li><a href="#lec-10">Lecture 10</a></li>
+        <li><a href="#lec-11">Lecture 11</a></li>
+        <li><a href="#lec-12">Lecture 12</a></li>
+        <li><a href="#lec-13">Lecture 13</a></li>
+      </ul>
+
+    <h2 class="display-4" id="lec-1">Lecture 1</h2>
+
+    <div class="problem">
+       <b>Example.</b> Suppose Neil Armstrong throws up a ball at vertical velocity 85mph on the moon. What is the maximum height it reaches? Repeat this experiment on planet Earth. This is an optimization problem, specifically called an unconstrained optimization problem. 
+    </div>
+
+    <div class="problem">
+        <b>Example (Franklin).</b> An example on investment management. Suppose we have a bank that has 100 million dollars. Suppose that it has 2 types of assets: loans (L) and securities (S). Suppose loans have 10% interest rates and securities have 5% interest rates, but securities are more liquid. Then the total rate of return is $R = 0.1L + 0.05S$, which is what the bank wants to maximize, subject to constraints. The first we have already mentioned:
+        $$L + S \le 100$$
+        (our unit is in millions of dollars). Another two straightforward constraints (sign constraints) are:
+        $$L \ge 0, S \ge 0$$
+        An additional constraint we will add is a liquidity constraint: the bank wants at least 25% of the funds liquid. This means:
+        $$S \ge 0.25(S+L) \Leftrightarrow 3S - L \ge 0$$
+        Finally, another constraint is that the bank wants to keep some money aside for some big customers to give loans at time. In our case, our bank wants to put aside 30 million for these big customers. This means:
+        $$L \ge 30$$
+        Any portfoio satisfying all constraints is called <b>feasible</b>. A feasible portfolio that maximizes $R$ is called <b>optimal</b>. What we will find is that the region of feasible portfolios forms a polygon.
+    </div>
+
+    <h2 class="display-4" id="lec-2">Lecture 2</h2>
+
+    <p>We continue the example from last time.</p>
+
+    <div class="problem">
+        <b>Example (Franklin, Investment Management cont.).</b> After we darw out the feasible solutions on the graph, we can see where $R$ is maximized by seeing the lines where $R$ is constant. We have $2L + S$ is a constant. Thus $S = -2L + k$ for some constant $k$. In other words, our values of constant $R$ are simply the lines of slope 2 in the plane. From this, we can see that the optimal portfolio occurs when $L = 3S$ and $L + S = 100$. Thus $L  = 75$ and $S = 25$. Thus $R = 0.1L + 0.05S = 7.5 + 1.25 = 8.75$ million dollars.
+    </div>
+
+    <div class="problem">
+        <b>Example (Franklin, Transportation Problem).</b> Oil is produced at different sites, where $s_i$ is the supply at site $i$. Oil is required at markets (New York, Tokyo, etc.). Let $d_j$ be the demand at market $j$. Suppose supply meets demand, so $\sum s_i \ge \sum d_j$. We would like to minimize the transportation costs. <br><br>
+
+        Let $x_{ij}$ be the barrels shipped from site $i$ to market $j$ and let $c_ij$ be the cost of shipping 1 barrel from site $i$ to market $j$. Then the total cost is
+        $$\sum_{i,j} c_{ij}x_{ij}$$
+        We have some constraints. For example, we must have for all $i$,
+        $$\sum_{j} x_{ij} \le s_i$$
+        Another constraint is that we want 
+        $$\sum_i x_{ij} \ge d_j$$
+        for each $j$. Note that we could actually use equality here because we don't ever want to ship more than we need to. And of course, we must have
+        $$x_{ij} \ge 0$$
+        for all $i, j$. For this example we won't draw, but this is a linear programming problem which we will learn how to solve in this course.
+    </div>
+
+    <div class="problem">
+        <b>Example (Franklin, Galaxies).</b> This problem is based on Faber (1972), titled <i>Quadratic Programming Applied to the Problem of Galaxy Population Synthesis (Astronomy and Astrophysics)</i>. We want to classify the types of stars in a galaxy. Let $x_k$ be the number of stars of the type $k$ for $k = 1,...,N$. Let $l_{kj}$ be the luminosity of star type $k$ in filter $j$, with $j = 1,...,J$. Then let $L_j$ ne the luminosity of galaxy in filter $j$. We would like to minimize the error 
+        $$Q = \sum_{j=1}^J W_j (L_j - \sum_{k=1}^N x_k l_{kj})^2$$ 
+        where $W_j = \dfrac{1}{(L_jP_j)^2}$ where $P_j$ is the observational error in $L_j$. We could apply regression, but the problem is that there are other constraints. For example, the $x_k$s must satisfy $x_k \ge 0$, the group ratios must satisfy $C_1 \le \dfrac{x_n}{x_n'} \le C_2$ where $n$ and $n'$ are different types of stars. Additionally, particular stellar group provides a certain percentage of total luminosity (in a given filter). 
+        $$C_3 \le \dfrac{l_{nj} x_n}{\sum l_k x_k} \le C_4$$
+        Another constraint comes from the mass to light ratios (some complicated expression).
+    </div>
+
+    <h2 class="display-4" id="lec-3">Lecture 3</h2>
+
+    <p>We start with definitions. Euclidean vector spaces, inner product spaces, and norms were defined but I omitted those definitions here.</p>
+
+    <p>We define the balls in $\mathbb{R}^n$: 
+        $$\overline{B}_r (x) = \overline{B}(x,r) = \{y \in \mathbb{R}^n \;|\; |x - y| \le r\}$$
+        $$B_r(x) = B(x,r) = \{y \in \mathbb{R}^n \;|\; |x - y| < r\}$$
+        $$\partial B_r(x) = \partial B(x,r) = \{y \in \mathbb{R}^n \;|\; |x - y| = r \}$$
+    </p>
+
+    <p>We define matrices, transpose, and symmetric matrices.</p>
+
+    <p><b>Definition (Nonnegative Definite).</b> If $A \in \mathbb{R}^{nm}$ is symmetric and satisfies for any $x \in \mathbb{R}^n$ $x \cdot (Ax) \ge 0$, ($x \cdot (Ax) = \sum a_{ij} x_i x_j = x^T A x$), we say $A$ is <b>non-negative definite</b>. We write $A \ge 0$.</p>
+
+    <p><b>Definition (Positive Definite).</b> If $x^T A x > 0$, we say $A$ is positive definite, and write $A > 0$.</p>
+
+    <p><b>Definition (Transpose).</b> $A \in \mathbb{R}^{n\times m}$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, 
+    $$y^TAx = x^T A^T y$$</p>
+
+    <p>We next defined partial derivative and gradient. The second order partials matrix is important enough to have a name, it is called the <b>Hessian matrix</b>:
+        $$\nabla^2 f(x) = \begin{bmatrix} \dfrac{\partial^2 f}{(\partial x_1)^2}  & ... & \dfrac{\partial^2 f}{\partial x_n \partial x_1} \\ ... & & ... \\ \dfrac{\partial^2 f}{\partial x_1 \partial x_n} & ... & \dfrac{\partial^2 f}{(\partial x_n)^2}\end{bmatrix}$$
+    </p>
+
+    <p>We define function composition and chain rule. We then did some real analysis definitions.</p>
+    
+    <h2 class="display-4" id="lec-4">Lecture 4</h2>
+
+    <h3 class="display-6" id="variations">Variations</h3>
+    <p>We start with unconstrained optimization. Let $f : \mathbb{R}^n \rightarrow \mathbb{R}$. </p>
+    <p><b>Definition (Minimizer).</b> $x_0 \in \mathbb{R}^n$ is a <b>minimizer</b> if for all $x \in \mathbb{R}^n$, $f(x_0) \le f(x)$. We write $f(x_0) = \min_{x\in\mathbb{R}^n} f(x)$.</p>
+
+    <p><b>Definition (Maximizer).</b> $x_\wedge$ is a <b>maximizer</b> if $\forall x \in \mathbb{R}^n$, $f(x_\wedge) \ge f(x)$. We write $f(x_n) = \max_{x\in\mathbb{R}^n} f(x)$. </p>
+    
+    <p>Next we find properties of minimizers.</p>
+    <div class="theorem">
+        <b>Theorem (First Variation).</b> Assume $f$ is differentiable and $x_0 \in \mathbb{R}^n$ is a minimizer. Then $\nabla f(x_0) = 0$.
+    </div>
+    <i>Proof.</i>
+
+    <p>We start with the one dimensional case (where $n = 1$). 
+        $$\lim_{h \rightarrow^+ 0} \dfrac{f(x+h) - f(x)}{h} = f'(x_0) \ge 0$$
+        $$\lim_{h\rightarrow^-} \dfrac{f(x_0 + h) - f(x)}{h} = f'(x_0) \le 0$$
+        $$\Rightarrow f'(x_0) = 0$$
+        We now consider general $n$. Let $y \in \mathbb{R}^n$ and define $\phi(t) = f(x_0 + ty)$. $0$ is a minimizer of $\phi : \mathbb{R} \rightarrow \mathbb{R}$. 
+        $$0 = \phi'(0) = \phi'(t)|_{t = 0} = \nabla f(x_0 + ty)y |_{t = 0} = \nabla f(x_0) y = 0$$
+        $y$ is arbitrary so take $y = \nabla f(x_0)$ so $|\nabla f(x_0)|^2 = 0$, so $\nabla f(x_0) = 0$. 
+    </p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <p><b>Definition (Critical Point).</b> A point $x_0 \in \mathbb{R}^n$ that staisfies $\nabla f(x_0) =0$ is called a <b>critical point</b> for $f$ (also known as an extremal point). </p>
+
+    <div class="remark">
+        <b>Remark.</b> Not every critical point is a minimizer.
+    </div>
+
+    <div class="theorem">
+        <b>Theorem (Second Variation).</b> Assume $f : \mathbb{R}^n \rightarrow \mathbb{R}$ is twice differentiable and assume that $x_0 \in \mathbb{R}^n$ is a minimizer. Then 
+        $$\nabla^2 f(x_0) \ge 0$$
+        (in other words the Hessian is nonnegative definite). If $x_0$ is a maximizer, then $\nabla^2f(x_0) \le 0$.
+    </div>
+    <i>Proof.</i>
+
+    <p>We start with the case wehn $n = 1$. 
+        $$f(x_0 + h) = f(x_0) + hf'(x_0) + \dfrac{h^2}{2} f''(z)$$
+        where $z \in [x_0, x_0 + h]$ with $h > 0$ and $\in [x_0 + h, x_0]$ with $h < 0$. We have that $hf'(x_0) = 0$, so we have:
+        $$f''(z) = \dfrac{f(x_0 + h) - f(x_0)}{h^2/2} \ge 0$$
+        Sending $h \rightarrow 0$, we have
+        $$f''(x_0) = \lim_{h \rightarrow 0} f''(z) \ge 0$$ 
+    </p>
+
+    <p>We now consider general $n$. Define $\phi(t) = f(x_0 + ty)$ for $y \in \mathbb{R}^n$. We have $\phi : \mathbb{R} \rightarrow \mathbb{R}$, and 0 is a minimizer of $\phi$. By the $n =1$ case, $\phi''(0) \ge 0$. Then
+        $$0 \le \phi''(0) = \phi''(t) |_{t = 0} = \dfrac{d}{dt} (\nabla f(x_0 + ty) \cdot y)|_{t = 0} = y (\nabla^2 f(x_0 + ty) \cdot y) |_{t = 0}$$
+        $$= y^T \nabla^2 f(x_0) y = \sum y^i y^j \partial_{x_i} \partial_{x_j} f(x_0)$$
+    and thus we have $\nabla^2 f(x_0) \ge 0$.
+    </p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="remark">
+        <b>Remark.</b> There is a catch; $\nabla^2 f(x_0) \ge 0$ is true also if $x_0$ is only a local minimizer.
+    </div>
+
+    <h2 class="display-4" id="lec-5">Lecture 5</h2>
+
+    <p>Today we discuss some applications and examples from Evans' lecture notes. </p>
+
+    <div class="problem">
+        <b>Example (Refraction and Relection).</b> Suppose you have two materials $A$ and $B$ and you introduce a light ray from a point $a$ in $A$ to the point $b$ in $B$. Given that light takes the past of least time, and that light moves at speed $v_1$ in material $A$ and $v_2$ in material $B$. 
+
+        <p>Then we wish to minimize:
+            $$f(t) = \dfrac{d_1}{v_1} + \dfrac{d_2}{v_2}$$
+            to get path of the light ray. Suppose the light hits the boundary at the point $c$ with coordinates $(x,0)$, and $a$ and $b$ have coordinates $(x_1,y_1)$ and $(x_2,y_2)$ respectively. We have:
+            $$f(x) = \dfrac{\sqrt{(x_1 - x)^2 + y_1^2}}{v_1} + \dfrac{\sqrt{(x_2 - x)^2 + y_2^2}}{v_2}$$
+            so
+            $$f'(x) = \dfrac{-x_1 + x}{v_1 \sqrt{(x_1 - x)^2 + y_1^2}} + \dfrac{-x_2 + x}{v_2 \sqrt{(x_2 - x)^2 + y_2^2}}$$
+            since $x_2 > x$, 
+            $$f'(x) = \dfrac{\sin \alpha_1}{v_1} - \dfrac{\sin \alpha_2}{v_2} = 0$$
+            $$\dfrac{\sin \alpha_1}{v_1} = \dfrac{\sin \alpha_2}{v_2}$$
+            which is Snell's law. Now suppose light reflects from point $a = (x_1, y_1)$ to point $b = (x_2, y_2)$, and it reflects off the mirror at $c = (x,0)$. We try to derive $\alpha_1 = \alpha_2$ as the minimum for the length of time on the path:
+            $$f(x) = \dfrac{\sqrt{(x_1 - x)^2 + y_1^2}}{v_1} + \dfrac{\sqrt{(x_2 - x)^2 + y_2^2}}{v_1}$$
+            $$f'(x) = \dfrac{1}{v_1} \left[ \dfrac{x - x_1}{v_1 \sqrt{(x_1 - x)^2 + y_1^2}} + \dfrac{x - x_2}{\sqrt{(x_2 -x)^2 + y_2^2}}\right]$$
+            $$\dfrac{1}{v_1} (\sin \alpha_1 - \sin \alpha_2 ) = 0$$
+            $$\sin \alpha_1 = \sin \alpha_2$$ 
+            and since $\alpha_1,\alpha_2 \le 90$, $\alpha_1 = \alpha_2$.
+        </p>
+    </div>
+
+    <div class="problem">
+        <b>Example (Circuit).</b> Suppose we have a circuit with nodes $n_0$, $n_1$, $n_2$, $n_3$, $n_4$, . . . , $n_{N+1}$ connected in some way with wires and resistors. Let $r_{kl} = r_{lk}$ mean the resistance between nodes $n_k$ and $n_l$, and reciprocal $\sigma_{kl} = \dfrac{1}{r_{kl}}$ conductance (allowing infinite resistances for open wires). There is a battery connected between nodes $n_0$ and $n_{N+1}$, with $v_0 = E$ and $v_{N+1} = 0$ the potentials at the two nodes. We have Ohm's law, $V = RI$, and also electrostatic energy, $e(v) = \dfrac{1}{2} \sum_{0 \le l < k \le N+1} \sigma_{kl} (v_l - v_k)^2$. In equilibrium, $e(v)$ is minimized. Thus,
+        $$0 = \nabla_v e(v)$$
+        $$\partial_{v_j} e(v) = \sum_{k=0}^{N+1} \sigma_{kj} (v_j - v_k) = 0$$
+        and by Ohm's law, $\sigma_{jk}(v_j - v_k) = i_{kj}$, so 
+        $$\sum_{k=0}^{N+1} i_{kj} = 0$$
+        which is precisely Kirchhoff's current law.
+    </div>
+
+    <div class="problem">
+        <b>Example (Least Squares).</b> $A \in \mathbb{R}^{m\times n}$, $b \in \mathbb{R}^m$, we want to solve $Ax = b$, and wish to minimize
+        $$e(x) = |Ax - b|^2$$
+        <div class="theorem">
+            <b>Theorem.</b> If $A^TA$ is invertible, then the solution to the above minimization problem is given by 
+            $$x_0 = (A^TA)^{-1}A^Tb$$
+        </div>
+    </div>
+
+    <h2 class="display-4" id="lec-6">Lecture 6</h2>
+
+    <div class="theorem"><b>Theorem.</b> Let $f : U \subset \mathbb{R}^n \rightarrow \mathbb{R}$, $f$ twice continuously differentiable where $U \subset \mathbb{R}^d$ is open. Let $x_0 \in U$ be a critical point, $\nabla f (x_0) = 0$ and $\nabla^2 f(x_0) \succ 0$. Then $x_0$ is a local minimizer.</div>
+    <i>Proof.</i>
+
+    <p>By Taylor's theorem, $h \in \mathbb{R}^d$, we have: 
+        $$f(x_0 + h) = f(x_0) + h\nabla f(x_0) + \dfrac{1}{2} h^T \nabla^2 f(x_0) h + R_{x_0,2}(h)$$
+        such that $\lim_{h\rightarrow 0} \dfrac{1}{|h|^2} R_{x_0,2}(h) = 0$. Since $\nabla^2 f(x_0) \succ 0$, all of its eigenvalues are real and positive. In other words, there exists $\lambda > 0$ such that $h^T \nabla^2 f(x_0) h \ge \lambda |h|^2$.
+    </p>
+
+    <p>Since $\dfrac{1}{|h|^2} R_{x_0,2}(h) \rightarrow 0$, we can find $\epsilon > 0$ such that for all $|h| < \epsilon$ we have $\dfrac{1}{|h|^2} |R_{x_0, 2}(h)| < \dfrac{\lambda}{4}$. Then
+    $$f(x_0 + h) \ge f(x_0) + \dfrac{\lambda}{2} |h|^2- |h|^2 \dfrac{\lambda}{4} = f(x_0) + \dfrac{\lambda}{4} |h|^2$$
+    which is true for all $|h| < \epsilon$, and this is exactly what we had wished to show.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+        
+    <div class="remark">
+        <b>Remark.</b> I just realized she uses $\succ$ and not $>$ for positive definite... I'll try to fix them above but yeah...
+    </div>
+
+    <p>Consider $\{(x^k, y^k) \;|\; x^k \in \mathbb{R}^n, y^k \in \mathbb{R}$, $k = 1,...,N\}$ (sequences). Minimize $\sum_{k=1}^N |x^k m + b - y^k|^2 = f(m,b)$. Define $e^k = x^k m + b - y^k$. Also, $\overline{x} = \dfrac{1}{N} \sum_{k=1}^N x^k$, $C_{ij} = \dfrac{1}{N} \sum_{k=1}^N (x_i^k - \overline{x}_i)(x_j^k - \overline{x}_j)$.</p>
+
+    <div class="remark">
+        <b>Remark.</b> $x_i^k$ represents the $i$th component of $x^k$.
+    </div>
+
+    <div class="theorem">
+        <b>Theorem.</b> Consider $C$ invertible, then a minimizer of $f$ satisfies $m_0 = C^{-1} d$ and $b_0 = \overline{y} - m_0 \overline{x}$.
+    </div>
+    <i>Proof.</i>
+
+    <p>$$\dfrac{\partial f}{\partial m_i}(b,m) = \sum_{k=1}^N x_i^k \cdot (x^k m + b - y^k) = 0$$
+    $$= \sum_{k=1}^N x_i^k x^k m + bN\overline{x}_i - \sum_{k=1}^N x_i^k y^k$$
+    $$= \sum_{k=1}^N x_i^k x^k m - N\overline{x}_i m \cdot \overline{x} + N\overline{x}_i \overline{y} - \sum_{k=1}^N x_i^k y^k = 0$$
+    $$= \sum_{k=1}^N m (c^k - \overline{x}) x_i^k + \sum x_i^k (\overline{y} - y^k) = 0$$
+    We also have that:
+    $$\overline{y} - \dfrac{1}{N} \sum y^k$$
+    $$=b+m\overline{x} - (b + \dfrac{m}{N}\sum_{k=1}^N x^k)$$
+    $$= m\overline{x} - \dfrac{m}{N}\sum_{k=1}^N x^k$$
+    so 
+    $$\overline{x}_i (\overline{y} - \dfrac{1}{N}\sum_{k=1}^N y^k) = \overline{x}_i m (\overline{x} - \dfrac{1}{N}\sum_{k=1}^N x^k) = 0$$
+    $$\sum_{k=1}^N \overline{x}_i (\overline{y} - y^k) = \sum_{k=1}^N \overline{x}_i m (\overline{x} - x^k) = 0$$</p>
+
+    <div class="remark">
+        <b>Remark.</b> There's definitely stuff wront here but I'll have to correct it later.
+    </div>
+
+    <p>$$\sum_{k=1}^N m(x^k - \overline{x}) (x_i^k - \overline{x}_i) + \sum_{k=1}^N (\overline{y} - y^k) (x_i^k - \overline{x}_i) = 0$$
+        $$\sum_{k=1}^N Nc_{ij} m_j = N(Cm)_j \Leftrightarrow Cm = d$$
+    </p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <p>We now consider Minimization with equality constraints.</p>
+
+    <h3 class="display-6" id="equality-constraints">Minimization with Equality Constraints</h3>
+
+    <p>Suppose we have $f : \mathbb{R}^n \rightarrow \mathbb{R}$, $g = (g_1,...,g_m)^T : \mathbb{R}^n \rightarrow \mathbb{R}^m$. Suppose $f$ and $g$ are twice continuously differentiable. We would like to minimize $f$ with the constraint that $g = 0$. The equations $g_k(x) = 0$ are called <b>equality constraints</b>.</p>
+
+    <p><b>Definition.</b> $x \in \mathbb{R}^n$ such that $g_k(x) = 0$ for all $k = 1,...,m$ is called <b>feasible</b>, $g_k(x) = g_k(x_1,...,x_n)$, 
+    $$\nabla g = \begin{pmatrix} \dfrac{\partial g_1}{\partial x_n} & \dfrac{\partial g_1}{\partial x_2} & ... & \dfrac{\partial g_1}{\partial x_n} \\ \dfrac{\partial g_2}{\partial x_n} & \dfrac{\partial g_2}{\partial x_2} & ... & \dfrac{\partial g_2}{\partial x_n} \\ ... & & & \\ \dfrac{\partial g_m}{\partial x_n} & \dfrac{\partial g_m}{\partial x_2} & ... & \dfrac{\partial g_m}{\partial x_n}\end{pmatrix} \in \mathbb{R}^{m \times n}$$</p>
+
+    <h2 class="display-4" id="lec-7">Lecture 7: Interpretations of Constrainted Optimization</h2>
+    
+    <p>Consider $f, g_1,..., g_m : \mathbb{R}^n \rightarrow \mathbb{R}$, $f,g = (g_1,...,g_m)^T$, twice continuously differentiable. Last time we were trying to minimize $f$ subject to the constraint that $g = 0$.</p>
+
+    <div class="theorem">
+        <b>Theorem.</b> Suppose $x_0$ solves the above minimization problem. Then there exists real numbers $\gamma_0$, $\lambda_0^1,...,\lambda_0^m$ not all equal to zero such that 
+        $$\gamma_0 \nabla f(x_0) + \lambda_0^1 \nabla g_1(x_0) + \lambda_0^2 \nabla g_2(x_0) + ... + \lambda_0^m \nabla g_m(x_0) = 0$$
+        Here, $\lambda_0^1,...,\lambda_0^m$ are called <b>Lagrange multipliers</b> for $g$. $\lambda_0 = (\lambda_0^1,...,\lambda_0^m)^T$. $\gamma_0$ is called the <b>abnormal multiplier</b>, and $\gamma_0 \neq 0$ is called a <b>normal multipler</b>.
+    </div>
+
+    <p>We will prove this later, but for now we will get some experience working with this. If $\gamma_0$ is not zero, we can divide by $\gamma_0$ to get new $\lambda_0^1,...,\lambda_0^m$ and $\gamma_0 = 1$. Note that we can also write the equation in the above theorem as 
+        $$\gamma_0 \nabla f (x_0)+ \lambda_0^T \nabla g(x_0) = 0$$
+    </p>
+
+    <p>We start with the case when $m = 1$, with a geometric interpretation. Consider a car driving on a hilly road, so that we can draw some elevation curves mapping the area, and a road going on some path along this map. The road is the constraint, the map is the $f$, and our theorem helps us find the minimum elevation of the car along this road.</p>
+
+    <p>We can make some observations. For one, by calculus, we know that the gradient is perpendicular to the level sets. At $x_0$ (the minimum), we know that the road is tangent to the elevation curves/level sets of $f$, so the gradients of $f$ and $g$ must be parallel (as they are perpendicular to the level sets). All of this means that
+    $$\nabla f(x_0) = -\lambda_0 \nabla g(x_0) \Leftrightarrow \nabla f(x_0) + \lambda_0 \nabla g(x_0) = 0$$
+    which is exactly what our theorem said, and $\lambda_0$ is called the Lagrange multiplier.
+</p>
+
+    <p>We now take a second interpretation, with few variables. Again consider $m = 1$. We reduce the constraint problem above to an unconstrained problem on fewer variables. Assume $g(x) = 0$ can be written as $x_n = \phi(x')$ where $x' = (x_1,...,x_{n-1})^T$. Suppose $x_0' = (x_{0,1},...,x_{n-1,1})^T$ where $x_0$ solves the constraint problem. Now $x_0'$ is an unconstrained minimizer of $f(x',\phi(x')) = \tilde{f}(x')$.</p>
+
+    <p>We have
+        $$\dfrac{\partial}{\partial x_i} (f(x', \phi(x'))) = \dfrac{\partial f}{\partial x_i} (x', \phi(x')) + \dfrac{\partial f}{\partial x_n} (x_0', \phi(x_0')) \dfrac{\partial \phi}{\partial x_i} = 0$$
+        for $i = 1,..., n$. Then
+        $$g(x_0', \phi(x_0')) = 0$$
+        for feasible $x_0$ (or $x_0'$)
+        $$\dfrac{\partial}{\partial x_i} (g(x_0', \phi(x_0'))) = \dfrac{\partial g}{\partial x_i} (x_0', \phi(x_0')) + \dfrac{\partial g}{\partial x_n} (x_0', \phi(x_0')) \dfrac{\partial \phi}{\partial x_i} = 0$$
+        for $i = 1,..., n$. Now 
+        $$\lambda_0 = -\dfrac{\partial f}{\partial x_n} (x_0) \left( \dfrac{\partial g}{\partial x_n}(x_0)\right)^{-1}$$
+        $$\dfrac{\partial f}{\partial x_n}(x_0) = -\lambda_0 \dfrac{\partial g}{\partial x_n} (x_0)$$
+        $$\dfrac{\partial f}{\partial x_i}(x_0) = -\lambda_0 \dfrac{\partial g}{\partial x_n} (x_0) \dfrac{\partial \phi}{\partial x_i} = 0$$
+        Then we have
+        $$\dfrac{\partial g}{\partial x_n} (x_0) \dfrac{\partial \phi}{\partial x_i} = -\dfrac{\partial g}{\partial x_i}(x_0)$$
+        Plugging in gives
+        $$\dfrac{\partial f}{\partial x_i} (x_0) + \lambda_0 \dfrac{\partial g}{\partial x_i} (x_0) = 0$$
+        for $i = 1,..., n-1$ as desired.
+    </p>
+
+    <h2 class="display-4" id="lec-8">Lecture 8</h2>
+
+    <p>We consider the value function interpretation with $m = 1$. For $a \in \mathbb{R}$, we define $v(a) = \min_{y\in \mathbb{R}^n}\{ f(y) \;|\; g(y) = a\}$, with $v(g(x)) \le f(x)$, $v(g(x_0)) = v(0) = f(x_0)$, and $h(x) = f(x) - v(g(x)) \ge 0$.</p>
+
+    <p>$h$ now has a minimizer at $x = x_0$, and min becomes the unconstrained minimization of $h$. Thus $x_0$ is a critical point of $h$, so 
+        $$\nabla h(x_0) = \nabla f(x_0) - v'(g(x_0)) \nabla g(x_0) = 0$$
+        $$$\nabla h (x_0)  = \nabla f(x_0) - v'(g(x_0)) \nabla g(x_0) = 0$$
+        $$= \nabla f(x_0) - v'(0) \nabla g(x_0) = 0$$
+        Now we simply define $\lambda = -v'(0)$ to get the Lagrange multiplier.
+    </p>
+
+    <div class="remark">
+        <b>Remark.</b> We have not shown that $g$ is actually differentiable, we just are assuming it. However, it is possible to show that $f$ differentiable implies that $v$ is differentiable almost everywhere.
+    </div>
+
+    <div class="example">
+        <b>Example.</b> For $n = 2$, $f(x) = x_1 + x_2$, $g(x) = x_1^2 + x_2^2$. Our feasible points are $g(x) = 0 \Leftrightarrow x = 0$. Thus $f(x_0) = 0$. Now we have 
+        $$\nabla f(x_0) = \begin{pmatrix} 1 \\ 1 \end{pmatrix},\;\; \nabla g(x_0) = \begin{pmatrix} 2x_{0,1} \\ 2x_{0,2} \end{pmatrix} = \begin{pmatrix} 0 \\ 0\end{pmatrix}$$ 
+        so we do not have our lagrange multiplier of the form $\nabla f(x_0) + \lambda \nabla g(x_0) = 0$. However, we can fix this with the theorem by allowing a $\gamma_0$ in front of $x$.
+    </div>
+
+    <div class="strat">
+        <b>Strat.</b> We thus get the geometric interpretation $\nabla f(x_0) || \nabla g(x_0)$, which works even if $\nabla g(x_0) = 0$. 
+    </div>
+
+    <i>Proof of Langrange Multiplier Theorem.</i>
+
+    <p>I left this for me to read in the (or a) textbook because of my midterm today.</p>
+
+    <h2 class="display-4" id="lec-9">Lecture 9</h2>
+
+    <p>We recall the Lagrange Multiplier theorem from previous classes. Essentially the idea behind the proof was that we get:
+        $$0 = \gamma_{\alpha_j} \nabla f (x_{\alpha_j}) + \nabla g(x_{\alpha_j})^\top \lambda_{\alpha_j} + \gamma_{\alpha_j} \beta (x_{\alpha_j} - x_0)$$
+        for some sequence $\alpha_j$, and then $\gamma_{\alpha_j} \rightarrow \gamma_0$, $\nabla f(x_{\alpha_j}) \rightarrow \nabla f(x_0)$, $\nabla g(x_{\alpha_j})^\top \rightarrow \nabla g(x_0)^\top$, $\lambda_{\alpha_j} \rightarrow \lambda_0$, and of course $x_{\alpha_j} - x_0$ goes to 0.
+    </p>
+
+    <div class="remark">
+        <b>Remark.</b> When $\gamma_0 = 0$ (abnormal case), the theorem on Lagrange multipliers doesn't provide much information about the minimizer. Therefore, we will be interested in the $\gamma_0 = 1$ case most of the time (normal multiplier). For this reason, we define what a regular point $x_0$ is.
+    </div>
+
+    <p><b>Definition (Regular Point).</b> $x_0$ is regular if $\nabla g_k(x_0)$ are linearly independent in $\mathbb{R}^n$ ($k = 1,...,m$).</p>
+
+    <div class="theorem">
+        <b>Theorem.</b> If $x_0$ solves the minimization problem and is regular, then $\nabla f(x_0) + \sum_{k=1}^m \lambda_0^k \nabla g_k(x_0) = 0$.
+    </div>
+
+    <div class="remark">
+        <b>Remark.</b> We write the above equation as $\nabla f(x_0) + \nabla g(x_0)^\top \lambda_0 = 0$, $\lambda_0 = (\lambda_0^1, ..., \lambda_0^m)^\top$.
+    </div>
+    <i>Proof.</i>
+
+    <p>The previous theorem shows that the equation holds, so we need to show that $\gamma_0 \neq 0$. We assume for contradiction that $\gamma_0 = 0$. Then 
+        $$\sum_{k=1}^m \lambda_0^k \nabla g_k(x_0) = 0$$
+        but then they are dependent (since we assumed in the proof othe theorem that one of the $\gamma, \lambda$ must be nonzero), so they are not independent. Contradiction.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="remark">
+        <b>Remark.</b> In many applications, the constraints are affine or linear, so we can write them as $Ax - b = 0$, where $A \in \mathbb{R}^{m \times n}$ and $b \in \mathbb{R}^m$. In this case, $x_0$ being regular means that the rows of $A$ have to be linearly independent. In that case, we can do Gaussian elimination to reduce the system to a set of linearly independent rows and thus make a new $\overline{A}x - \overline{b} = 0$, and $\overline{A} \in \mathbb{R}^{l \times n}$, $\overline{b} \in \mathbb{R}^l$ where $\overline{A}$ has rank $l$ and then $x_0$ is a regular point of this new constraint, and we can use these in the lagrange theorem. 
+    </div>
+
+    <div class="remark">
+        <b>Remark.</b> Consider $g(x) = Ax - b = 0$, $\overline{g}(x) = \overline{A}x - b$. If $x_0$ minimizes $f(x)$ subject to $g(x) = 0$, it minimizes $f(x)$ subject to $\overline{g}(x)= 0$ and it is a regular point for $\overline{g}$. Then the above theorem implies that 
+        $$\nabla f(x_0) + \sum_{k=1}^l \overline{\lambda}_0^k \overline{a}_{k,\cdot} = 0$$
+    </div>
+
+    <p>We now consider the second variation.</p>
+
+    <div class="theorem">
+        <b>Lemma.</b> If $x_0$ is regular, then the matrix $\nabla g(x_0) \nabla g(x_0)^\top$ is nonsingular.
+    </div>
+    <i>Proof.</i>
+
+    <p>Consider $y \in \mathbb{R}^m$, and assume $\nabla g(x_0) \nabla g(x_0)^\top y = 0$. We must show that $y = 0$. To do so, we take the inner product with $y$:
+        $$0 = y^\top \nabla g(x_0) \nabla g(x_0)^\top  = (\nabla g(x_0)^\top y)^\top \nabla g(x_0)^\top y = \left| \nabla g(x_0)^\top y\right|^2$$
+        Now we have $\left|\nabla g(x_0)^\top y\right| = 0$ so $\nabla g(x_0)^\top y = 0$, and note that 
+        $$\nabla g(x_0)^\top = \begin{pmatrix} \dfrac{\partial g_1}{\partial x_1}(x_0) & \dfrac{\partial g_2}{\partial x_2}(x_0) & ... & \dfrac{\partial g_m}{\partial x_1} (x_0) \\ ... & & & ... \\ \dfrac{\partial g_1}{\partial x_n} (x_0) & ... & ... & \dfrac{\partial g_m}{\partial x_n}(x_0) \end{pmatrix}$$ 
+        $$\nabla g(x_0)^\top y = \left( \sum_{k=1}^m \dfrac{\partial g_k}{\partial x_j} (x_0)y_k\right)^n_{j=1}$$
+        $$= \sum_{k=1}^m \nabla g_k(x_0) y_k$$
+        Because $\nabla g_k$ are linearly independent, $y_k = 0$ for $k = 1,...,m$ so $y = 0$.
+    </p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="theorem">
+        <b>Theorem (Constrained 2nd Variation Formula).</b> Suppose $x_0$ solves the minimization problem and that it is regular. Let $(\lambda_0^1,...,\lambda_0^m)$ be the corresponding Lagrange mulipliers from the previous theorem. Then 
+        $$y^\top (\nabla^2 f(x_0) + \sum_{k=1}^m \lambda_0^k \nabla^2 g_k(x_0))y \ge 0$$ 
+        for all $y \in \mathbb{R}^n$ such that $\nabla g(x_0)y = 0$.
+    </div>
+
+    <!--Weber is down to oversee projects for SURF (tip for the future)-->
+
+    <h2 class="display-4" id="lec-10">Lecture 10</h2>
+    <div class="remark">
+        <b>Remark.</b> I realized the lecture numbers are off because I missed a lecture once.
+    </div>
+
+    <div class="theorem">
+        <b>Theorem (Constrained 2nd Variation Formula).</b> Suppose $x_0$ solves the minimization problem and that it is regular. Let $(\lambda_0^1,...,\lambda_0^m)$ be the corresponding Lagrange mulipliers from the previous theorem. Then 
+        $$y^\top (\nabla^2 f(x_0) + \sum_{k=1}^m \lambda_0^k \nabla^2 g_k(x_0))y \ge 0$$ 
+        for all $y \in \mathbb{R}^n$ such that $\nabla g(x_0)y = 0$.
+    </div>
+    <i>Proof.</i>
+
+    <p>We return to the proof of the Lagrange Multiplier theorem. 
+        $$F^{\alpha} (x) = f(x) + \dfrac{\alpha}{2} |g(x)|^2 + \dfrac{\beta}{2}|x-x_0|^2$$
+        with $x_\alpha \rightarrow x_0$ as $\alpha \rightarrow \infty$. Also,
+        $$\gamma_\alpha = (1 + \alpha^2|g(x_\alpha)|^2)^{-1/2} \rightarrow \gamma_0 \neq 0$$
+        so $\{\alpha|g(x_\alpha)|\}_{\alpha > 0}$ is a bounded sequence. By the Bolzano-Weierstrass Theorem, $\{\alpha g(x_\alpha)\}_{\alpha > 0}$ is a convergent subsequence. So $\alpha_ig(x_{\alpha_i}) \rightarrow \lambda_0$ as $j \rightarrow \infty$ $\{\alpha_j\}_{j = n}^\infty$ subsequence of $\{\alpha\}$. 
+    </p>
+
+    <p>Because $x_\alpha$ for $\alpha$ large enough lies in the integerior of $B = \overline{B}(x_0,1)$, ($x_\alpha$ minimizes $F^{\alpha}$ in $B$)
+        $$\nabla^2 F^{\alpha} (x_\alpha) \succeq 0$$
+        $$\nabla F^{\alpha}(x_\alpha) = \nabla f(x_\alpha) + \alpha g(x-\alpha)^\top \nabla g(x_\alpha) + \beta(x_\alpha - x_0)$$
+        $$\nabla^2 F^{\alpha} (x_\alpha) = \nabla^2f(x_\alpha) + \alpha\nabla g(x_\alpha)^\top \nabla g(x_\alpha) + \alpha \sum_{k=1}^m g_k(x_\alpha) \nabla^2 g_k(x_\alpha) + \beta I \succeq 0 \;\;\;(*)$$
+        From the previous Lemma, we know that $\nabla g(x_0) \nabla g(x_0)^\top$ is invertible. Therefore, since $\nabla g$ is continuous, $\nabla g(x_\alpha)\nabla g(x_\alpha)^\top$ is invertible for $\alpha$ large enough.
+    </p>
+
+    <p>
+        So for $y$ such that $\nabla g(x_0)y = 0$, we define 
+        $$z_\alpha = y - \nabla g(x_\alpha)^\top (\nabla g(x_\alpha)\nabla g(x_\alpha)^\top)^{-1}\nabla g(x_\alpha)y$$
+        Now 
+        $$\nabla g(x_\alpha)z_\alpha = \nabla g(x_{\alpha})y - (\nabla g(x_{\alpha}) \nabla g(x_\alpha)^\top)(\nabla g(x_\alpha)\nabla g(x_{\alpha})^\top)^{-1}\nabla g(x_\alpha)y$$
+        $$= \nabla g(x_\alpha)y - \nabla g(x_\alpha)y = 0$$
+        so in the limit $\nabla g(x_0)z = 0$ where $z_\alpha \rightarrow z$. By definition and continuity of $\nabla g $ and $x_\alpha \rightarrow x_0$, we get $z_\alpha \rightarrow y$ as $\alpha \rightarrow \infty$. We use $z_\alpha$ in $(*)$ to get
+        $$0 \le z_\alpha^\top \nabla^2 F^\alpha (x_\alpha) z_\alpha = z_\alpha^\top(\nabla^2f(x_\alpha)+\alpha\nabla g(x_\alpha)^\top\nabla g(x_\alpha) + \alpha \sum_{k=1}^m g_k(x_\alpha) \nabla^2 g_k(x_\alpha) + \beta I)z_\alpha$$ 
+        $$\rightarrow y^\top (\nabla^2f(x_0) + \lambda_0^k\nabla^2g_k(x_0) + \beta I) y$$
+        $$0 \le y^\top (\nabla^2 f(x_0) + \sum_{k=1}^m \lambda_0^k\nabla^2g_k(x_0) + \beta I)y$$
+        and now as $\beta \rightarrow 0$, we have the desired result.
+    </p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="problem">
+        <b>Example (M Levi, SIAM News May 2020).</b> Suppose there are $n$ containers on a table connected at the bottom. Fill water of volume $V$ into these. Then it turns out that the height of the water in all of the containers will be the same. This is called Pascal's Principle. We define $a_k(y)$ to be the cross-sectional area of container $k$ at height $y$ above the table. Then $\int_0^{x_k} a_k(y) dy$ is the amount of water in container $k$ if the water level is $x_k$. We have:
+        $$g(x_1,...,x_n) = \sum_{k=1}^n \int_0^{x_{k}} a_k(y) \; dy - V = 0$$
+    </div>
+
+    <h2 class="display-4" id="lec-11">Lecture 11</h2>
+    <p>We continue the example from last time.</p>
+
+    <div class="problem">
+        <b>Example (M Levi, SIAM News May 2020).</b> Suppose there are $n$ containers on a table connected at the bottom. Fill water of volume $V$ into these. Then it turns out that the height of the water in all of the containers will be the same. This is called Pascal's Principle. We define $a_k(y)$ to be the cross-sectional area of container $k$ at height $y$ above the table. Then $\int_0^{x_k} a_k(y) dy$ is the amount of water in container $k$ if the water level is $x_k$. We have:
+        $$g(x_1,...,x_n) = \sum_{k=1}^n \int_0^{x_{k}} a_k(y) \; dy - V = 0$$
+        where 
+        $$V = \sum_{k=1}^n \int_0^{x_k} a_k(y) \; dy$$
+        We must have some potential energies 
+        $$E_k = \kappa \int_0^{x_k} ya_k(y) \; dy$$ 
+        and we wish to minimize 
+        $$f(x_1,...,x_n) = \kappa \sum_{k=n}^n \int_0^{x_k} ya_k(y) \; dy = \sum_{l=1}^n E_k$$
+        We wish to minimize $f$ subject to $g = 0$. At a minimizer $x^0 = (x_1^0,...,x_n^0)$, the constrained first variation formula gives 
+        $$\gamma_0 \nabla f(x^0) + \lambda_0 \nabla g(x^0) = 0$$
+        We get that 
+        $$\dfrac{\partial}{\partial x_k} g(x) = a_k(x_k) \neq 0$$
+        Thus, we set $\gamma_0$ to 1, and get:
+        $$\dfrac{\partial}{\partial x_k} f(x) = x_k a_k(x_k)$$
+        Finally we have for each $k$, 
+        $$\kappa x_k a_k(x_k) + \lambda_0 a_k(x_k) = 0 \Rightarrow \kappa x_k + \lambda_0 = 0 \Rightarrow \lambda_0 = -\kappa x_k, x_k = -\dfrac{\lambda_0}{\kappa}$$
+        so all of the $x_k$ are the same, as desired.
+        <p style="text-align: right;">$\blacksquare$</p>
+    </div>
+    
+    <div class="problem">
+        <b>Example (Electric Circuits (Again!)).</b> Suppose we have a circuit with nodes $n_0$, $n_1$, $n_2$, $n_3$, $n_4$, . . . , $n_{N+1}$ connected in some way with wires and resistors. Let $i_{kl}$ be the current from node $n_k$ to node $n_l$. We have $i_{kl} = -i_{lk}$ and $i_{kk} = 0$, and $\sum_{l=0}^{N+1} i_{kl} = 0$, with $k = 1,...,N$. $r_{kl}$ is the resistance between node $n_k$ and node $n_l$. Assume the total current in the network is $I$, so $\sum_{l=0}^{N+1} i_{ol} = I$, and $\sum_{l=0}^{N+1} i_{l,N+1} = I$. We wish to minimize 
+        $$f(i) = \sum_{0 \le k < l \le N+1} r_{kl} (i_{kl})^2$$
+        subject to 
+        $$g_k(i) = \left\{\begin{array} \sum\sum_{l=0}^{N+1} i_{kl} & \text{ if }1 \le k \le n \\ \sum_{l=0}^{N+1} i_{kl} - I & \text{ if }k = 0 \\ \sum_{l=0}^{N+1} i_{kl} + I & \text{ if }k = N+1\end{array} \right.$$
+        $$g(i) = 0$$
+        With $m \in \{1,...,N\}$, 
+        $$g_m(i) = -\sum_{l=0}^m i_{lm} + \sum_{k=n+1}^{N+1} i_{ml}$$
+        $$\dfrac{\partial g_m(i)}{\partial i_{kl}} = \left \{ \begin{array} +1 & 1 \le m = k < l \le N + 1 \\ -1 & 1 \le l = m < k \le N+1 \\ 0 & \text{ otherwise }\end{array}\right.$$
+        We then see that $\nabla g_m(i)$ are linearly independent because they have their zeros at different places (when you write out the vectors with components).
+
+        <p>And thus 
+            $$\nabla f(i) + \sum_{k=0}^{N+1} \lambda_0^k \nabla g_k(i) = 0$$
+            $$\dfrac{\partial f}{\partial i_{kl}} = 2r_{kl} i_{kl}$$ 
+            The first statement above gives 
+            $$\dfrac{\partial f}{\partial i_{kl}} + \sum_{m=0}^{N+1} \lambda_0^m \dfrac{\partial g_m}{\partial i_{kl}} (i) = 0$$
+            $$2r_{kl} i_{kl} + \lambda_0^k - \lambda_0^l = 0$$
+            We can swap the signs, and we have:
+            $$-\lambda_0^k + \lambda_0^l = 2r_{kl} i_{kl}$$
+            $$-v^k + v^l = 2r_{kl} i_{kl}$$ 
+            which is Ohm's law up to constants as desired.
+        </p>
+    </div>
+
+    <h2 class="display-4" id="lec-12">Lecture 12</h2>
+    Now we consider minimization of linear functions subject to linear constraints. Here we have 
+    <ol>
+        <li>$x = (x_1,...,x_n)^\top \in \mathbb{R}^n$, we write $x \ge 0$ if $x_i \ge 0$ for all $i$</li>
+        <li>$x \in \mathbb{R}^n$, we write $x > 0$ if $x_i > 0$ for all $i$</li>
+        <li>For $x,y \in \mathbb{R}^n$, we write $x \ge y$ if $x_i \ge y_i$ for all $i$.</li>
+    </ol>
+
+    <p><b>Definition (Canonical Primal Linear Programming Problem).</b> Let $A \in \mathbb{R}^{m \times n}$. Let $b \in \mathbb{R}^m$, and $c \in \mathbb{R}^n$. Then the <b>canoncial primal linear programming problem</b> is to find $x_0 \in \mathbb{R}^n$ such that $x_0$ minimizes $x \cdot c$ subject to $Ax = b$ and $x \ge 0$.</p>
+    <p><b>Definition (Feasible).</b> If $x \in \mathbb{R}^n$ we say $x$ is <b>feasible</b>.</p>
+
+    <p><b>Definition (Dual).</b> The <b>canonical dual problem</b> is to find a solution $y_0 \in \mathbb{R}^n$ to the problem "maximize $y \cdot b$ subject to constraint $A^T y \le c$."</p>
+
+    <p><b>Definition (Feasible).</b> $y$ is <b>feasible</b> if $A^T y \le c$.</p>
+
+    <div class="problem">
+        <b>Example.</b> Suppose we wish to minimize $x_1 + 2x_2 + 3x_3$ subject to $x_1 - 2x_2 + x_3 = 4$, and $-x_1 + 3x_3 = 5$, with $x_1,x_2,x_3 \ge 0$.
+        <div class="remark">
+            <b>Remark.</b> Using Lagrange gives 
+            $$\begin{bmatrix} 1 & 0 & 0 & 1 & -1 \\ 0 & -2 & 0 & -2 & 0 \\ 0 & 0 & 3 & 1 & 3 \\ 1 & -2 & 1 & 0 & 0 \\ -1 & 0 & 3 & 0 & 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ \lambda_1 \\ \lambda_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 4 \\ 5 \end{bmatrix}$$
+        </div>
+        The corresponding dual problem is: Find $y \in \mathbb{R}^2$ solving "maximize $4y_1 + 5y_2$ subject to $y_1 - y_2 \le 1$ and $-2y_1 \le 2$, and $y_1 + 3y_2 \le 3$."
+    </div>
+
+    <p>Why dual and primal? The next theorem:</p>
+
+    <div class="theorem">
+        <!--Theorem 9-->
+        <b>Theorem (Duality and Optimality).</b> 
+        <ol>
+            <li>If $x$ is feasible for the primal problem and $y$ is feasible for the dual problem, then 
+                $$b\cdot y \le c \cdot x$$
+            </li>
+            <li>If $x_0$ is feasible for the primal problem and $y_0$ is feasible for the dual problem and $b \cdot y_0 = c \cdot x_0$, then $x_0$ solves the primal problem and $y_0$ solves the dual problem.</li>
+        </ol>
+    </div>
+    <i>Proof.</i>
+
+    <p>For the first part, let $x$ and $y$ be feasible. Then 
+        $$b \cdot y = (Ax) \cdot y = x \cdot (A^T y) = \sum_{i = 1}^n x_i (A^Ty)_i \le \sum_{i=1}^n x_i c_i = x \cdot c$$
+    as desired.</p>
+    
+    <p>Now we consider the second part. Suppose $x_0$ and $y_0$ are feasible and $y_0 \cdot b = x_0 \cdot c$. Then from (i), for any $y$ that is feasible, $b \cdot y \le c \cdot x_0 = y_0 \cdot b$, so $y_0$ maximizes $b \cdot y$ over all feasible $y$. Similarly, from (i), for all $x$ that are feasible, $x \cdot c \ge b \cdot y_0 = x_0 \cdot c$, so $x_0$ minimizes among all feasible $x$ as desired.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="problem">
+        <b>Example.</b> Consider the primal problem: minimize $x_1 + 5x_2 + 2x_3 + 13 x_4$ subject to $5x_1 - 6x_2 + 4 x_3 - 2x_4 = 0$ and $x_1 - x_2 + 6x_3 + 9x_4 = 16$ and $x \ge 0$. We have:
+        $$A = \begin{bmatrix} 5 & -6  & 4 & -2 \\ 1 & -1 & 6 & 9 \end{bmatrix}, b = \begin{bmatrix} 0 \\ 16 \end{bmatrix}$$ 
+        and consider $x_0 = (0,2,3,0)^\top$ and $x_0 \ge 0$, and we have $Ax_0 = \begin{bmatrix} 0 \\ 16 \end{bmatrix}$ so it satisfies the constraints. Now the dual problem is that we wish to maximize $16\cdot y_2$ subject to $5y_1 + y_2 \le 1$, $-6y_1 - y_2 \le 5$, $4 y_1 + 6y_2 \le 2$, and $-2y_1 + 9 y_2 \le 13$. Consider $y_0 = \begin{bmatrix} -1 \\ 1\end{bmatrix}$. Since $by_0 = cx_0 = 16$, $x_0$ and $y_0$ are optimal as desired. 
+    </div>
+
+    <p><b>Definition.</b> The <b>standard linear programming problem</b> is to find $x_0 \in \mathbb{R}^n$ solving "minimize $xc$ subject to $Ax \ge b$ and $x \ge 0$".</p>
+
+    <p><b>Definition.</b> The <b>standard dual problem</b> is to find $y_0 \in \mathbb{R}^m$ solving "maximize $by$ subject to $A^\top y \le c$ and $y \ge 0$."</p>
+
+    <h2 class="display-4" id="lec-13">Lecture 13</h2>
+
+    <p>The general linear programming problem: Find $x_0 \in \mathbb{R}^n$ solving "minimize $c \cdot x$ subject to $\sum_{j=0}^n a_{ij} x_j \ge b_i$ fpr $i \in I_1$, $\sum_{j=1}^n a_{ij}x_j = b_i$ for $i \in I_2$, and $x_j \ge 0$ for $j \in J_1$ with $I_1 \cap I_2 = \varnothing$, $I_1 \cup I_2 = I$, $I = \{1,...,m\}$, and $J_n \subset J = \{1,...,n\}$.</p>
+
+    <p>Consider $|I| = m$, $|J| = n$, $$\tilde{x} = ((x_i)_{j \in J_1}, (u_j)_{j \in J_2}, (v_j)_{j \in J_2}, (z_j)_{j \in I_1})^\top \in \mathbb{R}^{|J_1| + 2|J_2| + |I_1|}$$ $$\tilde{c} = ((c_j)_{j \in J_1}, (c_j)_{j \in J_2}, (-c_j)_{j \in J_2}, 0, ..., 0)^{\top} \in \mathbb{R}^{|J_1| + 2|J_2| + |I_1|}$$
+        $$\tilde{b} = ((b_i)_{i \in I_1}, (b_i)_{i \in I_2})^\top \in \mathbb{R}^m$$ 
+        $$\tilde{A} = \begin{pmatrix} (a_{ij})_{i \in I_1, j \in J_1} & (a_{ij})_{i \in I_1, j \in J_2} & (-a_{ij})_{i \in I_1, j \in J_2} & -I_{|I_1|} \\ & & & \\ (a_{ij})_{i \in I_2, j \in J_1} & (a_{ij})_{i \in I_2, j \in J_2} & (-a_{ij})_{i \in I_2, j \in J_2} & 0\end{pmatrix}$$
+        where $J_1$ and $J_2$ are from the dual problem. We wish to minimize $\tilde{c} \tilde{x}$ subject to $\tilde{A}\tilde{x} = \tilde{b}$ and $\tilde{x} \ge 0$. All of this comes from 
+        $$x_j \ge 0\;\;\; j\in J_1$$
+        $$x_j = u_j - v_j \;\;\; j \in J_2$$ 
+        $$u_j, v_j \ge 0$$ 
+        $$\sum_{j=1}^n a_{ij} x_j = \sum_{j \in J_1} a_{ij} x_j + \sum_{j \in J_2} a_{ij} (u_j - v_j) = \sum_{j \in J_1} a_{ij} x_j + \sum_{j \in J_2} a_{ij} u_j + \sum_{j\in J_2} -a_{ij} v_j$$
+    </p>
+
+    <p>Why not just use Lagrange Multipliers and the calculus tools/variations/Lagrange Multipliers we had before for linear programming?</p>
+
+    <div class="problem">
+        <b>Example (Book by Franklin).</b> We wish to minimize $3x_1 + 5x_2 = f(x)$ subject to $2x_1 + x_2 - x_3 - 4 = 0 = g(x)$, with $x \ge 0$. We have that 
+        $$\nabla g = \langle 2, 1, -1\rangle \neq 0$$
+        so $\nabla g$ is nonzero, and thus any feasible point must be regular (since there is only one constraint). We have:
+        $$\nabla f = \langle 3 , 5 , 0\rangle $$
+        Now we want 
+        $$\nabla f + \lambda \nabla g = 0 \Rightarrow \langle 3, 5, 0 \rangle + \lambda \langle 2 , 1 , -1 \rangle = \langle 0, 0, 0\rangle$$
+        But now we have three contradicting values of $\lambda$. What went wrong?
+
+        Notice that we can consider $x_3$ a slack variable since it is not in the function. Then we can consider the constraint to be $2x_1 + x_2 \ge 4$. Drawing a picture, we notice that the optimal point $x$ is on the boundary of the set of feasible solutions. Essentially we plot lines where $3x_1 + 5x_2$ is a constant, and see where it intersects the feasible region and how to minimize that constant. Thus, we must resort to linear algebra methods.
+    </div>
+
+    <p>We now find another optimality condition:</p>
+
+    <div class="theorem">
+        <b>Theorem (Equilibrium Theorem/Equilibrium Equations).</b> Let $x$ be a feasible solution for the canonical primal linear programming problem and $y$ be feasible for the dual of the problem. Then we have seen that $y \cdot b \le c \cdot x$, and equality occurs if and only if they satisfy the equilibrium equations:
+        $$\sum_{i = 1}^n y_i a_{ij} = c_j \text{ if $x_j > 0$}$$ 
+        i.e. if the $j$th component of $x$ is positive, the $j$th dual inequality must be achieved as an equality.
+    </div>
+
+    <div class="remark">
+        <b>Remark.</b> Equivalently, if $x,y$ are optimal, then if $\sum_{i = 1}^m y_ia_{ji} < c_j$, then they must have $x_j = 0$. Sometimes the equilibrium equations are called <b>complementary slackness conditions</b> so if the constraint $x_j \ge 0$ is slack (i.e. $x_j > 0$), then the corresponding dual constraint is tight. 
+    </div>
+
+    <h2 class="display-4" id="lec-14">Lecture 14</h2>
+
+    <p>We start with the proof of the Equilibrium Theorem.</p>
+
+    <div class="theorem">
+        <b>Theorem (Equilibrium Theorem/Equilibrium Equations).</b> Let $x$ be a feasible solution for the canonical primal linear programming problem and $y$ be feasible for the dual of the problem. Then we have seen that $y \cdot b \le c \cdot x$, and equality occurs if and only if they satisfy the equilibrium equations:
+        $$\sum_{i = 1}^n y_i a_{ij} = c_j \text{ if $x_j > 0$}$$ 
+        i.e. if the $j$th component of $x$ is positive, the $j$th dual inequality must be achieved as an equality.
+    </div>
+    <i>Proof.</i>
+
+    <p>The dual constraints for $y_i$ give 
+        $$\sum_{i=1}^m y_i a_{ij} \le c_j$$ 
+        $$\Leftrightarrow c_j - \sum_{i = 1}^m y_i a_{ij} \ge 0$$
+        $$\Rightarrow x_j (c_j - \sum_{i = 1}^m y_i a_{ij} \ge 0)$$
+        for $j$ from 1 to $n$. Summing over $j$,
+        $$\sum_{j=1}^n x_j(c_j - \sum_{i = 1}^m y_i a_{ij}) \ge 0$$
+        $$\sum_{j=1}^n x_j c_j - \sum_{j=1}^n\sum_{i=1}^m y_i a_{ij} x_j \ge 0$$
+        $$\sum_{i=1}^m b_i y_i \le \sum_{j=1}^n x_j c_j$$
+        because $x$ and $y$ are feasible.
+    </p>
+
+    <p>If $\sum_{i=1}^m b_i y_i = \sum_{j=1}^m x_j c_j$, rewrite the previous equation. We have:
+        $$\sum_{i=1}^m b_i y_i - \sum_{j=1}^n \sum_{i=1}^m y_i a_{ij} x_j \ge 0$$
+        $$= \sum_{i=1}^m y_i (b_i - \sum_{j=1}^n a_{ij} x_j) \ge 0$$
+        Ny the constraints, the last expression should be an equality. Therefore, we can backtrack to get$$\sum_{j=1}^n x_j (c_j - \sum_{i=1}^m y_ia_{ij}) = 0$$
+        so either $x_j = 0$ or $c_j - \sum_{i=1}^m y_ia_{ij} = 0$.
+    </p>
+
+    <p>For the other direction,
+        $$\sum_{j=1}^n x_j c_j - \sum_{j=1}^m \sum_{i=1}^m x_ja_{ij} y_i = 0$$
+        and the left hand side is at least 
+        $$\sum_{i=1}^m b_i y_i - \sum_{j=1}^m \sum_{i=1}^n x_ja_{ij}y_i = \sum_{i=1}^m y_i(b_i - \sum_{j=1}^n a_{ij}x_j) = 0$$
+        so $b_j - (Ax)_j = 0$.
+    </p>
+
+    <div class="problem">
+        <b>Example.</b> We consider the primal problem to minimize $x_1 + 5x_2 + 2x_3 + 13x_4$ subject to $5x_1 - 6x_2 + 4x_3 - 2x_4 = 0$, $x_1 - x_2 + 6x_3 + 9x_4 = 16$, and $x \ge 0$. Consider the feasible solution $x = (0,2,3,0)$. 
+    </div>
+
+    <h3 class="display-6" id="basic-sols">Basic Solutions</h3>
+    <p><b>Definition (Basic Solution).</b> A <b>basic solution</b> is a feasible solution with as many zero entries as possible. Let's assume $x$ solves $Ax = b$. If $x \neq 0$, then call the nonzero entries $x_\alpha$, $x_\beta$, $x_\gamma$, .... Also, $A = \begin{pmatrix} a^1 & a^2 & ... & a^n\end{pmatrix}$ where $a^j$ are the columns of $A$.</p>
+
+    <p>$Ax = a^\alpha x_\alpha + a^\beta x_\beta + ... = \sum_{j=1}^n a^j x_j = b$. In the case that $b \neq 0$, we call $x$ a <b>basic solution</b> if the columns $a^\alpha, a^\beta,...$ are linearly independent. If $b = 0$, then $x = 0$ is a basic solution.</p>
+
+    <div class="problem">
+        <b>Example.</b> $A = \begin{pmatrix} 1 & -1 & -1 \\ 1 & 2 & 3 \end{pmatrix}$, $b = \begin{pmatrix} 0 \\ 1\end{pmatrix}$. If the rank of $A$ is 2, we have 3 sets of 2 linearly independent columns. $x_1 = 0$ and $-x_2 - x_3 = 0$ imply that $x_2 = -x_3$. Combined with $2x_2 + 3x_3 = 1$, we have $2x_2 - 3x_2 = 1$, sp $x_2 = 1$ and $x_3 = -1$. Thus $x = (0,1,-1)$ is a basic solution. Consider $x_2 = 0$, we similarly get a basic solution $(\dfrac{1}{4}, 0, \dfrac{1}{4})$. With $x_3 = 0$, we again similarly get a basic solution $(\dfrac{1}{3}, \dfrac{1}{3}, 0)$. By the argument before, these are all of them. There are infinitely many other solutions $\theta_1 + \theta_2 + \theta_3 = 1$ for $\theta_i \in \mathbb{R}$. We get $x = \theta_1 x' + \theta_2 x'' + \theta_3 x'''$ solves $Ax = b$.
+    </div>
+
+    <h2 class="display-4" id="lec-15">Lecture 15</h2>
+    
+    <div class="theorem">
+        <b>Theorem.</b> Consider the canonical linear programming problem. Find $x \in \mathbb{R}^n$ solving "minimize $c \cdot x$ subject to $Ax = b$, $x \ge 0$." 
+        <ol>
+            <li>If there is any feasible solution, there is a basic feasible solution.</li>
+            <li>If there is any optimal solution, there is a basic optimal solution.</li>
+        </ol>
+    </div>
+    <i>Proof.</i>
+
+    <p>For (1), suppose $x$ is a feasible solution. If there are several feasible solutions, let $x$ be the one with the smallest number of positive components. If $x = 0$, then it is basic by definition. Thus assume $x \neq 0$. Then let $x_\alpha$, $x_\beta$, etc. be the nonzero components of $x$. We have that $Ax = a^\alpha x_\alpha + a^\beta x_\beta + ... = b$ where $a^\alpha$, $a^\beta$, etc. are the columns of $A$. We need to show that $a^\alpha$, $a^\beta$, etc. are linearly independent. Suppose for contradiction that they are not. Then there are $\theta_\alpha$, $\theta_\beta$ such that $\theta_\alpha a^\alpha + \theta_\beta a^\beta + ... = 0$ with at least one $\theta_j \neq 0$. Without loss of generality, assume $\theta_\alpha > 0$. Otherwise multiplpy the equation by $-1$.</p>
+
+    <p>Let $\lambda \in \mathbb{R}$ and subtract the previous equation times lambda from the other previous equation to find 
+        $$a^\alpha (x_\alpha - \lambda \theta_\alpha) + a^\beta (x_\beta - \lambda \theta+\beta) + ... = b$$ 
+        If $|\lambda|$ is small enough, then the new components $(a_\alpha - \theta_\alpha \lambda)$, $(x_\beta - \theta_\beta \lambda)$, etc. are still $\ge 0$.
+    </p>
+
+    <p>Choose $\lambda$ as large as we can, while still keeping all components nonnegative. If $\theta_1 \le 0$, then any positive $\lambda$ will be ok. $x_i - \lambda \theta_i > 0$. On the other hand if $\theta_i > 0$, then we must have $\lambda \le \dfrac{x_i}{\theta_i}$, so that $x_i - \lambda \theta_i \ge x_i - \dfrac{x_i}{\theta_i} \theta_i \ge 0$. So we take $\lambda = \min\{\dfrac{x_i}{\theta_i}, x_i > 0, \theta_i > 0 \}$. Let $i = \mu$ be the index where the minimum is achieved, $\lambda = \dfrac{x_\mu}{\theta_\mu}$. Then the $\mu$th component will be $x_\mu - \lambda \theta_\mu = 0$.</p>
+
+    <p>$\tilde{x} = (0,...,x_\alpha - \lambda \theta_\alpha, 0, ..., 0, x_\beta - \theta_\beta \lambda,...,x_\mu - \theta_\mu \lambda,...)$ is feasible since $\tilde{x} \ge 0$, $A\tilde{x} = b$. But $\tilde{x}$ has one less positive entry than $x$ because $x_\mu -\theta_\mu \lambda = 0$. That contradicts the assumption. Thus, $x$ must be basic as desired.</p>
+
+    <p>We now consider the second part. This part is very similar, so I will leave this out.</p>
+    
+    <h2 class="display-4" id="lec-16">Lecture 16</h2>
+
+    <h3 class="display-6" id="simplex-method">Simplex Method</h3>
+
+    <p>This was developed by George Dantzig. We will consider the canonical linear programming problem: Find $x \in \mathbb{R}^n$ solving "minimize $c \cdot x$ subject to $Ax = b$, $x \ge 0$ with $A \in \mathbb{R}^{m\times n}, b \in \mathbb{R}^m, c \in \mathbb{R}^n$."</p>
+
+    <p>There are two phases to the method:
+        <ol>
+            <li>Phase I: Find a basic feasible solution to $Ax = b$, $x \ge 0$ or conclude there is none. </li> 
+            <li>Phase II: Given a basic feasible solution, find an optimal one, or show non exists.</li>
+        </ol>
+        We will make some simplifying assumptions, called "non-degeneracy" assumptions:
+        <ol>
+            <li>We assume that $m < n$.</li>
+            <li>We assume that the $m$ rows are linearly independent, so that the rank of $A$ is $m$.</li>
+            <li>We assume that $b$ is not a linear combination of less than $m$ columns of $A$.</li>
+        </ol>
+    </p>
+
+    <p>What do these assumptions mean?</p>
+    <ol>
+        <li>We have more unknowns $x_j$ than constraint equations.</li>
+        <li>Means that there are also $m$ linearly independent columns. If we didn't have this assumption, we might have redundant constraint equations or inconsistency.</li>
+        <li>Means that a basic $x$ has $m$ nonzero entries (exactly).</li>
+    </ol>
+
+    <p>Section 1.12 in Franklin shows how to do the simplex method when the non-degeneracy assumptions are not satisfied.</p>
+
+    <div class="theorem">
+        <b>Lemma.</b> Assume the non-degeneracy conditions. Assume that $x$ is a feasible solution with exactly $n$ nonzero entries ($Ax = b$ and $x \ge 0$) with $m$ nonzero entries. Then $x$ is a basic solution. 
+    </div>
+    <i>Proof.</i>
+
+    <p>The proof isn't that bad, so I'll leave it out here for myself to try later.</p>
+
+    <p>We now go over how to do Phase I. Assume we know how to do Phase II. Assume $b_i \ge 0$ (if not multiplfy that constraint equation by $-1$). We state Phase I as a minimization problem. "Minimize $z_1 + ... + z_m$ subject to $\sum_{j=1}^n a_{ij}x_j + z_i = b_i$ for $i = 1,...,m$, $x_i \ge 0$, $z_j \ge 0$, $i = 1,...,n$, $j = 1,...,m$. $\tilde{x} = (x,z) \in \mathbb{R}^{n+m}$, $\tilde{c} = (0,...,0,1,...,1)$. $\tilde{A} = (A, I_{m\times m})$, $\tilde{b} = b$. A feasible solution is $x_j = 0$ for $j = 1,...,n$, $z_i = b_i$ for $i = 1,...,m$. $\tilde{x} = (0,...,0,b_1,...,b_m)^\top$.</p>
+
+    <p>The cost of this solution is $\sum_{i=1}^m b_i$. </p>
+
+    <h2 class="display-4" id="lec-20">Lecture 20</h2>
+
+    <p>Today I'm not going to take notes here, as I am trying something new.</p>
+
+    <h2 class="display-4" id="lec-N">Lecture $N$</h2>
+
+    <p>Welp... that didn't really work out, so here we are again.</p>
+
+    <h3 class="display-6" id="quasi-newton-direction">Inexact/Quasi Newton </h3>
+
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -31,7 +31,7 @@ Dimensions are things like length, time, mass, etc.. It is important to distingu
 Story 2: Properties of Fluids
 -----------------------------------------
 
-Relevant lectures: Lecture 1
+Relevant lectures: Lectures 1, 2
 
 Our properties are going to be functions of space and time: $\textbf{x} \in \R^3$ and $t \in \R$. Here are some important properties:
 
@@ -50,3 +50,65 @@ In fluid dynamics, we will write the ideal gas law as:
 $R$ is called the gas constant, and the other quantities were discussed above.
 
 In physics we generally use the form $PV = nRT$. So what is the relationship between these two forms? In physics one has to look up the molecular weights and stuff, and in MechE, we have to look up individual gas constants for each gas.
+
+Ideal gas equation of state:
+<center>$$P = R\rho T$$</center>
+or in physics,
+<center>$$PV = nR_{\text{physics}}T$$</center>
+Notice that 
+<center>$$\rho = \frac{M}{V} = \frac{\nu_{\text{physics}}n}{V}$$</center>
+so solving for $n$, $n = \frac{\rho V}{\nu_{\text{physics}}}$. Substituting this into the previous equation, we find that 
+<center>$$P = \frac{R_{\text{physics}}}{\nu_{\text{physics}}} \rho T$$</center>
+so we've found that 
+<center>$$\boxed{R = \frac{R_{\text{physics}}}{\nu_{\text{physics}}}}$$</center>
+
+Story 3: Viscosity
+-----------------------------------------
+
+{/* 
+
+first homework about hurricanes apparently
+
+*/}
+
+Viscosity is about roughly how well things flow. Physically, it is a diffusion coefficient of momentum. 
+
+In fluid dynamics, we have so called boundary conditions. For a Newtonian fluid, the boundary conditions are that the fluid at any surface in the direction that is parallel to the surface must move at the same velocity as the surface. This is called the no-slip boundary condition. The zeroness of momentum *diffuses* into the middle so that for honey, where that diffusion would happen very quickly for example, the momentum in the middle will also be close to zero. For water on the other hand, the momentum in the middle might be high even if the momentum at the surface is zero.
+
+So far what we have discussed is called the ***kinematic viscosity***. There is another viscosity called ***dynamic viscosity***, which satisfies 
+$$\nu_{\text{dyn}} = \rho \nu_{\text{kin}}.$$
+From now on, $\nu$ will refer to kinematic viscosity. There is a dimensionless quantity called the Reynold's number, defined:
+$$\text{Re} = \frac{[V][L]}{\nu}$$
+where we are using brackets here to indicate "characteristic values". When $\text{Re} \le 10^3$, we call it laminar, when it is $\ge 10^5$ we call it turbulent, and in between this, we call it transitional.
+
+For 3D flows, it is extremely difficult to make calculations in the transitional region without approximations. That's why you need to take MECENG 106, because that is one of the hardest places to calculate flows.
+
+<div class="problem">
+**Example.** Consider water out of a tap. The characteristic volume and length are $5\; cm/s$ and $1\; cm$, and the viscosity is $0.01 \;cm^2/s$. As such,
+<center>$$\text{Re} = \frac{5\cdot 1}{0.01} = 500$$</center>
+so tap water flows are fairly laminar. Consider now a hurricane. There, the characteristic velocity is $10^4 \; cm/s$, the characteristic length is $10^7 \; cm$, and the viscosity is $0.1 \; cm^2/s$. Thus the Reynolds number is 
+$$\text{Re} = 10^{12}$$
+so this flow is clearly very turbulent.
+</div>
+
+<div class="remark">
+**Remark.** You can compute the transition point for smoke flowing up, when it transitions through different types of flow. Why do we define the Reynold's number like that?
+</div>
+
+
+Story 4: Pressure
+------------------------------------
+
+Relevant Lectures: Lecture 2
+
+Consider an area. This vector has normal inward vector. We might write:
+$$dF = \hat n P dA$$
+so that the integral is
+$$\int df = \int \hat n P dA$$
+A question is, if we change our orientation, then do we get a different force or something? It turns out that the magnitude is independent.
+
+We will show this in the ***static*** case, namely where
+- $V \equiv 0$
+- $\frac{\partial}{\partial t} = 0$
+
+Now let's imagine a little piece of swiss cheese (proceeds to draw an inclined plane with angle theta). 

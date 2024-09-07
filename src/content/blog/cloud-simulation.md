@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 title: "Cloud Simulation"
 description: "A cool website."
-image: "/img/pics/20240811-clouds.jpg"
+image: "/img/pics/IMG_4768.jpg"
 author: "Aathreya Kadambi"
 date: "August 23, 2024"
 ---

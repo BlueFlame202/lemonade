@@ -1,0 +1,112 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "EE A227BT: Convex Optimization"
+description: ""
+image: "/img/pics/20240427-berkeley-hort.jpg"
+writer: "Aathreya Kadambi"
+lecturer: Professor Benjamin Recht
+slug: "convex-opt"
+date: "Fall 2024"
+---
+
+{/* 
+Course project: it's kind of hard to think about what it should be until you've taken the class for a ew weeks.
+Problem sets every two or so weeks.
+
+It has to be related to convex optimization, and it has to be related to what you want to do for research.
+*/}
+
+This fall I'm thinking of auditing this convex optimization class. According to Professor Recht, these are the problems you can solve, and your computers can solve (assuming some stuff). This class is about models that you can know you are going to be able to solve, and then you acn work on the ones you don't know, and that's called research.
+
+
+Story 1: A Survey
+---------------------------
+
+Relevant Lecture: Lecture 1
+
+
+
+$$\min f_0(x)$$
+$$\text{subject to }x \in \mathcal{C}$$
+$$x \in \R^n, \mathcal{C} \subseteq \R^n$$
+$$f_0 : \R^n \rightarrow \R$$
+
+$$\max r(x)$$
+$$\text{subject to }x \in \mathcal{C}$$
+and same thing. But while these two things are the same mathematically, there is a difference in mindset. The first is like minimizing a cost, whereas the latter is maximizing a reward. Some people are minimizers and others are maximizers.
+
+Sometimes we just a constrant like $f_0(x) = 0$, and we want to find a solution. Feasibility. 
+
+
+Optimization problems:
+- Circuits
+- Portfolio
+- Lecture hall assignment (minimize the distance the professors have to walk)
+- Scheduling classes
+- Traffic routes
+
+He then introduced convex sets and convex fnuctions. A convex set is one where every line between two points in the set lies in the set. A convex function is one such that every line between two points on the function lies above the function. We can see a convex set from the convex function which is the set lying above the function. Notice that intersection of convex sets is convex. Let $\mathcal{E}_{f_0}$ be the convex set corresponding to a convex function. We can make a minimization problem:
+$$\min t$$
+$$\text{ subject to }x \in\mathcal{C}$$
+$$(x,t) \in \mathcal{E}_{f_0}$$
+
+I think if you intersect all half-planes containing the set, you get the set, and if you intersect all half-planes containing the set, you get the complement ish of the set. For a finite collection of half-planes, we get a polyhedron:
+$$Ax \le b$$
+and we write the linear program:
+$$\min c^\top x$$
+$$\text{subject to }Ax \le b$$
+We will talk about this, but we will take a different view than the one taken in a linear programming class. 
+
+"People will tell you, most problems are not convex, but it's all a mindset, bro." - Benjamin Recht.
+
+"I can turn any problem into a convex problem, by like rewriting it in a funny way. But I can't always solve it." - Benjamin Recht.
+
+Let's say we have a nonconvex function. We want to minimize $g(x)$ where $g$ is not convex. We can minimize over all probability distributions the expected values with respect to $P$ of $g(x)$. This problem is linear in $p$, probability distributions are a convex set. But it isn't easy to solve. "This is one trick, there are a million tricks. But it is not always possible to solve it."
+
+"I don't like the name of the class. It should be 'officially solvable convex problems'." 
+
+It's just a notation thing, but this notation gives you a convex problem for the nonconvex problem.
+
+
+<div class="remark">
+**Remark.** Unfortunately I had to miss two stories because of some prior commitments.
+</div>
+
+Story 4: Tangent Planes and Optimality
+-------------------------------------------
+We wish to minimize $x_0$ subject to $x \in \mathcal{C} \subseteq \R^d$.
+
+Tangent cone, feasible cone. Some weird letter thingy is the tangent cone:
+<center>$$\mathscr{T}_{x_{*}} = \{d : \exists \alpha > 0 \text{ w/ } x_{*} + \alpha d \in \mathcal{C}\}$$</center>
+
+<div class="remark">
+**Remark.** One of the hard parts about convex geometry is that in 2D, things are misleading. For example, in 2D, the convex hull of $\{x_i = \pm 1\}$ is the square. In higher dimensions, this has $2^n$ corners and it is the hypercube. It has $2n$ supporting hyperplanes. Now let's take the convex hull of $\{\pm e_i\}$ has $2n$ corners. But it has $2^n$ supporting hyperplanes. This is despite the same that they look exactly the same in 2D. Basically we're comparing a cube and a diamond thingy.
+</div>
+
+What are the set of directions that decrease the cost function?
+<center>$$\mathscr{D} = \{ d : d_0 < 0 \}$$</center>
+since any point with $d_0 < 0$ decreases the cost since we are minimizing $x_0$. So $x_*$ is optimal if $\mathscr{D} \cap \mathscr{T}_{x_*} = \varnothing$. A way to prove this is to show there is a function $h : \R^d \rightarrow \R$, $h(x) > 0$ on $\mathscr{D}$ and $h(x) \le 0$ on $\mathscr{T}$.
+
+We study convex optimization because it has a dumb reasoning for global equals local. But if you're a math nerd, it's interesting because there are some nice algebraic and geometric ideas here.
+
+By global/local stuff here, does he mean the local stuff is like the tangent plane at that point doesn't intersect the area where cost decreases, and the global stuff is the global optimality result?
+
+Story 5: Separating hyperplanes
+------------------------------------------
+
+<div class="theorem">
+**Theorem.** If $\mathcal{C}_1$ and $\mathcal{C}_2$ are nonempty, disjoint, and convex, then $\exists a \in \R^n$ and $b \in \R$ such that $a x \le b$ for all $x \in \mathcal{C}_1$, $a^\top z \ge b$ for all $z \in \mathcal{C}_z$.
+</div>
+
+Notice that before, we were trying to find a separating hyperplane between $\mathscr{D}$ and $\mathscr{T}$.
+
+*Proof Sketch.*
+
+We assume that there is a closest points $u$ and $v$ between the two sets, with $u \in \mathcal{C}_1$ and $v \in \mathcal{C}_2$. Then take the line between them and the hyperplane orthogonal to that line.
+
+<div class="theorem">
+**Theorem.** If $\mathcal{C}$ is closed and convex, let $S$ be the intersection of all half spaces containing $\mathcal{C}$. Then $\mathcal{C} = S$.
+</div>
+
+
+A polyhedron is something like $\{x : Ax \le b\}$. $A$ is a $m \times n$ matrix.

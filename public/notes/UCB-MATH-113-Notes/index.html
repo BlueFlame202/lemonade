@@ -1,0 +1,2098 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UCB MATH 113 Notes</title>
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="../nstyles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true
+        },
+        "HTML-CSS": { fonts: ["TeX"] }
+      });
+    </script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="../../components/navflame.js"  type="text/javascript" defer></script>
+    <script>$(window).on('load', function() {$('#nav-notes').addClass('active')});</script>
+  </head>
+  <body>
+    <nav-flame></nav-flame>
+    <div class="main-body">
+    <h1 id="sitename" class="display-2">UCB MATH 113 Notes</h1>
+    
+    <p>These are notes from MATH 113, at UC Berkeley. The course is taught by Aleksandra Utiralova.</p>
+
+    <h2 class="display-4">Table of Contents</h2>
+      <ul>
+        <li><a href="#lec-1">Lecture 1</a></li>
+        <li><a href="#lec-2">Lecture 2</a></li>
+        <li><a href="#lec-3">Lecture 3</a></li>
+        <li><a href="#lec-4">Lecture 4</a></li>
+        <li><a href="#lec-5">Lecture 5</a></li>
+        <li><a href="#lec-6">Lecture 6</a></li>
+        <li><a href="#lec-7">Lecture 7</a></li>
+        <li><a href="#lec-8">Lecture 8</a></li>
+        <li><a href="#lec-9">Lecture 9</a></li>
+        <li><a href="#lec-10">Lecture 10</a></li>
+        <li><a href="#lec-11">Lecture 11</a></li>
+        <li><a href="#lec-12">Lecture 12</a></li>
+        <li><a href="#lec-13">Lecture 13</a></li>
+        <li><a href="#lec-14">Lecture 14</a></li>
+        <li><a href="#lec-15">Lecture 15</a></li>
+        <li><a href="#lec-16">Lecture 16</a></li>
+        <li><a href="#lec-17">Lecture 17</a></li>
+        <li><a href="#ring-construct"></a>Ring Constructions</li>
+      </ul>
+
+    <h2 class="display-4" id="lec-1">Lecture 1</h2>
+
+    <div class="remark">
+        <b>Remark.</b> I tripped and scraped my knees right before class so my notes may be slightly worse quality this lecture (I'm semi-multitasking).
+    </div>
+
+    <p>We start with natural numbers, with only addition and multiplication, integers, with addition, multiplication, and subtraction, rationals, with addition, subtraction, multiplication, and division, and of coures reals with all four operations. We can also consider complex numbers, which are of the form $a + bi$ where $a$ and $b$ are real numbers and we define addition, multiplication, division, and subtraction as usual.</p>
+    
+    <p>$(\mathbb{N}, +)$ is what we call a monoid, $(\mathbb{Z}, +)$ is what we call a group, $(\mathbb{Z}, +, \times)$ is what we call a ring, and $\mathbb{Q}$, $\mathbb{R}$, and $\mathbb{C}$ are all examples of fields.</p>
+
+    <p>We discuss some basic set theory and logic but I'll omit that here since it's pretty commonly repeated in practically any math context.</p>
+
+    <p>We now discuss functions or maps.</p> 
+
+    <p><b>Definition (Function).</b> Let $A$ and $B$ be sets. A function $f$ from $A$ to $B$ denoted $f : A \rightarrow B$ is an assignment of a unique element of $B$ for each element in $A$. $A$ is called the domain of $f$ and $B$ is called the range.</p>
+
+    <p>We write $f : a \mapsto b$ if $b = f(a)$. An example of a function with $A = B = \mathbb{N}$ is $f:\mathbb{N} \rightarrow \mathbb{N}$, $n \mapsto n^2$.</p>
+
+    <p><b>Definition (Well-Defined).</b> $f : A \rightarrow B$ is well-defined if $a_1 = a_2 \Rightarrow f(a_1) = f(a_2)$.</p>
+
+    <p>Given a function $f: A \rightarrow B$, we can define $f(A)$ to be a subset of $B$ defined as $\{b \in B \;|\; \exists a \in A, f(a) = b\}$. $f(A)$ is called the <b>image</b> of $f$. Similarly, if $C \subset B$, define $f^{-1}(C) = \{a \in A \;|\; f(a) \in C\} \subset A$ to be the <b>preimage</b> of $C$.</p>
+
+    <p><b>Definition (Injective).</b> $f$ is <b>injective</b> if for any $a_1,a_2 \in A$, $f(a_1) = f(a_2) \Rightarrow a_1 = a_2$.</p>
+    <p><b>Definition (Surjective).</b> $f$ is <b>surjective</b> if for any $b \in B$, $\exists a \in A$ such that $f(a) = b$. In other words, the image of $A$ is $B$.</p>
+    <p><b>Definition (Bijective).</b> $f$ is called <b>bijective</b> or <b>one-to-one</b> if it is both surjective and injective.</p>
+
+    <p><b>Definition (Composition).</b> If $f : A \rightarrow B$, $g : B \rightarrow C$, then we define $g \circ f : A \rightarrow C$ with $g \circ f (a) = g(f(a))$.</p>
+
+    <p><b>Definition (Identity).</b> $Id_A : A \rightarrow A$, $a \mapsto a$</p>
+
+    <p><b>Definition (Left Inverse).</b> If $f : A \rightarrow B$, $g : B \rightarrow A$, $g$ is called a left inverse of $f$ if $g \circ f = Id_A$. </p>
+
+    <p><b>Definition (Right Inverse).</b> If $f : A \rightarrow B$, $g : B \rightarrow A$, $g$ is called a right inverse of $f$ if $f \circ g = Id_B$. </p>
+
+    <p><b>Definition (Inverse).</b> $g$ is the <b>inverse</b> of $f$ if $g$ is both a left and right inverse of $f$ (we can show uniqueness).</p>
+
+    <div class="theorem">
+      <b>Theorem.</b> We have three parts:
+      <ol style="margin-bottom: 0">
+        <li>$f$ is injective if and only if it has a left inverse</li>
+        <li>$f$ is surjective if and only if it has a right inverse</li>
+        <li>$f$ is bijective if and only if it has the inverse</li>
+      </ol>
+    </div>
+    <i>Proof left for me later.</i>
+
+    <p>Our next topic is equivalence relations. </p>
+
+    <p><b>Definition (Binary Relation).</b> $R \subset A \times A$ is called a <b>binary relation</b> on $A$, and we write $a\;R\;b$ if $(a,b) \in R$.</p>
+
+    <p><b>Definition (Equivalence Relation).</b> A binary relation $\sim$ is called an <b>equivalence relation</b> if it satisfies three properties:</p>
+    <ol>
+      <li>Reflexive Property</li>
+      <li>Symmetric Property</li>
+      <li>Transitive Property</li>
+    </ol>
+
+    <div class="problem">
+      <b>Example.</b> We can consider an equivalence relation on $\mathbb{Z}$ with $x \sim y$ if $x - y$ is even. We check the three properties. First $x \sim x$ is always true since $x - x  = 0$ is even. $x \sim y \Rightarrow y \sim x$ is true since $x - y = y - x$ so both or none must be even. Finally $x \sim y$, $y \sim z$ implies that $x - y$ and $y - z$ are both even, so $x - y + y - z = x - z$ must also be even, so $x \sim z$ as desired.
+    </div>
+
+    <div class="problem">
+      <b>Example.</b> Consider $A = \{\dfrac{a}{b} \;|\; a \in \mathbb{Z}, b \in \mathbb{Z} \backslash \{0\}\}$. We can check easily that $\dfrac{a}{b} \sim \dfrac{c}{d}$ if $ad = bc$ is an equivalence relation.
+    </div>
+
+    <p><b>Definition (Equivalence Class).</b> Suppose we have an equivalence relation $\sim$ on $A$. For $a \in A$, we define $[a] = \{x \in A \;|\; x \sim a \} \subset A$ to be the <b>equivalence class</b> of $a$.</p>
+
+    <p>From this definition, we can see that any two equivalence classes are either disjoint or the same. Thus, the whole set is just a disjoint union of equivalence classes. In other words, $A = \sqcup [a]$. $A \backslash \sim = \{ [a] \;|\; a \in A\}$. We have $\pi : A \rightarrow A \backslash \sim$ is sujective, $a \mapsto [a]$.</p>
+
+    <p>Now we discuss properties of $\mathbb{Z}$.</p>
+    <p><b>Definition (Divides).</b> We say that $d \neq 0$ <b>divides</b> if $a$ if $\exists$ some $b \in \mathbb{Z}$ such that $a = db$. We denote this relation by $d \;|\; a$. </p>
+
+    <p><b>Definition (Greatest Common Divisor).</b> For all $a,b \in \mathbb{Z}_{\neq 0}$, there exists a unique $d \in \mathbb{Z}_{> 0}$ called the greatest common divisor (gcd) of $a$ and $b$ such that $d \;|\; a$ and $d \;|\; b$, and for all $c$ such that $c \;|\; a$ and $c \;|\; b$, $c \;|\; d$.</p>
+
+    <div class="remark">
+      <b>Remark.</b> This might be kind of trivial, but as we can see, the division relation is a partial ordering of the positive integers.
+    </div>
+
+    <p><b>Definition (Least Common Multiple).</b> For all $a, b \in \mathbb{Z}_{\neq 0}$, there exists a unique $l \in \mathbb{Z}_{> 0}$ called the least common multiple of $a$ and $b$ such that $a \;|\; l$ and $b \;|\; l$, and for all $m$ such that $a \;|\; m$ and $b \;|\; m$, $l \;|\; m$. </p>
+
+    <div class="theorem">
+      <b>Theorem.</b> $\gcd(a,b)\text{lcm}(a,b) = ab$
+    </div>
+
+    <div class="theorem">
+      <b>Theorem (Division Theorem).</b> For all $a, b \in \mathbb{Z}_{\neq 0}$, there exists unique $q,r \in \mathbb{Z}$ such that $0 \le r < |b|$ such that $a = bq + r$. We call $q$ the <b>quotient</b> and $r$ the <b>remainder</b>.
+    </div>
+    <div class="remark">
+      <b>Remark.</b> We can see that the polynomials also have a similar structure, and we can also use the division theorem on polynomials.
+    </div>
+
+    <div class="theorem">
+      <b>Theorem (Euclidean Algorithm for $\gcd(a,b)$).</b> Take $r_0$ and $r_1$ defined by the remainders from $a = bq_0 + r_0$ and $b = aq_1 + r_1$. Then $\gcd(a,b) = \gcd(r_0, r_1)$. Furthermore, if we consider this process repeatedly, taking $r_{2j} = r_{2j+1}q_{2j+2} + r_{2j + 2}$ and $r_{2j+1} = r_{2j} q_{2j+1} + r_{2j+3}$, we will eventually obtain $r_{n}$ such that $r_{n-1} = q r_{n}$, and $r_{n}$ is $\gcd(a,b)$.
+    </div>
+
+    <div class="remark">
+      <b>Remark.</b> She stated and proved a slightly different theorem in class, but I omitted that and just put my one above because I think this one is a bit simpler and is more recursive (she essentially wrote it all out).
+    </div>
+
+    <p>We can run this algorithm backwards to prove the following therorem:</p>
+    <div class="theorem">
+      <b>Theorem (Bezout's Lemma).</b> Let $a, b \in \mathbb{Z}_{\neq 0}$. Then $\exists u, v \in \mathbb{Z}$ such that $\gcd(a,b) = au + bv$.
+    </div>
+
+    <p><b>Definition (Prime).</b> $p \in \mathbb{Z}$ is called <b>prime</b> if tis divisors are $q$ and $p$ only.</p>
+
+    <div class="theorem">
+      <b>Theorem.</b> $p \;|\; ab \Rightarrow p \;|\; a$ or $p\;|\; b$.
+    </div>
+
+    <h2 class="display-4" id="lec-2">Lecture 2</h2>
+
+    <div class="theorem">
+      <b>Theorem (Fundamental Theorem of Arithmetic).</b> For all $n \in \mathbb{N}$, $n$ can be expressed as $p_1^{\alpha_1} \cdot p_2^{\alpha_2} \cdot ... \cdot p_n^{\alpha_n}$ where $p_i < p_{i+1}$ in a unique way.
+    </div>
+
+    <p>In other words, if you are able to express $n$ as a product of priems in an ordered fashion, any two such expressions must coincide.</p>
+
+    <div class="problem">
+      <b>Example.</b> In the case of $\gcd$ and $\text{lcm}$, we can see that if $a = p_1^{\alpha_1} p_2^{\alpha_2} ... p_n^{\alpha_n}$ and $b = p_1^{\beta_1} p_2^{\beta_2} ... p_n^{\beta_n}$, then
+      $$\gcd(a,b) = p_1^{\min(\alpha_1, \beta_1)}p_2^{\min(\alpha_2,\beta_2)}...p_n^{\min(\alpha_n,\beta_n)}$$
+      $$\text{lcm}(a,b) = p_1^{\max(\alpha_1, \beta_1)}p_2^{\max(\alpha_2,\beta_2)}...p_n^{\max(\alpha_n,\beta_n)}$$
+    </div>
+
+    <p><b>Definition (Euler's $\varphi$ function).</b> We define $\varphi : \mathbb{N} \rightarrow \mathbb{N}$, $\varphi(n) = \# \{a \in \mathbb{N} \;|\; \gcd(a,n) = 1, a \le n\}$.</p>
+
+    <div class="theorem">
+      <b>Theorem.</b> For $m, n \in \mathbb{N}$ such that $\gcd(m,n) = 1$, 
+      $$\varphi(m,n) = \varphi(m)\varphi(n)$$
+    </div>
+    
+    <p>so we can get the totient of any number from its prime factorization. The above theorem is a corollary of the Chinese Remainder Theorem.</p>
+
+    <p>We now consider integers modulo $n$. We say that $a \sim b$ if $n \;|\; a - b$. What we would like to consider is $\mathbb{N}/\sim = \mathbb{Z}/n\mathbb{Z}$.</p>
+
+    <div class="theorem">
+      <b>Proposition.</b> $n\;|\; (a-b)$ if and only if $a$ and $b$ have the same remainder when divided by $n$.
+    </div>
+
+    <p>We can then write $\mathbb{Z}/\sim = \{ [0], [1], [2], ..., [n+1]\}$.</p>
+
+    <p>We can then consider $\pi : \mathbb{Z} \rightarrow \mathbb{Z}/n\mathbb{Z}$ which maps $a \mapsto [a]$. This is called "reduction mod $n$".</p>
+
+    <p>We can then define $[a] + [b]$ as taking representative elements, adding them together, and then reducing mod $n$ again. We need to check that this is well-defined. Given $a_1, a_2 \in [a]$ and $b_1, b_2 \in [b]$, $a_1 + b_1 - a_2 - b_2 = (a_1 - a_2) + (b_1 - b_2)$ which is divisible by $n$, so $[a_1 + b_1] = [a_2 + b_2]$ and our addition is indeed well-defined. We can similarly check multiplication.</p>
+
+    <p>Another thing we can check is that $0$ and $1$ behave as additive and multiplicative identites.</p>
+
+    <div class="problem">
+      <b>Example.</b> We would like to find $2^{1000}$ mod 1000. Note that $2^{10} = 1024 \equiv 24 \pmod {100}$, and $2^{20} \equiv 24^2 \equiv 76 \pmod {100}$. Notice that $76^2 \equiv 76 \pmod {100}$. This makes 76 a very nice number mod 100, and in fact, this means that $(2^{20})^n \equiv 76^n \equiv 76 \pmod {100}$. Thus, $2^{1000} \equiv 76 \pmod {100}$.
+    </div>
+
+    <p><b>Definition (Units).</b> Consider $(\mathbb{Z}/n\mathbb{Z})^\times = \{[a]\in\mathbb{Z}/n\mathbb{Z} \;|\; \exists b \in \mathbb{Z}, [a][b] = [1]\}$. This is the set of invertible elements, or <b>units</b>.</p>
+
+    <div class="theorem">
+      <b>Proposition.</b> $(\mathbb{Z}/n\mathbb{Z})^\times = \{[a] \;|\; 0 < a \le n, \gcd(a,n) = 1\}$.
+    </div>
+    <i>Proof.</i>
+
+    <p>Suppose $\gcd(a,b) = 1$. Then $\exists u, v \in \mathbb{Z}$ such that $au + nv = 1$. Then $[a][u] + [0] = [1]$, so $[u]$ is the inverse of $[a]$ as desired.</p>
+
+    <p>We now consider the reverse direction. Suppose $\gcd(a,b) = d \neq 1$. Define $m = \dfrac{n}{d} \in \mathbb{Z}$. Then $[m][a] = [0]$, so $n \;|\; ma$. Thus $[a]$ cannmot be invertible.  This is because if $[a][b] = [1]$, then $[m][a][b] = [m]$, but then $[0] = [m]$ which is a contradiction.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="theorem">
+      <b>Corollary.</b> $\left | \left(\mathbb{Z}/n\mathbb{Z}\right)^\times \right | = \varphi(n).$
+    </div>
+
+    <div class="remark">
+      <b>Remark.</b> Note that one thing that does not happen with the integers is that $[1] + [1] + ... + [1] = [0]$ with addition being done $n$ times.
+    </div>
+
+    <div class="theorem">
+      <b>Theorem (Fermat's Little Theorem).</b> For any $a$ and prime $p$, $a^p \equiv a \pmod p$.
+    </div>
+
+    <div class="theorem">
+      <b>Lemma (A.K.A. "Freshman's Dream").</b> $(x + y)^p \equiv x^p + y^p \pmod p$.
+    </div>
+    <i>Proof by Binomial Theorem.</i>
+
+    <i>Proof of Theorem.</i>
+
+    <p>We use induction. Simply consider base case $0^p \equiv 0 \pmod p$. Then $a^p \equiv a \pmod p \Rightarrow (a+1)^p \equiv a^p + 1^p \equiv a + 1 \pmod p$ as desired.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="remark">
+      <b>Remark.</b> Nice proof.
+    </div>
+
+    <p>We finally get to groups.</p>
+
+    <p><b>Definition (Binary Operation).</b> A <b>binary operation</b> $*$ on a set $G$ is a function $* : G \times G \rightarrow G$. We use notation $a * b = *(a,b)$.</p>
+
+    <p><b>Definition (Associativity).</b> A binary operation $*$ on $G$ is <b>associative</b> if $(a*b)*c = a*(b*c)$ for all $a,b,c \in G$.</p>
+
+    <p><b>Definition (Commutativity).</b> A binary operation $*$ on $G$ is <b>commutative</b> if $a * b = b * a$ for all $a, b \in G$.</p>
+
+    <p><b>Definition (Group).</b> A <b>group</b> is a pair $(G, *)$ where $G$ is a set and $*$ is a binary operation on $G$ such that $*$ is associative, there exists $e \in G$ such that $ea = ae = a$ for all $a \in G$, and for each $a \in G$, there exists $a^{-1} \in G$ such that $aa^{-1} = a^{-1}a = e$.</p>
+
+    <p><b>Definition (Abelian Group).</b> A group $(G, *)$ is called <b>commutative</b> or <b>Abelian</b> if $*$ is commutative.</p>
+
+    <div class="problem">
+      <b>Example.</b>
+      <ol>
+        <li>$(\mathbb{N}, +)$ is not a group</li>
+        <li>$(\mathbb{Z}, +)$ is a commutative group</li>
+        <li>$(\mathbb{R}, +)$ is a commutative group</li>
+        <li>$(\mathbb{C}, +)$ is a commutative group</li>
+        <li>$(\mathbb{Q}, +)$ is a commutative group</li>
+        <li>$(\mathbb{R}\backslash \{0\}, \times)$ is a commutative group</li>
+        <li>$(\mathbb{R}_{>0}, \times)$ is a commutative group</li>
+        <li>$(\mathbb{Z}/n\mathbb{Z}, +)$ is a commutative group</li>
+        <li>$((\mathbb{Z}/n\mathbb{Z})^\times, \times)$ is a commutative group</li>
+      </ol>
+      We might want to check that the last example above is actually still a group, and we can see that it is closed since if $[a]$ and $[b]$ are two invertible elements, then $[a][b]$ is also invertible.
+    </div>
+
+    <p><b>Definition (Monoid).</b> A <b>monoid</b> is a pair $(M,*)$ where $M$ is a set and $*$ is a binary operation on $M$ such that $*$ is associative. Sometimes, people also require that monoids have identity elements.</p>
+
+    <div class="problem">
+      <b>Example.</b>
+      <ol>
+        <li>$(\mathbb{N}, +)$ is a monoid</li>
+        <li>$(\mathbb{N} \cup \{0\}, +)$ is a monoid with identity</li>
+      </ol>
+    </div>
+
+    <div class="remark">
+      <b>Remark.</b> Every group is a monoid, but not every monoid is a group.
+    </div>
+
+    <div class="problem">
+      <b>Example.</b> Notice that if $(A, *)$ is a group and $(B, \circ)$ is a group, then $(A \times B, \cdot)$ is a group with the underlying set $(A \times B)$ and operation $(a_1, b_1) \cdot (a_2, b_2) = (a_1 * a_2, b_1 \circ b_2)$ where $a_1, a_2 \in A$ and $b_1, b_2 \in B$.
+    </div>
+
+    <div class="problem">
+      <b>Example (Free monoid on $n$ generators).</b> This is the set
+      $$\{w_1w_2...w_n \;|\; \text{where } k \in \mathbb{N} \cup \{0\}, w_i \in \{a_1,...a_n\}\}$$
+      with the operation $w_1w_2...w_k * u_1u_2...u_j = w_1w_2...w_k u_1u_2...u_j$.
+    </div>
+
+    <h2 class="display-4" id="lec-3">Lecture 3</h2>
+
+    <div class="remark">
+      <b>Remark.</b> We will often use the multiplicative notation for groups. Here, for example consider $(\mathbb{Z}/4\mathbb{Z}, +)$. Then by denoting $[0]$ by $1$ and $[1]$ by $x$, we can denote $[2]$ with $x^2$ and $[3]$ with $x^3$. Then we get the multiplicative notation $\{1,x,x^2,x^3\}$.
+    </div>
+
+    <p>We now discuss the free monoid and the free group (hehehe we discussed this in MUSA 174). </p>
+
+    <div class="remark">
+      <b>Remark.</b> The issue that we have is that there isn't an obvious way to use our symbols to expand the free monoid into a free group. Thus, we forcibly add inverses into the free monoid to make the free group defined below, noting that we have to be careful about some edge cases since elements next to their inverses should technically merge to the empty word.
+    </div>
+
+    <p><b>Definition (Free Group).</b> The free group with generators $a_1, ..., a_n$ is the free monoid but also with the added symbols $a_1^{-1}, ..., a_n^{-1}$ under the condition that all words cannot have $a_i$ and $a_i^{-1}$ neighboring each other. The definitions of multiplication now are pretty clear.</p>
+
+    <div class="example">
+      <b>Example.</b> The free group with generator $x$ is like: $(\{e, x, x^{-1}, x^2, x^{-2}, x^3, ...\}, \cdot)$. We cam see this through a tiny amount of experimentation.
+    </div>
+
+    <div class="theorem"><b>Claim.</b> <ol>
+      <li>The identity is unique</li>
+      <li>The inverse is unique (i.e. $g \mapsto g^{-1}$ is a function $G \rightarrow G$)</li>
+      <li>$(a^{-1})^{-1} = a$</li>
+      <li>$(ab)^{-1} = b^{-1}a^{-1}$</li>
+      <li>$a_1 ... a_n$ doesn't depend on bracketing</li>
+    </ol></div>
+    <i>Proof.</i>
+
+    <p>(1) Suppose $e_1$ and $e_2$ are identities. Then $e_1 = e_1e_2 = e_2$ as desired.</p>
+    <p>(2) Suppsoe $h_1$ and $h_2$ are inverses. Then $h_1 = h_1 e = h_1(gh_2) = (h_1g)h_2 = eh_2 = h_2$ as desired.</p>
+    <p>(3) $aa^{-1} = a^{-1}a = e$ so this follows from the uniqueness above and definition of inverse.</p>
+    <p>(4) $ab \cdot b^{-1} a^{-1} = aa^{-1} = e$, $b^{-1} a^{-1} a b = b^{-1} b = e$ as desired.</p>
+    <p>(5) can be shown via induction.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="theorem">
+      <b>Theorem.</b> The equations $ax = b$ and $ya = b$ have unique solutions in $G$ for $x$ and $y$ (for any fixed $a, b \in G$). In particular, $au = av \Rightarrow u = v$ and $ua = va \Rightarrow u = v$.
+    </div>
+    <i>Proof.</i>
+
+    <p>We first show that the solution is unique if it exists. Consider $ax = b$. We have $a^{-1} a x = a^{-1} b$ so $x = a^{-1} b$. We can then show that this solution actully is a solution: $a(a^{-1} b) = (aa^{-1})b = b$ as desired. Similarly, $ya = b$ implies that $yaa^{-1} = ba^{-1}$ so $y = ba^{-1}$, and $ba^{-1}a = b$ as desired. The particular case follows.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <p><b>Definition (Order).</b> The order of an element $x \in G$ (denoted $|x|$) is the minimal natural number $n \in \mathbb{N} \cup \{\infty\}$ such that $x^n = e$.</p>
+
+    <div class="theorem">
+      <b>Theorem.</b> If $G$ is finite, then every element has finite order.
+    </div>
+    <i>Proof.</i>
+
+    <p>Let $x \in G$. Then $\{1, x, x^2, ...\} \subseteq G$, so not elements are distinct. Thus there exist $k < l$ such that $x^k = x^l$. Thus, $1 = x^{l- k}$, so the order is at most $l - k$. Thus $x$ has finite order. </p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="remark">
+      <b>Remark.</b> (I didn't write it explicitely here so it might be hrader to see) this proof relies on the Well-Ordering Principle. Basically we are saying that the set $\{n \in \mathbb{N} \;|\; x^n = 1 \} \subseteq \mathbb{N}$ is nonempty and thus has a minimal element by the Well-Ordering Principle.
+    </div>
+
+    <div class="remark">
+      <b>Remark.</b> I'm having flashbacks to the last parts of linear algebra where we defined tensors and we used free vector spaces? or smth.
+    </div>
+
+    <p><b>Definition (Symmetric Group).</b> $\Omega$ a set, $S_{\Omega} = \{\text{bijections }\Omega \rightarrow \Omega\}$. The operation is composition.</p>
+
+    <div class="theorem">
+      <b>Claim.</b> The symmetric group is indeed a group.
+    </div>
+    <i>Proof.</i>
+
+    $$(u \circ v) \circ w [\omega] = (u \circ v) (w(\omega))$$
+    $$ = u(v(w(\omega)))$$
+    $$= u \circ (v \circ w (\omega))$$
+    The identity sends each element to itself. Also, each bijection has an inverse.
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <p>Note that when $\Omega = \{1, ..., n\}$, $S_{\Omega} = S_n$. Bijections from $\{1,...,n\}$ to itself are called permutations.</p>
+
+    <p><b>Definition.</b> A cycle of length $k$ $(a_1, a_2,...,a_k) = w \in S_n$, $a_i \in \{1,...,n\}$, $a_i \neq a_j$ if $i \neq j$.</p>
+
+    <div class="remark">
+      <b>Remark.</b> $\{1,...,n\} \subseteq \{1,...,n+1\}$. If $a_i \in \{1,...,n\} \subseteq \{1,...,m\}$, $(a_1,...,a_k) \in S_m$ for all $m \ge n$. 
+    </div>
+
+    <p><b>Definition (Transposition).</b> A permutation which swaps two elements and keeps all other elements the same. (I give a loose definition here but obviously there is a better more rigorous definition).</p>
+    
+    <p>$(a_1,...,a_{m_1})(a_{m_1 + 1},...,a_{m_2})...(a_{m_k+1},...,a_{m_{k+1}})$ is a product of disjoint cycles, where $a_j$ are pairwise distinct elements in $\{1,...,n\}$. This defines a permutation.</p>
+
+    <div class="problem">
+      <b>Example.</b> For example, $(12)(34) = (34)(12)$ which maps $1,2,3,4$ to $2,1,4,3$. Also note that we can have $(5)$ a cycle of length 1.
+    </div>
+
+    <div class="theorem">
+      <b>Theorem.</b> Every permutation in $S_n$ can be written as a product of disjoint cycles.
+    </div>
+
+    We will prove this next time.
+
+    <h2 class="display-4" id="lec-4">Lecture 4</h2>
+    <div class="remark">
+      <b>Remark.</b> Prediction: Induction on $n$.
+    </div>
+
+    <div class="remark">
+      <b>Remark.</b> There is more than one way to write a cycle. For example, $(123) = (231) = (312)$.
+    </div>
+
+    <p>We now prove the theorem.</p>
+
+    <div class="theorem">
+      <b>Theorem.</b> Every permutation $w$ in $S_n$ can be written as a product of disjoint cycles.
+    </div>
+    <i>Rough Proof.</i>
+
+    <p>Smoothing up the proof is left to the reader. It's basically yeah induction = algorithm. Pick the smallest element such that it is not yet in a cycle. If there is no such element, we are done. Otherwise, call the element $a$. Let $b = w(a)$. If $b = a$, then close the bracket and go back to step 1. Otherwise, let $c = w(b)$. Let $b = c$ and repeat the process. We claim that this process must terminate. This is because otherwise the permutation is infinite. It is not precisely necessary, but we generally erase all cycles of length 1.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="remark">
+      <b>Remark.</b> I sorta don't like the last part because like yes we commit notation abuse all the time but if we erase all cycles of length 1, we cannot tell immediately what $S_n$ a product of disjoint cycles is a subset of. In some sense this may not be a problem though since we can view everything as infinite permutations or something.
+    </div>
+
+    <div class="remark">
+      <b>Remark.</b> Now we can easily compute orders of elements. 
+    </div>
+
+    <p>Now suppose we have a cycle decomposition $(a_1,...,a_{m_1})(a_{m_1+1},...,a_{m_2})...(a_{m_{k-1}+1}...a_{m_k})$ then notice that we can actually compute squaring and other things by doing things individually on the cycles. For example, $(123)(45)(6)(789 \:10)$, the square is $(132)(45)(6)(79)(8\:10)$.</p>
+
+    <div class="strat">
+      <b>Strat.</b> Note that $(123)$ can be squared easily by noting that $(123)$ cubed is the identity, so the square is the inverse of $(123)$, which is the same as reading it backwards, or $(132)$.
+    </div>
+
+    <p>Now we have that the order of an element is the length of the cycle it is a part of, and $|w|$ is the $\text{lcm}$ of the orders of the individual elements, or $\text{lcm} (m_1,m_2,...,m_k)$.</p>
+
+    <div class="remark">
+      <b>Remark.</b>
+
+      $$(12)(23) = (123)$$
+      $$(23)(12) = (132)$$
+      $$(12)^{-1} = (12) = a$$
+      $$(23)^{-1} = (23) = b$$
+      $$(ab)^{-1} = b^{-1} a^{-1} = ba$$
+      $$(12)(123) = (23)$$
+      $$(123)(12) = 13$$
+    </div>
+
+    A corollary from the remark is
+    <div class="theorem">
+      <b>Corollary.</b> $S_n$ is not commutative for $n \ge 3$.
+    </div>
+    
+    <p><b>Definition.</b> Let $G$ be a group and let $S$ be a subset of $G$. Let $S = \{s_1,...,s_n\}$ be finite. We say that $G$ is <b>generated</b> by $S$ if every element $g \in G$ can be written as a product of elements in $S$ and their inverses.</p>
+
+    <p>If $g = w_1w_2...w_k$ such that $w_i \in S \cup S^{-1}$ (where $S^{-1}$ is th eset of the inverses), and $s_i$ does not neighbor $s_i^{-1}$, then we call the word a reduced expression for $g$.</p>
+
+    <div class="theorem">
+      <b>Theorem.</b>
+      <ol>
+        <li>$S_n$ is generated by transpositions $S = \{(ij) \;|\; i < j\}$, $|S| = {n \choose 2}$.</li>
+        <li>$S_n$ is generated by $S = \{(i,i+1) \;|\; i \in \{1,...,n-1\}\}$ (let $s_i$ be the transposition between $i$ and $i+1$ or $(i,i+1)$.</li>
+      </ol>
+    </div>
+    <i>Proof.</i>
+
+    <p>For (1), she gave an example and thus an algorithm. I propose instead a smaller lemma which does everything for us:</p>
+
+    <div class="theorem">
+      <b>Lemma.</b> Any cycle can be expressed as a product of transpositions. 
+    </div>
+
+    <p>The proof is pretty much exactly the same, just slightly different. See the previous remark, proof left to reader since it's pretty simple. Basically if we have $(1234) = (14)(13)(12)$.</p>
+
+    <p>For (2), do the homework. It follows from (1).</p>
+
+    <p><b>Definition.</b> A presentation of a group $G$ is the data of $\langle S \;|\; R_1 = ... = R_m = 1\rangle$, $S$ is the set generating $G$, and $R_i$ is a reduced expression in cuts of $S$. </p>
+
+    <p>We have $s_i^2 = 1$, $(s_is_j)^2 = 1$ if $|i-j|^2 > 1$, and $(s_is_{i+1})^3 = 1$. We can write:
+      $$S_n = \langle s_1,...,s_{n-1} \;|\; s_i^2=1,(s_is_j)^2 = 1 \text{ if } |i - j| > 1, (s_is_{i+1})^3 = 1)\rangle$$
+    </p>
+
+    <p><b>Definition (Dihedral Group).</b> $D_{2n} = \{\text{symmetries of a regular }n-\text{gon}\}$. For example, you can rotate (for example by $\dfrac{2\pi}{n}$ radians). We can get all rotations by composing the smallest rotation. There are also reflections. </p>
+
+    <p>Notice that there are $n$ rotations and $n$ reflections (reflections needs a bit of casework on the parity of $n$). The reason we call it $D_{2n}$ and not $D_n$ is that $|D_{2n}| = 2n$ (1 identity, $n-1$ rotations, $n$ reflections).</p>
+
+    <p>We have an injective map from $D_{2n}$ to $S_n$, going from the symmetry to its action on the vertices. On the other hand, this map is not surjective since not every permutation is a bunch of symmetries on the $n$-gon.</p>
+
+    <p>Notice that each symmetry is determined by the image of two neighboring vertices.</p>
+
+    <p>Now if $r$ is a rotation by $\dfrac{2\pi}{n}$, then $r$ has order $n$. We have $D_{2n} = \{1,r,...,r^{n-1}, s, sr,sr^2,...,sr^{n-1}\}$ because it turns out that all of the rotations are $s$ (one of the rotations) composed with one of the rotations. In particulary, we can see that $r$ and $s$ generate $D_{2n}$. We will investigate these properties more thoroughly next time.</p>
+
+    <h2 class="display-4" id="lec-5">Lecture 5</h2>
+
+    <p>Last time we discussed $D_{2n}$. We note that the identity and rotations are orientation preserving and the reflections change the orientation.</p>
+
+    <div class="theorem">
+      <b>Claim.</b> We have:
+      $$D_{2n} = \{1,r,...,r^{n-1}, s, sr,sr^2,...,sr^{n-1}\}$$
+    </div>
+    <i>Proof.</i>
+
+    <p>We can already see that the rotations are all different, and we can see that all the reflections are different than the rotations. What we must show is that $sr^i \neq sr^j$ when $i,j < n$. We can see this by noting that $s(1) = 1$, $sr(n) = 1$, and so on until $sr^{n-1}(2) = 1$. Alternatively, suppose that $sr^i = sr^j$. Then $r^{-j} s^{-1} s r^i = 1 \Rightarrow r^{i-j} = 1$. But then $i = j$.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <p>Consider $rs$. Notice that $rs = sr^{-1}$. We can check this by noticing that $rs(1) = 2, rs(2) =1$, and $sr^{-1}(1) = 2, sr^{-1}(2) = 1$.</p>
+
+    <div class="theorem">
+      <b>Claim.</b> $r^k s = sr^{-k}$.
+    </div>
+    <i>Proof by induction.</i>
+
+    <div class="remark">
+      <b>Remark.</b> This is so powerful...
+    </div>
+
+    <div class="theorem">
+      <b>Theorem.</b> $\mathcal{D}_{2n} = \langle r,s \;|\; r^n = s^2 = 1, rs = sr^{-1} \rangle$.
+    </div>
+    <i>Proof.</i>
+
+    <p>Notice that every element in $\langle r,s \;|\; r^n = s^2 = 1, rs = sr^{-1}\rangle$ can be expressed in terms of $r$ and $s$ (without inverses). This is because the first rule allows us to exchange an inverse with a larger power of $r$ or $s$. We can also use the first rule to bring the size of a string of consecutive $r$s or $s$s down to less than $n$ $r$s or less than 2 $s$s. In other words, every word can be written as $r^{m_1} s r^{m_2} s ... s r^{m_k}$, with $m_1,m_k$ allowed to be zero, and $m_i \le n-1$. The middle $m_i$s may not be zero. Finally, the last rule allows us to commute all $s$s in the above string to the left, resulting in $s^{k-1} r^{M}$. Finally, we can reduce powers using the first rule again to get $sr^{m}$, with $m < n$. Thus the element is equal to an element in $\{1,r,...,r^{n-1}, s, sr,sr^2,...,sr^{n-1}\}$ as desired.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="remark">
+      <b>Remark.</b> Wait couldn't we use this kind of proof idea to write an $O(n)$ algorithm for smth cool? Although I don't know what, it's just a feeling.
+    </div>
+    
+    <p><b>Definition (Homomorphism).</b> A map that preserves the structure while changing the set. More precisely, it is a map $\phi : (G, \circ) \rightarrow (H, *)$, such that $\phi(a \circ b) = \phi(a) * \phi(b)$.</p>
+
+    <div class="problem">
+      <b>Exercise.</b> $\phi(e_G) = e_H$. Moreover, for all $g \in G$, $\phi(g)^{-1} = \phi(g^{-1})$.
+    </div>
+
+    <p><b>Definition.</b>
+    <ol>
+      <li>A bijective homomorphism $\phi : G \rightarrow H$ is called an <b>isomorphism.</b></li>
+      <li>If $\exists$ an isomorphism between $G$ and $H$, we say that $G$ is <b>isomorphic</b> to $H$. Denoted by $G \cong H$.</li>
+      <li>A homomorphism that maps $G$ to itself is called an <b>endomorphism</b>.</li>
+      <li>A bijective endomorphism is called an <b>automorphism</b>.</li>
+    </ol></p>
+
+    <div class="problem">
+      <b>Example.</b> 
+      <ol>
+        <li>The identity map from $G$ to itself is an automorphism.</li>
+        <li>$\phi : G \rightarrow H$ is the <b>trivial map</b>, $g \mapsto e_H$, which is a homomorphism.</li>
+        <li>$(\mathbb{Z}, +) \rightarrow (\mathbb{Q}, +)$ is an injective homomorphism.</li>
+        <li>Recall that we have a map $\mathbb{Z} \rightarrow \mathbb{Z}/n\mathbb{Z}$, $a \mapsto [a]$. This is a homomorphism. Specifically, it is a surjective homomorphism.</li>
+        <li>$\mathcal{D}_{2n} \rightarrow S_n$ is an injective homomorphism.</li>
+        <li>$\exp : (\mathbb{R}, +) \rightarrow (\mathbb{R}_{> 0}, \times)$ is an isomorphism, so $(\mathbb{R}, +) \cong (\mathbb{R}_{>0}, \times)$.</li>
+        <li>Consider $(\mathbb{Z}/3\mathbb{Z})^\times$. It has two elements $\{[1], [-1]\}$. Similarly, $\mathbb{Z} /2\mathbb{Z} = \{[0], [1]\}$. In fact, $(\mathbb{Z}/3\mathbb{Z})^\times \cong \mathbb{Z} /2\mathbb{Z}$.</li>
+        <li>If $\phi : G \rightarrow H$ is an isomorphism, then $\phi^{-1} : H \rightarrow G$ is also an isomorphism.</li>
+      </ol>
+    </div>
+
+    <div class="remark">
+      <b>Remark.</b> Notice that if we have homomorphisms $\phi : G \rightarrow H$, $\psi : H \rightarrow K$, then $\psi \circ \phi : G \rightarrow K$ is also a homomorphism. This can be verified very quickly, I won't include it here.
+    </div>
+
+    <p>Notice that $G \cong G$ via the identity map, $G \cong H$ implies $H \cong G$, and the transitive property also holds. Thus, $\cong$ is an eqiuvalence relation. Essentially, this just means that we can mainly worry about groups up to this isomorphism.</p>
+
+    <div class="theorem">
+      <b>Claim.</b> If $G \cong H$, $\phi : G \rightarrow H$ is the isomorphism, 
+      <ol>
+        <li>$G$ is finite if and only if $H$ is finite, and if both are finite, then $|G| = |H|$.</li>
+        <li>$G$ is abelian if and only if $H$ is commutative.</li>
+        <li>For all $x \in G$, $|x| = |\phi(x)|$.</li>
+      </ol>
+    </div>
+    <i>Proof.</i>
+
+    <p>(1) follows directly from the isomorphism being a bijection. For (2), suppose $H$ is commutative, but $G$ is not. Then there must be $h_1, h_2$ such that $h_1h_2 \neq h_2h_1$. But then $\phi(h_1)\phi(h_2) = \phi(h_1h_2) \neq \phi(h_2h_1) = \phi(h_2) \phi(h_1)$ by injectivity which is a contradiction. For the other direction, use the fact that $\phi$ being an isomorphism implies that $\phi^{-1}$ is also an isomorphism. For (3), notice that $x^n = 1$ if and only if $\phi(x)^n = 1$, which completes the proof.</p>
+
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <div class="problem">
+      <b>Example.</b>
+      <ol>
+        <li>We can see that $\mathbb{Z}/6\mathbb{Z} \not\cong S_3$ just by noticing that the first group is abelian whereas the second is not.</li>
+        <li>Notice that in $(\mathbb{R}, +)$ every element has infinite order, whereas in $(\mathbb{R}\backslash \{0\}, \times)$, $-1^2 = 1$ so $-1$ has order 2. Thus they are not isomorphic.</li>
+        <li>$S_{\Omega} \cong S_{\Delta}$ if and only if $|\Omega| = |\Delta|$ assuming $|\Omega|, |\Delta| < \infty$.</li>
+      </ol>
+      <div class="remark">
+        <b>Remark.</b> (3) extends to countably infinite as well?
+      </div>
+    </div>
+
+    <p><b>Definition (Kernel).</b> If $\phi : G \rightarrow H$ is a homomorphism, the kernel of $\phi$ $\text{Ker}(\phi) = \{g \in G \;|\; \phi(g) = e_H\}$.</p>
+
+    <div class="theorem">
+      <b>Claim.</b> $\phi$ is injective if and only if $\ker(\phi) = \{e_G\}$.
+    </div>
+    <i>Proof.</i>
+
+    <p>The first direction is obvious. Suppose $\ker (\phi) = \{e_G\}$ and suppose $\phi(a) = \phi(b)$. Then $\phi(ab^{-1}) = e_H$. Thus $ab \in \ker(\phi)$, so $ab^{-1} = e_G$, so $a = b$.</p>
+    <p style="text-align: right;">$\blacksquare$</p>
+
+    <p><b>Definition (Image).</b> $\text{Im}(\phi) = \{\phi(g) \;|\; g \in G\}$.</p>
+
+    <div class="theorem">
+      <b>Theorem.</b> $\phi$ is surjective if and only if $\text{Im}(\phi) = H$.
+    </div>
+     
+    <h2 class="display-4" id="lec-6">Lecture 6</h2>
+
+    <p>Consider homomorphism $\varphi: G \rightarrow H$. Let $G = \langle s_1,...,s_n \;|\; R_1 = ... = R_m = 1\rangle$ where $R_j = s_{i_1}^{\epsilon_1} ... s_{i_{k_j}}^{e_{k_j}}$ for $i_l \in \{1,...,n\}$ and $\epsilon_j \in \{-1,1\}$. We have $\varphi(s_i) = r_i \in H$, $\varphi(1) = 1$. $\varphi(s_{i_1}^{\epsilon_1} . . . s_{i_{k_j}}^{\epsilon_{k_j}} = r_{i_1}^{\epsilon_1} ... r_{k_j}^{\epsilon_{k_j}} \in H$. Additiionally, $\varphi(R_j) = R_j[r_1...r_n]$. We can verify $\varphi(1) = 1$. </p>
+
+    <div class="theorem">
+      <b>Theorem.</b> Let $G = \langle s_1,...,s_n \;|\; R_1 = ... = R_m = 1\rangle$. 
+      $$\text{Hom}(G,H) \rightarrow \{(r_1,...,r_n)\in H^n \;|\; R_j[r_1,...,r_n] = 1 \in H\}$$
+    </div>
+
+    <div class="problem">
+      <b>Example.</b> One example is $t : G \rightarrow H$, $g \mapsto 1$. Then $t \mapsto (1,...,1)$. Another example is $D_{2n} = \langle r,s \;|\; r^n = s^2 = 1, sr = srs^{-1}r = 1\rangle$. Let $\varphi : D_{2n} \rightarrow D_{2d}$ where $d$ is not necessarily the same as $n$. We have $\varphi(r) = r_1$, $\varphi(s) = s_1$. $s_1^2 = 1 \Rightarrow \varphi(s^2) = 1$. $s_1r_1 = r_1^{-1}s \Rightarrow \varphi(sr) = \varphi(r^{-1}s)$, $r_1^n = 1$ implies $\varphi(r^n) = 1$. From this wee see that such a homomorphism exists if and only if $d\;|\;n$ (proved fairly quickly so omitted).
+    </div>
+
+    <p>$\varphi : D_{2n} \rightarrow S_n$, $r \mapsto (1,2,3...,n)$, $s \mapsto (2\; n)(3 \;n-1)...$</p>
+
+    <div class="problem">
+      <b>Example.</b> We can see $D_6 \cong S_3$, $r \mapsto (123)$, $s \mapsto (23)$. The way that we see this is an isomorphism is by noting that $S_3 = \langle (12, (23)\rangle$, so since $rs \mapsto (123)(23) = (12)$, we can simply see that $S_3 = \langle \varphi(rs), \varphi(s)\rangle$.
+    </div>
+
+    <p><b>Definition (Subgroup).</b> A $H \subset G$ is called a <b>subgroup</b> if it is closed under the binary operation of $G$ and also closed under inverses. Additionally, the identity is a part of $H$. We denote subgroups with $H \le G$ to distinguish from subset.</p>
+
+    <div class="remark">
+      <b>Remark.</b> The last property is only included to prevent empty subgroups.
+    </div>
+
+    <div class="remark">
+      <b>Remark.</b> $H$ is a group when we restrict the operation on $G$ to it. Also, the identity of $G$ is the group identity of $H$.
+    </div>
+
+    <div class="problem">
+      <b>Example.</b> 
+      <ol>
+        <li>$\{e\}, G \le G$</li>
+        <li>$(\mathbb{Z},+) \subset (\mathbb{Q}, +)$</li>
+        <li>$(\mathbb{Q}, +) \le (\mathbb{R}, +)$</li>
+        <li>$(\mathbb{R}, +) \le (\mathbb{C}, +)$</li>
+        <li>$(\mathbb{Q}_{>0}, \times) \le (\mathbb{Q}_{\neq 0}, \times)$</li>
+        <li>$(\mathbb{Q}_{>0}, \times) \le (\mathbb{R}_{>0}, \times$</li>
+        <li>$(\mathbb{Q}_{\neq 0}, \times) \le (\mathbb{R}_{\neq 0}, \times)$</li>
+      </ol>
+    </div>
+
+    <div class="problem">
+      <b>Non-Examples.</b>
+      <ol>
+        <li>$\mathbb{N} \subset \mathbb{Z}$ is not a subgroup under addition because it is not closed under inverses.</li>
+        <li>$\left(\mathbb{Z}/n\mathbb{Z}\right)^\times \subset \mathbb{Z}/n\mathbb{Z}$ is not a subgroup as they have different operations.</li>
+      </ol>
+    </div>
+
+    <div class="theorem">
+      <b>Claim.</b> If $H \le G$, $K \le H$, then $L \le G$.
+    </div>
+
+    <p>From the above claim, we could have written:</p>
+    <center><!-- https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXG1hdGhiYntRfV97PjB9Il0sWzEsMCwiXFxtYXRoYmJ7Un1fez4wfSJdLFswLDEsIlxcbWF0aGJie1F9X3tcXG5lcSAwfSJdLFsxLDEsIlxcbWF0aGJie1J9X3tcXG5lcSAwfSJdLFswLDIsIlxcbGUiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiwzLCJcXGxlIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMSwiXFxsZSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxLDMsIlxcbGUiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0= -->
+      <iframe class="quiver-embed" src="https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXG1hdGhiYntRfV97PjB9Il0sWzEsMCwiXFxtYXRoYmJ7Un1fez4wfSJdLFswLDEsIlxcbWF0aGJie1F9X3tcXG5lcSAwfSJdLFsxLDEsIlxcbWF0aGJie1J9X3tcXG5lcSAwfSJdLFswLDIsIlxcbGUiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiwzLCJcXGxlIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMSwiXFxsZSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxLDMsIlxcbGUiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=&embed" height="200vw" style="border-radius: 8px; border: none;"></iframe></center>
+      <div class="remark">
+        <b>Remark.</b> Category theory flashbacks... natural transformation?! Poset category? Later Revision: Not exactly...
+      </div>
+
+      <div class="problem">
+        <b>Example.</b> 
+        <ol>
+          <li>$\{1,r,r^2,...,r^{n-1}\} = A \subset D_{2n}$, $A \le D_{2n}$. </li>
+          <li>$m\mathbb{Z} = \{ n \in \mathbb{Z}, \;|\; m \;|\; n\}$. $m\mathbb{Z} \le (\mathbb{Z}, +)$</li>
+        </ol>
+      </div>
+
+      <div class="theorem">
+        <b>Proposition (Subgroup Criterion).</b> $H \le G$ if and only if 
+        <ol>
+          <li>$H \neq \varnothing$</li>
+          <li>$\forall x, y\in H$, $xy^{-1} \in H$</li>
+        </ol>
+      </div>
+      <i>Proof.</i>
+
+      <p>Suppose $H$ satisfies (1) and (2). Take $x \in H$. $1 = xx^{-1} \in H$. For all $x \in H$, $1 \cdot x^{-1} = x^{-1} \in H$. For all $x, y \in H$, $y^{-1} \in H$. $x \cdot (y^{-1})^{-1} = xy \in H$. The other direction is trivial.</p>
+      <p style="text-align: right;">$\blacksquare$</p>
+
+      <p><b>Definition (Centralizer).</b> $A \subset G$ any subset. The <b>centralizer</b> of $A$ in $G$ is $C_G(A) = \{g \in G\;|\; g a g^{-1} = a\; \forall a \in A\}$. </p>
+      
+      <div class="remark">
+        <b>Remark.</b> $\Leftrightarrow ga = ag$.
+      </div>
+
+      <div class="theorem">
+        <b>Claim.</b> $C_G(A) \le G$. 
+      </div>
+      <i>Proof.</i>
+
+      <p>Consider $x,y \in C_G(A)$. We have $yay^{-1} = a$ for all $a \in A$. Thus $a = y^{-1}yay^{-1}y = y^{-1}ay \Rightarrow y^{-1} \in C_G(A)$. Additionally, for all $a \in A$, $(xy^{-1}) a (xy^{-1})^{-1} = xy^{-1}ayx^{-1} = xax^{-1} = a$, so $xy^{-1} \in C_G(A)$. Thus, by the previous proposition, $C_G(A)$ is a subgroup.</p>
+      <p style="text-align: right;">$\blacksquare$</p>
+
+      <p><b>Definition (Normalizer).</b> Consider $A \subset G$, so $g \in G$, $G \supset g A g^{-1} = \{gag^{-1} \;|\; a \in A\}$. The <b>normalizer</b> of $A$ in $G$ is
+      $$N_G(A) = \{g \in G \;|\; gAg^{-1} = A\}$$</p>
+
+      <div class="remark">
+        <b>Remark.</b> $C_G(A) \subset N_G(A)$.
+      </div>
+
+      <div class="theorem">
+        <b>Claim.</b> $N_G(A) \le G$. 
+      </div>
+      <i>Proof.</i>
+      
+      <p>Let $x,y \in N_G(A)$. Then $y Ay^{-1} = A$. Consider the map $f_y : A \rightarrow A$, $a \mapsto yay^{-1}$. Then $yay^{-1} = yby^{-1} \Rightarrow a = b$, so $f_y$ is injective and thus a bijection. Thus it must have an inverse. We claim that $f^{-1}_y : A \rightarrow A$, $a \mapsto y{-1}ay$. We have $f^{-1}_y f_y (a) = y^{-1}(yay^{-1})y = a$ as desired. Thus $y^{-1} \in N_G(A)$. Additionally, we have $xy^{-1} A yx^{-1} = xAx^{-1} = A$, so $xy^{-1} \in N_G(A)$. Thus the subgroup criterion implies that it is a subgroup.</p>
+      <p style="text-align: right;">$\blacksquare$</p>
+
+      <p><b>Definition (Center).</b> The <b>center</b> of $G$ is $Z_G = \{g \in G \;|\; \forall h \in G, hg=gh\}$. Alternatively, $Z_G = C_G(G)$.</p>
+
+      <div class="problem">
+        <b>Example.</b>
+        <ol>
+          <li>If $G$ is abelian, for all $A \subset G$, $Z_G = C_G(A) = N_G(A) = G$.</li>
+          <li>$A = \varnothing$, $G$ is any group, $C_G(A) = N_G(A) = G$</li>
+          <li>$D_8 = G$, $Z_{D_8} = \{1,r^2\}$. Consider $A = \{1, r, r^2, r^3\}$. Then $C_G(A) = A$, and $N_G(A) = G$.</li>
+        </ol>
+      </div>
+
+      <p><b>Definition (Conjugation).</b> $gag^{-1}$ is <b>conjugation</b> of $a$ by $g$.</p>
+
+      <p>Consider $G = S_{n}$, and let $w$ and $u$ be two permutations. </p>
+
+      <div class="theorem">
+        <b>Claim.</b> If $u$ sends $i$ to $j$, then $wuw^{-1}$ sends $w(i)$ to $w(j)$.
+      </div>
+      <i>Proof.</i>
+
+      <p>We have $wuw^{-1}(w(i)) = wu(i) = w(j)$ as desired.</p>
+      <p style="text-align: right;">$\blacksquare$</p>
+
+      <div class="remark">
+        <b>Remark.</b> This result seems so trivial yet so deep...
+      </div>
+
+      <div class="theorem">
+        <b>Corollary.</b> $Z_{S_n} = \{e\}$ for $n \neq 2$.
+        <div class="remark">
+          <b>Remark.</b> Yet another reason to love 2.
+        </div>
+      </div>
+      <i>Proof.</i>
+
+      <p>If $w \in Z_{S_n}$. Suppose $w(i) = j$, $j \neq i$. Take $k$ such that $k \neq i$, $k \neq j$. $w(i\; k)w^{-1} = (ik) \neq (jw_k)$.</p>
+      <p style="text-align: right;">$\blacksquare$</p>
+      
+      <div class="remark">
+        <b>Remark.</b> $(i \; j)$ is a transposition.
+      </div>
+
+      <h2 class="display-4" id="lec-7">Lecture 7</h2>
+
+      <p>We consider conjugation in $S_n$.</p>
+
+      <div class="remark">
+        <b>Remark.</b> I was a bit late so it's possible I missed something small at the beginning.
+      </div>
+
+      <p>We have that for $\Omega \subset \{1,2,...,n\}$, $S_{\Omega} \subseteq S_n$, and $S_\Omega$ is isomorphic to $S_m$ for some $m \le n$.</p>
+
+      <p>Consider $\Omega = \{3,4,...,n\}$ so $S_{\Omega} \le S_n$. Every element in $C_{S_n}((12))$ is either $w \in S_{\Omega}$ or $w(12)$ for $w \in S_{\Omega}$. Therefore $C_{S_n}((12)) \cong \mathbb{Z}/2\mathbb{Z} \times S_{n-2}$, $\varphi : \mathbb{Z} / 2\mathbb{Z} \times S_{\Omega} \rightarrow C_{S_n}((12))$. $\varphi : ([0], w) \mapsto w$, $([1],w) \mapsto (12)w$. $([1],u)\cdot([1],w) \mapsto (12)u(12)w = uw$. Then $\text{Ker} \varphi = \{([0], e)\}$, and $C_{S_n} ((12)) = N_{S_n} ((12))$. $\varphi(([0],u) \cdot ([1],w))) = \varphi([0], uw) = uw$.</p>
+
+      <p>Furthermore, we have that $C_{S_n}((12)) = N_{S_n}((12))$.</p>
+
+      <div class="remark">
+        <b>Remark.</b> If $A \le G$, then $N_G(A) \ge A$ because for all $a,b \in A$, $aba^{-1} \in A$. Also, note that $C_{S_n}((12)) = C_{S_n} (\{e, (12)\})$.
+      </div>
+
+      <p> We now discuss subgroups generated by subsets.</p>
+
+      <p><b>Definition (Subgroup Generated by a Subset).</b> Given $A \subset G$, $\langle A\rangle = \bigcap_{H \le G, A \subset H} H$ is the subgroup generated by $A$.</p>
+
+      <div class="problem">
+        <b>Example.</b> 
+        <ol>
+          <li>$\langle (12)\rangle = \{e, (12)\}$</li>
+          <li>$\langle r \rangle = \{e,r,r^2, r^3, ...,r^{n-1} \} \le D_{2n}$ </li>
+        </ol>
+      </div>
+
+      <div class="theorem">
+        <b>Claim.</b> $$\langle A \rangle = \left\{a_1^{\epsilon_1}...a_n^{\epsilon_n} \;|\; a_i \in A, \epsilon_i \in \{1,-1\}, n \in \mathbb{N} \cup \{0\}\right\}$$
+      </div>
+
+      <p>$G$ is generated by elements of $A \subseteq G$ if and only if $G = \langle A \rangle$.</p>
+
+      <div class="problem">
+        <b>Example.</b> 
+        <ol>
+          <li>$\langle G \rangle = G$</li>
+          <li>$\langle \varnothing \rangle = \{e\}$</li>
+          <li>$S_{k+1} = \langle (i \; i + 1) \;|\; i \in \{1,...,k\} \rangle \subset S_n$</li>
+          <li>$D_{2n} = \langle r, s \rangle$</li>
+          <li>$S_n = \langle (i \; i+1) \;|\; i \in \{1,...,n-1\}\rangle$</li>
+        </ol>
+      </div>
+
+      <div class="problem">
+        <b>Example (Claim).</b> Notice that $\langle (123) \rangle = \{ e, (123), (132) \} \cong \mathbb{Z} / 3\mathbb{Z}$.
+      </div>
+
+      <p><b>Definition (Cyclic).</b> A subgroup generated by a single element $x$ is called <b>cyclic</b> ($x$ is called a generator). Equivalently, $G$ is called cyclic if $G = \langle x \rangle$ for some $x \in G$.</p>
+
+      <div class="remark">
+        <b>Remark.</b> The generator does not have to be unique.
+      </div>
+
+      <div class="problem">
+        <b>Example.</b>
+        <ol>
+          <li>$\mathbb{Z}/m\mathbb{Z} = \langle [1]\rangle$</li>
+          <li>$\mathbb{Z} = \langle 1 \rangle$</li>
+        </ol>
+      </div>
+
+      <div class="theorem">
+        <b>Proposition.</b> 
+        <ol>
+          <li>If $G$ is cyclic then it is abelian.</li>
+          <li>If $H = \langle x\rangle then $|G| = |x|$.</li>
+        </ol>
+      </div>
+      <i>Proof.</i>
+
+      <p>Pretty straightforward, I leave it to you, the reader (mwehehe).</p>
+
+      <div class="problem">
+        <b>Example.</b> Consider $\mathbb{Z} / 2 \mathbb{Z} \times \mathbb{Z} / 3 \mathbb{Z}$. It is not cyclic, but it is abelian. This can be quickly seen by listing the elements, and noting that the order of any element is less than the order of the group. We will eventually show the Chinese Remainder Theorem, essentially that any ablian group can be written as a product of cyclic groups. But also notice that $\mathbb{Z} / n \mathbb{Z} \times \mathbb{Z} / m\mathbb{Z}$ is cycle if and only if $\gcd(n,m) = 1$. We show one direction below.
+      </div>
+
+      <div class="theorem">
+        <b>Theorem.</b> $\mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z}$ is cyclic if $\gcd(n,m) = 1$.
+      </div>
+      <i>Proof.</i>
+
+      <p>Suppose $G$ is finite. $G$ is cyclic if and only if $\exists x \in G$, $|x| = |G|$. Using a result form the homework, $|([1],[1])| = \text{lcm}(n,m) = nm$. </p>
+      <p style="text-align: right;">$\blacksquare$</p>
+
+      <div class="theorem">
+        <b>Proposition.</b> 
+        <ol>
+          <li>If $x \in G$, $|x| = n$, then $x^a = 1$ if and only if $n \;|\; a$.</li>
+          <li>If $G = \langle x \rangle$, $|x| = n$, then $|x^a| = \dfrac{n}{\gcd(n,a)}$</li>
+        </ol>
+      </div>
+      <i>Proof.</i>
+
+      <p>We start with the first part. If $x^a = 1$, then by the division algorithm $a = n q + r$, so $x^r = 1$ and $r$ is between 0 and $n-1$ so $r = 0$. Thus, $x^a = 1$ if and only if $a$ is divisible by $n$.</p>
+      
+      <p>Now the second part.Consider $d = \gcd(n,a)$, $n = dc$, $a = db$, and $\gcd(c,b) = 1$. $(x^a)^c = x^{dbc} = (x^n)^b = 1$. If $(x^a)^l = 1$, then notice that $n \;|\; al$. Sine $n = dc$, and $a= db$, $dc \;|\; dbl$, so $c \;|\; bl$, so $c \;|\; l$ which is exactly what we wanted. </p>
+      <p style="text-align: right;">$\blacksquare$</p>
+
+      <p>If $\gcd(n,m) = d > 1$, then $|([a],[b])| = \text{lcm}(\dfrac{n}{\gcd(n,a)}, \dfrac{m}{\gcd(m,b)}) = \dfrac{n}{\gcd(n,a)} \cdot \dfrac{m}{\gcd(m,b)} < nm$ if $[1] = x$ and $[a] = x^a$.</p>
+      
+      <div class="theorem">
+        <b>Theorem.</b> If $G = \langle x\rangle$,
+        <ol>
+          <li>If $|G| = \infty$, then $G \cong \mathbb{Z}$</li>
+          <li>If $|G| = n$, then $G \cong \mathbb{Z}/n\mathbb{Z}$</li>
+        </ol>
+      </div>
+      <i>Proof.</i>
+      
+      <p>We start with the first part. $G= \{1,x,x^{-1}, x^2, x^{-2}\}$, $\varphi : \mathbb{Z} \rightarrow G$, $k \mapsto x^k$. For the second part, consider $\varphi : \mathbb{Z} / n\mathbb{Z} \rightarrow G$, with $[k] \mapsto x^k$.</p>
+      <p style="text-align: right;">$\blacksquare$</p>
+
+      <p>From this we get the other direction of the previous theorem:</p>
+
+      <div class="theorem">
+        <b>Theorem.</b> If $\gcd(n,m) = 1$, then $\mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z} \cong \mathbb{Z}/nm\mathbb{Z}$.
+      </div>
+
+      <div class="theorem">
+        <b>Theorem.</b> If $G = \langle x \rangle$, $|x| = n$, then $G = \langle x^a \rangle$ if and only if $\gcd(a,n) = 1$. In particular, the number of generators in $G$ is $\varphi(n)$.
+      </div>
+
+      <h2 class="display-4" id="lec-8">Lecture 8</h2>
+      <div class="theorem">
+        <b>Theorem.</b> Suppose $G = \langle x \rangle$. 
+        <ol>
+          <li> Every subgroup $K \le G$ is also cyclic</li>
+          <li> If $|x| = n < \infty$, then $\forall a \;|\; n$, there exists a unique $K \le G$ such that $|K| = a$.</li> 
+        </ol>
+      </div>
+      <i>Proof.</i>
+
+      <p>We start with (1). If $K = \{1\}$, we are done. Suppose $K \neq \{1\}$. 
+        $$\{ n \in \mathbb{N} \;|\; x^n \in K \} \neq \varnothing$$
+        Let $l$ be a minimal such number. $K = \langle x^l \rangle$, because if $x^m \in K$, $x^m \cdot x^{-lq} = x^r \in K$. ($m = lq + r$, $0 \le r \le l$). Since $l$ is minimal, $r = 0$.
+      </p>
+
+      <div class="remark">
+        <b>Remark.</b> There may be stuff missing from the above; I sort of rushed it because I came in a bit late.
+      </div>
+
+      <p>
+        Now we consider (2). $K = \langle x^{n/a} \rangle$. $|x^{n/a} = a \Rightarrow |K| = a$. If $|K'| = a$, let $K = \langle x^l \rangle$. $|x^l| = \dfrac{n}{\gcd(n,l)} = a$, so $\gcd(n,l) = \dfrac{n}{a}$. Thus $\dfrac{n}{a} \;|\; l$. We now have $K=\langle x^{n/a} \rangle \ge \langle x^l \rangle = K'$. But $|K| = |K'|$ and are finite, so $K = K'$.
+      </p>
+      <p style="text-align: right;">$\blacksquare$</p>
+
+      <div class="remark">
+        <b>Remark.</b> Now we know that the number of subgroups of $\mathbb{Z} / n\mathbb{Z}$ is the number of divisors of $n$. In particular, $\mathbb{Z}/p\mathbb{Z}$ for prime $p$ are <b>simple groups</b> and behave like primes. Notice that all subgroups of $\mathbb{Z}$ are of the form $m\mathbb{Z}$ since $\langle k, l\rangle = \{ak + bl \;|\; a,b \in \mathbb{Z} \} = \langle \gcd(k,l)\rangle$. 
+      </div>
+
+      <div class="theorem">
+        <b>Theorem.</b>
+        <ol>
+          <li>$C_G (A) = C_G(\langle A \rangle )$ </li>
+          <li>$N_G(A) \le N_G(\langle A \rangle)$ ($N_G(A) = N_G(\langle A \rangle)$?)</li>
+          <li>$\langle A \rangle \le N_G(\langle A \rangle)$</li>
+        </ol>
+      </div>
+      <i>Proof.</i>
+
+      <p>We can see that $C_G(\langle A \rangle) \le C_G(A)$ is fairly quick. Now suppose $g \in C_G(A)$. Then $gag^{-1} = a$ for all $a$. Now notice that $ga^{-1}g^{-1} = a^{-1}$ since the left and right hand sides of the second equation are the inverses of the left and right hand sides of the first equation. Then, notice that we have a multiplicative ness of the property. The rest is left for me later so that I can get a better handle of conjugation (and also because I feel like writing it down later and it's fairly simple to derive).</p>
+       
+
+      <p><b>Definition (Group Action).</b> A <b>left action</b> of a group $G$ on a set $A$ is a map $\rho : G \times A \rightarrow A$. $\rho(g,a) = g * a$. It must satisfy:
+      <ol>
+        <li>$g_1 * (g_2 * a) = g_1g_2 * a$ for all $g_1,g_2 \in G$ and $a \in A$.</li>
+        <li>$1 * a = a$ for all $a \in A$.</li>
+      </ol></p>
+      
+      <!-- https://q.uiver.app/?q=WzAsNCxbMCwwLCJHIFxcdGltZXMgKEcgXFx0aW1lcyBBKSJdLFsxLDAsIkcgXFx0aW1lcyBBIl0sWzEsMSwiQSJdLFswLDEsIkcgXFx0aW1lcyBBIl0sWzAsMywibVxcdGltZXMgaWRfQSJdLFswLDEsImlkX0dcXHRpbWVzIFxccmhvIl0sWzMsMiwiXFxyaG8iXSxbMSwyLCJcXHJobyJdXQ== -->
+      <center>
+<iframe class="quiver-embed" src="https://q.uiver.app/?q=WzAsNCxbMCwwLCJHIFxcdGltZXMgKEcgXFx0aW1lcyBBKSJdLFsxLDAsIkcgXFx0aW1lcyBBIl0sWzEsMSwiQSJdLFswLDEsIkcgXFx0aW1lcyBBIl0sWzAsMywibVxcdGltZXMgaWRfQSJdLFswLDEsImlkX0dcXHRpbWVzIFxccmhvIl0sWzMsMiwiXFxyaG8iXSxbMSwyLCJcXHJobyJdXQ==&embed" height="200vw" style="border-radius: 8px; border: none;"></iframe></center>
+<p>The above diagram commutes.</p>
+
+        <div class="problem">
+          <b>Example.</b> The <b>trivial action</b> of $G$ on $A$ is $(g,a) \mapsto a$ for all $g \in G$ and for all $a \in A$. we write $G \acts^\rho A$.
+        </div>
+
+        <p>Apon experimentation that I didn't copy down right now, we can actually see that a group action is like a homomorphism from $G$ to the symmetric group on $A$. In particular, we can have $\tilde{\rho} : G \rightarrow S_A$, so $\rho(g,a) = \tilde{\rho}(g)(a)$.</p>
+
+        <div class="problem">
+          <b>Example.</b> 
+          <ol>
+            <li>$S_A \acts A$, $S_n \acts \{1,..., n\}$</li>
+            <li>$D_{2n}$ acts on the vertices of an $n$-gon. In particular, if we choose some labeling, we are essentially visualizing the map from $D_{2n}$ to $S_n$, which goes from symmetries to maps on vertices.</li>
+            <li>Suppose $H \le G$. we claim that $H$ acts on $G$ with left multiplications, sending $\rho : (h,g) \mapsto hg$. In particular, if $H = G$, then this $\rho$ is called a <b>left regular action</b>.</li>
+            <li>$G$ acts on itself by conjugations. The corresponding action is called the <b>adjoint action</b>. $ad : (g,h) \mapsto ghg^{-1}$.</li>
+          </ol>
+        </div>
+
+        <div class="remark">
+          <b>Remark.</b> Consider $\text{Aut}(G) \le S_G$. An adjoint of $G$ maps is an automorphism of $G$ which is also a subset of $S_G$.
+        </div>
+
+        <p><b>Definition (Kernel).</b> A <b>kernel</b> of a group action of $G$ on $A$ is $\{g \in G \;|\; ga = a \;\forall a \in A\} = \ker(\text{permutation rep})$. Essentially, we have $\ker(\tilde{\rho} = \{g\in G \;|\; \tilde{\rho}(g) = e\}$, where $\tilde{\rho} : G \rightarrow S_A$.</p>
+
+        <p><b>Definition (Faithful).</b> An action of $G$ or $A$ is called <b>faithful</b> if $\ker(\tilde{\rho}) = \{e\}$, ($\tilde{\rho} : G \rightarrow S_A$ is injective).</p>
+
+        <div class="remark">
+          <b>Remark.</b> Examples 2 and 3 are also faithful, and example 4 is faithful if and only if $Z_G =\{e\}$.
+        </div>
+
+        <h2 class="display-4" id="lec-9">Lecture 9</h2>
+        <div class="theorem">
+          <b>Proposition.</b> Suppose $G$ acts faithfully on $A$. Then $G$ is isomorphic to a subgroup of $S_A$.
+        </div>
+
+        <p>Consider $\tilde{\rho} : G \rightarrow S_A$ and $\ker(\tilde{\rho}) = \{e\}$. Then $\tilde{\rho}$ is injective and $\tilde{\rho} : G \rightarrow \text{Im}(\tilde{\rho}) \le S_A$ is bijective.</p>
+
+        <div class="theorem">
+          <b>Corollary.</b> If $G$ is finite then $G$ is isomorphic to a subgroup of $S_n$ for some $n$.
+        </div>
+
+        <div class="problem">
+          <b>Example.</b> Consider $n$ dimensional complex vector spaces.
+          <ol>
+            <li>$\text{Mat}_{n\times n} (\mathbb{C}) \leftrightarrow \{\text{Linear maps }\mathbb{C}^n \rightarrow \mathbb{C}^n\}$. From these we can form a group $GL_n$ with the set of all invertible matrices. We actually have $GL_n \le S_{\mathbb{C}^n}$.</li>
+            <li>$GL_n$ acting on $\mathbb{C}^n$ with $(A,v) \mapsto A \cdot v$ is faithful.</li>
+            <li>$GL_n$ acting on $\mathbb{C}$ with $(A,t) \mapsto \det A \cdot t$, $A * (B * t) = \det A \det B t = \det(AB) t = AB * t$, $\det Id = 1$. Not faithful.</li>
+          </ol>
+          If $\sigma g$ is a linear map $\mathbb{C}^n \rightarrow \mathbb{C}^n$ then the data of group action is the same as a homomorphism from $G$ to $GL_n$ etc. etc. this is a big topic called representation theory which studies stuff based on linear maps or smth? I'm honestly really exhausted today so I'm probably going to make a lot of mistakes in today's notes because it's feeling really hard to focus.
+        </div>
+
+        <p><b>Definition.</b> Let $G$ act on $A$ and let $a \in A$. The <b>orbit</b> of $a$ is a set $G \cdot a = \left\{ ga \;|\; g \in G\right\}$.</p>
+
+        <div class="theorem">
+          <b>Theorem.</b> The binary relation $a \sim ga$ for all $a \in A$ and $g \in G$ is an equivalence relation. In particular, orbits are equivalence classes.
+        </div>
+
+        <p><b>Definition.</b> An action of $G$ on $A$ is called transitive if it has only one orbit.</p>
+
+        <div class="remark">
+          <b>Remark.</b> A transitive action means that the graph that you can draw from the action is connected.
+        </div>
+
+        <p><b>Definition.</b> Let $G$ act on the left on $A$. $G \backslash A = A / n = \{Ga \;|\; a \in A\}$ is the <b>quotient</b> of $A$ by the action of $G$. 
+        $$\pi : A \rightarrow G \backslash A, a \mapsto Ga$$</p>
+
+        <div class="remark">
+          <b>Remark.</b> Sometimes when there is no ambiguity whether action is right or left we can use notation $A / G$.
+        </div>
+
+        <p><b>Definition.</b> An automorphism of $G$ is called <b>inner</b> if it lies in the image of $\tilde{\rho}$. Essentially if it is equivalent to $\sigma g$ where $\sigma g$ is $ghg^{-1}$.</p>
+
+        <p><b>Definition.</b> An orbit of $g \in G$ under the conjugation action is called a conjugacy class of $G$.</p>
+
+        <div class="problem">
+          <b>Example.</b>
+          <ol>$A,B \in GL_n$ are in the same conjugacy class ($A = CBC^{-1}$, $C \in GL_n$) implies they differ by a change of coordinates in $\mathbb{C}^n$.</ol>
+        </div>
+
+        <div class="theorem">
+          <b>Theorem.</b> There is a bijection 
+          $$\left\{ \text{Conjugacy classes in $S_n$}\right\} \rightarrow \left\{\text{Partitions of $n$}\right\}$$
+          where $w$ gets mapped to the cycle type of $w$ (the lengths of the cycles in $w$).
+        </div>
+
+        <h2 class="display-4" id="lec-10">Lecture 10</h2>
+
+        <div class="problem">
+          <b>Example.</b> $\mathbb{R} \acts \mathbb{R}^2 \cong \mathbb{C}$, $t$ acts by rotation by $2\pi t$ radians, $\rho : (t,z) \mapsto e^{2\pi it} \cdot z$. $\text{ker}(\rho) = \mathbb{Z} \subseteq \mathbb{R}$.
+        </div>
+        
+        <p>We discovered last time that $G$ acts on itself by conjugation. We denote $\text{Cl}(x) = G \cdot x$ the conjugacy class of $x$.</p>
+
+        <div class="problem">
+          <b>Example.</b> 
+          <ol>
+            <li>$G = S_n$, the conjugacy classes are lke the cycle types (lengths of cycles) or the partitions of $n$.</li>
+            <li>If $G$ is abelian, then $\text{Cl}(g) = \{g\}$ for all $g \in G$.</li>
+            <li>$\text{Cl}(g) = \{g\}$ is equivalent to $hgh^{-1} = g$ for all $h \in G$ which is equivalent to $g \in Z_G$.</li>
+            <li>$D_8 \le S_4$, $r = (1234)$, $r^2 = (13)(24)$, $r^3 = (1432)$, $s = (24)$, $sr = (14)(23)$, and $sr^2 = (13)$, and $sr^3 = (12)(34)$. Notice that the oens of the same cycle types are $\{r,r^3\}$, $\{r^2,sr,sr^3\}$, and $\{sr^2,s\}$. We can actually see that:
+              $$\text{Cl}(e) = \{e\}$$
+              $$\text{Cl}(r) = \{r,r^3\}$$
+              $$\text{Cl}(r^2) = \{r^2\}$$
+              $$\text{Cl}(s) = \{s,sr^2\}$$
+              $$\text{Cl}(sr) = \{sr, sr^3\}$$
+              The reason that we don't see $r^2$ in the same conjugacy class as the other ones is that $D_8$ is a subgroup of $S_4$, so the element needeed to conjugate $r^2$ to get one of the other ones is not in $D_8$ despite being in $S_n$. It turns out $\text{Cl}_H(h_1) = \text{Cl}_H(h_2) \Rightarrow \text{Cl}_G(h_1) = \text{Cl}_G(h_2)$ if $H \le G$ but not the other way.
+            </li>
+          </ol>
+        </div>
+
+        <p><b>Definition (Stabilizer).</b> Definition. Let $G \acts X$, $x \in X$. $\text{Stab}(x) = \{g \in G \;|\; g \cdot x = x\}$.</p>
+
+        <div class="theorem">
+          <b>Proposition.</b> 
+          <ol>
+            <li>$G_x \le G$</li>
+            <li>$\text{Ker}(\rho) \le G_x$</li>
+            <li>$\text{Ker}(\rho) = \bigcap_{x \in X} G_x$</li>
+          </ol>
+        </div>
+        <i>Proof.</i>
+
+        <p>We start with the first part. Let $g,h \in G_x$. $hx = x$, $x = h^{-1} h x = h^{-1}x$, $gh^{-1}x = gx = x$, so $gh^{-1} \in G_x$, so it is a subgroup by the subgroup criterion.</p>
+        
+        <p>The second part is fairly obvious.</p>
+
+        <p>The third part follows from $\bigcap_{x \in X} G_x = \{g \in G\;|\; \forall x g\in G\} = \{ g \in G \;|\; \forall x\in X. gx = x\} = \text{Ker}(\rho)$ as desired.</p>
+
+        <div class="problem">
+          <b>Example.</b>
+          <ol>
+            <li>$S_n \acts \{1,...,n\}$, $\text{Stab}(i) = S_{\Omega}$, $\Omega= \{1,...,i-1,i+1,...,n\}$</li>
+            <li>$D_{2n} \acts \{1,..., n\}$, $\text{Stab}(1) = \{1,s\}$.</li>
+            <li>$G \acts G$ by conjugation, $\text{Stab}(g) = C_G(g)$</li>
+            <li>$B = \{ k-\text{element subsets of $G$}\}$, $G \acts B$, $\rho : (g,A) \mapsto g A g^{-1}$. $\text{Stab}(A)$ is the normalizer $N_G(A)$.</li>
+            <li>$\mathbb{R}_{\neq 0} \acts \mathbb{R}^k$, $(\lambda, v) \mapsto \lambda v$, $\text{Stab}(v) = \{1\}$ and $\text{Stab}(0) = \mathbb{R}_{\neq 0}$. Also, $G \cdot v$ is the line spanned by the vector except for zero, and $G \cdot 0 =\{0\}$, so they sort of switch places.</li>
+            <li>$H \le G$, $H \acts G$ by left multiplication. $H \cdot g = \{hg \;|\; h \in H$\}$.</li>
+            <li>$\text{Stab}(g) = \{e\}$ because $hg = h \Rightarrow h = e$. We have that $\# H \cdot g = \# H$.</li>
+          </ol>
+        </div>
+
+        <div class="theorem">
+          <b>Proposition.</b> If $y \in G \cdot x$, let $y = g \cdot x$. Then $G_y = gG_x g^{-1}$.
+        </div>
+        <i>Proof.</i>
+
+        <p>Let $h \in G_y$ the stabilizer of $y$. Then $hy = hgx = gx = y$, so $g^{-1}hgx = x$, so $g^{-1}hg \in G_x$. If $a \in G$, $a\cdot x = x$, $gag^{-1}y = gag^{-1} gx = gax = gx = y$. Thus $gag^{-1} \in G_y$.</p>
+
+        <p>We now consider right actions. We have defined left actions, but the difference is that now wherease we had $h \cdot g \cdot x = (hg)\cdot x$, we now have $x \cdot g \cdot h = x \cdot (gh)$ so the order has been swapped.</p>
+
+        <p><b>Definition (Anti-Homomorphism).</b> A map $\varphi : G \rightarrow H$ is called an <b>anti-homomorphism</b> if $\varphi(ab) = \varphi(b)\cdot \varphi(a)$.</p>
+
+        <div class="problem">
+          <b>Example.</b>
+          <ol>
+            <li>The map from $G \rightarrow G$, $g \mapsto g^{-1}$ is an antihomomorphism because $(gh)^{-1} = h^{-1}g^{-1}$.</li>
+            <li>Consider $GL_n \rightarrow GL_n$, $A \mapsto A^t$. Then $(AB)^t = B^tA^t$.</li>
+          </ol>
+        </div>
+
+        <p><b>Definition.</b> A <b>right action</b> of $G$ on $X$ is a map $\rho : X \times G \rightarrow X$, $\rho(x,g) = x \cdot g$, such that
+        <ol>
+          <li>$x \cdot \cdot h = x \cdot (gh)$</li>
+          <li>$x \cdot 1 = x$</li>
+        </ol></p>
+
+        <p>How does this relate to homomorphisms? Consider $\sigma_g:X \rightarrow X$, $x \mapsto x \cdot g$. Then $\sigma_h \circ \sigma_g(x) = (x \cdot g)\cdot h = x \cdot(gh) = \sigma_{gh}(x)$ so $\tilde{\rho}: G \rightarrow S_X$ is an antihomomorphism.</p>
+
+        <div class="theorem">
+          <b>Proposition.</b> If $\rho : G \times X \rightarrow X$ is a left action, then $\tau : X \times G \rightarrow X$, $(x,g) \mapsto g^{-1}\cdot x$ is a right action.
+        </div>
+        <i>Proof.</i>
+        $$\tilde{\tau}(g) = \tilde{\rho}(g^{-1})$$
+        $$\tilde{\tau} = \tilde{\rho} \cdot \text{inv}$$ 
+
+        <div class="remark">
+          <b>Remark.</b> If $\varphi : G \rightarrow H$ and $\psi:H \rightarrow K$ are antihomomorphisms, then $\psi \circ \varphi : G \rightarrow K$ is a homomorphism.
+        </div>
+
+        <div class="problem">
+          <b>Example.</b> $GL_n \rightarrow GL_n$, $A \mapsto (A^{-1})^t$. 
+        </div>
+
+        <div class="problem">
+          <b>Example.</b> $H \le G$, $G \acts H$ (acts on $G$ on the right) by right multiplication. $g \cdot H$ is the orbit of $g$, and $g \cdot H = H \cdot g$ if and only if $g$ is in the normalizer.
+        </div>
+
+        <div class="remark">
+          <b>Remark.</b> Everything we showed for left actions is also similarly true and defined for right ones.
+        </div>
+
+        <p><b>Definition (Coset).</b> 
+          <ol> 
+            <li>$g \cdot H$ is called a <b>left coset</b> of $H$ in $G$</li>
+            <li>$H \cdot g$ is called a <b>right coset</b> of $H$ in $G$</li>
+          </ol>
+          </p>
+
+          <p>Now we can see that $H \backslash G$ is the set of right cosets, and $G / H$ is the set of left cosets.</p>
+
+          <div class="theorem">
+            <b>Theorem (Orbit-Stabilizer Theorem).</b> Consider finite $G$ acting on the left on $X$. Fix $x \in X$. $f : G \rightarrow G \cdot x$, $g \mapsto g \cdot x$ is a surjective map. Then $\#G_x \cdot \#G \cdot x = \# G$.
+          </div>
+
+          <p>Consider $f^{-1}(x) = \{g \in G \;|\; f(g) = x\}$. This is just $G_x$. Now consider $y = h \cdot x$. $f^{-1}(y) = \{g \in G \;|\; h^{-1}gx = x\}$ which is $h G_x$.</p>
+
+          <p>We essentially have a bunch of fibers that get glued together. In our case, the fibers are all the same size.</p>
+
+          <p>We obtain: $\# G = \sum_{y \in Gx} \#f^{-1}(y)$, but $\#f^{-1}(y)$ is the same for every $y$, and it is $\# G_x$. Thus $\# G = \# G_x \cdot \# G\cdot x$.</p>
+          <p style="text-align: right;">$\blacksquare$</p>
+
+          <h2 class="display-4" id="lec-11">Lecture 11</h2>
+
+          <p>Consider $G$ acting on $X$. The map $f : G \rightarrow G x$ surjective, $g \mapsto g\cdot x$. $f^{-1}(gx) = g\cdot \text{Stab}(x)$.</p>
+
+          <div class="theorem">
+            <b>Corollary.</b> $\#G = \#Gx \cdot \# \text{Stab}(x)$
+          </div>
+
+          <div class="problem">
+            <b>Example.</b>
+            <ol>
+              <li>Fix $n \in \mathbb{N}$. $\mathbb{Z}$ acts on $\mathbb{C} = \mathbb{R}^2$ via $k$ acts by the rotatation by $\dfrac{2\pi k}{n}$ radians (multiplication by $e^{2\pi k/n \sqrt{-1}}$. The stabilizer of $t$ is $n\mathbb{Z} \le \mathbb{Z}$. In other words, the orbit is the vertices of the regular $n$-gon in the complex plane, the $n$th roots of unity.</li>
+              <li>$w \in S_n$, how many elements of $S_n$ commute with $w$? The question we are trying to answer is how many elements are in the stabilizer, and note that $C_{2n}(w) = \text{Stab}(w)$ under the conjugation action. The corollary tells us that the number of elements in the orbit is the number of elements in the conjugacy class of $w$, or $S_n \cdot w$. Consider $w = (143)(25)$. We want to compute the number of cycles of type $(3,2)$, which is $\dfrac{5 \cdot 4 \cdot 3}{3} \cdot \dfrac{2 \cdot 1}{2} = 20$. We then get 
+                $$\#C_{S_5}(w) = \dfrac{\# S_5}{\# \text{Cl}(w)} = 6$$
+              </li>
+              </ol>
+              </div>
+            
+          <p>If $G$ acts transitively on $X$, fix $x \in X$, then $f : G \rightarrow X$, $g \mapsto g\cdot x$ is surjective.</p>
+
+            <div class="remark">
+              <b>Remark.</b> A surjective map $f : A \rightarrow B$ defines an equal relation on $A$ by $a_1 \sim a_2$ if $f(a_1) = f(a_2)$. We can then consider $A / \sim \rightarrow B$.
+            </div>
+
+            <p>Now $f(g_1) = f(g_2) = gx$ if and only if $g_1, g_2 \in g \text{Stab}(x)$. Notice that $G / \text{Stab}(x) = \{g \text{Stab}(x) \;|\; g \in G\}$. $G \rightarrow G/\text{Stab}(x)$, $g \mapsto g \text{Stab}(x)$. $g_1 \sim g_2$ if they live in the same equivalence class $\sim^2$, so if they live in the same coset. $g_1 \text{Stab}(x) = g_2 \text{Stab}(x)$.</p>
+
+            <p>Basically we can come up with two equivalence relations on $G$ and they end up commuting somehow? Might need to rewatch this part later.</p>
+
+            <p>We get $G / \text{Stab}(x) \rightarrow X$ with $g \text{Stab}(x) \mapsto g \cdot x$.</p>
+
+            <center>
+              <!-- https://q.uiver.app/?q=WzAsMyxbMSwwLCJHIl0sWzAsMSwiRy9cXHRleHR7U3RhYn0oeCkiXSxbMiwxLCJYIl0sWzEsMiwiZ1xcY2RvdCBcXHRleHR7U3RhYn0oeCkgXFxtYXBzdG8gZ1xcY2RvdCB4IiwyXSxbMCwyLCJnIFxcbWFwc3RvIGcgXFxjZG90IHgiXSxbMCwxLCJnXFxtYXBzdG8gZ1xcY2RvdCBcXHRleHR7U3RhYn0oeCkiLDJdXQ== -->
+<iframe class="quiver-embed" src="https://q.uiver.app/?q=WzAsMyxbMSwwLCJHIl0sWzAsMSwiRy9cXHRleHR7U3RhYn0oeCkiXSxbMiwxLCJYIl0sWzEsMiwiZ1xcY2RvdCBcXHRleHR7U3RhYn0oeCkgXFxtYXBzdG8gZ1xcY2RvdCB4IiwyXSxbMCwyLCJnIFxcbWFwc3RvIGcgXFxjZG90IHgiXSxbMCwxLCJnXFxtYXBzdG8gZ1xcY2RvdCBcXHRleHR7U3RhYn0oeCkiLDJdXQ==&embed" height="200vw" style="border-radius: 8px; border: none;"></iframe>
+            </center>
+
+            <p><b>Definition.</b> If $G$ acts on $X$ and $G$ acts on $Y$, we will say that $X$ is isomorphic to $Y$ as a set with $G$-action if there exists a bijection $f : X \rightarrow Y$ such that $f(gx) = gf(x)$.</p>
+
+            <div class="problem">
+              <b>Example.</b>
+              <ol>
+                <li>$S_n$ acts on $\{1,...,n\}$, $S_n$ acts on $\{a_1,...,a_n\}$. $w \cdot a_i = a_{w(i)}$. $\{1,...,n\} \rightarrow \{a_1,...,a_n\}$, $i \mapsto a_i$, $w \cdot i \mapsto a_{w(i)}$.</li>
+              </ol>
+            </div>
+
+            <p>$G$ acts on $G/H$ by left multiplication, $g_1 \cdot (g_2H) = g_1g_2 H$. $G/\text{Stab}(x) \rightarrow X$, $g \text{Stab}(x) \mapsto gx$. $\tilde{f}(\text{Stab}(x)) = x$, $\tilde{f}(g\cdot \text{Stab}(x)) = g\cdot x$, $\tilde{f}(g_1\cdot (g_2\text{Stab}(x)) = g_1 \tilde{f}(g_2 \text{Stab}(c))$.</p>
+
+            <p>Transitive action:
+              $$g_1 \cdot (g_2H) = g_1g_2 H$$
+              Wait are we sure? Rewatch.
+            </p>
+
+            <div class="theorem">
+              <b>Corollary.</b> Every $X$ with a transitive action of $G$ is isomorphic to $G/H$ for some $H \le G$.
+            </div>
+
+            <center>
+<!-- https://q.uiver.app/?q=WzAsMyxbMSwwLCJcXG1hdGhiYntafSJdLFswLDEsIlxcbWF0aGJie1p9L25cXG1hdGhiYntafSJdLFsyLDEsIlxcbWF0aGJie1p9IFxcY2RvdCB0Il0sWzEsMF0sWzEsMl0sWzAsMl1d -->
+<iframe class="quiver-embed" src="https://q.uiver.app/?q=WzAsMyxbMSwwLCJcXG1hdGhiYntafSJdLFswLDEsIlxcbWF0aGJie1p9L25cXG1hdGhiYntafSJdLFsyLDEsIlxcbWF0aGJie1p9IFxcY2RvdCB0Il0sWzEsMF0sWzEsMl0sWzAsMl1d&embed" height="200vw" style="border-radius: 8px; border: none;"></iframe>
+
+            </center>
+            $t \in \mathbb{C}$ is a complex point.
+
+
+
+            <p>Consider $G / H = \{g \cdot H \;|\; g \in G\}$. We ask how many elements there are in this set (we know it is at most $|G|$).</p>
+
+            <p><b>Definition (Index).</b> $\#G/H = [G : H]$ is called the <b>index</b> of $H$ in $G$.</p>
+
+            <div class="theorem">
+              <b>Theorem (Lagrange's Theorem).</b> Consider $G$ and $H$ finite. $[G : H] = \dfrac{\#G}{\#H}$. In particular, $\#H \;|\; \#G$.
+            </div>
+            <div class="theorem">
+              <b>Corollary.</b> For all $x \in G$. $|x| \;|\; \# G$ because $|x| = \#\langle x\rangle$.
+            </div>
+
+            <div class="remark">
+              <b>Remark.</b> If $d \;|\; \#G$ then it is possible for there to be no subgroup of order $d$. A more straightforward insight is that it is possible for there to not be an element whose order is some specified divisor of $\#G$.
+            </div>
+
+            <p>
+              <b>Definition.</b> $g_1,...,g_k \in G$ with $k = [G :H]$ are called <b>coset representatives</b> if $g_i H \neq g_k H$ if $i \neq k$ (or $\{g_1H, g_2H, ..., g_kH\} = G/H$).
+            </p>
+
+            <div class="problem">
+              <b>Example.</b> $1,2,...,n$ are coset representation for $\mathbb{Z}/n\mathbb{Z}$. $0,1,...,n-1$ are also.
+            </div>
+
+            <div class="problem">
+              <b>Example.</b> $S_{n-1} \le S_n$. $S_n/S_{n-1} = S_n/\text{Stab}(n) \rightarrow \{1,...,n\}$. From $\tilde{f} : wS_{n-1} \mapsto w \cdot n$. $\tilde{f} (w \cdot S_{n-1}) = \tilde{f}(u \cdot S_{n-1})$. $w(n) = u(n)$. Then we can get $(1,n), (2,n),...,(n-1,n)$.
+            </div>
+
+            <h2 class="display-4" id="lec-12">Lecture 12</h2>
+
+            <h3 class="display-6" id="cyclic-groups">Cyclic Groups</h3>
+
+            <p>A <b>cyclic group</b> is a group of the form $G = \langle x \rangle$, $x \in G$. Then $G = \{x^k \;|\; k \in \mathbb{Z}$. If $G$ is infinite, then $x^k \neq x^l$ for any $k$ and $l$. If it is finite, then $|G| = |x| = n$, and $G = \{1,x,x^2,...,x^{n-1}\} \cong \mathbb{Z}/n\mathbb{Z}$. Then $|x^a| = \dfrac{n}{\gcd(n,a)}$, and all subgroups are cyclic with $|\langle x^a \rangle| = \dfrac{n}{\gcd(n,a)}$. We also have some facts: $G$ is cyclic if adn only if $\exists x \in G$ such that $|x| = |G|$, and $\mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z}$ is cyclic if and only if $\gcd(m,n) = 1$. In particular, if $n$ and $m$ are coprime, $\mathbb{Z}/n\mathbb{Z} \times \mathbb{Z}/m\mathbb{Z} \cong \mathbb{Z}/m\mathbb{Z}$.</p>
+
+            <p>I'll make a blog post about centralizers of elements in $S_n$ later so I didn't take notes on that too much.</p>
+
+            <h2 class="display-4" id="lec-14">Lecture 14</h2>
+
+            <p>$G/H$ is a group under the operation $g_1 H \cdot g_2 H = g_1g_2 H$ if and only if $H \le G$ (i.e. $N_G(H) = G$). $\pi : G \rightarrow G/H$ with $g \mapsto gH$ is surjective group homomorphism, $\varphi : G \rightarrow \overline{G}$ surjective, then $\overline{G} \cong G/\text{Ker}(\varphi)$, and $\text{Ker}(\varphi) \trianglelefteq G$.</p>
+
+            <div class="problem">
+              <b>Example.</b> Consider $\mathbb{Z}/k\mathbb{Z} \subseteq \mathbb{Z}/n\mathbb{Z}$, $(\mathbb{Z}/n\mathbb{Z})/(\mathbb{Z}/k\mathbb{Z}) \cong \mathbb{Z}/d\mathbb{Z}$. $\pi : \mathbb{Z}/n\mathbb{Z} \rightarrow \mathbb{Z}/d\mathbb{Z}$, $[a] \mapsto [a]$.
+            </div>
+
+            <p>
+              <b>Definition (Simple).</b> A group $G$ is called <b>simple</b> if $\{1\}$ and $G$ are the only normal subgroups in $G$.
+            </p>
+
+            <p>
+              Let's categorize Subgroups and Quotients:
+
+              A subgroup is a group along with an injective group homomorphism. We have a sort of universal property:
+              <center>
+                <!-- https://q.uiver.app/?q=WzAsMyxbMCwxLCJcXHZhcnBoaTpHJyJdLFsxLDAsIkgiXSxbMiwxLCJHIl0sWzAsMl0sWzAsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMiwiaSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d -->
+<iframe class="quiver-embed" src="https://q.uiver.app/?q=WzAsMyxbMCwxLCJcXHZhcnBoaTpHJyJdLFsxLDAsIkgiXSxbMiwxLCJHIl0sWzAsMl0sWzAsMSwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMiwiaSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV1d&embed" height="200vw" style="border-radius: 8px; border: none;"></iframe>
+              </center>
+              with $\text{Im}(\varphi) \le i(H)$. Consider quotients. We have $\pi : G \rightarrow \overline{G}$ surjective, ($N = \text{Ker}(\pi)$)
+              <center>
+                <!-- https://q.uiver.app/?q=WzAsMyxbMCwwLCJHIl0sWzEsMCwiXFxvdmVybGluZXtHfSJdLFsxLDEsIkgiXSxbMSwyLCJcXHZhcnBoaSJdLFswLDIsIlxcdGlsZGV7XFx2YXJwaGl9IiwyXSxbMCwxLCJcXHBpIl1d -->
+<iframe class="quiver-embed" src="https://q.uiver.app/?q=WzAsMyxbMCwwLCJHIl0sWzEsMCwiXFxvdmVybGluZXtHfSJdLFsxLDEsIkgiXSxbMSwyLCJcXHZhcnBoaSJdLFswLDIsIlxcdGlsZGV7XFx2YXJwaGl9IiwyXSxbMCwxLCJcXHBpIl1d&embed" height="200vw" style="border-radius: 8px; border: none;"></iframe>
+              </center>
+              with $N \le \text{Ker}(\tilde{\varphi})$. $\text{Hom}(\overline{G},H) = \{\tilde{\varphi} \in \text{Hom}(G,H), \text{Ker}(\tilde{\varphi})\ge N\}$. We can define the quotient like this by $N$. And we can show that this universal property determines the group up to isomorphism.
+            </p>
+
+            <div class="problem">
+              <b>Example.</b> How do we understand homomorphisms out of $\mathbb{Z}/n\mathbb{Z}$? Consider $\varphi : \mathbb{Z}/n\mathbb{Z} \rightarrow G$, and $\tilde{\varphi} : \mathbb{Z} \rightarrow G$, $n \in \text{Ker}(\varphi)$. For $\tilde{\varphi}$, the homomorphism is determined by where $1$ goes, so if $2$ goes to $g$, then $k$ goes to $g^k$. Then using the property of quotient groups, $\text{Hom}(\mathbb{Z}/n\mathbb{Z},G) = \{g \in G \;|\; g^n =e\}$
+            </div>
+
+            <div class="remark">
+              <b>Remark.</b> $\mathbb{Z}/n\mathbb{Z}$ is simple exactly when $n$ is prime.
+            </div>
+
+            <div class="display-6" id="alternating-groups">Alternating Groups And The Sign Homomorphisms for $S_n$</div>
+
+            <p>We define the sign map $\text{sign} : S_n \rightarrow \{1, -1\} \le \mathbb{R}_{\neq 0}$. Define $w \in S_n$.</p>
+             
+            <p><b>Definition (Set of Inversions).</b> The <b>set of inversions</b> $\text{Inv}(w) = \{(a,b) \;|\; a,b \in \{1,...,n\}, a < b, w(a) > w(b) \}$.</p>
+
+            <p><b>Definition.</b> $\text{inv}(w) = |\text{Inv}(w)|$</p>
+
+            <center>
+<!-- https://q.uiver.app/?q=WzAsMTAsWzAsMCwiMSJdLFsxLDAsIjIiXSxbMiwwLCIzIl0sWzMsMCwiNCJdLFs0LDAsIjUiXSxbMCwxLCIxIl0sWzEsMSwiMiJdLFsyLDEsIjMiXSxbMywxLCI0Il0sWzQsMSwiNSJdLFswLDcsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSw1LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsMywiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDksIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw4LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d -->
+<iframe class="quiver-embed" src="https://q.uiver.app/?q=WzAsMTAsWzAsMCwiMSJdLFsxLDAsIjIiXSxbMiwwLCIzIl0sWzMsMCwiNCJdLFs0LDAsIjUiXSxbMCwxLCIxIl0sWzEsMSwiMiJdLFsyLDEsIjMiXSxbMywxLCI0Il0sWzQsMSwiNSJdLFswLDcsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSw1LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsMywiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDksIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw4LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d&embed" height="200vw" style="border-radius: 8px; border: none;"></iframe>
+            </center>
+
+            <p>Notice that $\text{inv}(w)$ is just the number of intersections, 4.</p>
+
+            <div class="remark">
+              <b>Remark.</b> Sometimes $\text{inv}(w) = l(w)$ is called the <b>length</b> of $w$.
+            </div>
+
+            <p><b>Definition.</b> $\text{sign}(w) = (-1)^{\text{inv}(w)}$.</p>
+
+            <p>Notice that $\{w \in S_n \;|\; \text{inv}(w) = 1\} = \{s_i \;|\; s_i = (i\; i +1)\}$.</p>
+
+            <div class="theorem">
+              <b>Proposition.</b> 
+              <ol>
+                <li>$\text{sign}(s_iw) = -\text{sign}(w)$</li>
+                <li>$\text{sign}(uw)=\text{sign}(u)\text{sign}(w)$, and in particular, $\text{sign}(w^{-1}) = \text{sign}(w)$. Also, $\text{sign}(uwu^{-1}) = \text{sign}(w)$</li>
+              </ol>
+              <div class="remark">
+                <b>Remark.</b> (2) means that $\text{sign}$ is a group homomorphism.
+              </div>
+            </div>
+            <i>Proof omitted here.</i>
+
+            <p>But an idea from the proof of (1) is that $(\text{Inv}(s_iw) \cup \text{Inv}(w))\backslash (\text{Inv}(s_iw) \cap \text{Inv}(w))$ contains one element.</p>
+
+            <div class="theorem">
+              <b>Corollary.</b> The sign of any transposition is $-1$, and $\text{sign}((a_1 ... a_k)) = (-1)^{k-1}$.
+            </div>
+
+            <div class="theorem">
+              <b>Corollary.</b> If $w$ has cycle type $(k_1...k_l)$, then the sign is $(-1)^{k_1+...+k_l - l}$.
+            </div>
+
+            <div class="remark">
+              <b>Remark.</b> Notice that it does not matter if you include cycles of lengths 1 in your decomposition in the above.
+            </div>
+
+            <div class="theorem">
+              <b>Theorem.</b> $\text{inv}(w)$ is the minimal $k$ such that $w$ can be expressed as the product of $k$ elementary transpositions. This is why it is also referred to as the length.
+            </div>
+            <i>We won't show the proof here, but yeah.</i>
+
+            <p><b>Definition (Alternating Subgroup).</b> We define the alternating subgroup $A_n = \text{Ker}(\text{sign})\trianglelefteq S_n$.</p>
+
+            <p>Since $\text{sign} : S_n \rightarrow \mathbb{Z}/2\mathbb{Z}$, so $|A_n| = \dfrac{|S_n|}{|\mathbb{Z}/2\mathbb{Z}|} = \dfrac{n!}{2}$. Also, it can be shown that $A_n$ is simple.</p>
+
+            <div class="theorem">
+              <b>Theorem (First Isomorphism Theorem).</b> If $\varphi : G \rightarrow H$ is a homomorphism, then $G/\text{Ker}(\varphi) \cong \text{Im}(\varphi)$. 
+            </div>
+
+            <div class="thoerem">
+              <b>Corollary.</b> $|Im(\varphi)| = [G : \text{Ker}(\varphi)]$.
+            </div>
+
+            <div class="problem">
+              <b>Example.</b> $\varphi : \mathbb{R} \rightarrow \mathbb{C}_{+0}$, $+ \mapsto \text{exp}(2\pi \sqrt{-1} t)$, $\text{Im}(\varphi) = \{z \in \mathbb{C}_{+0}\;|\; |z| = 1\}$. $\text{Im}(\varphi) = S^1 = \text{SO}(2)$. $\text{Ker}(\varphi) = \mathbb{Z}$, $\mathbb{R}/\mathbb{Z} \cong S^1$.
+            </div>
+
+            <p><b>Definition.</b> $H, K \le G$. $H \cdot K = \{ hk \;|\; h \in H, k \in K\}$.</p>
+
+            <div class="theorem">
+              <b>Proposition.</b> $|HK| = \dfrac{|H| \cdot |K|}{|H\cap K|}$.
+            </div>
+            <i>Proof left to me for later.</i>
+
+            <div class="theorem">
+              <b>Claim.</b> $HK$ is a subgroup if and only if $HK = KH$.
+            </div>
+
+            <div class="theorem">
+              <b>Corollary.</b> $H \le N_G(K)$ or $K \le N_G(H)$ implies $KH = HK$ (because $hK = Kh$ for all $h$).
+            </div>
+
+            <h2 class="display-4" id="lec-15">Lecture 15</h2>            
+
+            <p>We continue with direct and semidirect products of groups.</p>
+
+            <p><b>Definition.</b> If $H,K$ are groups and $G$ is such that $H \trianglelefteq G$, $G/H \cong K$ then $G$ is called an <b>extension</b> between $K$ and $H$.</p>
+
+            <div class="problem">
+              <b>Example.</b> $G = H \times K$, $H = H \times \{1\}$, $K = \{1\} \times K$. $\pi_1 : G \rightarrow H$, $(h,k) \mapsto h$, $\pi_2 : G \rightarrow K$, $(h,k) \mapsto k$. $\text{Ker}(\pi_1) = K$, $\text{Ker}(\pi_2) = H$, $G/H = K$.
+            </div>
+
+            <div class="theorem">
+              <b>Proposition.</b> Suppose $H, K \le G$, and 
+              <ol>
+                <li>$H, K \trianglelefteq G$</li>
+                <li>$H \cap K = \{1\}$</li>
+                <li>$G = HK = \{hk \;|\; h \in H, k \in K\}$</li>
+              </ol>
+              then $G \cong H \times K$.
+            </div>
+            <i>Proof.</i>
+
+            <p>Consider $\varphi : H \times K \rightarrow G$, $(h,k) \mapsto hk$. 
+            $$\varphi((h_1,k_1) \cdot (h_2,k_2)) = \varphi((h_1h_2,k_1k_2)) = h_1h_2k_1k_2 = (h_1k_1)(h_2k_2)$$</p>
+
+            <p>Recall from homework that if $H,K \le G$, $H \cap K = \{1\}$, then for all $h \in H$ and $k \in K$, $hk = kh$.</p>
+          
+            <p>$\varphi$ is surjective because of (3) and injective because of (2) (simple to check).</p>
+            
+            <div class="remark">
+              <b>Remark.</b> I believe this also holds in the other direction if you just find two subgroups of $G$ isomorphic to arbitrary groups $H$ and $K$ satisfying $G \cong H \times K$.
+            </div>
+
+            <div class="problem">
+              <b>Example.</b> $\gcd(m,n) = 1$, $\mathbb{Z}/mn\mathbb{Z} \cong \mathbb{Z}/m\mathbb{Z} \times \mathbb{Z}/n\mathbb{Z}$. Consider $H = \langle [m]\rangle$, $K = \langle [n]\rangle$. Notice that $H \cap K = \{[0]\}$ and $HK = \{a[m] + b[n] \;|\; a,b \in \mathbb{Z}\}$ and notice $[1] \in HK$ by Bezout's Lemma.
+            </div>
+
+            <p>We wish to relax the condition that $K$ must be a normal subgroup of $G$ to $K$ being just a subgroup if $G$, $H \cap K = \{1\}$, $HK = G = KH$, $\forall g \in G$, $g = hk$ for a unique $h \in H$ and a unique $k \in K$. Define $\pi |_k : K \rightarrow G/H$, $G = \bigcup_{k\in K} Hk$. If $Hk_1 = Hk_2$, then $k_1k_2^{-1} \in H \cap K$, so $k_1 = k_2$.</p>
+
+            <p>$\pi|_k : k \mapsto Hk$, so $\pi |_k$ is an isomorphism, so $G$ is an extension between $K$ and $H$.</p>
+
+            <p>We wish to generalize things with the next definition:</p>
+
+            
+
+            <p><b>Definition (Semidirect Product).</b> Let $H$ and $K$ be groups and let $K$ act on $H$ by group automorphisms $(\sigma : K \rightarrow \text{Aut}(H) \le S_H$). Let $\sigma(k)(h) = k * h$. Define $H \rtimes_\sigma K$ the <b>semidirect product</b> is a group with underlying set $H \times K$ and group operation $(h_1,k_1) \cdot (h_2, k_2) = (h_1 (k_1 * h_2), k_1k_2)$.</p>
+
+            <p>We can check that $(1,1)$ is the identity of this group and the inverse of $(h,k)$ is $(k^{-1} * h^{-1}, k^{-1})$.</p>
+
+            <div class="problem">
+              <b>Example.</b> Let $H = \mathbb{Z}/n\mathbb{Z}$ and let $K = \mathbb{Z}/2\mathbb{Z} = \{1,s\}$. Define the action of $s$ on $h$ as $s * h = h^{-1}$. This is indeed a group automorphism since the group is abelian (this was also a homework problem). We can write $H = \{1,r,r^2,...,r^{n-1}\}$. Then notice that $(r^k, s) \cdot (r^l, s) = (r^k (s * r^l), 1) = (r^{k-l}, 1)$. This is just like the dihedral group! In fact, $H \rtimes K \cong D_{2n}$.<br><br>
+
+              An idea is that basically the rule $rs = sr^{-1}$ can be seen as $(r,1)(1,s) = (1,s)(r^{-1},1)$. 
+            </div>
+
+            <div class="theorem">
+              <b>Proposition.</b> If $G = H \rtimes K$,
+              <ol>
+                <li>$H = H \times \{1\} \trianglelefteq G$</li>
+                <li>$K = \{1\} \times K \le G$</li>
+                <li>$H \cap K = \{1\}$</li>
+                <li>$HK = G$</li>
+              </ol>
+            </div>
+            
+            <i>Interesting point from proof.</i>
+            
+            <p>An interesting and important idea is
+              $$(1,k)(h,1) (1,k^{-1}) = (k * h, 1)$$
+              which shows that this recovers $k$!
+            </p>
+
+            <p>The idea of the previous proposition is that we can rewrite the old proposition as </p>
+            <div class="theorem">
+              <b>Proposition.</b> Suppose $H, K \le G$, and 
+              <ol>
+                <li>$H \trianglelefteq G$</li>
+                <li>$H \cap K = \{1\}$</li>
+                <li>$G = HK = \{hk \;|\; h \in H, k \in K\}$</li>
+              </ol>
+              then $G \cong H \rtimes K$ with respect to the action $k * h = khk^{-1}$.
+            </div>
+
+            <i>Proof is the same but now with $\varphi : H \rtimes K \rightarrow G$, $(h,k) \mapsto hk$.</i>
+
+            <div class="theorem">
+              <b>Proposition.</b> Let $G = H \rtimes_\sigma K$. The following are equivalent:
+              <ol>
+                <li>$K \trianglelefteq G$</li>
+                <li>$\sigma : K \rightarrow \text{Aut}(H)$ is a trivial map. For all $k \in K$, $k \mapsto id_H$ ($k * h = h$).</li>
+                <li>$id : H \times K \rightarrow H \rtimes K$, $(h,k) \mapsto (h,k)$ is a group homomorphism.</li>
+              </ol>
+            </div>
+
+            <div class="theorem">
+              <b>Theorem.</b> If $G$ is an extension between $K$ and $H$, ($H \trianglelefteq G$, $G/H = K$, $\pi : G \rightarrow K$) then $G = G \times K$ iff exists $s : K \rightarrow G$ such that $\pi \circ S = id_K$ (the splitting of $\pi$).
+            </div>
+
+            <div class="remark">
+              <b>Remark.</b> Every action can be made into the action by conjugation through this above method. Universal property construction of conjugacy action?
+            </div>
+
+            <div class="problem">
+              <b>Example.</b> 
+              <ol>
+                <li>$S_n = A_n \rtimes \mathbb{Z}/2\mathbb{Z}$, where $A_n$ is the kernel of the sign map and $S_n / A_n \cong \mathbb{Z}/2\mathbb{Z}$. 
+                  $$\mathbb{Z}/2\mathbb{Z} \rightarrow^s S_n \rightarrow^{\text{sign}} \mathbb{Z}/2\mathbb{Z}$$
+                  $s : [1] \mapsto (12)$ is a splitting. We identify $\mathbb{Z}/2\mathbb{}$ with $\{1,(12)\}$.
+                </li>
+                <li>Consider $\mathbb{Z}/4\mathbb{Z}$, noting $\mathbb{Z}/2\mathbb{Z} \subseteq \mathbb{Z}/4 \mathbb{Z}$.  We can get $\pi : \mathbb{Z}/4\mathbb{Z} \rightarrow \mathbb{Z}/2\mathbb{Z}$, $[a] \mapsto [a]$ is not a splitting. Notice that $\mathbb{Z}/4\mathbb{Z}$ is not $\mathbb{Z}/2\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}$, nor is it a semidirect product. We can see this last part by noting that $\text{Aut}(\mathbb{Z}/2\mathbb{Z} = \{1\}$ so the only automorphism is the trivial one, and from the theorem we know that this is the same as $H \times K$, so $\mathbb{Z}/4\mathbb{Z}$ is not congruent. We can also see this by noticing that $\mathbb{Z}/2\mathbb{Z} \rightarrow ^s \mathbb{Z}/4\mathbb{Z} \rightarrow^\pi \mathbb{Z}/2\mathbb{Z}$ always has $\text{Im}(s) \le \text{Ker}(\pi)$, so $\pi \circ s$ is trivial.</li>
+                <li>An example from linear algebra is $B$ the group of upper rtiangle matrices which are invertible (so the elements on the diagonal are not zero). Consider the subgroup $U$ of strictly upper triangular matrix whose diagonal elements are 1, and the subgroup $D$ of diagonal matrices which are invertible. Then $B = U \rtimes D$. One can also check that these two do not commute so it is not a direct product, only a semidirect product.</li>
+              </ol>
+            </div>
+
+            <h2 class="display-4" id="lec-16">Lecture 16</h2>     
+            <div class="theorem">
+              <b>Theorem.</b> Suppose $G$ is a finitely generated abelian group. Then there exists $r \ge 0$ and $n_1,...,n_m \in \mathbb{Z}$ and $m \ge 0$, $n_i \ge 2$, and $n_{i+1} \;|\; n_i$ for all $i$, then $G \cong \mathbb{Z}^r \times \mathbb{Z}/n_1\mathbb{Z} \times ... \times \mathbb{Z} / n_m \mathbb{Z}$. If $G \cong \mathbb{Z}^s \times \mathbb{Z}/l_1\mathbb{Z} \times ... \times \mathbb{Z}/l_k\mathbb{Z}$ such that $l_i \ge 2$ and $l_{i+1} \;|\; l_i$, then $s = r$, $k = m$, and $l_i = n_i$ for all $i$.
+            </div>
+            <i>Proof Idea.</i>
+
+            Since $G = \langle a_1, ..., a_n\rangle$, $\varphi : \mathbb{Z}^n \rightarrow G$ is surjective, with $\varphi((k_1,...,k_n)) \mapsto \sum k_ia_i$. Then $G = \mathbb{Z}^n/\text{Ker}(\varphi)$. $L = \text{Ker}(\varphi) \le \mathbb{Z}^n$. We take as a black box that $L$ is finitely generated.
+
+            We later need to use another fact, that $A = \text{Mat}_n(\mathbb{Z})$ is invertibel if and only if $\text{det}(A)$ is invertible in $\mathbb{Z}$. $\text{det}(A) = \pm 1$. Another acct is Smith's normal form: there exists a basis $y_1,...,y_n$ of $\mathbb{Z}^n$ and $n_1,...,n_m \in \mathbb{Z}$ such that $n_{i+1} \;|\; n_i$ such that $L = \langle n_1y_1,...,n_my_m\rangle$.
+
+
+            Fun fact to prove some day: One abelian group that we encounter that we don't completely understand is the invertible elements in $\mathbb{Z}/n\mathbb{Z}$. But for prime $p$, $(\mathbb{Z}/p\mathbb{Z})^\times \cong \mathbb{Z}/(p-1)\mathbb{Z}$. In particular, it turns out that $(\mathbb{Z}/p\mathbb{Z})^\times$ is cyclic.
+
+            <h2 class="display-4" id="lec-17">Lecture 17</h2>     
+
+            <p>We start by defining rings. I won't include it here since I understand the definition pretty well. For this class, we work with unital rings as the normal rings and nonunital rings are special.</p>
+
+            <div class="problem">
+              <b>Example.</b> $\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$. Also, notice that $\mathbb{Z}/n\mathbb{Z}$ is also a ring without having to discard any elements. 
+              <div class="remark">
+                <b>Remark.</b> $(\mathbb{Z}/p\mathbb{Z})^\times$ is also a ring, and is $(\mathbb{Z}/n\mathbb{Z})^\times$ a ring if we make addition be like $1 + $ anything goes to the next smallest thing in the ring (I think distributivity might break)?
+              </div>
+              Also notice $\{0\}$ is a ring, called the $\{0\}$-ring.
+            </div>
+
+            <p><b>Definition.</b> A ring $R$ is commutative if $ab = ba$ for all $a, b \in R$.</p>
+
+            <div class="remark">
+              <b>Remark.</b> Hold up... can rings somehow be described by identifying elements of the group automorphisms with the elements of a group? In other words, a group can be a ring if the size of the set of its automorphisms is the same as the size of the group?
+            </div>
+
+            <p><b>Definition.</b> A ring $R$ is a <b>division ring</b> if for all $a \neq 0 \in R$, there exists $b \neq 0 \in R$ such that $ab = ba = 1$.</p>
+
+            <p><b>Definition.</b> A commutative division ring is a <b>field</b> if $0 \neq 1$. There is debate over whether $0 \neq 1$ should be a condition.</p>
+
+            <div class="problem">
+              <b>Example.</b> $\mathbb{Q}$, $\mathbb{R}$, and $\mathbb{C}$ are also fields, and so is $\mathbb{Z}/p\mathbb{Z}$.
+            </div>
+
+            <p>An interesting ring is quaternions, $\mathbb{H} = \{a + bi + cj + dk \;|\; a,b,c \in \mathbb{R}, i^2 = j^2 = k^2 = -1$, and $ijk = -1\}$. It can be checked that $\mathbb{H}$ is a division ring.</p>
+
+            <p><b>Definition (Zero Divisor).</b> $a \neq 0 \in R$ is a <b>zero divisor</b> if there exists $b \neq 0 \in R$ such that $ab = 0$ or $ba = 0$.</p>
+
+            <p><b>Definition (Unit).</b> $a \neq 0 \in R$ is a <b>unit</b> if there exists $b \neq 0 \in R$ such that $ab = ba = 1$. $R^\times$ is the group of units in $R$.</p>
+
+            <div class="remark">
+              <b>Remark.</b> $R$ is a division ring if and only if $R^\times = R_{\neq 0}$.
+            </div>
+
+            <div class="theorem">
+              <b>Lemma.</b> If $a$ is a unit then $a$ is not a zero divisor.
+            </div>
+
+            <p>Before we prove this, we need to be able to use a few things quite freely. We check some things:</p>
+            <div class="theorem">
+              <b>Lemma.</b>
+              <ol>
+                <li>$0 \cdot a = a \cdot 0 = 0$</li>
+                <li>$(-a) \cdot b = a \cdot (-b) = -ab$</li>
+                <li>$(-a) \cdot (-b) = ab$</li>
+                <li>$1$ is unique and $(-1) \cdot a = a \cdot (-1) = -a$</li>
+              </ol>
+            </div>
+            <i>Proof (Normally I omit this but this felt juicy for some reason).</i>
+
+            <ol>
+              <li>$0 \cdot a = (0 + 0)a = 0 \cdot a + 0 \cdot a \Rightarrow 0 = 0 \cdot a$</li>
+              <li>$(-a) \cdot b + ab = (- a + a)b = 0b = 0$ and $a \cdot (-b) + ab = a(-b + b) = a0 = 0$</li>
+              <li>$(-a)(-b) = -(-a)b = -(-ab) = ab$</li>
+              <li>$1_a = 1_a1_b = 1_b$, and the last part is simply from part 2.</li>
+            </ol>
+            <p style="text-align: right;">$\square$</p>
+
+            <p>Now we can prove the lemma. Suppose $ab = 0$ and $a^{-1}a = 1$. Then $0 = a^{-1}0 = a^{-1}ab = b$ contradiction.</p>
+            <p style="text-align: right;">$\square$</p>
+
+            <div class="problem">
+              <b>Example.</b> 
+              <ol>
+                <li>$\mathbb{Z}^\times = \{-1, 1\}$ has no zero divisors.</li>
+                <li>$(\mathbb{Z}/n\mathbb{Z})^\times = \{[a]\;|\; \gcd(a,n) = 1\}$ if $\gcd(a,n) = d > 1$</li>
+              </ol>
+            </div>
+
+            <p><b>Definition (Integral Domain).</b> A commutative ring with no zero divisors is called an <b>integral domain</b>.</p>
+
+            <div class="problem">
+              <b>Example.</b> Fields, $\mathbb{Z}$ is an integral domain. I think $\mathbb{Z}/p\mathbb{Z}$ is an integral domain?
+            </div>
+
+
+            <div class="theorem">
+              <b>Proposition.</b> Let $R$ be an integral domain and suppose $ab = ac$. Then $a = 0$ or $b = c$.
+            </div>
+
+            <i>Proof.</i>
+
+            $$ab - ac = a(b-c) = 0 \Rightarrow a = 0 \text{ or } b = c$$
+            <p style="text-align: right;">$\blacksquare$</p>
+
+            <div class="theorem">
+              <b>Corollary.</b> If $R$ is a finite integral domain, then $R$ is a field.
+            </div>
+            <i>Proof.</i>
+
+            <p>Consider $a \neq 0 \in R$, and $m_a : R \rightarrow R$ which is injective, $b \mapsto ab$. Then since $R$ is finite, $m_a$ is a bijection, so there exists $c$ such that $ac = 1$.</p>
+            <p style="text-align: right;">$\blacksquare$</p>
+
+            <p><b>Definition (Subring).</b> $S \subseteq R$ is a subring if $(S, +) \le (R,+)$ and $1 \in S$, $S$ is closed under multiplication.</p>
+
+            <div class="problem">
+              <b>Example.</b> 
+              <ol>
+                <li>$\mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C} \subset \mathbb{H}$. </li>
+                <li>Define $\text{Fun}(\mathbb{R},\mathbb{R})$ the functions from $\mathbb{R}$ to $\mathbb{R}$, $fg(x) = f(x)g(x)$, $(f+g)(x) = f(x) + g(x)$,
+                  $$C^{\infty}(\mathbb{R}, \mathbb{R}) \subset C^k(\mathbb{R},\mathbb{R}) \subset C^2(\mathbb{R}, \mathbb{R}) \subset C^{1}(\mathbb{R}, \mathbb{R}) \subset C(\mathbb{R}, \mathbb{R}) \subset \text{Fun}(\mathbb{R}, \mathbb{R})$.
+                </li>
+              </ol>
+            </div>
+
+            <div class="remark">
+              <b>Remark.</b> $R \subset A$ integral domain, then $R$ is an integral domain. In particular, $R$ subring of a field is an integral domain.
+            </div>
+
+            <h3 class="display-6" id="">Non-unital Rings</h3>
+
+            <p>As a temporary tangent, we might want to consider nonunital rings.
+            </p>
+
+            <div class="problem">
+              <b>Example.</b>
+              <ol>
+                <li>$n \mathbb{Z}$.</li>
+                <li>$C^c(\mathbb{R}, \mathbb{R}) = \{ f \in C(\mathbb{R}, \mathbb{R}) \;|\; \{x \;|\; f(x) \neq 0\} \text{ compact }\}$ is compactly supported functions.</li>
+              </ol>
+            </div>
+
+            <p>Ok... that's enough heh. Back to other stuff.</p>
+            
+            <h3 class="display-6" id="ring-construct">Ring Constructions</h3>
+              
+                <p>$X$ nonempty set, $R$ is a ring. $\text{Fun}(X,R)$ inherits properties of $R$. $\text{Fun}(X,R)$ is commutative if and only if $R$ is commutative. For all $r \in R$, $C_r \in \text{Fun}(X,R)$. $Cr : x \mapsto r$, $R \subset \text{Fun}(X,R)$</p>
+                <p>$\begin{bmatrix} r &  & 0 \\ & ... & \\ 0 & & r\end{bmatrix} \in \text{Mat}_n(R)$, $R \subset \text{Mat}_n(\mathbb{R})$</p>
+                <div class="remark">
+                  <b>Remark.</b> Usually $R$ is commutative. Also, you may hvae noticed, $\text{Mat}_2(\text{Mat}_2(\mathbb{R})) = \text{Mat}_4(\mathbb{R})$. Also, notice $GL_n(R) = \text{Mat}_n(R)^\times$.
+                </div>
+                <p>$R$ a ring, $G$ a finite group. $RG$ is called a group ring with coefficients in $R$. This is $\{ \sum_{g \in G} c_g \cdot g \;|\; c_g \in R\}$. It will make our lives easier if we make $R$ a commutative ring, so we actually do that. Then $(c\cdot g) (d \cdot h)  = cd \cdot (gh)$.</p>
+                <div class="problem">
+                  <b>Example.</b> $D_6 = \{1, r, r^2, s, sr, sr^2\}$, $(2 + s-r^2), (3sr + sr^2) \in \mathbb{Z}D_6$, and $(2 + s - r^2)(3 sr + sr^2) = 6sr + 2 sr^2 + 3r + r^2 - 3sr^2 - s = 3r + r^2 - s$. 
+                </div>
+                <div class="remark">
+                  <b>Remark.</b> Linear automorphisms are basically $GL_n$. You can extend a group to a group ring by the above group ring construction.
+                </div>
+    
+                <div class="strat">
+                  <b>Strategy.</b> An important strategy in representation theory is that once you have forgotten some structure, such as addition of matrices, you can "relearn" this structure by constructing a group ring with some ring.
+                </div>
+    
+                <div class="remark">
+                  <b>Remark.</b> $R \subset R G$ is a subgring by $r \mapsto r \cdot 1$.
+                </div>
+  
+                <p>Consider $R$ a commutative ring. $R[x]$ is the polynomials with coefficients in $R$. $R[x] = \{a_n x^n + a_{n-1}x^{n-1} + ... + a_1 x + a_0 \;|\; a_i \in R\}$. $x^n x^m = x^{n + m}$. For all $r \in R$, $r$ is a constant polynomial. Let $p = a_nx^n + ... + a_1 x + a_0$, with $a_n \neq 0$. We say that the <b>degree</b> of $p$ is $n$ ($\text{deg} (p) = n$). We define the degree of $0 \in R[x]$ to be $-\infty$.</p>
+
+                <div class="theorem">
+                  <b>Lemma.</b> If $R$ is an integral domain, then for all $p, q \in R[x]$, $\text{deg}(pq) = \text{deg}(p) + \text{deg}(q)$.
+                </div>
+
+                <div class="theorem">
+                  <b>Corollary.</b> $R[x]^\times = R^\times$. $R[x]$ is an integral domain.
+                </div>
+
+
+                <h2 class="display-2">Midterm 2 Revieww</h2>
+                <div class="theorem">
+                  <b>Theorem.</b> $G = \langle x_1,...,x_k\langle$, and $H = \langle y_1,...,y_l\rangle$, then to check that $H$ is normal, we need to check $x_iy_jx_i^{-1} \in H$ for each $j$ and $i$.
+                </div>
+
+                <div class="remark">
+                  <b>Remark.</b> There is nothing special about $s$ or $r$. Any two reflections are the same in terms of how they behave, so all the reflections behave the same.
+                </div>
+
+                <h2 class="display-2">Lecture $N$</h2>
+            
+                <p><b>Definition (Principal Ideal Domain).</b> A ring $R$ is a <b>principal ideal domain</b> (PID) if it is an integral domain and all ideals in $R$ are principal. </p>
+
+                <div class="theorem">
+                  <b>Corollary.</b> Every Euclidean domain is a PID.
+                </div>
+
+                <div class="theorem">
+                  <b>Propoisition.</b> Let $R$ be a PID. Then every prime ideal in $R$ is maximal.
+                </div>
+                <i>Proof.</i>
+                
+                <p>Let $(p)$ be a prime ideal and $(p) \subset (m) \Rightarrow p = mr$ for some $r$. $mr \in (p)$ implies that $m = os \Rightarrow p =psr \Rightarrow 1 = sr$, and $r = ps \Rightarrow p = pms  \Rightarrow 1 = ms$. Etc.</p>
+
+                <div class="theorem">
+                  <b>Corollary.</b> $R[x]$ is PID then $R$ is a field.
+                </div>
+
+                <p><b>Definition (Noetherian).</b> A ring is called <b>Noetherian</b> if every left ascending chain of ideals stabilizes, i.e.
+                $$\forall I_1 \subseteq I_2 \subseteq ...$$
+                then there exists $N$ such that for all $n,m \ge N$, $I_n = I_m$.</p>
+
+                <div class="theorem">
+                  <b>Proposition.</b> Every PID is Noetherian.
+                </div>
+
+                <p><b>Definition (Irreducible).</b> Let $R$ be a commutative ring, we say $r \in R$ is <b>irreducible</b> if $r = pq \Rightarrow p \in R^\times$ or $q \in R^\times$.</p>
+
+                <div class="remark">
+                  <b>Remark.</b> Wait in the below proposition, should it say that $r$ is not a unit? Yes. Units cannot be irreducible or prime. So I guess the or above is exclusive.
+                </div>
+
+                <div class="theorem">
+                  <b>Proposition.</b> If $R$ is a PID then $r$ is irreducible if and only if $r$ is prime.
+                </div>
+
+                <div class="remark">
+                  <b>Remark.</b> Then we can see that prime ideals are just those generated by irreducible (polynomials?).
+                </div>
+
+                <p><b>Definition (Distinct).</b> $p$ and $q$ are called <b>distinct</b> primes if $(p) \neq (q)$.</p>
+
+                <div class="theorem">
+                  <b>Lemma.</b> Consider $R$ a PID. If $p$, $q$ are distinct primes, 
+                  <ol>
+                    <li>$(p,q) = R$</li>
+                    <li>$(p^k, q^l) = R$</li>
+                  </ol>
+                </div>
+
+                <div class="theorem">
+                  <b>Proposition.</b> 
+                  <ol>
+                    <li>Consider $R$ a PID, and $f \in R$, $f \neq 0$ and $f \neq R$. Then there exist distinct primes $p_1,...,p_l$ such that $f = u p_1^{a_1} ...p_l^{a_l}$ where $u \in R^\times$. </li>
+                    <li>If $p_1^{a_1}...p_l^{a_l} = uq_1^{b_1}...u_n^{b_n}$, then $l = n$, and $(p_i) = (q_{w(i)})$ for all $i$ and $w \in S_n$.</li>
+                  </ol>
+                  
+                </div>
+
+                <div class="theorem">
+                  <b>Corollary.</b> Let $R$ be a PID, and $f = up_1^{e_1}...p_k^{a_k} \in R$, then
+                  $$R/(f) \simeq R/(p_1^{a_1}) \times ... \times R/(p_k^{a_k})$$
+                </div>
+
+                <div class="problem">
+                  <b>Example.</b> Consider $\mathbb{C}[x]$. The fundamental theorem of algebra tells us that irreducible polynomials in $\mathbb{C}[x]$ are $\{x-a : a \in \mathbb{C}\}$. Now consider $\mathbb{R}[x]$. We can see that irreducible polynomials are polynomial that are either linear or quadratic polynomials with determinant less than zero. Then we can see that $R[x]/(x^2 + 1) \simeq \mathbb{C}$.
+                </div>
+
+                <h3 class="display-6" id="field-of-fractions">Field of Fractions</h3>
+
+                <p>Consider a general comutative ring $R$. We can introduce an equivalence relation on ordered pairs as follows:
+                  $$F(R) = \{\dfrac{m}{n} \;|\; m \in R, \; n \in R_{\neq 0} \}/ \sim$$
+                  where $\dfrac{m}{n} \sim \dfrac{a}{b}$ if $bm = an$. We can define addition as 
+                  $$\dfrac{m}{n} + \dfrac{p}{q} = \dfrac{qm  + pn}{nq}$$
+                  $$-\dfrac{m}{n} = \dfrac{-m}{n}$$
+                  $$0 = \dfrac{0}{1}$$
+                  $$\dfrac{m}{n} \cdot \dfrac{p}{q} = \dfrac{mp}{nq}$$ 
+                  $$(\dfrac{m}{n})^{-1} = \dfrac{n}{m}$$ 
+                  $$1 = \dfrac{1}{1}$$ 
+                  We can show all of this forms a field by easily verifying all of the conditions. The only problem is, multiplication is not well defined if we allow zero divisors, since $nq$ could be zero. Thus, we can force $R$ to be an integral domain, and then 
+                </p>
+
+                <p><b>Definition (Field of Fractions).</b> If $R$ is an integral domain then $F(R)$ is a field called the <b>field of fractions</b> of $R$.</p>
+
+                <div class="theorem">
+                  <b>Proposition.</b>
+                  <ol>
+                    <li>If $R$ is an integral domain, then $F(R)$ is a field.</li>
+                    <li>$\varphi : R \rightarrow F(R)$, $r \mapsto \dfrac{r}{1}$ is an injective ring homomorphism.</li>
+                    <li>If $\psi : R \rightarrow F$ is an injective ring homomorphism and $F$ is a field, there exists $\sigma : F(R) \rightarrow F$ such that 
+                      $$\sigma \circ \varphi =\psi$$ 
+                    </li>
+                  </ol>
+                </div>
+                
+                <div class="remark">
+                  <b>Remark.</b> We have $\psi(r)^{-1} = \sigma(1/r)$.
+                </div>
+
+                <h2 class="display-2">Lecture $N + 2$</h2>
+
+                <div class="theorem">
+                  <b>Theorem (Isomorphism).</b> If $\varphi \in \text{Hom}_R(N,M)$ then $\text{Im}(\varphi) \simeq N/\text{Ker}(\varphi)$.
+                </div>
+                
+                <div class="theorem">
+                  <b>Proposition.</b> If $M$ is cyclic, then $M \simeq R/I$ for some left ideal $I$.
+                </div>
+                <i>Proof by isomorphism theorem.</i>
+
+                <p><b>Definition (Cyclic).</b> $M$ is cyclic if $M = Rx$ for some $x \in M$.</p>
+
+                <b>Definition (Free).</b> A module $M$ is <b>free</b> on the set $A \subseteq M$ if for all $m \in M_{\neq 0}$ there exists unique scalars $r_1,...,r_n \in R$ and $a_1,...,a_n \in A$ such that $m = \sum_{i=1}^n r_i a_i$. 
+
+                <b>Definition (Basis).</b> $A$ os a <b>basis</b> of $M$.
+
+                <div class="remark">
+                  <b>Remark.</b> If $A$ is a basis of a free module $M$, then all elements of $A$ are $R$-linearly independent (standard definition of linedarly independent with coefficients in $R$).
+                </div>
+
+
+                <div class="problem">
+                  <b>Example.</b>
+                  <ol>
+                    <li>If $R = F$ a field, then for all $M \in R$-mod is free.</li>
+                    <li>$R = \mathbb{Z}$, $M = \mathbb{Z}/n\mathbb{Z}$, for all $x \in M$, $n \cdot x = 0 \cdot x = 0$.</li>
+                    <li>$R = \mathbb{C}[x,y]$, $M = (x,y)$. We claim that this is not free. How do we know? Well $M$ doesn't have a basis of size one because it is not a principle ideal. Suppose $M$ has a basis of size larger than 1 because every two elements are linearly dependent. Consider any $a,b \in M$. Then since $a$ and $b$ are also members of our ring, $b a - ab = 0$, so they are linearly dependent.</li>
+                  </ol>
+                </div>
+
+                <p><b>Definition (Tortion).</b> $M \in R$-mod 
+                $$\text{Tor}(M) = \{m \in M \;|\; \exists r \in R_\neq 0, rm = 0\}$$</p>
+
+                <div class="theorem">
+                  <b>Claim.</b> If $R$ is an integral domain, then $\text{Tor}(M)$ is a submodule.
+                </div>
+
+                <p><b>Definition (Rank).</b> The rank $\text{rk }M$ is the maximal number of $R$-lineraly independent elements in $M$.</p>
+
+                <div class="theorem">
+                  <b>Proposition</b> If $M$ is free and $R$ is an integral domain with basis $\{x_1,...,x_n\}$ then any $n+1$ elements of $M$ are $R$-linearly dependent.
+                </div>
+                <i>Proof.</i>
+
+                <p>Since $R$ is an integral domain, we can embed $R$ into its field of fractions $F(R)$. We can also embed $M$ into $F^n$, 
+                  $$\sum r_i x_i$$
+                  if $a_0,...,a_n\in M$ there exists $y_0,...,y_n \in F$, $\sum_{i=0}^n y_i a_i = 0$, $y_i = \dfrac{b_i}{c_i}, c = \prod_{i=0}^n c_i$, $cy_i \in R$, $\sum_{i=0}^r (cy_i)a_i = 0$.
+                </p>
+
+                <p>Consider $\varphi, \psi$ in $\text{Hom}_R(M,N)$. Notice that $(\varphi + \psi)$ is also a homomorphism and $r \varphi$ is also a homomorphism.</p>
+
+                <div class="theorem">
+                  <b>Claim.</b>
+                  <ol>
+                    <li>$\varphi + \psi \in \text{Hom}_R(M,N)$</li>
+                    <li>$r \varphi \in \text{Hom}_R(M,N)$</li>
+                    <li>These operations make $\text{Hom}_R(M,N)$ an $R$-mod.</li>
+                  </ol>
+                </div>
+
+                <p><b>Definition.</b> If $N_1,...,N_k$ are submodules of $M$, then $N_1 + ... + N_k := \{n_1 + ... + n_k \;|\; n_i \in N\}$</p>
+
+                <p><b>Definition.</b> Let $N,M \in R$-mod. $N \times M \in R$-mod, $r (n,m) = (rn,rm)$. </p>
+
+                <div class="theorem">
+                  <b>Proposition.</b> TFAE 
+                  <ol>
+                    <li>$\varphi : N_1\times N_2 \times ... \times N_k \rightarrow N_1 + ... + N_k$, $(n_1,n_2,...,n_k) \mapsto n_1+...+n_k$, $\varphi$ is an isomorphism of $R$-mod.</li>
+                    <li>$N_j \cap (N_1 + ... + N_{j-1} + N_{j+1} + ... + N_k) = 0$ for all $j$.</li>
+                    <li>For all $x \in N_1 + ... + N_k$, there exists a unique $n_1,...,n_k$ such that $X = n_1 + ... + n_k$.</li>
+                  </ol>
+                </div>
+                <i>Proof I leave for myself later.</i>
+
+                <p><b>Defintiion.</b> If $N_1,...N_k$ satisfy these conditions then write $N_1 \oplus ... \oplus N_k = N_1 + ... + N_k$.</p>
+
+                <div class="theorem">
+                  <b>Proposition.</b> If $M$ is a free module on $\{x_1,...,x_n\}$, then $M = R x_1 \oplus ... \oplus Rx_n \simeq R^n$.
+                </div>
+
+                <div class="theorem">
+                  <b>Proposition.</b> If $M$ is free on $A \subseteq M$ then as sets $\text{Hom}_R(M,N) = \text{Fun}(A,N)$ for all $N \in R$-mod.
+                </div>
+
+                <div class="theorem">
+                  <b>Theorem.</b> Let $R$ be a PID, let $M$ be a free $R$-module of rank $n$, and $N \subseteq M$ a submodule. Then 
+                  <ol>
+                    <li>$N$ is free of rank $m \le n$</li>
+                    <li>$\exists y_1,...,y_n \in M$, $\exists a_1,...,a_m \in R_{\neq 0}$ where $a_1 \;|\; a_2 \;|\; ... \;|\; a_m$</li>
+                  </ol>
+                  such that $M = Ry_1 \oplus Ry_2 \oplus ... \oplus Ry_n$, and $N = Ra_1 y_1 \oplus ... \oplus Ra_m y_m$
+                </div>
+                <i>Proof.</i>
+                
+                <p>We start by trying to define $a_1$. Consider the $\varphi \in \text{Hom}_R(M,R)$. Then $\varphi(N) \subseteq R$ is a submodule, so it is an ideal. It is also a principle ideal, so we define $\varphi(N) = (a_\varphi)$. We then define $\sum = \{(a_\varphi) \;|\; \varphi \in \text{Hom}_R(M,R)$.</p>
+
+                <div class="theorem">
+                  <b>Lemma.</b> $\sum$ has a maximum element.
+                </div>
+                <i>Proof.</i>
+
+                <p>Consider any $I_1 \in \sum$. If it is maximal, we are done. Otherwise, there exists another ideal $I_2$ so that $I_1 \subset I_2$. Thus, we can either find $I_2$ to be maximal or we continue to find a chain of inclusions. We claim that we must stop at some point because our ring must be Noetherian, so any chain must stabilize. We can then call this maximal ideal $(a_\nu)$, and define $a_1 = a_\nu$ ($a_1$ from the satement of the theorem.)</p>
+
+                <p>Now there exists some $y \in N$ such that $\nu(y) = a_1$. Let $M = Rx_1 \oplus ... \oplus Rx_n$. Consider $\pi_i : M \rightarrow R$ projections to the ith coordinates $(r_1,...,r_n) \mapsto r_i$. If $a_1 = 0$, then $\sum = \{(0)\}$. Therefore, $\varphi(N) = 0$ for all $\varphi$, so for all $n = (r_1,...,r_n)$, $\pi_i(n) = 0$, so $n = 0$, and $N = 0$. Then the result is trivial. </p>
+
+                <p>Assume $N \neq 0$, so $a_1 \neq 0$.</p>
+
+                <div class="theorem">
+                  <b>Lemma.</b> For all $\varphi \in \text{Hom}_R(M,R)$, $\varphi(y)$ is divisible by $a_1$.
+                </div>
+                <i>Proof.</i>
+
+                <p>Consider the gcd: $(a_1,\varphi(y)) = (d)$. $d = ra_1 + s\varphi(y)$. $\psi = r\nu + s\varphi \in \text{Hom}_R(M,R)$. Consider 
+                $$\psi(y) = r\nu(y) + s\varphi(y) = d$$ 
+                because $\nu(y) = a_1$. Consider $d \in \psi(N)$. $(d) \subseteq \psi(N) = a(\psi)$, $(a_1 \subseteq (d)$. Since $(a_1) \subseteq (a_\psi)$ immplies that $(a_1) = (a_\psi)$, which implies $(a_1) = (d)$, $\varphi(y) \in (a_1)$. </p>
+
+                <p>Bcak to the theorem. $\pi_i(y)= a_1b_i$, $y = (a_1b_1,a_1b_2,...,a_1b_n)$, $y_1 = (b_1,...,b_n)$, $y = a_1y_1$.</p>
+
+                <div class="theorem">
+                  <b>Lemma.</b>
+                  <ol>
+                    <li>$M = Ry_1 \oplus \text{Ker }\nu$</li>
+                    <li>$N = Ra_1y_1 \oplus (\text{Ker }\nu \cap N)$</li>
+                  </ol>
+                </div>
+                <i>Proof.</i>
+
+                For the first part, $x = \nu(x)y_1 + (x-\nu(x)y_1)$
+                
+                <div class="remark">
+                  <b>Remark.</b> $a_1 \nu(y_1) = \nu(a_1y_1) = \nu(y_1) = a_1$ are we sure $a_1$ has an inverse?
+                </div>
+                
+                $\nu(x - \nu(x)y_1) = \nu(x) - \nu(x) \nu(y_1) = 0$. $ry_1 \in \text{Ker}(\nu)$, $\nu(ry_1) = r\nu(y_1) = r = 0$ which implies $Ry_1 \cap \text{Ker}(0) = 0$. For the second part, $x \in N$, $x = \nu(x) y_1 + (x-\nu(x) y_1)$. 
+
+                <p>Now that we have gotten all of this preliminary stuff out of the way, we can show part 1 of the theorem by induction on $m$. We have that $M = Ry_1 \oplus \tex{Ker }\nu$ and $N = Ra_1y_1 \oplus (\text{Ker }\nu \cap N)$. If the rank of $N$ is 0, then $\text{Tor}(N) = N = 0$, and $\text{Tor}(N) \subseteq \text{Tor}(M) = 0$. If the rank of $(\text{Ker }\nu \cap N)$ is $m-1$, then $?$ free implies that $\simeq R^{m-1}$ which implies $N \simeq R \times R^{m-1}$ is also free.</p>
+
+                <p>To prove the second part, by induction on $n$, By 1, $\text{Ker }\nu$ is free of rank $n-1$. $\text{Ker } \nu \cap N \subseteq \text{Ker }\nu$. There exists $a_2,...,a_m,y_2,...,y_m$, $(\text{Ker }\nu \cap N) = Ra_2 y_2 \oplus ... \oplus Ra_m y_m$, $a_2\;|\; a_3 \;|\; ... \;|\; a_m$. $\text{Ker }\nu = Ry_2 \oplus ... \oplus Ry_m$.</p>
+
+                <h2 class="display-2">Lecture $N + 3$</h2>
+
+                <p>Consider $R$ a PID, and $M$ an $R$-module. $M$ is free of rank $n$, $N \subseteq M$. </p>
+
+                <div class="theorem">
+                  <b>Theorem.</b>
+                  <ol>
+                    <li>$N$ is free of rank $m \le n$</li>
+                    <li>$\exists y_1,...,y_n \in M$</li>
+                  </ol>
+                  $M = Ry_1 \oplus ... \oplus Ry_n$. There exists $a_1,..., a_m \in R$, $N = Ra_1y_1 \oplus ... \oplus Ra_m y_m$.
+                </div>
+                
+                <p>To check that $a_1$ divides $a_2$, consider $\psi : M \rightarrow R$, $\psi(y_1) = \psi(y_2) = 1$, $\psi(y_k) = 0$ for all $k > 2$. $\psi(a,y_1) = a_1 \in \psi(N) \in \Sigma$, $\psi(a_2y_2) = a_2 \in \psi(N)$, $(a_1) \subseteq \psi(N) \Rightarrow \psi(N) = (a_1)$, $a_2 \in (a_1)$, so $a_1 \;|\; a_2$.</p>
+
+                <div class="theorem">
+                  <b>Corollary.</b> Let $M$ be a finitely generated $R$-module. Then there exists $a_1,...,a_k \in R_{\neq 0}$, $a_1 \;|\; a_2 \;|\; ... \;|\; a_k$, $a_i \not \in R^\times$, there exists $l \in \Z_{\ge 0}$. $M \simeq R/(a_1) \times ... \times R/(a_k) \times R^l$.
+                </div>
+                <i>Proof.</i>
+
+                <p>
+                  Let $m_1$, ..., $m_n$ be generators of $M$, and $\varphi: R^n \rightarrow M$, $(r_1,...,r_n) \mapsto \sum_{i=1}^n r_i m_i$, surjective, $R$-linear, $M \simeq R^n/\text{Ker }\varphi$. Mptoce $R^n = Ry_1 \oplus ... \oplus Ry_n$, $\text{Ker }\varphi simeq R\Tilde{a}_1 y_1 \oplus ... \oplus R\Tilde{a}_m y_m$. $R^n/\text{Ker }\varphi \simeq R/\Tilde{a}_1 \times ... \times R/\Tilde{a}_m \times R^{n-m}$. etc etc then we get existence.
+                </p>
+                
+                <p>To get uniqueness, we need to introduce the following definition:</p>
+
+                <p><b>Definition.</b> Consider $p \in R$, $M \in R-\mathsf{mod}$. $pM = \{pm \;|\; m \in M\}$.</p>
+
+                <div class="theorem">
+                  <b>Lemma.</b> Let $p \in R$ be a prime element. Let $R/(p) = F$ a field. 
+                  <ol>
+                    <li>Consider $M = R^n$. Then $M/pM \simeq F^n$.</li>
+                    <li>If $M = R/(a)$, if we take the quotient $M/pM$, we can get $0$ if $p$ does not divide $a$, or we can get $F$ if $p \;|\; a$.</li>
+                    <li>Consider $M = R/(a_1) \times ... \times R/(a_k)$. Consider $M/pM = F^l \;|\; l = \# \{i \;|\; p \;|\; a_i\}$.</li>
+                  </ol>
+                  
+                </div>
+               
+                <div class="theorem">
+                  <b>Theorem.</b> Suppose $M \simeq R/(a_1) \times ... \times R/(a_k) \times R^l \simeq  R/(b_1) \times... \times R/(b_m) \times R^n \simeq a_1 \;|\; ... \;|\; a_k, a_i \not\in R^\times$, $b_1 \;|\; ... \;|\; b_m$, $b_i \not\in R^\times$. Then $l = n$, $k = m$, $(a_1) = (b_1)$, ..., $(a_k) = (b_k)$.
+                </div>
+
+                <div class="remark">
+                  <b>Remark.</b> We can show that the free part is the same and then the torsion part is the same.
+                </div>
+
+                <p>Assume $M = \text{Tor}(M)$. $M = R/(a_1) \times ... \times R/(a_k) = R/(b_1) \times ... \times R/(b_m)$.</p>
+
+                <p>Modules over $F[x]$. Let $X$ be a linear operator on a finite dimensional vector space $V$. $V \simeq F[x]/(a_1) \times ... \times F[x]/(a_k)$, $a_1,..., a_k \in F[x]$. If $V \simeq F[x]/(a)$, assume $a$ is <b>monic</b>, so the coefficient of its highest degree term is 1. We can always divide by the first coefficient to make this true. So we have WLOG. $F[x]/(a)$ has basis $\overline{1}, $\overline{x}$ (overline means image of), $\overline{x}^2$, ..., $\overline{x}^{n-1}$ over $F$.</p>
+
+                <p>In this basis, we can write the matrix $X$:
+                  $$X = \begin{bmatrix} 0 & 0 & 0 & ... & 0 & -a_0 \\ 1 & 0 & 0 & ... & 0 & -a_1 \\ ... & ... & ... & ... & ... & ... \\ 0 & 0 & 0 & ... & 1 & -a_n\end{bmatrix}$$
+                </p>
+
+                <div class="theorem">
+                  <b>Theorem (Rational Canonical Form/Frobenius Normal Form).</b> We can always find a basis of our vector space so that the matrix of $X$ is a block diagonal matrix where each block is a companion matrix such that $a_1 \;|\; a_1 \;|\; ... \;|\; a_k$. 
+                </div>
+
+                <div class="problem">
+                  <b>Exercise.</b> If $X = A$ is the companion matrix of $a(x)$, then $\chi_X(t) = a(t)$. Also, for block diagonal, we can just multiply the $a_j(t)$s for each block.
+                </div>
+
+                <p>We can also get Jordan normal form as a corollary of this classification theorem along with the Chinese Remainder Theorem. 
+                  $$F[x]/(a(x)) \simeq F[x]/(p_1)^{\alpha_1} \times ... \times F[x]/(p_k)^{\alpha_k}$$
+                  $$a = p_1^{\alpha_1}...p_k^{\alpha_k}$$ 
+                </p>
+
+                <p>We first cover the fundamental theorem of algebra. Irreducible polynomials over $\mathbb{C}$ are only linear ones.</p>
+
+                <p>We now consider Field Extensions. </p>
+
+                <p><b>Definition.</b> $K$ is a field extension of $F$ (denoted $K / F$) if $F$ is a subfield of $K$. </p>
+
+                <div class="theorem">
+                  <b>Corollary.</b> If $K$ is an extension of $F$, then $K$ is an $F$-algebra, so $K$ is a vector space over $F$.
+                </div>
+
+                <p><b>Definition.</b> The degree of $K$ over $F$, denoted $[K : F]$, is the dimension of $K$ as a vector space over $F$. $[K : F] = \dim_F K$.</p>
+
+                <div class="problem">
+                  <b>Example.</b> $\mathbb{R} \subseteq \mathbb{C}$, $\mathbb{C}/\mathbb{R}$, $[\mathbb{C} : \mathbb{R}] = 2$. $[\mathbb{R} : \mathbb{Q}] = \infty$.
+                </div>
+
+                <p><b>Definition.</b> $\text{ch } F$ is $p$ such that $1 + ... + 1 = 0$ ($p$ additions of 1). If $p = \infty$, $p = 0$.</p>
+
+                <p><b>Definition.</b> A prime subfield $F$ of $K$ is a smallest subfield (equivalently a subfield generated by 1).</p>
+
+                <div class="problem">
+                  <b>Example.</b> 
+                  <ol>
+                    <li>The prime subfield of $\mathbb{R}$ is $\mathbb{Q}$.</li>
+                    <li>$\mathbb{F}_p(x)$ is $\mathbb{F}_p$.</li>
+                  </ol>
+                  In particular, if $\text{ch }F= 0$, the prime subfield is $\mathbb{Q}$, and if $\text{ch }F = p$, the prime subfield is $\mathbb{F}_p$.
+                </div>
+
+                <p><b>Definition.</b> An extension $K/F$ is finite if $[K : F]$ is finite.</p>
+
+                <div class="theorem">
+                  <b>Theorem.</b> For any irreducible polynomial $p \in F[x]$, there exists a finite $K/F$ such that $p$ has a root in $K$.
+                </div>
+                <i>Proof.</i>
+
+                <p>Consider $F[x]/p(x) = K$, $[K : F] = \deg p$.</p>
+
+                <!--New lecture-->
+
+                <p><b>Definition.</b> Let $K/F$, $\alpha \in K$. $F(\alpha)$ is the minimal subfield of $K$ containing $F,\alpha$. Also, $F(\alpha)/F$ is the simple extension.</p>
+
+                <p><b>Definition.</b> $\alpha_1, ..., \alpha_k \in K/F$, $F(\alpha_1,...,\alpha_k)$ is the minimal self contaiing $F$, $\alpha_1,...,\alpha_k$.</p>
+
+                <div class="remark">
+                  <b>Remark.</b> $F(\alpha, \beta) \subseteq K/F$, $F \subseteq F($\alpha$) \subseteq K$. $(F(\alpha))(\beta) = F(\alpha, \beta) = (F(\beta))(\alpha)$.
+                </div>
+
+                <p><b>Definition.</b> $K/F$ is finitely generated if $\exists \alpha_1,...,\alpha_k$ such that $F(\alpha_1,..,\alpha_k) = K$.</p>
+
+                <p><b>Definition.</b> $K/F$ is algebraic if for all $\alpha \in K$, there exists $f(x) \in F[x]$ such that $f(\alpha) = 0$.</p>
+
+                <div class="theorem">
+                  <b>Corollary.</b> If $[K : F] < \infty$, $K/F$ is algebraic.
+                </div>
+
+                <p><b>Definition.</b> If $\alpha \in K/F$ is an algebraic element, there exists a monic polynomial of minimum degree $m_\alpha(x) \in F[x]$ such that $m_\alpha(\alpha) = 0$. This is called the minimal polynomial of $\alpha$.</p>
+
+                <div class="theorem">
+                  <b>Theorem.</b> Let $\alpha \in K/F$ be an algebraic element. Then $F(\alpha) \simeq F[x]/(m_\alpha(x))$.
+                </div>
+
+                <div class="theorem">
+                  <b>Theorem.</b> $F \subseteq K \subseteq L$, $[L : F] = [L : K] \cdot [K : F]$.
+                </div>
+                <i>Proof.</i>
+
+                $L = K\langle \alpha_1,...,\alpha_n\rangle$ and $K = F\langle \beta_1,...,\beta_k\rangle$, so $L = F\langle \alpha_i \beta_j\rangle_{i \le n, j \le k}$, $x \in L$, $x = a_1\alpha-1 + ... + a_n \alpha_n$, $a_i \in K$.
+
+                <div class="theorem">
+                  <b>Theorem.</b> $K/F$ is finite ifand only if its algebraic and finitely generated.
+                </div>
+                <i>Proof.</i>
+
+                <p>$K = F(\alpha_1,...,\alpha_k)$, $F_j = F(\alpha_1,...,\alpha_j)$. $[K : F] = [F_K : F_0] = [F_k : F_{k-1}] [F_{k-1} : F_{k-2}] ... [F_1 : F_0]$.</p>
+
+                <p>Consider the extension $F_j/F_{j-1}$, and $F_j = F_{j-1}(\alpha_j)$. Since $\alpha_j$ is algebraic over $F_{j-1}$, $[F_j : F_{j-1}] < \infty$.</p>
+
+                <p><b>Definition (Algebraic Closure).</b> The <b>algebraic closure</b> of $F$ denoted $\overline{F}$ is the minimal field containing roots of all polynomials with coefficients in $F$.</p>
+
+                <p><b>Definition (Algebraically Closed).</b> $F$ is called <b>algebraically closed</b> if $\overline{F} = F$.</p>
+
+                <div class="theorem">
+                  <b>Proposition.</b> $\overline{F}$ is algebraically closed.
+                </div>
+                <i>Proof.</i>
+
+                <p>Let $p(x) = a_0 + ... + a_{n-1} x^{n-1} + x^n$ be a polynomial in $\overline{F}[x]$. Consider $K := F(a_0,...,a_{n-1}) \subseteq \overline{F}$, and consider $K[x]/(p(x)) = L$. We have $F \subseteq K \subseteq L$. We have $[L :F] < \infty$, so $L \subseteq \overline{F}$. </p>
+
+                <div class="theorem">
+                  <b>Theorem (Fundamental Theorem of Algebra).</b> $\overline{\mathbb{C}} = \mathbb{C}$.  
+                </div>
+
+                <div class="theorem">
+                  <b>Corollary.</b> There are no other finite field extensions of $\mathbb{R}$.
+                </div>
+
+                <h3 class="display-6">Straight-Edge and Compass Constructions</h3>
+                
+                <p>Three old problems we solve:</p>
+                <ol>
+                  <li>Doubling the cube</li>
+                  <li>Trisecting an angle</li>
+                  <li>Squaring the circle</li>
+                  <li>For which $n$ is it possible to construct a regular $n$-gon</li>
+                </ol>
+
+                <p>First of all, $p(x,y)$ (a point at $(x,y)$) is constructable if and only if segments of lengths $x$ and $y$ are constructable.</p>
+
+                <p>$F = \{x \in \mathbb{R} \;|\; \text{segment of length $x$ or $-x$ is constructable}\} \subseteq \mathbb{R}$.</p>
+
+                <div class="problem">
+                  <b>Example.</b> $\alpha, \beta \in F$, we can show that $\alpha + \beta$, $\alpha -\beta$, $\alpha \beta$, and $\dfrac{\alpha}{\beta}$ are in $F$. Thus, $F$ is a field, and we have $\mathbb{Q} \subseteq F \subseteq \mathbb{R}$. $F$ is not $\mathbb{Q}$ is possible since we can construct geometric means.
+
+                </div>
+
+                <p><b>Proposition.</b> $\alpha \in F$ if and only if $\mathbb{Q}(\alpha)$ is obtained by a sequence of degree 2 extensions.</p>
+
+                <div class="theorem">
+                  <b>Corollary.</b> $\alpha \in F$, then $[\mathbb{Q}(\alpha) : \mathbb{Q}] = 2^k$.
+                </div>
+
+
+                <div class="strat">
+                  <b>Strategy.</b> We can show that $\dfrac{x^p - 1}{x - 1}$ is irreducible by substituting $(x+1)$ for $x$ and then applying Eisenstiein criterion, whereas Eisenstein's criterion isn't otherwise directly applicable.
+                </div>
+
+                <div class="theorem">
+                  <b>Theorem.</b> A regular $p$-gon is constructable if and only if $n = 2^k \cdot p_1 \cdot ... p_l$ where $p_i \neq p_j$ if $i \neq j$ and $p_i = 2^{n_i} + 1$.
+                </div>
+                <i>One direction was shown in class.</i>
+
+                <p>$\{ \varphi \;|\; \varphi(a) = a$ for all $a \in F\} = \text{Aut}(K/F) \subseteq \text{Aut}(K)$. $\sigma \in \text{Aut}(K/F)$ if $\alpha$ is a root $f(x)$ in $F[x]$, $\sigma(\alpha)$ is alsoa root of $f(x)$.</p>
+
+                <p>There is a one to one corerspondence between $F \subseteq L \subseteq K$ and subgroups of $\text{Aut}(K/F)$. $L = K^H$ you get a subfield. The set of subgroups of the automorphisms of $K/F$ is called the Galois group of $K/F$.</p>
+
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
