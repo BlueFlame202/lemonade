@@ -42,3 +42,70 @@ We can actually adjust the syllabus along the way based on what people are inter
 **Definition.** An argument is ***deductively valid*** if it is impossible for its premises to be true and its conclusion to be false, i.e., it is truth-preserving. The truth of the premises sort of gets passed down to the conclusion.
 
 The majority of this class will not be about deductive logic, but rather *inductive logic*! Exciting! :D
+
+Story: Why Are You Here?
+--------------------------------
+
+Why are you in this class? Because you wanted to come to class and you saw on CalCentral that the lecture was in this hall. What you do has to do with what you want and what you believe. 
+
+Example of a bad argument:
+1. CalCentral says that the lecture for PHIL148 are in WH today.
+2. So: The lecture for PHIL148 are in WH today.
+
+Corrected:
+1. CalCentral says that the lecture for PHIL148 are in WH today.
+2. If CalCentral says that the lecture for PHIL148 are in WH today, then the lecture for PHIL148 are in WH today.
+3. So: The lecture for PHIL148 are in WH today.
+
+This is a modus ponens argument, and it is valid. But do we believe it? Not necessarily, because the second claim depends on the day. If for example it is a holiday, then actually statement 2 is not true. But let's talk about *today*, where we are actually here. Why did we believe it today? We agree that the second claim *can* be wrong in some cases. We might believe it because we have been coming to class for the past weeks and it has been here for the past two weeks. 
+
+Another deductively invalid argument:
+1. For any course x, location y, and time t before today, if CalCentral says that the lecture for course x is in y at t, then the lecture for course x is in y at t.
+2. So: For any course x, location y and time t, if CalCentral says that the lecture for course x is in y at t, then the lecture for course x is in y at t.
+
+This isn't valid! Yet, we make these types of arguments all the time. This is **Hume's Problem of Induction**. Why do we think these are reasonable? Is there any basis for these arguments?
+
+Think critically about this argument and see if there is a logical justification. We are not all being wildly irrational. 
+
+<div>
+**Remark.** Professor knows just off the top of her head that it took Euclid 47 propositions to prove the Pythagorean theorem. 🔥 
+</div>
+
+We are not asking about why we do inductive reasoning, but more *should* we do inductive reasoning.
+
+A priori: something you can know independently of any empirical experiences 
+
+A posteriori:  something you can't know it independently of empirical experiences
+
+WAIT, in this sense, language models can only discover a priori facts, whereas humans can identify a posteriori things. According to the professor, no, because we give the LLMs a posteriori information. For example, we tell the LLM which responses we prefer during training, which are a posteriori truths.
+
+A truth p is ***necesssary*** if it is "metaphysically" impossible for p to be false. Otherwise, it is a ***contingent truth***.
+
+<div class="theorem">
+
+</div>
+
+On the other hand, this idea was disputed. Kant thinks that there are synthetic a priori truths:
+- 7 + 5 = 12,
+- Everything that happens has its cause.
+
+Maybe the thing about Bourbaki is that they tried to separate the empirical experiences from the math, to develop a purely a priori math.
+
+See Quine, Willard V. O. Two Dogmas of Empiricism. Some philosophers have rejected the identification of necessary/contigent with a priori/a posteriori. Note to self, check out PHIL133.
+
+Just like we get an inductive principle, we get a counter-inductive principle. Why are we justified in using the inductive principle, but not the counter-inductive principle? If someone comes up to you and says that they are using the counter-inductive principle, what can you say to the other person to justify yourself to yourself? Maybe the inductive principle just more often true?
+
+Counter Inductive Principle
+------------------------------------
+
+The weird thing about the CIP is that as it is proved to be successful in the past, it says that its own application will be unsuccessful in the future.
+
+Black:
+
+"So the very definition of CIP renders it impossible for the rule to be successful without being incoherent. The suggested [rule-circular argument] in support of CIP could be formulated only if CIP were known to be unreliable, and would therefore be worthless. So we have an a priori reason for preferring IP to its competitor CIP."
+
+Wait so like lemme try to formalize this a little bit. Suppose we have a set of propositions $P$ along with a set of times $T = \{0, 1, ...\}$. We might formalize inductive principle as:
+$$\frac{(p, k)}{(p,k+1)}$$
+whereas CIP is formalized as:
+$$\frac{(p,k)}{(\neg p,k+1)}$$
+Then I guess the issue brought up was that if we have a proposition $p_0$ "CIP is true", then according to CIP, $\frac{(p_0,k)}{(\neg p_0, k)}$. Note though that this only holds if we actually allow this proposition to exist in our first order language. This prevents CIP from being an inference rule pretty much, so if CIP is an inference rule, "CIP is true" cannot be a proposition in our language. On the other hand, if IP is an inference rule, we can still have "IP is true" in our language.

@@ -109,4 +109,65 @@ We assume that there is a closest points $u$ and $v$ between the two sets, with 
 </div>
 
 
-A polyhedron is something like $\{x : Ax \le b\}$. $A$ is a $m \times n$ matrix.
+Story 7: Convex Functions
+------------------------------------
+Definitions for convexity:
+- For all $x, z \in \text{dom }f$ and $\theta \in [0,1]$, $f((1-\theta)x + \theta z)= (1-\theta)f(x) + \theta f(z)$
+- For all $x,z \in \text{dom }f$, $f(z) \ge f(x) + \nabla f(x)^\top (z-x)$
+- For all $x \in \text{dom }f$, $\nabla_z(f)x) \ge 0$.
+
+We also have some operations that preserve convexity:
+- Nonnegative linear combinations
+- Affine composition $f(Ax + b)$
+- Maximization $\max_{i \in I}f_i(x)$
+- Partial minimization $\min_{z}f(x,z)$
+- Composition with scalar, convex, nondecerasing function
+
+Who has tried the eigenvalue solver? You can put a matrix in that's postiive definite and get a negative number out. It happens especially as you get rank deficient. It is a real problem and when you're writing code you have to put safety checks, if you have a negative eigenvalue and its $10^{12}$ smaller than the largest eigenvalue, you have to treat it as zero and put a safety check to deal with that.
+
+<div class="remark">
+**Remark.** Dang that's some really good advice/wisdom ngl.
+</div>
+
+
+Notice that least squares, $\frac{1}{2n} \sum_{i=1}^n (a^\top x - b)^2$ is a convex function.
+
+It should be our goal to reduce all problems to finding the least squares solution.
+
+If $A$ is a symmetric matrix, we can define a quadratic function $f(x) = \frac{1}{2}x^\top Ax$.
+
+<div class="remark">
+**Remark.** Always put a $\frac{1}{2}$ in front of your quadratics. It makes your derivatives nicer.
+</div>
+
+You should have the gradients for the loss of the least squares and the gradient of $q(x) = \frac{1}{2}x^\top A x + b^\topx + c$ memorized.
+
+Why do we care about the log od a determinant? For a positive definite matrix.
+- The log of a determiant of a covariance is apparently entropy of a gaussian or something? Some paper on maximizing the log of the determiant. Why do we want to maximize and not minimize, it is concave.
+- I think maybe it also tells us whether or not $X$ expands or contracts the space overall or something? Not sure tbh.
+
+Take $X = Z + tV$, $t \in \R$,
+<center>$$\log \det (Z + tV) = \log \det (Z^{1/2} (I + tZ^{-1/2} VZ^{-1/2})Z^{1/2}) = \log \det Z + \log  \det (I + tZ^{-1/2}VZ^{-1/2})$$</center>
+using the property that $\det (XW) = \det(X) \det (W)$. Now if we let $\mu_i$ be the eigenvalues of $Z^{-1/2}VZ^{-1/2}$, the eigenvalues of $I + tZ^{-1/2}VZ^{-1/2}$ are $1 + t\mu_i$.
+
+<div class="remark">
+**Remark.** It turns out that $\nabla \log \det X = X^{-1}$. You can find the Hessian of this and do it another way.
+</div>
+
+
+
+<div class="remark">
+**Remark.** Why were we allwoed to do $X = Z + tV$ again? Is it just because of convecity or something? 
+</div>
+
+Let $A$ be symmetric and $\lambda(A)$ the largest eigenvalue of $A$. We expect this to be convex because it is a maximization of something.
+
+In this example, $\lambda(A) = \max_{\|x\| = 1} x^\top A x$, and $x^\top A x$ is a linear function of $A$, so this must be convex. This is a particularly interesting example because it is not differentiable.
+
+Functions where all sublevel sets are intervals can be minimized with the bracket search. But you have to be able t ofind points in the sublevel sets. The thing about this is that it is simpler in 1D than it is in higher dimensions. I think he called this quasiconvex?
+
+Ceiling function is quasiconvex. There's a function called $\text{card}(x)$ with $x \in \R^n$, also known as the $L^0$ norm, tells you the number of nonzero components of $x$.
+
+If a function is log concave, then when you take the logarithm, it is concave. The function $x$ is log concave. $e^x$ is also, but one of hte most important is the Gaussian probability density function.
+
+If you have a constraint, $f(x) \ge \alpha$, then $\log f(x) \ge \log \alpha$ if you have a log concave function.

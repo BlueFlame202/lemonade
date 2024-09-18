@@ -253,3 +253,142 @@ The reason we define it weirdly like this as opposed to the canonical definition
 <div class="theorem">
 **Geometric Hahn-Banach Theorem.** If $\{0 \} \not\in A$ and $A$ is a convex linearly open set, then there exists a hyperplane $V$ such that $V \cap A = \varnothing$. In more generality, if $V_1 \cap A = \varnothing$ and .., 
 </div>
+
+
+
+Hahn-Banach Theorem
+-----------------------------
+
+This one was taught by Zhongkai.
+
+<div class="theorem">
+**Theorem.** Let $V$ be a vector space over $\R$. $A \subseteq V$ convex and linearly open.
+</div>
+
+<div class="theorem">
+**Theorem.** $V_1 \subseteq V$ linear subspace, $V_1 \cap A = \varnothing$, then there exists a hyperplane $V_2$, $V_1\subseteq V_2$, and $V_2 \cap A = \varnothing$.
+</div>
+
+*Proof.*
+
+First looked at $V = \R^2$ and made observation that for any $ \in V$, half line $\{t x : t\ ge 0\}$ if it intersects $A$, then $\{tx : t\le 0\} \cap A = \varnothing$ (or else $0 \in A$ by convexity).
+
+He did a ton of stuff and then had to use Zorn's Lemma.
+
+Now we will stop this topic for a while and go back to Hahn Banach with a version in topology or something.
+
+
+Metrics and Topologies
+------------------------------
+
+Defined topological space and topological structure. Defined Metric space as well, and how metric space induces a topology.
+
+Defined closed and also what it means for a set to be complete.
+
+<div class="theorem">
+**Theorem (Baire Category Theorem).** If $(E,d)$ is complete metric space, $\{U_n\}_{n=1}^\infty$ a countable family of dense open sets then $\bigcap_{n=1}^\infty U_n$ is dense in $E$.
+</div>
+
+A set $A\subseteq E$ is called nowhere dense if its closure $\overline{A}$ doesn't have interior. A set is called first category if it is a countable union of nowhere dense sets. A set is called second category if it is NOT first category. 
+
+
+Baire Category Theorem
+--------------------------------
+
+$(E,d)$ is a complete metric space, $\{U_n\}_{n=1}^\infty$ countable family of open dense sets. Then $\cap_{n=1}^\infty U_n$ is dense in $E$.
+
+**Definition.** $A \subseteq E$ is called generic if it contains the countable intersection of open dense sets.
+
+<div class="problem">
+**Example.** $E = C^0([0,1]; \R)$, $d(f,g) = \sup_{x\in [0,1]}|f(x)-g(x)|$
+
+$A$ is nowhere differentiable functions as a subset of $E$.
+
+$F_n = \{f \in E : \exists x_0 \in [0,1], \text{ s.t. } |f(x) - f(x_0)|\le n|x-x_0|\}$
+</div>
+
+When discussing something, he did a proof by picture where he drew a zig zaggy function with slope on any interval being either $2n$ or $-2n$.
+
+
+Tychonov Theorem
+
+Locally convex, balanced, absorbing.
+
+- $M \subseteq V$ is called balanced if for all $x \in M$, $|a| \le 1$, $ax \in M$.
+- $M\subseteq V$ is called absorbing if for all $x \in V$, $|a|$ sufficiently small, $ax \in M$.
+
+
+<div class="theorem">
+**Theorem.** A Housedorff, first countable, TBS is locally convex if and only if the topology is given countable family of seminorms. In this case, the topology is metrizable.
+</div>
+
+Locally convex: $N$ is open, balanced, and absorbing. 
+$$P_n(x) := \inf\{t > 0 : \frac{x}{t} \in N\}$$
+
+
+Seminorms $N_{i,j} = \{x \in V : p_i(x) < \epsilon_j\}$, $\epsilon_j \rightarrow 0$. Hausdorff implies $\cap_{i,j}N_{ij} = \{0\}$, which is how we can guarantee that $d(x,y) = 0 \Rightarrow p_i(x-y) = 0\Rightarrow x - y = 0$.
+Some classical consutrction
+$$d(x,y) = \sum_{n=1}^\infty 26{-n} \frac{p_n(x-y)}(1+p_n(x-y))$$
+Triangle inequality is a bit tricky but we can show it from the regular triangle inequality on $p_n$.
+
+
+TBS is a supset of locally convex TBS which is a supset of seminorm space which is a supset of Frechet space which is a supset of Banach space is a supset of Hilbert space.
+
+
+
+Metrizable Locally Convex Topological Veector Spaces
+------------------------------------------------------
+
+
+As a consequence of a bunch of theorems, a topology is defined using a countable family of seminorms $p_j : V \rightarrow [,\infty)$, $p_j(x+y) \le p_j(x) + p_j(y)$, $p_j(a_x) = |a|p_j(x)$, i.e., $x_n \rightarrow x$ is equivalent to $p_j(x_n - x) \rightarrow 0$ as $n \rightarrow \infty$ for all $j$.
+
+$V, \{p_j\}$ is called a Frechet space if and only if it is complete.
+
+Seminormal space (i.e. top space defined by one seminorm).
+
+The $\|f\|_p$ norm is a seminorm based on Minkowski's theorem or something. 
+
+$W \subseteq V$,  we would like to define a norm on $V/W$.
+$$\tilde{p}(x+W) := \inf_{y \in x + W} p(y)$$
+$\tilde{p}$ is continuous if and only if $W$ is closed.
+
+Issue in theorem statement, basically we have a seminorm, but we want to show that when we divide it by points that go to zero, we get a norm. 
+
+<div class="theorem">
+**Claim.** $\tilde{p}$ is a norm on $V/W$ if and only if $W$ is closed.
+</div>
+
+Now notice that $C(\R^n)$ is not a normed space. Why? Suppose there exists a norm $p$ such that $\forall j \exists c_j$ such that $p_j(x) \le c_j p(x)$. Just take $f(j) = jc_j$ (connected by linear pieces in between), and then the condition would be $j c_j \le c_j p(f)$ which is impossible if it has to happen over all $j$.
+
+
+We have a whole bunch of different Hahn-Banach theorems. These are all based on the geometric version. There is one version though here:
+
+<div class="theorem">
+**Theorem.** Suppose $V$ is a locally convex topological vector space. $W \subseteq V$ is a linear subspace. Then $x \in \overline{W}$ if and only if for all $f : V \rightarrow K$ such that $f|_W = 0$, $f(x) = 0$.
+</div>
+
+<div class="theorem">
+**Theorem (The Runge Approximation Theorem).** Suppose $K \subseteq \mathbb{C}$ and $u$ is holomorphic in an open neighborhood of $K$. If $\mathbb{C} \backslash K$ is connected, then for every $\epsilon$ there exists a polynomial $p$ such that$\sup_K |p(x) - u(x)| < \epsilon$.
+</div>
+
+In Rudin's Real and Complex Analysis, in an appendix, there is a proof that you only need it to be holomorphic on the interior of $K$. $\|u\| = \sup_{x \in K} |u(x)|$.
+
+There exists a nontrivial fact which is that every continuous linear functional $f$ from ...
+$$f(u) = \int u(z) \; d\mu(z)$$
+for a finite complex supported something. (I think he's saying we can find $\mu$ so that this works for any functional $f$). The proof is also in the book by Rudin that he mentioned apparently.
+
+Suppose $v$ is compactly supported and smooth in $\mathbb{C}$.
+
+$$\overline{\partial} = \frac{1}{2}(\partial_x + i\partial_y)$$
+$$u \in C^1(U)$$
+$$u \in \mathcal{O}(U) \Leftrightarrow \overline{\partial} u = 0$$
+
+$$\int_{\mathbb{C}} \overline{\partial}v(z) \; dm(z) = 0$$
+$$-\frac{1}{\pi}\int_{\mathbb{C}} \overline{\partial} v(z) (\zeta - z)^{-1} \; dm(z) = v(\zeta)$$
+Basically proved using Green's formula to reduce it to Cauchy's integral formula.
+
+From Hahn-Banach, we need that $\int \zeta^n \; d\mu(\zeta) = 0$ finite for all measure supported in $K$ for all $n$ implies $\int u(\zeta) d\mu(\zeta) = 0$. This left hand side of the implication is the condition that it vanishes on the sapce of polynomials.
+
+Eventually, $z \rightarrow \int (\zeta - z)^{-1} d\mu(\zeta)$ is holomorphic on $K^c$.
+
+Next time we'll solve PDEs using Hahn-Banach theorem :eyes:.
