@@ -1,0 +1,41 @@
+---
+layout: ../../layouts/LectureNotesLayout.astro
+title: "Homotopy Groups"
+description: "Preparation for the Quals."
+image: "/img/pics/IMG_4768.jpg"
+writer: Aathreya Kadambi
+lecturer: Professor Alexander Givental and Fomenko and Fuchs
+date: "September 24, 2024"
+---
+
+$\pi_n(X,x_0) = \pi_b((S^n,0), (X,x_0))$. Note that $\pi_0(X,x_0)$ is the number of path-connected components of $X$.
+
+He then explained the pictures from Fig 37 and Fig 38 in the book and basically section 8.1.
+
+Depednence on Base Points
+----------------------------
+
+If we have another base point $x_1$ and a path from $x_0$ to $x_1$ $\gamma$, we get a map $\pi_n(X,x_0)\xrightarrow{\gamma} \pi_n(X,x_1) \xrightarrow{\tilde{\gamma}} \pi_n(X,x_0)$. 
+
+We introduced many algebraic invariants but we can't compute many of them unless the space is trivial, so let's look at a covering $(T,t_0) \rightarrow (X,x_0)$. In the theory of coverings we showed that mappings $p : (T,t_0)\rightarrow (X,x_0)$ are injective. This is because if a loop is contractible in $(X,x_0)$, we can use the homotopy lifting lemma to lift this homotopy up to $T$, and then because the fiber is discrete, we get the same point up there so that the other loop upstairs is also contractible. From this, we get that $p_* : \pi_n(T,t_0) \hookrightarrow \pi_n(X,x_0)$ is injective for $n \ge 1$. It turns out for $n \ge 2$, it is also surjective.
+
+{/* Remember that construction for showing that n torus is covered by a k torus, I should somehow make that quotienting and stuff more rigorous. Apparently $\pi_n(three torus) = 0$ and youcan also extract that from complex analysis because it says something (Riemann mapping theorem) CP1 or C or P, and for tori it is C or unit disk so they are both contractible */}
+
+Relative Homotopy Groups
+----------------------------
+
+He discussed some stuff from this section.
+
+
+The Reason This Was introduced
+-------------------------------
+This isn't necessarily helpful for computations or anything, but it let's us make the long exact homotopy sequence.
+
+He wrote something about $A \xhookrightarrow{i} X$ and $(X,x_0,x_0) \xrightarrow{j}(X,A,x_0)$.
+
+<center>
+$$\pi_0(X)\xleftarrow{i_*}\pi_0(A)\xleftarrow{\partial} \pi_1(X,A) \xleftarrow{j_*}\pi_1(X) \xleftarrow{i_*}\pi_1(A) \leftarrow \pi_2(X,A)\leftarrow \dots$$
+</center>
+<center>
+$$\dots \xleftarrow{i_*} \pi_{n-1}(A)\xleftarrow{\partial} \pi_n(X,A)\xleftarrow{j_*}\pi_n(X) \xleftarrow{i_*}\pi_n(A) \xleftarrow{\partial}\pi_{n+1}(X,A) \leftarrow$$
+</center>

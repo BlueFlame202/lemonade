@@ -392,3 +392,67 @@ From Hahn-Banach, we need that $\int \zeta^n \; d\mu(\zeta) = 0$ finite for all 
 Eventually, $z \rightarrow \int (\zeta - z)^{-1} d\mu(\zeta)$ is holomorphic on $K^c$.
 
 Next time we'll solve PDEs using Hahn-Banach theorem :eyes:.
+
+Recollection of Theorems
+---------------------------------
+
+<div class="theorem">
+**Geometric Version of Heine-Borel.** Let $V$ be a real vector space and $A \subseteq V$ be a convex linearly open set. Then if $F$ is an affine set $F \cap A =\varnothing$, there exists an affine hyperplane $H$ such that $H \cap A = \varnothing$, $H \supseteq F$, $x \in H$.
+</div>
+
+<div class="theorem">
+**Theorem.** If $V$ is a topological vector space over $K = \R,\mathbb{C}$, $A$ convex and open which are nonempty, $F$ is an affine subspace such that $F \cap A = \varnothing$, then $\exists H$ a closed affine hyperspace $F \subseteq H$ and $H \cap A = \varnothing$.
+</div>
+
+- If $K = \R$, apply gen? theory so $H \supseteq F$, $H \cap A = \varnothing$, $\text{codim }H = 1$, all we need is $\overline{H} = H$, since $\overline{H} \neq V$ as $A$ is open and nonempty.
+- If $K = \mathbb{C}$, take it as a real vector space to get some $H$ from the first part, then consider $H_1 = H \cap (iH)$. Then it is not too hard to show that it works.
+
+
+<div class="theorem">
+**Theorem.** If $A \subseteq V$, $V$ is locally convex topological vector space, $A$ is a closed convex set, $x \not\in A$. Then there exists $f : V \rightarrow K$, continuous? and linear such that 
+<center>$$\inf_{y\in A} |f(x) - f(y)| > 0$$</center>
+(in particular, the affine hyperplane $H = \{y : f(x) = f(y)\}$ satisfies $H \cap A = \varnothing$).
+</div>
+
+As a corollary,
+<div class="theorem">
+**Corollary.** $W \subseteq V$ linear subspace, $x \in \overline{W} \Leftrightarrow \forall f : V \rightarrow K$ continuous, $f |_W = 0$, we have $f(x) = 0$. 
+</div>
+
+{/* Hahn Banach theorem was actually proved by Helli? earlier, and was proved int he real case first historically. */}
+
+<div class="theorem">
+**Theorem.** IF $W \subseteq V$, $p$ is a seminorm of $V$, $f : W \rightarrow K$, $|f(x)| \le p(x)$, then $\exists f_1 : V \rightarrow K$ such that $|f_1(x)| \le p(x)$ and $f_1|_W = f$.
+</div>
+
+<div class="remark">
+**Remark.** We defined Hilbert space and discussed inner products, and in the definition he said $(ax, y) = a(x,y)$. I pointed out that isn't it nicer to have $(x,ay) = a(x,y)$, to which he asked if I was a physicist. Apparently that is the physics notation and this version he is using is the math notation, and to my surprise, he's right, even Linear Algebra Done Right actually used that convention! It's funny that my mind has been rewired in this way to think of inner products as applications of linear functionals via the notation itself.
+</div>
+
+<div class="theorem">
+**Theorem (Riesz).** Suppose $L : H \rightarrow K$, linear and continuous, then $\exists !$ $y \in H$ such that $L(x) = (x,y)$. 
+</div>
+
+<div class="remark">
+**Remark.** By constructing linear functionals, we can actually obtain elements of the Hilbert space. Differential equations students seminar at 2 oclock on Tuesday.
+</div>
+
+<div class="theorem">
+**Theorem (Application of Hein Borel and $\R$).** For $\varphi \in C^2(\mathbb{C})$, suppose $\varphi : \mathbb{C} \rightarrow \R$ such that $\Delta \varphi(z) = \kappa(z) > 0$ for all $z \in \mathbb{C}$. Then for all $f \in L^2 (\mathbb{C}, \kappa^{-1}ee^{-\varphi}\; dm(z))$, ($\|f\|_\psi^2 := \int_{\mathbb{C}} |f(z)|^2e^{-\psi(z)}\;dm(z)$, $\psi(z) = \varphi(z) + \log \kappa(z)$), $\boxed{\overline{\partial} u = f}$, $\|u\|_\varphi \le \|f\|_{\varphi + \log \kappa}$.
+</div>
+
+<div class="remark">
+**Remark.** In our Hilbert space setting, Cauchy-Schwarz inequality implies the triangle inequality.
+</div>
+
+<div class="theorem">
+**Theorem.** Suppose $A$ is a closed convex subset of $H$ and $x \not \in A$. Then $\exists !$ $y \in A$ such that $\|x-y\| = \inf_{z\in A} \|x-z\|$ and $L(z) := \langle z, x-y\rangle$ satisfies $\Re L(z-y) \le 0$, $z\in A$. This implies $|L(z) - L(x)| \ge |L(y) - L(x)| = \|x-y\|^2 > 0$, $z \in A$.
+</div>
+
+<div class="remark">
+**Remark.** For next theorem, 1 dimensional case was he forget who showed it. The 2 dimensional case was proved in Berkeley, and the $n$ dimensional case was shown by Hormander.
+</div>
+
+<div class="remark">
+**Remark.** "Old mathematicians are like old boxers, they can still dish out punishment but they cannot take any." he says as he remarks that he doesn't actually know how to solve three of the problems on the homework.
+</div>

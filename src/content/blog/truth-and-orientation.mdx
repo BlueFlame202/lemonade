@@ -1,0 +1,50 @@
+---
+layout: ../../layouts/BlogPostLayout.astro
+title: "Truth and Orientation"
+description: "Does truth exist? Is G(125,34) orientable?"
+image: "/img/pics/20240918-new-book.jpg"
+author: "Aathreya Kadambi"
+slug: "truth-and-orientation"
+date: "September 18, 2024"
+---
+
+I have two pressing problems at the moment (probably more but we'll ignore the others). The first comes from Hume's problem which we were discussing in a philosophy and probability class, and the second comes from the fact that my algebraic topology problem set is asking me to describe which Grassmanians are orientable (which would be great if I knew how to do that). Also, apparently syntax is not enough to have a proposition, you need to have a model and semantic structure or something. That being said, don't quote me on that because I don't get it yet.
+
+According to ChatGPT, "Inference rules operate on the syntactic level but are used to derive conclusions that correspond to propositions".
+
+
+
+Thoughts on Hume's Problem
+--------------------------------------
+
+I'm still trying to formalize my thoughts, but to be honest I'm still understanding how models, semantic spaces, and different orders of logic all come together cohesively. Right now, my formalism is as follows. 
+
+Let's say we have a collection of statements $P$, these are all the statements we can make with our language. Then I'll call $T$ a *truth* on $P$ if it is a map $T : P \rightarrow \{-1, 1\}$ mapping each statement $p$ to either $-1$ or $1$, depending on whether $p$ is true or false. 
+
+A rule of inference is denoted as $\frac{p}{q}$ (according to ChatGPT), which sorta means that if $T(p)$ is 1, then $T(q)$ is 1. I say "sorta" because we might have to formalize this in its own logic or something, but I'll have to think about those details later.
+
+But what this let's us do is basically formalize the inductive principle and counter inductive principles as "rules of inference". They both fundamentally seem to rely on a notion of time to me, so I'll add time to my set of propositions by making a new set of propositions: $P' = P \times T$ (the Cartesian product) where $T$ is our set of times. For the following ideas, I'll just take $T = \Z_{\ge 0}$ the nonnegative integers for simplicity.
+
+In class, we discussed ideas from Wesley C. Salmon and Max Black. To be honest I still have to read through their work more carefully, but here are my thoughts based on what we've discussed. We can formalize the inductive principle (IP) as the inference rule:
+<center>$$\frac{(p, t)}{(p, t+1)}$$</center>
+and we can formalize the counterinductive principle (CIP) as the inference rule:
+<center>$$\frac{(p, t)}{(\neg p, t+1)}$$</center>
+The issue brought up with the counterinductive induction principle (CIP) arises when we allow the proposition $p_0$ stating "CIP is true at time $k$" to be a valid proposition in $P$. If CIP is ever right, for instance at time $j$, then that means $T((p, j)) = 1$ and $T((\neg p, j+1)) = 1$ for some $j$, but it also means $T((p_0, j)) = 1$. By the counter inductive principle, then, $T((\neg p_0, j+1)) = 1$. If we also use the law of excluded middle, that $(p, t)$ or $(\neg p, t)$ for all $t$, then $T((p_0, j+1)) = -1$. That means that CIP is wrong at time $j+1$, so that $T((p, j+2)) = -1$. On the other hand, we have CIP as an inference rule, so $T((p,j+2)) = 1$. This seems to be a contradiction.
+
+In other words, CIP as an inference rule isn't really compatible with both the law of excluded middle and a proposition like $p_0$. I will note that defining $p_0$ is slightly weird, because somehow it allows us to look ahead in time without an inference rule, which we could consider banning.
+
+So does this mean that there is no truth which is compatible with CIP, as long a we believe in having the ability to add this proposition and also the law of excluded middle? Personally, I'm a bit more skeptical of being able to add this proposition that has access to CIP.
+
+
+My Slightly Improved Understanding of Geometry and Topology
+--------------------------------------
+
+When thinking about the whole Grassmanian stuff, I think a fundamental issue for me is that I can't see any manifolds globally. It seems to me that inherently, by construction, I can only see local things, which is to me like walking through a cave in Pokemon without having the TM Flash. It's genuinely miserable. 
+
+In particular, with the Grassmanian thing, I feel like if I could just imagine a picture of $G(125,34)$, I could immediately tell you if it was orientable. I can tell you if the Mobius band isn't orientable, for example, and when I tell that to you, it doesn't necessarily involve me coming up with a orientation cover, it just looks twisty, so I might at least hypothesize that it wasn't orientable and then coming up with an orientation cover.
+
+That led me to looking into the different mathematicians have come up with for understanding global geometric and topological ideas. Maybe I can't directly picture global things, but at the very least, it would be nice if I could know something, anything, about the global picture.
+
+In the end I went to office hours with Professor Givental and cleared a bit up, but to be honest I still haven't gotten this problem yet. It's also my fault though, because I haven't read the textbook carefully yet. I'll revisit this idea and make a new blog post soon! 
+
+Oh yeah, and the reason I was talking about both orientations and induction is that they both felt like choices of maps to $\{-1, 1\}$ satisfying nice properties. The fiber over the orienting map is basically the $\{-1, 1\}$ part. Note that in reality in all of these cases, there is no obvious choice of positive/negative, which is a pretty nice idea which even persists in the construction of the real numbers. Maybe even with real numbers we could have forgotten about a positive and negative side of the line and thought instead about fibers over an "absolute value" map.

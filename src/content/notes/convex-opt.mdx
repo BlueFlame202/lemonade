@@ -171,3 +171,80 @@ Ceiling function is quasiconvex. There's a function called $\text{card}(x)$ with
 If a function is log concave, then when you take the logarithm, it is concave. The function $x$ is log concave. $e^x$ is also, but one of hte most important is the Gaussian probability density function.
 
 If you have a constraint, $f(x) \ge \alpha$, then $\log f(x) \ge \log \alpha$ if you have a log concave function.
+
+{/* He wants a proposal for a project for this class by the end fo October. And this is research, so it's allowed to change, what ends up happening may end up being very different, but he wants to make sure that we have started thinking about an idea relevant to the calss. */}
+
+Cones
+-----------------------
+
+He wants to talk about convex cones. This,
+<center>
+$$ \min c^\top x$$
+s.t. $A_0 + \sum_{i=1}^n A_i x_i \ge 0$
+</center>
+these problems are called semidefinite programming problems (SDP problems). Today we'll see how many problems can be written like this.
+
+Let $K$ be a convex cone. If for all $x, z \in K$, $\alpha x +\beta  z \in K$, $\alpha, \beta \in \R_+$. $R_+^n$ is called an orthant or nonnegative orthant.
+
+The Orthant is self-dual, which follows simply. The second order cone also is self dual, that follows from Cauchy-Schwarz. The SDP problem is also self dual or something.
+
+$$X, Z \ge 0$$
+$$X = \sum_{i=1}^n \lambda_i u_i u_i^\top$$
+$$Z = \sum_{=1}^n \mu_i v_i v_i^\top$$
+
+You should show that $\sum_{i,j} X_{ij} Z_{ij}$ for yourself. If you do something, you get:
+<center>$$= \sum_{i=1}^n \sum_{j=1}^n \lambda_i \mu_j \text{Tr}(u_iu_i^\top v_j v_j^\top)$$</center>
+
+Take two PSD matrices and dot product them together and you always get a positive number, taht's the cool thing.
+
+This is nice because if you can solve one program, you can solve another. This will end up leading to the primal dual ideas. The second order cone actually encodes quadratic programming, and the positive semidefinite cone encodes everything.
+
+<div class="remark">
+**Remark.** A piece of motivation is that we are heading towards optimality of $\langle \nabla f, z - x\rangle \ge 0$. As I was typing this he decided to erase it, and someone loudly whispered "no!". It was really funny.
+</div>
+
+Convex Q.P.
+-------------------------
+
+
+minimize $\frac{1}{2}x^\top Q x + p^\top x$ subject to $x \in \Omega$.
+
+minimize $t^2$  ... subject to $\frac{1}{2}x^\top Q x + p^\top x \le t^2$, $x \in \Omega$
+
+$\frac{1}{2}(x+Q^{-1}p)^\top Q (x+ Q^{-1}p)\le t^2$
+$\|Q^{1/2} x + Q^{-1/2}p \| \le t$
+
+Don't solve least squares using gradient descent, but we can solve least squares via a second order cone problem. 
+
+minimize $t^2$ subject to $\|Ax - b\|^2 \le t^2$. By monotonicity, this is the same as just saying $\min t$ such that $\|Ax - b\| \le t$.
+
+Stochastic Optimization
+------------------------------------
+
+Minimize $c^\top x$ such that $\text{Pr}(a^\top x \le b) \ge \eta$ (in other words, we're picking $a$ out of a hat, and we want that the probability of the condition being met is decently high). A version of markowitz forcasting or something. Finance people like this. 
+
+Suppose $a \in \mathcal{N}(\overline{a}, \Sigma)$. $a^\top x \sim \mathcal{N}(\overline{a}x, x^\top \Sigma x)$.
+
+$$\text{Pr}(a^\top x \le b) = \Phi(\frac{b-\overline{a^\top}x}{\|\Sigma x\|_i})$$
+or something. Gaussican CDF. We can the minimize $c^\top x$ such that $\overline{a}^\top x + \Phi^{-1}(\eta)\|\Sigma^{1/2}x\|_i \le b$. This is a very frequnetist problem because we're setting a sort of confidence level.
+
+Robust optimization
+----------------------------------
+Minimize $c^\top x$ subject to $a^\top x \le b$ for all $a \in \mathcal{E}$. $\mathcal{E} = \{\overline{a} + Pu : \|u \| \le 1\}$. $P \ge 0$. What is the relationship between robust and stochastic problems? It is actually a very contentious point in the optimization community because the robust people say they can solve all the stochastic people's problems. Recht low key sides with the robusters (get it, robust, plust they bust people's problems so they're busters). 
+
+The tricks on the robust side are still going to work even if we change up $\mathcal{E}$, and we get different formulations that still solve the stochastic ppls problems or something? You just have to worry about what sets you can describe well using convex sets rather than deal with stochasticity?
+
+Duality: Concave Maximization and Convex Optimization
+------------------------------------------------
+
+**Fact 1:** Solutions to the primal are always at least the solutions to the dual.
+
+Branch and bound is a solution method that makes use of duality.
+
+He thinks algebra is underappreciated. 🤨 Idk about that one. Maybe in CS.
+
+Dualizing is somehow a projection into the space convex problems? Maybe? because dual gives you a convecx problem, and dual of the dual gives you a convexification of your original problem.
+
+Let's look at this: $P$ is symmetric, maximize $x^\top P x$ subject to $\|x\|_2 = 1$. 
+
+Or maybe, looking at a dual, minimize $\lambda$ subject to $\lambda I - P \ge 0$. We know how to do this. That's just $\lambda_{\max}$ of $P$. But then if we put $x$ the corresponding eigenvector into the original problem, we immediately find $\lambda_{\max}$, so we have strong duality and we've solved that nonconvex problem!
