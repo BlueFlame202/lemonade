@@ -456,3 +456,60 @@ As a corollary,
 <div class="remark">
 **Remark.** "Old mathematicians are like old boxers, they can still dish out punishment but they cannot take any." he says as he remarks that he doesn't actually know how to solve three of the problems on the homework.
 </div>
+
+
+
+
+... (I may have missed some things in here)
+
+
+Analytic Fredholm Theory
+-------------------------------------
+{/* Oct 24 */}
+
+We say that $z \rightarrow B(z)$ is **meromorphic** with a pole of **finite rank** at $z = z_0$ if there exists finite rank operators $B_1, ..., B_J$ and an analytic family of open $z \rightarrow \tilde{B}(z)$, for $z$ near $z_0$ such that $B(z) = \sum_{j=1}^J \frac{B_j}{(z - z_0)^j} + \tilde{B}(z)$.
+
+<div class="theorem">
+**Theorem.** Suppose $z_0 \in \Omega$ at which $A(z_0)^{-1} : B_2 \rightarrow B_1$ exists. Then $z \mapsto A(z)^{-1}$ is a meromorphic family of open ? with poles of finite rank.
+</div>
+
+<div class="problem">
+**Example.** $B = B_1 = B_2$, $S \in \mathcal{L}_c(B,B)$, $A(z) = S - z I$, $\Omega = \mathbb{C} \backslash \{0\}$.
+</div>
+
+*Proof.*
+
+Notice $\text{ind}(A(z)) = \text{ind}(A(z_0)) = 0$. Fix $w \in  \Omega$. $\dim \ker A(w) = n(q) = n = \dim\text{coker }A(w)$. There exists $R_- : K^n \rightarrow B_2$ and $R_{+} : B_ \rightarrow K^n$ such that ?? $E_{-+}^W (z) : K^n \rightarrow K^n$
+
+$$\begin{pmatrix} A(w) & R_{-} \\ R_+ & 0\end{pmatrix} : B_1 \oplus K^n \rightarrow B_2 \oplus K^n$$
+is invertible. There exists $U(w)$ neighborhood of $w$ wsuch that we have the schur's complement thing. Now $A(z)^{-1}$ exists is equivalent to $E_{-+}^2(z)^{-}$ existing, and then $A(z)^{-1} = E^w(z) - E_{+}^w(z) E_{-+}^w(z)^{-1} E_-^w(z)$
+
+<div class="strat">
+**Strat.** The idea in this lecture is in part about how we can exapnd things into Laurant series and work with those.
+</div>
+
+
+<div class="theorem">
+**Theorem.** Suppose $P : B_1 \rightarrow B_2$, $B_1 \subseteq B_2$, $P - zI$ is Fredholm for $z \in \Omega$ connected open ?. Assume $\exists z_0 \in \Omega$ such that $(P- z_0 I)^{-1}$ exists. Then $z \rightarrow (P-zI)^{-1}$ is meromorphic in $\Omega$ with poles of finite rank. Moreover, $\Pi_z :=\frac{1}{2\pi i} \oint_z (wI - P)^{-1} dw$ where integral is over a positive orientation circle containing only a pole, satisfies:
+<center>$$\Pi_z^2 = \Pi_z,\quad \text{rank }\Pi_z < \infty$$</center>
+</div>
+*Proof.*
+
+$$\Pi_z = \frac{1}{2\pi i} \int_{\gamma_j} (w - P)^{-1}\;dw$$
+$$w = wI$$, 
+$$\Pi_z^2 = \left(\frac{1}{2\pi i}\right)^2 \int_{\gamma_1}\int_{\gamma_2} (w_1 - P)^{-1} (w_2 - P)^{-1}\; dw_1 \; dw_2$$
+$$(w_1 - P)^{-1} - (w_2 - P)^{-1} = (w_1 - P)^{-1}((w_2 - P) - (w_1 - P))(w_2 - P)^{-1}$$
+$$ = (w_1 - P)^{-1}(w_2 - w_1)(w_2 - P)^{-1}$$
+$$(w_1 - P)^{-1}(w_2 - P)^{-1} = \frac{1}{w_2 - w_1}((w_1 - P)^{-1} - (w_2 - P)^{-1})$$
+$$\Pi_z^2 = \frac{1}{(2 \pi i)^2} \int_{\gamma_1} \int_{\gamma_2} (w_1 - P)^{-1}\frac{1}{w_2 - w_1}\;dw_1 \;dw_2\;\frac{1}{(2 \pi i)^2} \int_{\gamma_1} \int_{\gamma_2} (w_2 - P)^{-1}\frac{1}{w_2 - w_1}\;dw_1 \;dw_2$$
+Integral outside is zero.
+
+Weak Topology and Weak Star Topology and Other things
+---------------------------------------------------------
+
+- $F$, $G$ vector spaces, $F \times G \ni (x,y) \mapsto \langle x, y\rangle$ nilpotent.
+
+Fact: If $L : F \rightarrow K$ is continuous iwth respect to $\sigma(F,G)$ where $\sigma(F,G)$ is the topology on $F$ by seminorms $x \mapsto |\langle x, y\rangle|$, $y \in G$, then $\exists y \in G$ such that $L(x) = \langle x, y\rangle$.
+
+- Banach-Alaoglou Theorem
+
