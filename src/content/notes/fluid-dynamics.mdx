@@ -11,8 +11,9 @@ date: "Fall 2024"
 
 This fall I'm taking a fluid dynamics class by Professor Phil Marcus at Berkeley! Coincidentally, I actually was really interested in his research on Jupyter's red spot and these related problems in freshman year, although I ended up going down a different road for a while. Excited to learn fluid dynamics.
 
-Story 1: Dimensions
------------------------------------------
+## Chapter 1: Hydrostatics
+
+### Story 1: Dimensions
 
 Relevant lectures: Lecture 1
 
@@ -28,8 +29,7 @@ Dimensions are things like length, time, mass, etc.. It is important to distingu
 **Remark.** I'll leave out the examples and discussion of dimensional analysis and units and things like that, since one can find good treatment of that subject in practically any thick science textbook. One thing I will mention is that apparently there's actually a unit of temperature called "Rankine". I've never seen that before.
 </div>
 
-Story 2: Properties of Fluids
------------------------------------------
+### Story 2: Properties of Fluids
 
 Relevant lectures: Lectures 1, 2
 
@@ -62,8 +62,7 @@ so solving for $n$, $n = \frac{\rho V}{\nu_{\text{physics}}}$. Substituting this
 so we've found that 
 <center>$$\boxed{R = \frac{R_{\text{physics}}}{\nu_{\text{physics}}}}$$</center>
 
-Story 3: Viscosity
------------------------------------------
+### Story 3: Viscosity
 
 {/* 
 
@@ -96,8 +95,7 @@ so this flow is clearly very turbulent.
 </div>
 
 
-Story 4: Pressure
-------------------------------------
+### Story 4: Pressure
 
 Relevant Lectures: Lecture 2
 
@@ -114,8 +112,82 @@ We will show this in the ***static*** case, namely where
 Now let's imagine a little piece of swiss cheese (proceeds to draw an inclined plane with angle theta). 
 
 
-Story $k$: Gauss's Law
----------------------------
+## Chapter 2: Go with the Flow
 
-Our MechE 106 equation which is in many cases more useful than Gauss's law is:
-<center>$$-\int_V \nabla P \;d\text{volume} = \int_S P\hat{\mathbf{n}} \; d\text{area}$$</center>
+### Story 1: Towards Continuity and Conservation
+
+In the following, we're going to pretend we know some information: the density $\rho$ (a distribution on $\R^3$ representing mass), $\mathbf{F}_M$ (an idea of flux), and $Q$ (another distribution on $\R^3$ representing creation/destruction of mass).
+
+Consider any fixed region (volume) $V \in \R^3$, and imagine $\R^3$ filled with a fluid. The density of this fluid is given by $\rho(x,y,z,t)$. Then we can obtain a fwe quantities directly:
+- **Total Mass of Fluid in Container:** $\int_V \rho \;dV$ (summing up the density function)
+- **Time Rate of Change of Total Mass of Fluid in Container:** $dM(t)/dt = \int_V \frac{\partial \rho}{\partial t} dV$
+- **Flux Through The Boundary/Surface (Rate of transport of mass from outside to inside):** $\dot{M}_{\text{transport}} = \int_{\partial V} \mathbf{F}_M \cdot \hat{n}\; dA =: \int_{\partial V} \mathbf{F}_M \cdot d\vec{A} = -\int_V \nabla \cdot \mathbf{F}_M\;dV$
+    - $\mathbf{F}_M$ is defined so that $(\mathbf{F}_M \cdot \hat{\mathbf{n}}) \; dA$ is the time rate at which mass passes through the surface element
+
+Then we find that the change in the total mass of the region can only change when mass is created or destroyed within the region, or when it flows in through the boundary. This gives us:
+$$\int_V \frac{\partial \rho}{\partial t} dV = -\int_V \nabla \cdot \mathbf{F}_M + Q\;dV$$
+and since this holds for all regions $V$, we find that 
+<center>$$\boxed{\frac{\partial \rho}{\partial t} = -\nabla \cdot \mathbf{F}_M + Q}.$$</center>
+
+### Story 2: Mass and Momentum Go with the Flow
+
+We theorize that mass "goes with the flow" in the sense that, as Professor Marcus puts it, "transport of mass in a fluid is due to the fluid velocity". Mathematically,
+<center>$$\mathbf{F}_M = \rho \mathbf{v}.$$</center>
+This sort of makes sense in a dimensional-analysis sort of way, and also intuitively: mass flows at a rate dictated by the velocity. Substituting this into our equation, and considering the case in which mass cannot be created nor destroyed (so $Q = 0$),
+<center>$$\frac{\partial \rho}{\partial t} = -\nabla \cdot (\rho \mathbf{v}) = -\rho \nabla \cdot \mathbf{v} - \nabla \rho \cdot \mathbf{v}.$$</center>
+which is called the <b>continuity equation</b> or the <b>conservation of mass</b>. We rewrite this as:
+<center>$$\boxed{\frac{\partial \rho}{\partial t} + (\mathbf{v}\cdot \nabla)\rho = -\rho(\nabla \cdot \mathbf{v})}.$$</center>
+In the special case where $\rho$ is constant, we find that this is the same as $\boxed{\nabla \cdot v  = 0}$.
+
+In general, if we make the assumption that a quantity "goes with the flow" and know the density of the quantitiy, we can write an expression for $\mathbf{F}$ and get an appropriate continuity or conservation law. Another important example is momentum. In the case of momentum, the density is something like "mass times velocity". Since velocity is a vector quantity though, and we want a scalar density field, we instead choose a particular direction called the "accounting direction", which we will use to study momentum flow in that direction. If we take a certain direction $\hat{d}$, and write $v_d = \vec{v} \cdot \hat{d}$, then we can take the scalar density field $\rho v_d$, and end up with the expression:
+<center>$$\mathbf{F}_{MOM_d} = \rho v_d \mathbf{v}.$$</center>
+Plugging this into our conclusion from the last story,
+<center>$$\frac{\partial \rho}{\partial t} = -\nabla \cdot (\rho v_d \mathbf{v}) + Q_{MOM_d}.$$</center>
+Note that unlike for mass, it is harder to say that momentum cannot be created nor destroyed. In fact, by Newton's laws, forces are "sources" of momentum. Now for simplicity I'll take my accounting direction $\hat{d}$ to be $\hat{z}$, but this can be applied in any direction. By definition, $-\nabla P \cdot \hat{z}$ is the force per unit volume due to pressure of our fluid. We may also have external forces, for example due to gravity, which would contribute $-g\rho \hat{z}$. Substituting this in for $Q_{MOM_z}$, we get:
+<center>$$\frac{\partial (\rho v_z)}{\partial t} = -\nabla \cdot (\rho v_z \mathbf{v}) - \frac{\partial P}{\partial z} - g\rho$$.</center>
+which is the $z$-component of Euler's equation. In the static case, this reduces to our usual hydrostatic equation! 
+
+Now if we simplify this equation and also use the conservation of mass equation from before, we can actually simplify this into the form:
+<center>$$\frac{\partial v_z}{\partial t} + (\mathbf{v} \cdot \nabla)v_z = -\frac{1}{\rho}\frac{\partial P}{\partial z} - g$$</center>
+And similar equations in the $x$ and $y$ directions can be combined to give the overall Euler's equation:
+<center>$$\boxed{\frac{\partial \mathbf{v}}{\partial t} + (\mathbf{v}\cdot \nabla)\mathbf{v} = -\frac{1}{\rho}\nabla P - g\hat{z}}.$$</center>
+
+We actually have a special name for the $\frac{\partial}{\partial t} + \mathbf{v}\cdot \nabla$ operator: it is called the Lagrangian time derivative, or the material or advective or convective derivative. This is kind of like the total time derivative from the perspective of someone who is moving, taking their motion into account via chain rule. A Lagrangian particle is a particle which "goes with the flow", so the Lagrangian derivative is the rate of change in time as observed by a Lagrangian particle.
+
+To summarize, the Euler equation and continuity equation can be written:
+<center>$$\frac{D\mathbf{v}}{Dt} = -\frac{1}{\rho}\nabla P - g\hat{z}$$</center>
+<center>$$\frac{D\rho}{Dt} = -\rho(\nabla \cdot \mathbf{v})$$</center>
+
+### Story 3: Vorticity and Bernoulli's Theorem
+
+We call the curl of the velocity vector field vorticity: $\mathbf{\omega} = \nabla \times \mathbf{v}$. This satisfies the following identity:
+<center>$$\mathbf{v} \times \mathbf{\omega} - \frac{1}{2}\nabla\|v\|^2 \equiv -(\mathbf{v} \cdot \nabla)\mathbf{v}$$</center>
+(I'll leave this as an exercise to the reader). Then substituting into Euler's equation gives:
+<center>$$\frac{\partial\mathbf{v}}{\partial t} = \mathbf{v}\times \mathbf{\omega} - \frac{1}{2}\nabla \|v\|^2 - \frac{1}{\rho}\nabla P - \nabla \phi$$</center>
+where $\phi = gz$ is the gravitational potential.
+
+Now there are a few important definitions:
+- Streamline: a continuous curve tangent to $\mathbf{v}$ everywhere 
+    - Cannot be visualized in an experiment
+- Pathline: path of a particle that "goes with the flow"
+    - When velocity is independent of time, pathlines and streamlines are the same
+- Streakline: path created by a bunch of particles released at every time up to a certain point
+
+Finally, we can discover Bernoulli's equation by dotting our expression with $\hat{\mathbf{s}} = \frac{\mathbf{v}}{\|\mathbf{v}\|}$ and noting that $(\hat{\mathbf{s}}\cdot \nabla)Q = \frac{\partial Q}{\partial s}$, and considering the case of a steady flow so that $\frac{\partial \mathbf{v}}{\partial t} = 0$:
+<center>$$\boxed{\frac{\partial}{\partial s}\left[\frac{1}{2}\|v\|^2 + \frac{1}{\rho} P + gz\right] = 0}$$</center>
+so $\frac{1}{2}\|v\|^2 + \frac{1}{\rho} P + gz$ is constant along streamlines.
+
+<div class="remark">
+**Remark.** In what we have done so far, we have not accounted for viscous effects. As such, we should be wary of applying Bernoulli's equation or Euler's equation to situations where viscous effects matter.
+</div>
+
+### Story 4: Energy and the Breakdown of Bernoulli
+
+<div class="remark">
+**Remark.** This story is motivated by my trauma from midterm 2. I knowingly used Bernoulli in a place it probably wasn't applicable to avoid the possible pains and time stress of a control volume approach, but to my horror and demise, this wasn't a valid approximation. 
+
+At the time, my deluded justification was that for a propeller, there should be points in time where air above and below the propeller are connected spatially (there isn't a propeller fan in the way) although to be fair they are always connected spatially. I used this idea of path connectedness to justify having a streamline and applying Bernoulli. After all, streamlines are curves that are at all points tangent to the velocity field, so there should be some time $t_0$ where we can find a streamline there, when the propeller isn't in the way. Yeah... I was a fool and got cooked on that midterm as a result.
+
+So in this story, we will learn from my mistakes and learn where the ideas of Bernoulli functions break down.
+</div>
+
