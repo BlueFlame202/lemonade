@@ -7,8 +7,6 @@ author: "Aathreya Kadambi"
 date: "September 2, 2024"
 ---
 
-<div><img src="https://people.eecs.berkeley.edu/~kanazawa/img/new_animated.gif" \="" /> </div>
-
 Here's some music you can listen to while reading if you're logged into Spotify:
 <div>
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6TKVlFvHKm8Li9FDEuORf0?utm_source=generator" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>

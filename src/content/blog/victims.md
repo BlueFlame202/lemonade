@@ -8,6 +8,8 @@ slug: "victims"
 date: "December 22, 2024"
 ---
 
+<div><img src="https://people.eecs.berkeley.edu/~kanazawa/img/new_animated.gif" \="" /> </div>
+
 Recently, the death of Brian Thompson has been celebrated throughout American social media, and Luigi Mangione has been lifted to fame as a hero. In my view, we've traded life and temporary freedoms for awareness: not a great trade. Instead of celebrating these moments, we should consider these events more seriously.
 
 Luigi acknowledges the complexity of his actions in his own Goodreads post. He discusses Theodore Kaczynski:
