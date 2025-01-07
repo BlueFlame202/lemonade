@@ -9,6 +9,18 @@ date: "January 7, 2025"
 
 <div><img src="https://people.eecs.berkeley.edu/~kanazawa/img/new_animated.gif" /> ^- borrowed from Professor Kanazawa's website, Professor please let me know if you'd prefer that I take it off 🤧</div>
 
+## Table of Contents
+- [Blog Updates](#blog-updates)
+- [Experiments with SLAHMR](#experiments-with-slahmr)
+    - [Bike Race](#bike-race)
+    - [Shoveling Snow](#shoveling-snow)
+    - [Blue Angels](#blue-angels)
+    - [Other Videos](#other-videos)
+- [January Planned Posts](#january-planned-posts)
+
+Blog Updates
+-----------------------
+
 Happy New Year! I'm a bit late... unforunately. My backlog of blog posts has grown astonishingly, all because I got slightly stuck on my second ladder operators post! I'm really close to being done, but the proof of the result is evading me. But now I have to make this one, which makes me feel guilty about the other planned ones which are nearly done but not ready yet... maybe at the end of this post I'll sketch out some of the posts I plan to finish up and release in this next week. :-)
 
 In any case, in the last two days, I was playing around with this thing called SLAHMR! It's essentially a model for pose detection, but it's especially cool because it also models the motion of the camera itself, along with a ground plane!
