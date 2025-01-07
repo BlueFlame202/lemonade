@@ -23,7 +23,7 @@ Blog Updates
 
 Happy New Year! I'm a bit late... unforunately. My backlog of blog posts has grown astonishingly, all because I got slightly stuck on my second ladder operators post! I'm really close to being done, but the proof of the result is evading me. But now I have to make this one, which makes me feel guilty about the other planned ones which are nearly done but not ready yet... maybe at the end of this post I'll sketch out some of the posts I plan to finish up and release in this next week. :-)
 
-In any case, in the last two days, I was playing around with this thing called SLAHMR! It's essentially a model for pose detection, but it's especially cool because it also models the motion of the camera itself, along with a ground plane!
+In any case, in the last two days, I was playing around with this thing called SLAHMR! It's a model for pose detection and tracking, but it's especially cool because it also models the motion of the camera itself, along with a ground plane!
 
 In this post, I mainly want to discuss a few features I noticed of the SLAHMR model:
 - **Covers Bodies Accurately**
