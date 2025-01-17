@@ -7,8 +7,6 @@ author: "Aathreya Kadambi"
 date: "January 7, 2025"
 ---
 
-<div><img src="https://people.eecs.berkeley.edu/~kanazawa/img/new_animated.gif" /> ^- borrowed from Professor Kanazawa's website, Professor please let me know if you'd prefer that I take it off 🤧</div>
-
 ## Table of Contents
 - [Blog Updates](#blog-updates)
 - [Experiments with SLAHMR](#experiments-with-slahmr)

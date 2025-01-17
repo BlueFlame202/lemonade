@@ -43,9 +43,9 @@ export default function Navbar(props : NavbarProps) {
           <a href="/notes" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue group-hover:text-white group-hover:no-underline ${props.active === 'notes' ? 'active' : ''}`}>
             Notes
           </a>
-          <a href="/projects" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue group-hover:text-white group-hover:no-underline ${props.active === 'work' ? 'active' : ''}`}>
+          {/* <a href="/projects" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue group-hover:text-white group-hover:no-underline ${props.active === 'work' ? 'active' : ''}`}>
             Projects
-          </a>
+          </a> */}
           <a href="/sea" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue group-hover:text-white group-hover:no-underline ${props.active === 'sea' ? 'active' : ''}`}>
             🌊
           </a>
