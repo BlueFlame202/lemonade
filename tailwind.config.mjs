@@ -18,7 +18,7 @@ export default {
 			'solved-blue': '#aeecff',
 			'solved-blue-darker': '#abddf6',
 			'header-image-bg': '#ffeed9',
-			'header-image-bg-light': '#fffffa',
+			'header-image-bg-light': '#fffff6',
 			'primary': 'rgba(var(--primary-rgb), 1)',
 			'secondary': 'rgba(var(--secondary-rgb), 1)',
 			'tertiary': 'rgba(var(--tertiary-rgb), 1)',
