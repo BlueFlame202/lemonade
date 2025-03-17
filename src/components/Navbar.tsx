@@ -15,7 +15,7 @@ export default function Navbar(props : NavbarProps) {
 
   return (
     <div className="bg-white p-4">
-    <div id="banner" className="flex justify-center md:justify-start">
+    <div id="banner" className="flex justify-center md:justify-start rounded-lg">
       <img src="/img/AK-circle.png" className="logo" alt="lemonade"></img>
         <div>
           <h1 className="hidden md:block">Lemonade</h1>
@@ -32,7 +32,7 @@ export default function Navbar(props : NavbarProps) {
             </svg>
         </button>
     </div>
-    <div className={`group shadow-md relative z-10 flex items-center w-full bg-white transition-colors duration-500 no-underline hover:bg-special-blue ${isOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-around`} style={{ maxHeight: '5%' }}>
+    <div className={`rounded-lg group shadow-md relative z-10 flex items-center w-full bg-primary transition-colors duration-500 no-underline hover:bg-special-blue ${isOpen ? 'block' : 'hidden'} md:flex md:items-center md:justify-around`} style={{ maxHeight: '5%', boxShadow: '0 0 6px rgba(0, 0, 0, 0.1)' }}>
         <div className="text-base my-4 flex flex-col md:flex-row justify-around w-full" id="links">
           <a href="/" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue group-hover:text-white group-hover:no-underline ${props.active === 'home' ? 'active' : ''}`}>
             Home
