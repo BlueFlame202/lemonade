@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 title: "Faster"
 description: "Repetition."
-image: "/img/pics/20240808-random-quantum-mechanics-notecards.jpg"
+image: "/img/pics/faster.png"
 author: "Aathreya Kadambi"
 date: "March 20, 2025"
 ---
