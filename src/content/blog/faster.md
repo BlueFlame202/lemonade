@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 title: "Faster"
 description: "Repetition."
-image: "/img/pics/faster.png"
+image: "/img/pics/IMG_8039.jpg"
 author: "Aathreya Kadambi"
 date: "March 20, 2025"
 ---

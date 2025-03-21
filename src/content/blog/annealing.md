@@ -2,7 +2,7 @@
 layout: ../../layouts/BlogPostLayout.astro
 title: "Annealing"
 description: "."
-image: "/img/pics/faster.png"
+image: "/img/pics/IMG_8040.jpg"
 author: "Aathreya Kadambi"
 date: "March 20, 2025"
 ---
