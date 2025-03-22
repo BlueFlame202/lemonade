@@ -1,4 +1,5 @@
 ---
+import Analytics from '@vercel/analytics/astro'
 import Navbar from "../components/Navbar";
 import NewsWidget from "../components/NewsWidget.astro";
 import Footbar from "../components/Footbar.astro";
@@ -40,6 +41,6 @@ import '../styles/bstyles.css'
         </div>
         </main>
         <Footbar></Footbar>
-    </div>
+        <Analytics />
     </body>
 </html>
