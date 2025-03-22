@@ -1,5 +1,6 @@
 ---
 import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from "@vercel/speed-insights/astro"
 import Navbar from "../components/Navbar";
 import NewsWidget from "../components/NewsWidget.astro";
 import Footbar from "../components/Footbar.astro";
@@ -42,5 +43,6 @@ import '../styles/bstyles.css'
         </main>
         <Footbar></Footbar>
         <Analytics />
+        <SpeedInsights />
     </body>
 </html>
