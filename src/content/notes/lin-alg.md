@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/LectureNotesLayout.astro
+
 title: "MAT 217 Notes: Honors Linear Algebra"
 description: "Linear Algebra Notes"
 date: "Fall 2021"
