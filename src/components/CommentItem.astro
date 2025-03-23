@@ -1,0 +1,23 @@
+---
+const { comment } = Astro.props;
+---
+
+<div class="p-4 bg-header-image-bg-light rounded">
+  <div class="font-bold">{comment.name}</div>
+  <div class="text-gray-600 text-sm">
+    {comment.createdAt?.toLocaleDateString()}
+  </div>
+  <div class="mt-2">{comment.message}</div>
+
+  {comment.children?.length > 0 && (
+    <div class="pl-6 border-l-2 border-gray-300 mt-4">
+      {comment.children.map((child) => (
+        <div class="font-bold">{child.name}</div>
+        <div class="text-gray-600 text-sm">
+            {child.createdAt?.toLocaleDateString()}
+        </div>
+        <div class="mt-2">{child.message}</div>
+      ))}
+    </div>
+  )}
+</div>

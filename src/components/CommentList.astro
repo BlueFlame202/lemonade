@@ -1,0 +1,49 @@
+---
+import { db, Comment, eq, desc } from "astro:db";
+import CommentItem from "./CommentItem.astro";
+
+interface Props {
+  postSlug: string;
+}
+
+const { postSlug } = Astro.props;
+
+// Fetch comments
+const comments = await db
+  .select()
+  .from(Comment)
+  .where(eq(Comment.postSlug, postSlug))
+  .orderBy(desc(Comment.createdAt));
+
+// Helper function to organize comments into parent-child relationships
+const nestComments = (comments) => {
+  const commentMap = new Map();
+  const roots = [];
+
+  // Create a map for quick lookup
+  comments.forEach(comment => commentMap.set(comment.id, { ...comment, children: [] }));
+
+  comments.forEach(comment => {
+    if (comment.parentId === -1) {
+      roots.push(commentMap.get(comment.id));
+    } else {
+      const parent = commentMap.get(comment.parentId);
+      if (parent) {
+        parent.children.push(commentMap.get(comment.id));
+      }
+    }
+  });
+  console.log("hi", comments);
+
+  return roots;
+};
+
+const nestedComments = nestComments(comments);
+---
+
+<!-- Render Comments -->
+<div class="space-y-4">
+  {nestedComments.map((comment) => (
+    <CommentItem comment={comment} />
+  ))}
+</div>
