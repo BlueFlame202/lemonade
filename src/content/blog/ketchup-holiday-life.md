@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Ketchup, Holiday, Life"
 description: "Who are you?"
 image: "/img/pics/20240808-cardboard-box-gardens.jpg"

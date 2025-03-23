@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "USD Scripting"
 description: "Thank You Pixar"
 image: "/img/pics/20240902-ghee-and-ethics.jpg"

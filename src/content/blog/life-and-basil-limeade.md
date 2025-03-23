@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Life and Basil Limeade"
 description: "Things I've been thinking about, with a side of basil limeade."
 image: "/img/pics/20240808-life-and-basil-limeade.jpg"

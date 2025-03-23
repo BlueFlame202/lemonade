@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Proof by Bureaucracy"
 description: "My only critique of Lee."
 image: "/img/pics/riemannian-struggles-031625.jpg"

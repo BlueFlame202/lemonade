@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Grafting and GPUs"
 description: "Things to consider when growing limes and lemons, and thinking about my GPU limitations."
 image: "/img/pics/IMG_3880.jpg"

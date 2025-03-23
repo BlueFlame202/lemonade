@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Faster"
 description: "Repetition."
 image: "/img/pics/IMG_8039.jpg"

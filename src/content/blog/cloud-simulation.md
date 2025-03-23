@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Cloud Simulation"
 description: "A cool website."
 image: "/img/pics/IMG_4768.jpg"

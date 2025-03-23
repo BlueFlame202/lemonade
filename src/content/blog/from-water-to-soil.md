@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "From Water to Soil"
 description: "Systems"
 image: "/img/pics/IMG_7795.jpg"

@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "SLAHMR and New Years Updates"
 description: "Investigations"
 image: "/img/pics/000084_001.png"

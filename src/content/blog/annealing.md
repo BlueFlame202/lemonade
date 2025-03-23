@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
 title: "Annealing"
 description: "."
 image: "/img/pics/IMG_8040.jpg"

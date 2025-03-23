@@ -8,13 +8,15 @@ import sitemap from "@astrojs/sitemap";
 
 import vercel from "@astrojs/vercel/serverless";
 
+import db from "@astrojs/db";
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://aathreyakadambi.vercel.app/',
   integrations: [tailwind(), react(), mdx({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex]
-  }), sitemap()],
+  }), sitemap(), db()],
   output: "server",
   adapter: vercel()
 });

@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Updates and .vscode"
 description: "I can't decide if I like nature, and also I learned of a cool feature!"
 image: "/img/pics/20240821-updates-and-vscode.jpg"

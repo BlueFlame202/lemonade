@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Satisfying Sip"
 description: "My New Tea Station!"
 image: "/img/pics/IMG_6417.jpg"

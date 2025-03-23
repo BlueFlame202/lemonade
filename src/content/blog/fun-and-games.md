@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Fun and Games"
 description: "Why do I live?"
 image: "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da841ce479b46df9dae4a6dbd046"

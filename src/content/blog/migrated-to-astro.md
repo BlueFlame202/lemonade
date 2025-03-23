@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Migrated to AstroJS!"
 description: "I moved the blog from NextJS to AstroJS!"
 image: "/img/pics/astrojs.png"

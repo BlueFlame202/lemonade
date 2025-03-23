@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Roses and Radiance Fields"
 description: "I visited Berkeley Horticultural! I've also been thinking about NeRFs...."
 image: "/img/pics/20240427-berkeley-hort.jpg"

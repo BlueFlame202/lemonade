@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Victims"
 description: "Should violence be used as a shortcut for awareness?"
 image: "/img/pics/20240808-cardboard-box-gardens.jpg"

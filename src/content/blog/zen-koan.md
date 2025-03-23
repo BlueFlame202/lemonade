@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Zen Koan"
 description: "Wyatt Roy's Mu Mirror."
 image: "/img/pics/20240808-random-quantum-mechanics-notecards.jpg"

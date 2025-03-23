@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "A Cool Way to Garden"
 description: "Check out this video I saw!"
 image: "/img/pics/20240808-cardboard-box-gardens.jpg"

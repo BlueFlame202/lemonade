@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/BlogPostLayout.astro
+
 title: "Ghee and Ethics"
 description: "Wealth, Fame, and Power."
 image: "/img/pics/20240902-ghee-and-ethics.jpg"
