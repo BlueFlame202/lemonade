@@ -9,10 +9,11 @@ const { postSlug } = Astro.props;
 
 const result = Astro.getActionResult(actions.addComment);
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+console.log("from commentform.astro:", postSlug);
 ---
 
 <form method="POST" action={actions.addComment} class="mb-8">
-  <input type="hidden" name="postSlug" value="{postSlug}" />
+  <input type="hidden" name="postSlug" value={postSlug} />
 
   <div class="mb-4">
     <label for="name">Name:</label>
