@@ -6,10 +6,10 @@ interface CommentType {
   id: number;
   postSlug: string;
   name: string;
-  email: string;
   message: string;
   createdAt: Date;
   parentId: number;
+  email?: string;
   children?: CommentType[];
 }
 

@@ -9,37 +9,45 @@ const { postSlug } = Astro.props;
 
 const result = Astro.getActionResult(actions.addComment);
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+
+const theName = "Sans Nom"
+const theEmail = "anon@aathslemonade.vercel.app"
 ---
 
 <form method="POST" action={actions.addComment} class="mb-8">
   <input type="hidden" name="postSlug" value={postSlug} />
 
-  <div class="mb-4">
-    <label for="name">Name:</label>
-    <input
-      type="text"
-      id="name"
-      name="name"
-      required
-      class="w-full p-2 border rounded"
-    />
-    {inputErrors.name &&
-    <p class="text-red-500">{inputErrors.name}</p>
-    }
-  </div>
-
-  <div class="mb-4">
-    <label for="email">Email:</label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      required
-      class="w-full p-2 border rounded"
-    />
-    {inputErrors.email &&
-    <p class="text-red-500">{inputErrors.email}</p>
-    }
+  <div class="grid grid-cols-2 gap-4">
+    <div class="mb-4">
+      <label for="name">Name: </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={theName}
+        required
+        class="flex-grow pl-2 pr-2 border-b rounded"
+        readonly
+      />
+      {inputErrors.name &&
+      <p class="text-red-500">{inputErrors.name}</p>
+      }
+    </div>
+    <div class="mb-4">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value={theEmail}
+        required
+        class="flex-grow pl-2 pr-2 border-b rounded"
+        readonly
+      />
+      {inputErrors.email &&
+      <p class="text-red-500">{inputErrors.email}</p>
+      }
+    </div>
   </div>
 
   <div class="mb-4">
@@ -48,7 +56,7 @@ const inputErrors = isInputError(result?.error) ? result.error.fields : {};
       id="message"
       name="message"
       required
-      class="w-full p-2 border rounded"
+      class="w-full p-2 border-b rounded"
     ></textarea>
     { inputErrors.message && (
     <p class="text-red-500">{inputErrors.message}</p>
