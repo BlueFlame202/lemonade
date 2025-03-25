@@ -1,5 +1,6 @@
 ---
 import { actions, isInputError } from "astro:actions";
+import { getSession } from 'auth-astro/server';
 
 interface Props {
     postSlug: string;
@@ -10,8 +11,14 @@ const { postSlug } = Astro.props;
 const result = Astro.getActionResult(actions.addComment);
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 
-const theName = "Sans Nom"
-const theEmail = "anon@aathslemonade.vercel.app"
+let theName = "Sans Nom"
+let theEmail = "anon@aathslemonade.vercel.app"
+
+const session = await getSession(Astro.request);
+if (session) {
+  theName = session.user?.name;
+  theEmail = session.user?.email;
+}
 ---
 
 <form method="POST" action={actions.addComment} class="mb-8">

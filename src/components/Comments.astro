@@ -2,6 +2,11 @@
 import CommentList from "./CommentList.astro";
 import CommentForm from "./CommentForm.astro";
 
+import { Auth, SignIn, SignOut } from 'auth-astro/components';
+import { getSession } from 'auth-astro/server';
+
+const session = await getSession(Astro.request);
+
 interface Props {
     postSlug: string;
 }
@@ -11,7 +16,27 @@ const { postSlug } = Astro.props;
 
 <div class="comments-section">
     <h3>Comments</h3>
-    <p>Log in with Google to make comments unanonymously!</p>
+    <div>
+    {session ? (
+        <p>Welcome {session.user?.name}. Feel free to leave a comment! If you would like to remain anonymous, log out!</p>
+    ) : (
+        <p>Not logged in. Log in with Google to make comments unanonymously!</p>
+    )}
+
+    <Auth>
+      {(session: Session) => {
+        if (session) {
+          return (
+              <SignOut>Sign Out</SignOut>
+          );
+        } else {
+          return <SignIn provider="google">Sign In</SignIn>;
+        }
+      }}
+    </Auth>
+    <br/>
+    </div>
+
     <div>
         <CommentForm postSlug={postSlug} server:defer />
         <CommentList postSlug={postSlug} server:defer />
