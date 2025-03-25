@@ -15,9 +15,9 @@ let theName = "Sans Nom"
 let theEmail = "anon@aathslemonade.vercel.app"
 
 const session = await getSession(Astro.request);
-if (session) {
-  theName = session.user?.name;
-  theEmail = session.user?.email;
+if (session && session.user) {
+  theName = session.user.name;
+  theEmail = session.user.email;
 }
 ---
 
