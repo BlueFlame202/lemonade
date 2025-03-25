@@ -21,17 +21,25 @@ const { postSlug } = Astro.props;
     {session ? (
         <p>Welcome {session.user?.name}. Feel free to leave a comment! If you would like to remain anonymous, log out!</p>
     ) : (
-        <p>Not logged in. Log in with Google to make comments unanonymously!</p>
+        <p>Not signed in. Sign in with Google to make comments unanonymously!</p>
     )}
 
     <Auth>
       {(session: Session) => {
         if (session) {
           return (
-              <SignOut>Sign Out</SignOut>
+              <SignOut>
+                <a class="px-4 py-2 bg-tertiary text-white rounded">
+                  Sign Out
+                </a>
+              </SignOut>
           );
         } else {
-          return <SignIn provider="google">Sign In</SignIn>;
+          return <SignIn provider="google">
+                  <a class="px-4 py-2 bg-tertiary text-white rounded">
+                  Sign In
+                  </a>
+                </SignIn>;
         }
       }}
     </Auth>

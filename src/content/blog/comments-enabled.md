@@ -13,3 +13,4 @@ I wanted to allow people to comment unanonmyously, but I also want to prevent id
 
 One consideration I made was having comments be reverse chronological and replies be chronological. Let me know what you think of that below! :)
 
+Finally, now that I have a database and forms and everything, I'm a bit worried about security. Let me know if you'd be down to stress test this website! ;)
