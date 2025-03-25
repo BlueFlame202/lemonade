@@ -17,7 +17,7 @@ let theEmail = "anon@aathslemonade.vercel.app"
 const session = await getSession(Astro.request);
 if (session?.user) {
   theName = session.user.name ?? 'Dr. Strange';  // Default to empty string if name is null/undefined
-  theEmail = session.user.email ?? ''drstrange@aathslemonade.vercel.app;  // Default to empty string if email is null/undefined
+  theEmail = session.user.email ?? 'drstrange@aathslemonade.vercel.app';  // Default to empty string if email is null/undefined
 }
 ---
 
