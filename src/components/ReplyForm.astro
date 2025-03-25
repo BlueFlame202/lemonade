@@ -1,0 +1,49 @@
+---
+import { actions, isInputError } from "astro:actions";
+import { getSession } from 'auth-astro/server';
+
+interface Props {
+    postSlug: string;
+    parentId: number;
+    starter: string;
+}
+
+const { postSlug, parentId, starter } = Astro.props;
+
+let atStarter = "@" + starter + " ";
+
+const result = Astro.getActionResult(actions.addComment);
+const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+
+let theName = "Sans Nom"
+let theEmail = "anon@aathslemonade.vercel.app"
+
+const session = await getSession(Astro.request);
+if (session?.user) {
+  theName = session.user.name ?? 'Dr. Strange';  // Default to empty string if name is null/undefined
+  theEmail = session.user.email ?? 'drstrange@aathslemonade.vercel.app';  // Default to empty string if email is null/undefined
+}
+---
+
+<form method="POST" action={actions.addComment} class="mb-8">
+    <input type="hidden" name="postSlug" value={postSlug} />
+    <input type="hidden" name="name" value={theName} />
+    <input type="hidden" name="email" value={theEmail} />
+    <input type="hidden" name="parentId" value={parentId} />
+
+    <div class="mb-4">
+        <textarea
+            id="message"
+            name="message"
+            required
+            class="w-full p-2 border-b rounded"
+        >{atStarter}</textarea>
+        { inputErrors.message && (
+        <p class="text-red-500">{inputErrors.message}</p>
+        ) }
+    </div>
+
+    <button type="submit" class="px-4 py-2 bg-tertiary text-white rounded text-sm">
+        Reply
+    </button>
+</form>

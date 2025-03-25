@@ -1,4 +1,6 @@
 ---
+import ReplyForm from "./ReplyForm.astro";
+
 interface CommentType {
   id: number;
   postSlug: string;
@@ -20,18 +22,47 @@ const { comment } = Astro.props as Props;
 <div class="p-4 bg-header-image-bg-light rounded">
     <div class="font-bold">{comment.name}</div>
     <div class="text-gray-600 text-sm">
-        {comment.createdAt?.toLocaleDateString()}
+        {comment.createdAt?.toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true,  // Use 12-hour format (AM/PM)
+                      })}
     </div>
     <div class="mt-2">{comment.message}</div>
+
+    <details class="text-gray-600 text-xs">
+      <summary>Reply</summary>
+      <ReplyForm postSlug={comment.postSlug} parentId={comment.id} starter={comment.name} />
+    </details>
+
     {comment.children?.length ? (
     <div class="pl-6 border-l-2 border-gray-300 mt-4">
         {comment.children.map((child) => (
         <div>
             <div class="font-bold">{child.name}</div>
             <div class="text-gray-600 text-sm">
-            {child.createdAt?.toLocaleDateString()}
+            {child.createdAt?.toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              hour12: true,  // Use 12-hour format (AM/PM)
+            })}
             </div>
             <div class="mt-2">{child.message}</div>
+
+            <details class="text-gray-600 text-xs pb-5">
+              <summary>Reply</summary>
+              <ReplyForm postSlug={comment.postSlug} parentId={comment.id} starter={child.name} />
+            </details>
         </div>
         ))}
     </div>

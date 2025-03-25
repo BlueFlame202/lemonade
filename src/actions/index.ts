@@ -10,8 +10,9 @@ export const server = {
       name: z.string().min(1, 'Name is required'),
       email: z.string().email('Valid email is required'),
       message: z.string().min(1, 'Comment cannot be empty'),
+      parentId: z.number().optional(),
     }),
-    handler: async ({ postSlug, name, email, message }) => {
+    handler: async ({ postSlug, name, email, message, parentId }) => {
       const comment = await db
         .insert(Comment)
         .values({
@@ -20,6 +21,7 @@ export const server = {
           email,
           message,
           createdAt: new Date(),
+          parentId
         })
         .returning();
 

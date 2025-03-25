@@ -40,7 +40,8 @@ const nestComments = (comments: CommentType[]): CommentType[] => {
     } else {
       const parent = commentMap.get(comment.parentId);
       if (parent) {
-        parent.children!.push(commentMap.get(comment.id)!);
+        // unshift so replies are in chronological order
+        parent.children!.unshift(commentMap.get(comment.id)!);
       }
     }
   });
