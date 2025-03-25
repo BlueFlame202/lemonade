@@ -1,11 +1,14 @@
 import { defineMiddleware } from 'astro:middleware';
 import { getActionContext } from 'astro:actions';
 
+import { getSession } from 'auth-astro/server';
+
+
 export const onRequest = defineMiddleware(async (context, next) => {
   const { action, setActionResult, serializeActionResult } = getActionContext(context);
   if (action?.calledFrom === 'form') {
     const result = await action.handler();
-    // ... handle the action result
+    
     setActionResult(action.name, serializeActionResult(result));
     return context.redirect(context.originPathname);
   }

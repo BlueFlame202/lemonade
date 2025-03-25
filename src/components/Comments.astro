@@ -47,7 +47,7 @@ const { postSlug } = Astro.props;
     </div>
 
     <div>
-        <CommentForm postSlug={postSlug} server:defer />
+        <CommentForm server:defer />
         <CommentList postSlug={postSlug} server:defer />
     </div>
 </div>

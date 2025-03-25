@@ -37,7 +37,7 @@ const { comment } = Astro.props as Props;
 
     <details class="text-gray-600 text-xs">
       <summary>Reply</summary>
-      <ReplyForm postSlug={comment.postSlug} parentId={comment.id} starter={comment.name} />
+      <ReplyForm parentId={comment.id} starter={comment.name} />
     </details>
 
     {comment.children?.length ? (
@@ -61,7 +61,7 @@ const { comment } = Astro.props as Props;
 
             <details class="text-gray-600 text-xs pb-5">
               <summary>Reply</summary>
-              <ReplyForm postSlug={comment.postSlug} parentId={comment.id} starter={child.name} />
+              <ReplyForm parentId={comment.id} starter={child.name} />
             </details>
         </div>
         ))}

@@ -3,12 +3,11 @@ import { actions, isInputError } from "astro:actions";
 import { getSession } from 'auth-astro/server';
 
 interface Props {
-    postSlug: string;
     parentId: number;
     starter: string;
 }
 
-const { postSlug, parentId, starter } = Astro.props;
+const { parentId, starter } = Astro.props;
 
 let atStarter = "@" + starter + " ";
 
@@ -26,9 +25,6 @@ if (session?.user) {
 ---
 
 <form method="POST" action={actions.addComment} class="mb-8">
-    <input type="hidden" name="postSlug" value={postSlug} />
-    <input type="hidden" name="name" value={theName} />
-    <input type="hidden" name="email" value={theEmail} />
     <input type="hidden" name="parentId" value={parentId} />
 
     <div class="mb-4">
