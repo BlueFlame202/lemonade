@@ -29,14 +29,14 @@ const { postSlug } = Astro.props;
         if (session) {
           return (
               <SignOut>
-                <a class="px-4 py-2 bg-tertiary text-white rounded">
+                <a class="px-4 py-2 bg-tertiary text-white rounded break-all">
                   Sign Out
                 </a>
               </SignOut>
           );
         } else {
           return <SignIn provider="google">
-                  <a class="px-4 py-2 bg-tertiary text-white rounded">
+                  <a class="px-4 py-2 bg-tertiary text-white rounded break-all">
                   Sign In
                   </a>
                 </SignIn>;
