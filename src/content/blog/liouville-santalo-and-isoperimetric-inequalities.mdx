@@ -1,0 +1,66 @@
+---
+title: "Liouville, Santalo, and Isoperimetric Inequalities"
+description: "A difficult problem from my PSet"
+image: "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da841ce479b46df9dae4a6dbd046"
+author: "Aathreya Kadambi"
+date: "March 26, 2025"
+---
+
+I had been feeling more and more confident about my submissions to my Riemannian geometry homework, when suddenly, I had to do Problem Set 5. The first problem was fine, and the second was fairly simple. Problem 3 turned out to be difficult for me, though. And at the time, after Problem 3, my lack of understanding of horizontal and vertical spaces, along with Lie groups and algebras, seemed to be detrimental. A few weeks later I think I finally understand all of the problems on that PSet much better, but it really did take a while.
+
+This post is particularly about the third problem on that homework, which gave me the most trouble, but also seems the most interesting. The goal was to prove Liouville's theorem, along with Santalo's formula. I think were a few misunderstandings that kept me from solving it for so long:
+1. I did not know about Cartan's magic formula,
+2. I could not understand why the volume form should split and why it being unique was nontrivial (assuming everything proved by Lee is considered trivial, since I can just cite Lee),
+3. I struggled with the definitions of what it means for a flow to "preserve" a form.
+
+There were other smaller misunderstandings as well that slowly cleared themselves up, but these were the most blaring ones. In this post, I'll go over each of those things and my newfound understanding of them, and then discuss a bit about the applications of Santalo's formula.
+
+Cartan's Magic Formula
+----------------------------------
+
+Cartan's Magic Formula tells us how to evaluate $\mathcal{L}_V \omega$, where $V$ is a smooth vector field and $\omega$ is a smooth differential form. It says:
+<center>$$\mathcal{L}_V \omega = d(\iota_V \omega) + \iota_X d\omega,$$</center>
+where $\iota_V$ is something called the interior product:
+<center>$$(\iota_V \omega)(\cdot) := \omega(V, \cdot).$$</center>
+This turned out to be extremely useful, especially since for the case of proving Liouville's theorem, $\omega$ was closed, so that $d\omega = 0$, and we were left with $\mathcal{L}_V \omega = d(\iota_V \omega)$. We could also compute $\iota_V \omega$, which gave us $\mathcal{L}_V \omega$. Very magical indeed. 
+
+I was going to put the full proof of Cartan's formula in this post, but decided not to for brevity. The idea, though, is to use induction on the order of the form (makes sense, since ultimately, the interior product sort of stores some extra data to lower the order of the form, and the base case seems easier).
+
+<div class="remark">
+**Remark.** With this notation, I think it's nice that we can also write $\iota_X\nabla = \nabla_X$.
+</div>
+
+
+Splitting the Volume Form
+----------------------------------
+
+This confusion took a particularly long time to iron out, despite being quite simple (I think) in the end. The main point of confusion for me was: isn't the Riemannian volume form unique as per Proposition 2.41 of Lee? The problem said "a volume form" instead of "the volume form", why? And after that, how do we actually get the splitting?
+
+The setup is that of proving Liouville's theorem. We have found the symplectic form $\omega$, and with $\rho(v) = \frac{1}{2}|v|^2$ some notion of energy, we also have that $\iota_G \omega = -d\rho$. Finally, we figured out that $\mathcal{L}_G \omega = \mathcal{L}_G\omega^n = 0$, and want to now show that $\omega^n$ can be decomposed as $\pm d\rho  \wedge dV_{UM}$ for some volume form $dV_{UM}$.
+
+To clarify my first question, it turns out that the concept of a volume form is more general than a Riemannian volume form. A volume form should satisfy:
+- it is "top-degree", namely for an $n$ dimensional manifold, it is in $\Omega^n (M)$,
+- it is non-vanishing,
+- it is orientation dependent (makes sense, as per Proposition B.15 from Lee).
+
+The decomposition part was simpler than I thought; since $d\rho$ is a nonzero constant on $UM$, it allows for the decomposition by the properties of the wedge product and differential forms, and the fact that the other part was a volume form came simply as well, since the main thing to show is that it is non-vanishing.
+
+Volume Form-Preserving Flow
+----------------------------------
+
+The main confusion here was how a flow can "preserve" a volume form on the tangent space, if the flow was a vector field on the tangent space itself, and the volume form was a differential form on the tangent space. I think the main way to see this is actually by looking at trajectories of the vector field, or via the Lie derivative $\mathcal{L}_X\omega = 0$. It can also be phrased via the pullback, which makes the concept feel more natural. In the case of this problem, however, formulating it in terms of the Lie derivative was particularly useful, since previous parts worked out the Lie derivative.
+
+Application of Santalo's formula
+-----------------------------------
+
+It turns out that Santalo's formula has an interesting application: it can be used to prove an isoperimetric inequality! The following was proved by Christopher B. Croke in 1984:
+
+<div class="theorem">
+**Theorem.** If $(M, \partial M)$ is a compact $n$-dimensional ($n \ge 3$) Riemannian manifold of non-positive sectional curvature, and every geodesic ray minimizes length up till it hits the boundary, then
+<center>$$\text{Vol}(\partial M)^n \ge C(n) \text{Vol}(M)^{n-1}$$</center>
+where 
+<center>$$C(n) = \dfrac{\alpha(n-1)^{n-1}}{\alpha(n-2)^{n-2}\left(\int_0^{\pi/2}\cos(t)^{n/n-2}\sin(t)^{n-2}\;dt\right)^{n-2}}$$</center>
+and $\alpha(n)$ is the volume of the unit $n$-sphere. Equality doesn't hold for $n\neq 4$, and if $n = 4$, equality holds if and only if $M$ is isometric to a flat ball.
+</div>
+
+I still have to fully read the proof and paper, but this is particularly interesting to me because of the special treatment of the dimension 4. I had previously heard that dimension 4 is particularly weird, but I still do not understand why. Perhaps this will be the subject of future blog posts!
