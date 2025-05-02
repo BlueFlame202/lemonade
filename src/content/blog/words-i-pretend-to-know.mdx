@@ -1,0 +1,37 @@
+---
+
+title: "Words I Pretend to Know"
+description: "KL Divergence, Homology, Tor, and Revisiting Orientability"
+image: "/img/pics/IMG_6423_2.jpg"
+author: "Aathreya Kadambi"
+slug: "words-i-pretend-to-know"
+date: "May 1, 2025"
+---
+
+This post got very delayed by like... a year? But here it is now. Here are some words I better understand now:
+
+<div class="remark">
+**KL Divergence:** A measure of distance between distributions. For distributions $P$ and $Q$, 
+<center>$$D_{KL}(P \parallel Q) = \mathbb{E}_{x \sim P} \left[\log P(x) - \log Q(x)\right] = H(P) - H(P, Q).$$</center>
+It turns out that minimizing KL divergence is equivalent to maximum likelihood if we have i.i.d. samples from the background process. We might prefer to use KL divergence over other notions of distance between distribution because minimizing it by altering $Q$ can be thought of as maximizing $H(P,Q)$, or making the cross-entropy between the two distributions as high as possible, whereas other notions of distance may not have this information-theoretic footing.
+</div>
+
+<div class="remark">
+**Homology:** Homology groups basically give us an algebraic framework for working with topological structures. We can form chain complexes, and by taking kernels and images of boundary maps, we then can understand "bounded" things called "cycles" and "boundaries" respectively. Then taking quotients of these objects in the chain complexes gives us homology:
+<center>$$C_{n+1}(X) \xrightarrow{\partial_{n+1}}C_n(X) \xrightarrow{\partial_n} C_{n-1}(X)$$</center>
+gives us $H_n(X) = \text{Ker}\;\partial_n / \text{Im}\;\partial_{n+1}$. This is all a bit abstract, but maybe I'll make better posts about this in the future.
+
+As it is written in Fomenko and Fuchs:
+
+*Compared with homotopy groups, they have an important flaw—their accurate definition requires substantial algebraic work—and important advantages: Their computation is much easier, we will calculate them more or less immediately for the majority of topological spaces known to us, and also they are geometrically better visualizable [there are no counterintuitive phenomena like $\pi_3(S^2)\equiv \Z$].*
+</div>
+
+I will postpone the last two words: Tor and Orientability, to a future post. For now, I need to solidify my understanding of Riemannian geometry and optimal transport. I will come to algebraic topology after this.
+
+What fueled this post? The other day (and a year ago), a friend of mine asked me what KL divergence was, and I felt like laughing because KL divergence is just one of those things I always pretended to understand because everyone around me said it so much that I just had to follow along. A horrible habit, but it is what it is. It all started in elementary school when I was too lazy to walk over to get a dictionary every time I stumbled across a word I didn't know, and started trying to use context clues. But with some things, context clues only get you so far. 
+
+The good thing is, most words that I don't know now I will *eventually* figure out one day. Like the word tensor. In my defense, the first time I was taught what a tensor was, I was told the universal property of a tensor product (it was also the first time I was hearing what a univeral property was). Pretty traumatizing. But these days (a year ago) I've come to picture tensors as pretty much looking like multidimensional arrays. The universal property is pretty nice though, but I'm not sure if it's the best and most intuitive idea. These days (now), I think having better understood and appreciated category theory, I do like the universal property definition a lot.
+
+Anyway, the good thing is that over time, I've come to learn the definitions of many of those things which I had previously avoided looking in a dictionary for. 
+
+Sometimes I feel guilty about delayed posts like this one, but to be honest, these are the posts where I've taken the time and learned the most new words instead of staying in my comfort zone and using all the same old ones.
