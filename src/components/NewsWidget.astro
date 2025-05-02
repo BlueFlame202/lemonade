@@ -1,16 +1,21 @@
 ---
+import { getCollection } from 'astro:content';
 
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
 ---
 <div class="shadow-md m-4 p-4 bg-header-image-bg-light border-secondary border-t-4 border-r-0 border-b-0 border-l-0 rounded-lg">
   <h2>News</h2>
     
   <p>It's spring break! I'm relaxing back at home.</h3>
   <p>
-  [3/16/2025:] <a href="/blog/proof-by-bureaucracy/">Proof by Bureaucracy</a><br />
-  [2/23/2025:] <a href="/blog/from-water-to-soil/">From Water to Soil</a><br />
-  [1/10/2025:] <a href="/blog/zen-koan/">Zen Koan</a><br />
-  [1/7/2025:] <a href="/blog/slahmr/">SLAHMR and New Years Updates</a><br />
-  [11/5/2024:] <a href="/blog/satisfying-sip/">Satisfying Sip</a><br />
+    {latestPosts.map((post) => (
+          <span>
+            [{post.data.date}:] <a href={`/blog/${post.slug}`}>{post.data.title}</a><br />
+          </span>
+        ))}
   </p>
   <h3 class="text-muted">Notes</h3>
   <p>
