@@ -1,0 +1,120 @@
+---
+title: "Geometry and Probability"
+description: "My two favorite subjects mixing?"
+image: "/img/pics/IMG_8717.jpg"
+author: "Aathreya Kadambi"
+date: "May 13, 2025"
+---
+
+When thinking about what to do for my final project in my Riemannian geometry class, I had two potentialy topics in mind:
+- Information geometry, the fisher information metric, etc.
+- A review of recent work on optimal transport, based on the material in Cédric Villani's books.
+
+I became interested in the first topic because it has the word "information" in it. Supposedly this may be a misnomer, but my gut instinct is that it's not. I was particularly interested because Fisher information is a Hessian, which is essentially curvature. In my mind (especially after studying a tad bit of physics) curvature is all that matters since we usually only care about second-order Taylor expansions and local studies. So this felt like a mix of my favorite things: information and curvature. Not only that, but one of my friends had been learning about Fisher information in his statisics class, so I was a little jealous and curious. After enrolling in Bayesian statistics and Riemannian geometry this semester, I learned a bit more about Fisher information and also the Fisher information metric, and the field of information geometry has been stuck in the back of my mind ever since.
+
+I became interested in the second topic when I was reading about TRELLIS and a method called rectified flow. Supposedly, optimal transport finds amazing applications in computer vision and graphics, and it's really manifested in some amazing technologies. I wanted to learn more about these. In addition, I noticed that optimal transport seemed to have an extremely rich mathematical theory behind it. I found Cédric Villani's books on the subject and decided to start reading. Again, it seemed to fit right in with Riemannian geometry, and I loved that it also considered measure theory (it's always felt very strange to me that there are almost two theories of integration and interpretations of symbols like "dx"). 
+
+After watching <a href="https://www.youtube.com/watch?v=6DZjBcDfPHs">this talk by Villani</a>, I have a strong gut feeling that there is a much deeper connection between all of these ideas. After all, it seems to me that probability theory and geometry set out to do the same thing: measure the world. I think that in some way, they should yield extremely similar theory and ideas.
+
+In this post, I will give an overview of what I am learning about both subjects, and maybe some small details about why I think they are so interesting and related. My Riemannian geometry professor mentioned RCD spaces, so I'll focus on a paper from 2009 by John Lott and Cédric Villani, <em>Ricci curvature for metric-measure spaces via optimal transport</em>. In this paper, the authors show how to extend optimal transport theory to metric-measure spaces, and how to develop a notion of Ricci curvature bounded below.
+
+<div class="remark">
+<b>Remark.</b> For transparency, I used an LLM to speedily convert my original LaTeX notes into this blog post in MDX (I was originally going to do it directly in MDX but decided to go with LaTeX for the better PDF convertibility). Once I refine them further, my notes will also be on my professional website! If you notice any errors in this post, however, let me know! 
+
+In a next post I'll consider some of theorems and inequalities that can be generalized to metric spaces based on this work. Somehow I saw these theorems on nonsmooth spaces before I saw them on smooth spaces. :-) But they were theorems I've been looking forward to since I first heard about Fisher information and entropy.
+</div>
+
+For context, I will also discuss some background on optimal transport theory based on Villani's book, *Optimal transport: old and new* and a lecture by Luigi Ambrosio. I will borrow notation and ideas from the references above. $\mathcal{X}$ will denote a complete, separable, measured length space.
+
+# Background on Optimal Transport
+
+**Definition (Image Measure/Push-Forward).** $\mu$ a Borel measure on $\mathcal{X}$. If $T : \mathcal{X} \rightarrow \mathcal{Y}$ is a Borel map, $T_\# \mu$ is the push-forward of $\mu$ by $T$:
+$$(T_\# \mu)(A) = \mu(T^{-1}(A)) \quad \forall A \in \mathcal{B}(\mathcal{Y}).$$
+
+**Definition (Law of a Random Variable).** For a random variable on $(\Omega, P)$,
+$$\text{law}(X) = X_\# P.$$
+
+**Definition (Coupling).** Let $(\mathcal{X}, \mu)$ and $(\mathcal{Y}, \nu)$ be probability spaces. A *coupling* is a collection of two random variables $X$ and $Y$ such that $\text{law}(X) = \mu$ and $\text{law}(Y) = \nu$. Via notation abuse, $(X,Y)$ and $\text{law}(X, Y)$ are also called couplings. The set of all couplings of $\mu$ and $\nu$ is denoted $\Pi(\mu, \nu)$.
+
+<div class="remark"> 
+**Villani's Remark (Story of Couplings).**  
+- *Uninformative couplings always exist.* Take the space ($\mathcal{X} \times \mathcal{Y}$, $\mu \otimes \nu)$: the **trivial coupling**. Here "$X$ does not give any information about the value of $Y$" (Villani 6).  
+- *Really good couplings don't always exist.* When $X$ has all information about $Y$, we have a **deterministic coupling**: a measurable function $T : \mathcal{X} \rightarrow \mathcal{Y}$ so that $Y = T(X)$.
+</div>
+
+<div class="strat">
+**Optimal Transport.** Let $c : \mathcal{X} \times \mathcal{Y} \rightarrow \R$ be a cost function. The **Monge-Kantorovich problem** is:  
+<center>$$\inf_{\Pi(\mu, \nu)} \mathbb{E} c(X, Y) = \inf_{\pi = \text{law}(X,Y)} \int_{\mathcal{X} \times \mathcal{Y}} c(x, y) d\pi(x,y)$$</center>
+and the solution couplings $(X,Y)$ are called **optimal transports**.  
+</div>
+
+
+<div class="strat">
+**Wasserstein Distance.** Let $P(\mathcal{X})$ be the space of Borel probability measures on metric space $\mathcal{X}$. The square of the **Wasserstein distance** between two measures $\mu, \nu \in P(\mathcal{X})$ is the infimal cost of the Monge-Kantorovich problem with cost $c(x, y)= d(x,y)^2$.  
+</div>
+
+# Ricci Curvature Bounds on Nonsmooth Spaces
+
+The trick to defining nonnegative $N$-Ricci curvature is to consider this notion of *weak displacement convexity*: convexity along *Wasserstein geodesics*. Define $P_2(\mathcal{X})$ as $P(\mathcal{X})$ equipped with the Wasserstein distance $W_2$.  
+
+Consider $U : [0,\infty)\rightarrow \R$ a continuous convex function with $U(0) = 0$.  
+
+**Definition ($\mathcal{DC}_N$, $\mathcal{DC}_\infty$).** Consider $N \in [1, \infty)$. We define the following collections of "entropy-type" functions:  
+$$\mathcal{DC}_N := \{ U : \lambda \mapsto \lambda^N U(\lambda^{-N})\text{ is convex on }[0, \infty)\},$$  
+$$\mathcal{DC}_\infty := \{ U : \lambda \mapsto e^\lambda U(e^{-\lambda})\text{ is convex on }(-\infty, \infty)\}.$$
+
+For any reference probability measure $\nu \in P(\mathcal{X})$, $\mu \in P_2(\mathcal{X})$ can be decomposed as $\mu = \rho \nu + \mu_s$ where $\mu_s$ is singular w.r.t. $\nu$. Then, the corresponding "entropy-type" functional to $U$ is:  
+$$U_\nu(\mu) := \int_\mathcal{X} U(\rho(x))\;d\nu(x) + U'(\infty)\mu_s(\mathcal{X}) \quad \in \text{Maps}(P_2(\mathcal{X}), \R \cup \{ \infty\})$$  
+where $U'(\infty) = \lim_{r\rightarrow \infty} \frac{U(r)}{r}$.  
+
+<div class="strat">
+**Ricci Curvature Bounds on Nonsmooth Spaces.** Compact measured length space $(\mathcal{X}, d, \nu)$ has **nonnegative $N$-Ricci curvature** for $N \in [1, \infty)$ if **for every $\mu_0,\mu_1 \in P_2(\mathcal{X})$ with support contained in $\text{supp}(\nu)$ we have weak displacement convexity for every $U_\nu$ functional:** there exists a Wasserstein geodesic $\mu_t$ connecting $\mu_0$ and $\mu_1$ such that  
+<center>$$U_\nu(\mu_t) \le (1-t)U_\nu(\mu_0) + tU_\nu(\mu_1) \quad \forall t \in [0,1], U \in \mathcal{DC}_N.$$</center>
+For $N = \infty$, $(\mathcal{X}, d, \nu)$ has **$\infty$-Ricci curvature bounded below by $K$** if  
+<center>$$U_\nu(\mu_t) \le (1-t)U_\nu(\mu_0) + tU_\nu(\mu_1) - \frac{1}{2}\lambda(U)t(1-t)W_2(\mu_0, \mu_1)^2 \quad \forall t \in [0,1], U \in \mathcal{DC}_\infty,$$</center>
+for $\lambda : \mathcal{DC}_\infty \rightarrow \R \cup \{-\infty\}$, $U\mapsto \inf_{r > 0} K\frac{rU_+'(r) - U(r)}{r}$. 
+</div> 
+
+<div class="remark">
+**Remark (Eulerian/Lagrangian duality).** This definition has a heavy Lagrangian flavor in the sense that we consider convexity along geodesics, whereas the notion in the Riemannian case feels fundamentally more Eulerian and algebraic in nature. Maybe this provides another example of what Ambrosio mentions in his talk?
+</div>
+
+<div class="theorem">
+**Theorem (Lott-Villani 0.12 with constant $\Psi$).** For any smooth compact connected Riemannian manifold $M$,  
+- for $N \in [n, \infty)$, the space $(M, g, \frac{d\mathrm{vol}_M}{\mathrm{vol}(M)})$ has nonnegative $N$-Ricci curvature if and only if $\mathrm{Ric} \ge 0$.  
+- $(M, g, \frac{d\mathrm{vol}_M}{\mathrm{vol}(M)})$ has $\infty$-Ricci curvature bounded below by $K$ if and only if $\mathrm{Ric} \ge K g$.  
+</div>
+
+<div class="theorem">
+**Theorem (Lott-Villani 0.13).** The properties of having nonnegative $N$-Ricci curvature or $\infty$-Ricci curvature bounded below by $K$ commute with taking Gromov-Hausdorff limits.  
+</div>
+
+<div class="remark">
+**Remark (Role of Optimal Transport).** The role of optimal transport in all of this is providing a metric on $P(\mathcal{X})$ from which we get $P_2(\mathcal{X})$, where we can formulate displacement convexity more carefully as convexity along Wasserstein geodesics.
+</div>
+
+# RCD($K,N$) Spaces
+
+**Definition ($\mathrm{CD}(K,N)$).** A space is called $\mathrm{CD}(K,N)$ if it has Ricci curvature bounded below by $K$ and dimension at most $N$.
+
+With the theory above, we can at least define $\mathrm{CD}(K, \infty)$ spaces.
+
+<div class="remark">
+**Remark (Finsler Spaces).** A Finsler space is a differentiable manifold with a Minkowski norm on tangent spaces. We don't like them because they do not have as nice properties as Riemannian manifolds ("anisotropic" geometry, issues relating to flows, no Bochner inequality).
+</div>
+
+RCD($K,N$) spaces exclude Finsler spaces by requiring spaces to be "infinitesimally Hilbertian":
+
+**Definition ($\mathrm{RCD}(K,N)$).** A metric-measure space $(\mathcal{X}, d, \mu)$ is called $\mathrm{RCD}(K,N)$ if it is $\mathrm{CD}(K,N)$ and $W^{1,2}(\mathcal{X}, d, \mu)$ is a Hilbert space.
+
+Alternatively, in Ambrosio's talk, he instead uses the definition for infinitesimally Hilbertian that the "Cheeger Dirichlet energy" is quadratic.
+
+<div class="remark">
+**Remark (GH Convergence).** In a work by Ambrosio, Gigli, and Savaré, they show that $\mathrm{RCD}(K,N)$ spaces are also more stable under GH convergence than $\mathrm{CD}(K, N)$ spaces. Here they use the alternative definition for infinitesimally Hilbertian spaces.
+</div>
+
+# References
+1. Ambrosio, Luigi. *Optimal transport: old and new*. 2015.  
+2. Lott, John, and Cédric Villani. *Ricci curvature for metric-measure spaces via optimal transport*. *Annals of Mathematics* 169.3 (2009): 903--991.  
+3. "Optimal Transport and Ricci Curvature." YouTube, uploaded by Rio ICM2018, [https://www.youtube.com/watch?v=JCHNQWhcSLs](https://www.youtube.com/watch?v=JCHNQWhcSLs).  
+4. Gigli, Nicola. *On the differential structure of metric measure spaces and applications*. *Memoirs of the American Mathematical Society* 236.1113 (2015): 1--91. DOI: [https://doi.org/10.1090/memo/1113](https://doi.org/10.1090/memo/1113).
