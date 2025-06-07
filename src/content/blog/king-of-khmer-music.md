@@ -32,7 +32,7 @@ as well as this playlist on SoundCloud:
 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/502143522&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/sunny-kong-114589213" title="Sunny Kong" target="_blank" style="color: #cccccc; text-decoration: none;">Sunny Kong</a> · <a href="https://soundcloud.com/sunny-kong-114589213/sets/khmer-music" title="Khmer Music" target="_blank" style="color: #cccccc; text-decoration: none;">Khmer Music</a></div>
 </center>
 
-In a future post, I may try to better understand the influences that make his music what it was! In the meantime, I enjoyed checking out these articles about Sisamouth:
+In a future post, I may try to better understand the influences and inspirations that made his music what it was! In the meantime, I enjoyed checking out these articles about Sisamouth:
 1. <a href="https://thebettercambodia.com/king-of-khmer-music-sinn-sisamouth/">https://thebettercambodia.com/king-of-khmer-music-sinn-sisamouth/</a>
 2. <a href="https://8inside.wordpress.com/2016/03/21/sinn-sisamouth/">https://8inside.wordpress.com/2016/03/21/sinn-sisamouth/</a>
 3. <a href="https://oldsongs-khmer.blogspot.com/2019/07/sin-sisamouth.html">https://oldsongs-khmer.blogspot.com/2019/07/sin-sisamouth.html</a>
