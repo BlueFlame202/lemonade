@@ -17,7 +17,7 @@ For the near future, I think I'll have a few types of posts:
 - Math/Science/Philosophy (more of a magazine vibe, with links to technical details on Orange Juice)
 - Music
 - Plants
-- Gym/Motivational/Nutrition
+- Gym/Motivation/Nutrition
 
 since these are the things that matter to me most right now!
 
