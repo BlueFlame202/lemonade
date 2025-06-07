@@ -1,7 +1,7 @@
 ---
 title: "Bourgain's Problem Resolved!"
 description: "Inspired by Klartag and Lehec's resolution of Bourgain's slicing problem."
-image: "/img/pics/IMG_9053.jpg"
+image: "/img/pics/IMG_9074.jpg"
 author: "Aathreya Kadambi"
 date: "June 6, 2025"
 ---
