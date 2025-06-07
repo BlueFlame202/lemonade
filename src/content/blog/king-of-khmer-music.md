@@ -12,17 +12,17 @@ Is it because of the pleasant melodies? The deep harmonies? Steady tempos? Synco
 
 Or perhaps relatable lyrics? Clever rhymes? Meaningful themes?
 
-There are too many reasons to enjoy music—there's no wonder why it's such a universally appreciated form of art. What I appreciate most about it, though, is how well it can capture emotion, meaning, and culture.
+There are too many reasons to enjoy music—it's no wonder why it's such a universally appreciated art form. What I appreciate most about it, though, is how well it can capture emotion, meaning, and culture.
 
-During a class I took on Buddhism, we had the luxury of hearing directly about Khmer music from researcher and musician <a href="https://www.trentwalker.org/about">Trent Walker</a>. Ever since then, I started listening to 20th century Cambodian music. In particular, I've been listening to one Cambodian artist the most: Sinn Sisamouth, the "King of Khmer Music". Living from the 1930s to the 1970s, Sisamouth had a prolific career, performing on the national radio station, at royal receptions, and traveling to nearby countries. His career ended unfortunately during the Khmer Rouge rule, when he went missing.
+During a class I took on Buddhism, we had the luxury of hearing directly about Khmer music from researcher and musician <a href="https://www.trentwalker.org/about">Trent Walker</a>. Ever since then, I started listening to 20th-century Cambodian music. In particular, I've been listening to one Cambodian artist the most: Sinn Sisamouth, the "King of Khmer Music". Living from the 1930s to the 1970s, Sisamouth had a prolific career, performing on the national radio station, at royal receptions, and traveling to nearby countries. His career ended unfortunately during the Khmer Rouge rule when he went missing.
 
-I like the tranquil nature of the music that isn't draining, and the lyrics to some songs feel fresh and different from what I'm used to. Apparently, Sisamouth spent much time searching three different dictionaries in Khmer, Sanskrit, and Pali for the right word for a particular song. I'm not sure that I can fully appreciate that aspect of his songs as a linguistically limited person, but it's certainly worthy of respect, and YouTuber DMKhmer has translated some of his songs into English.
+I like the tranquil nature of the music without feeling overly glum, and the lyrics to some songs feel fresh and different from what I'm used to. It is said that Sisamouth spent a lot of time searching three different dictionaries in Khmer, Sanskrit, and Pali for the right words for a particular song. I'm not sure that I can fully appreciate that aspect of his songs as a linguistically limited person, but it's certainly worthy of respect, and YouTuber DMKhmer has translated some of his songs into English.
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_v6m5CQN5-k?si=DvsqHKHo6INoSFhJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </center>
 
-In addition, his music features instruments with interesting sound qualities. While I haven't fully identified the instruments I find most appealing, I do like his use of mandolin, and something that sounds like an organ. Check out this playlist on Spotify with many of his songs:
+In addition, his music features instruments with interesting sound qualities. While I haven't fully identified the instruments I find most appealing, I do like his use of mandolin and something that sounds like an organ. Check out this playlist on Spotify with many of his songs:
 <center>
 <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5cVJfvYWqw4DRk15WmXBcn?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 </center>
