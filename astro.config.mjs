@@ -19,5 +19,11 @@ export default defineConfig({
     rehypePlugins: [rehypeKatex],
   }), sitemap(), db(), auth()],
   output: "server",
-  adapter: vercel()
+  adapter: vercel(),
+  vite: {
+    optimizeDeps: {
+      include: ['maplibre-gl'],
+      exclude: []
+    }
+  }
 });
