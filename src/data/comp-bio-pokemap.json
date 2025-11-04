@@ -1,0 +1,13 @@
+[
+  {
+    "name": "ScienceML Group, UC Berkeley",
+    "leader": "Jennifer Listgarten",
+    "type": "research_group",
+    "latitude": 37.8731,
+    "longitude": -122.2578,
+    "domain": ["computational_biology", "machine_learning_for_biology"],
+    "tags": ["probabilistic_models", "bayesian_inference", "protein_design", "interpretable_ml"],
+    "notes": "Develops probabilistic and ML methods for biological data.",
+    "link": "https://www.scienceml.org/"
+  }
+]
