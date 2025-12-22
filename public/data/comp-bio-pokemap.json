@@ -30,8 +30,54 @@
     "longitude": -122.2679,
     "domain": ["computational_biology", "machine_learning_for_biology"],
     "tags": ["probabilistic_models", "bayesian_inference", "protein_design", "interpretable_ml"],
-    "notes": "Mission (1) to leverage scientific insight to develop new machine learning methods, and (2) to develop and leverage new machine learning methods to advance science.",
+    "notes": "Mission \"(1) to leverage scientific insight to develop new machine learning methods, and (2) to develop and leverage new machine learning methods to advance science.\"",
     "link": "https://ai-science.eecs.berkeley.edu",
+    "color": "blue"
+  },
+  {
+    "name": "LMU Munich",
+    "type": "institution",
+    "latitude": 48.1104294,
+    "longitude": 11.4588142,
+    "domain": ["spatil_omics", "physics_for_biology"],
+    "tags": ["university"],
+    "notes": "LMU Munich. Home to the Mages lab, among others.",
+    "link": "https://www.lmu.de/en/",
+    "color": "red"
+  },
+  {
+    "name": "Mages Lab, LMU Munich",
+    "leader": "Simon Mages",
+    "type": "research_group",
+    "latitude": 48.1089711,
+    "longitude": 11.4575782,
+    "domain": ["spatial_omics", "physics_for_biology"],
+    "tags": ["spatial_omics", "quantum_chromodynamics"],
+    "notes": "\"[T]he research focus of our group lies on the joint analysis of the rich data about position and internal spaces from molecular to tissue scale, which can be generated with state-of-the-art experimental spatial omics methods.\"",
+    "link": "https://ai-science.eecs.berkeley.edu",
+    "thoughts": "https://www.ocf.berkeley.edu/~aathreyak/orange-juice/thoughts/comp-bio-research/mages-lab",
+    "color": "blue"
+  },
+  {
+    "name": "The Hebrew University, Edmond J. Safra Campus",
+    "type": "institution",
+    "latitude": 31.7700066,
+    "longitude": 35.1868605,
+    "domain": ["spatil_omics"],
+    "tags": ["university"],
+    "notes": "The Hebrew University. Home to the Nitzan Group, among others.",
+    "link": "https://en.huji.ac.il",
+    "color": "red"
+  },
+  {
+    "name": "Nitzan Group, The Hebrew University of Jerusalem",
+    "leader": "Mor Nitzan",
+    "type": "research_group",
+    "latitude": 31.7750694,
+    "longitude": 35.197989,
+    "domain": ["spatial_omics"],
+    "tags": ["spatial_omics"],
+    "notes": "\"[W]e are interested in studying the emergence of complex behavior out of the interactions of simple dynamic units in biological systems.\"",
     "color": "blue"
   }
 ]

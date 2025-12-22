@@ -1,4 +1,18 @@
 import React from 'react'
+import { useState } from "react";
+
+type Category =
+  | "math"
+  | "geometry"
+  | "ml"
+  | "cs"
+  | "philosophy"
+  | "music"
+  | "life"
+  | "plants"
+  | "science"
+  | "tea"
+  | "nt";
 
 type BlogPost = {
     title: string;
@@ -6,6 +20,7 @@ type BlogPost = {
     link: string;
     date: string;
     backgroundImage?: string; // Optional background image for each blog post
+    category: Category[];
 };
 
 type BlogPageProps = {
@@ -13,13 +28,61 @@ type BlogPageProps = {
 };
 
 export default function BlogPage({ posts }: BlogPageProps) {
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {posts.map((post, index) => (
-                <BlogPostCard key={index} {...post} />
-            ))}
-        </div>
-    );
+  const [selected, setSelected] = useState<Set<Category>>(
+    new Set(["math"]) // default selection (optional)
+  );
+
+  const toggleCategory = (cat: Category) => {
+    setSelected(prev => {
+      const next = new Set(prev);
+      next.has(cat) ? next.delete(cat) : next.add(cat);
+      console.log(next);
+      return next;
+    });
+  };
+
+  const filteredPosts =
+    selected.size === 0
+      ? posts
+      : posts.filter(post =>
+          post.category.some(c => selected.has(c))
+        );
+
+  const allCategories: Category[] = [
+    "math", "geometry", "ml", "cs", "philosophy",
+    "music", "life", "plants", "science", "tea", "nt"
+  ];
+
+  return (
+    <>
+      {/* Category Toggles */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {allCategories.map(cat => {
+          const active = selected.has(cat);
+          return (
+            <button
+              key={cat}
+              onClick={() => toggleCategory(cat)}
+              className={`px-3 py-1 rounded-full border transition
+                ${active
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}
+              `}
+            >
+              {cat}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Blog Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredPosts.map(post => (
+          <BlogPostCard key={post.link} {...post} />
+        ))}
+      </div>
+    </>
+  );
 }
 
 type BlogPostCardProps = {

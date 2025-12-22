@@ -12,6 +12,7 @@ interface PokeMapEntry {
   tags?: string[];
   notes?: string;
   link?: string;
+  thoughts?: string;
   minZoom?: number; // Minimum zoom level to show this marker (default based on type)
   color?: "red" | "blue"; // Marker color (default based on zoom level)
 }
@@ -234,6 +235,15 @@ export default function PokeMap() {
                 className="text-blue-600 hover:underline mt-2 block"
               >
                 Visit site →
+              </a>
+            )}
+            {selected.thoughts && (
+              <a
+                href={selected.thoughts}
+                target="_blank"
+                className="text-blue-300 hover:underline mt-1 block"
+              >
+                See Aath's Notes
               </a>
             )}
             <div className="mt-3 text-xs text-gray-500">

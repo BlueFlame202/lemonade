@@ -9,7 +9,7 @@ import { getSession } from 'auth-astro/server';
 const session = await getSession(Astro.request);
 
 interface Props {
-    postSlug: string;
+  postSlug: string;
 }
 
 const { postSlug } = Astro.props;
