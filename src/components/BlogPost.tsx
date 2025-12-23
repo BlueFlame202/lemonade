@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from "react";
-import type { Category, BlogPost, BlogPageProps, BlogPostCardProps } from "../types/blog"
+import type { Category, BlogPageProps, BlogPostCardProps } from "../types/blog"
 import { categories } from "../types/blog"
 
-export default function BlogPage({ posts }: BlogPageProps) {
+export default function BlogPage({ posts, postsPerPage = 9 }: BlogPageProps) {
   const [selected, setSelected] = useState<Set<Category>>(
     new Set([]) // default selection (optional)
   );
@@ -23,10 +23,21 @@ export default function BlogPage({ posts }: BlogPageProps) {
           post.category.some(c => selected.has(c))
         );
 
+  const [page, setPage] = useState(1);
+
+  // Compute total pages
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+  // Slice posts for the current page
+  const paginatedPosts = filteredPosts.slice(
+    (page - 1) * postsPerPage,
+    page * postsPerPage
+  );
+
   return (
     <>
       {/* Category Toggles */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap justify-center gap-2 mb-6">
         {categories.map(cat => {
           const active = selected.has(cat);
           return (
@@ -45,11 +56,74 @@ export default function BlogPage({ posts }: BlogPageProps) {
         })}
       </div>
 
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-6 gap-2">
+        <button
+          onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+          className="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50"
+        >
+          Prev
+        </button>
+
+        {[...Array(totalPages)].map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage(i + 1)}
+            className={`px-3 py-1 border rounded ${
+              page === i + 1 ? "bg-blue-600 text-white border-blue-600" : ""
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+          disabled={page === totalPages}
+          className="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
+      <br/>
+
       {/* Blog Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {filteredPosts.map(post => (
+        {paginatedPosts.map(post => (
           <BlogPostCard key={post.link} {...post} />
         ))}
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-6 gap-2">
+        <button
+          onClick={() => setPage(prev => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+          className="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50"
+        >
+          Prev
+        </button>
+
+        {[...Array(totalPages)].map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setPage(i + 1)}
+            className={`px-3 py-1 border rounded ${
+              page === i + 1 ? "bg-blue-600 text-white border-blue-600" : ""
+            }`}
+          >
+            {i + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
+          disabled={page === totalPages}
+          className="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     </>
   );

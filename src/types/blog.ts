@@ -27,6 +27,7 @@ export type BlogPost = {
 
 export type BlogPageProps = {
     posts: BlogPost[];
+    postsPerPage?: number;
 };
 
 export type BlogPostCardProps = {
