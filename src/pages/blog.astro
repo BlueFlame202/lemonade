@@ -10,7 +10,7 @@ const mdPosts = await getCollection('blog');
 
 const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({
   title: post.data.title,
-  content: post.body,               // if you want the markdown content
+  description: post.data.description,
   link: `blog/${post.slug}`,
   date: post.data.date,
   category: post.data.category as Category[],
