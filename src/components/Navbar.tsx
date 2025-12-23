@@ -19,7 +19,7 @@ export default function Navbar(props : NavbarProps) {
       <img src="/img/AK-circle.png" className="logo" alt="lemonade"></img>
         <div>
           <h1 className="hidden md:block">Lemonade</h1>
-          <h2 className="hidden md:block">A Sweet Homemade Drink Made in Many Parts of the World</h2>
+          <h3 className="hidden md:block">Aathreya Kadambi's Blog</h3>
         </div>
       </div>
     {/* <img src="/img/lemonade-header.png" alt="logo" id="banner" className="w-full" width={500} layout="responsive" /> */}

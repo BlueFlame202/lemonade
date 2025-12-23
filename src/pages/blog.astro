@@ -1,9 +1,26 @@
 ---
 import ClassicLayout from "../layouts/BaseLayout.astro";
 import BlogPage from "../components/BlogPost";
-import { blogPosts } from "../content/posts"
+
+import type { BlogPost, Category } from "../types/blog"
+import { otherPosts } from "../content/posts"
+import { getCollection } from 'astro:content';
+
+const mdPosts = await getCollection('blog');
+
+const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({
+  title: post.data.title,
+  content: post.body,               // if you want the markdown content
+  link: `blog/${post.slug}`,
+  date: post.data.date,
+  category: post.data.category as Category[],
+  backgroundImage: post.data.image, // optional
+}));
+
+const allPosts: BlogPost[] = [...otherPosts, ...normalizedMdPosts]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 ---
 
 <ClassicLayout title="Blog">
-    <BlogPage posts={blogPosts} client:load />
+    <BlogPage posts={allPosts} client:load />
 </ClassicLayout>

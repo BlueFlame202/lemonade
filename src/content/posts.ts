@@ -1,6 +1,6 @@
 import type { BlogPost } from "../types/blog"
 
-export const blogPosts = [
+export const otherPosts = [
         // { title: 'Tales from Berkeley', content: 'Spicing up Life', link: 'blog/tales-from-berkeley', date: 'December 30, 2024', backgroundImage: 'img/pics/IMG_6417.jpg' },
         // { title: 'Kernel Methods and Mercer\'s Theorem', content: 'Functional Analysis Meets ML', link: 'blog/kernel-methods-and-mercers-theorem', date: 'December 30, 2024', backgroundImage: 'img/pics/IMG_6417.jpg' },
 
@@ -8,71 +8,71 @@ export const blogPosts = [
         // { title: 'Motivating Ladder Operators II', content: 'Trying again to understand ladder operators better.', link: 'blog/motivating-ladder-operators-ii', date: 'January 10, 2025', backgroundImage: 'img/pics/20240808-random-quantum-mechanics-notecards.jpg' },
         // { title: 'What is dx', content: 'Sus Calculus Things', link: 'blog/what-is-dx', date: 'December 30, 2024', backgroundImage: 'img/pics/IMG_6417.jpg' },
 
-        { 
-            title: 'Economics of Efficiency', content: 'The ethics of maximizing resource efficiency.', 
-            link: 'blog/economics-of-efficiency', date: 'August 29, 2025', backgroundImage: 'img/pics/algae-placeholder.jpeg',
-            category: ['philosophy']
-        },
-        { 
-            title: 'King of Khmer Music: Part 1', content: 'Cambodian music I\'ve listened to recently.', 
-            link: 'blog/king-of-khmer-music', date: 'June 6, 2025', backgroundImage: 'img/pics/sinn-sisamouth.png',
-            category: ['music']
-        },
-        { 
-            title: 'Bourgain\'s Problem Resolved!', content: 'Inspired by Klartag and Lehec\'s resolution of Bourgain\'s slicing problem.', 
-            link: 'blog/bourgains-problem-resolved', date: 'June 6, 2025', backgroundImage: 'img/pics/IMG_9074.jpg',
-            category: ['geometry', 'math']
-        },
-        { 
-            title: 'A New Era', content: 'Lemonade for a Broader Audience!', 
-            link: 'blog/a-new-era', date: 'June 6, 2025', backgroundImage: 'img/pics/IMG_9053.jpg',
-            category: ['life']
-        },
-        { 
-            title: 'Geometry and Probability', content: 'My two favorite subjects mixing?', 
-            link: 'blog/geometry-and-probability', date: 'May 13, 2025', backgroundImage: 'img/pics/IMG_8717.jpg',
-            category: ['geometry', 'math']
-        },
-        { 
-            title: 'Words I Pretend to Know', content: 'KL Divergence, Homology, Tor, and Revisiting Orientability.', 
-            link: 'blog/words-i-pretend-to-know', date: 'May 1, 2025', backgroundImage: 'img/pics/IMG_6423_2.jpg',
-            category: ['math']
-        },
-        { 
-            title: 'Langevin on Manifolds', content: 'Unexpected Exponential Sighting!', 
-            link: 'blog/langevin-on-manifolds', date: 'April 1, 2025', backgroundImage: 'img/pics/IMG_8716.jpg',
-            category: ['geometry', 'math']
-        },
-        { 
-            title: 'Liouville, Santallo, and Isoperimetric Inequalities', content: 'A difficult problem from my PSet.', 
-            link: 'blog/liouville-santalo-and-isoperimetric-inequalities', date: 'March 26, 2025', backgroundImage: 'img/pics/20240427-berkeley-hort.jpg',
-            category: ['geometry', 'math']
-        },
+        // { 
+        //     title: 'Economics of Efficiency', content: 'The ethics of maximizing resource efficiency.', 
+        //     link: 'blog/economics-of-efficiency', date: 'August 29, 2025', backgroundImage: 'img/pics/algae-placeholder.jpeg',
+        //     category: ['philosophy']
+        // },
+        // { 
+        //     title: 'King of Khmer Music: Part 1', content: 'Cambodian music I\'ve listened to recently.', 
+        //     link: 'blog/king-of-khmer-music', date: 'June 6, 2025', backgroundImage: 'img/pics/sinn-sisamouth.png',
+        //     category: ['music']
+        // },
+        // { 
+        //     title: 'Bourgain\'s Problem Resolved!', content: 'Inspired by Klartag and Lehec\'s resolution of Bourgain\'s slicing problem.', 
+        //     link: 'blog/bourgains-problem-resolved', date: 'June 6, 2025', backgroundImage: 'img/pics/IMG_9074.jpg',
+        //     category: ['geometry', 'math']
+        // },
+        // { 
+        //     title: 'A New Era', content: 'Lemonade for a Broader Audience!', 
+        //     link: 'blog/a-new-era', date: 'June 6, 2025', backgroundImage: 'img/pics/IMG_9053.jpg',
+        //     category: ['life']
+        // },
+        // { 
+        //     title: 'Geometry and Probability', content: 'My two favorite subjects mixing?', 
+        //     link: 'blog/geometry-and-probability', date: 'May 13, 2025', backgroundImage: 'img/pics/IMG_8717.jpg',
+        //     category: ['geometry', 'math']
+        // },
+        // { 
+        //     title: 'Words I Pretend to Know', content: 'KL Divergence, Homology, Tor, and Revisiting Orientability.', 
+        //     link: 'blog/words-i-pretend-to-know', date: 'May 1, 2025', backgroundImage: 'img/pics/IMG_6423_2.jpg',
+        //     category: ['math']
+        // },
+        // { 
+        //     title: 'Langevin on Manifolds', content: 'Unexpected Exponential Sighting!', 
+        //     link: 'blog/langevin-on-manifolds', date: 'April 1, 2025', backgroundImage: 'img/pics/IMG_8716.jpg',
+        //     category: ['geometry', 'math']
+        // },
+        // { 
+        //     title: 'Liouville, Santallo, and Isoperimetric Inequalities', content: 'A difficult problem from my PSet.', 
+        //     link: 'blog/liouville-santalo-and-isoperimetric-inequalities', date: 'March 26, 2025', backgroundImage: 'img/pics/20240427-berkeley-hort.jpg',
+        //     category: ['geometry', 'math']
+        // },
         { 
             title: 'CJ: Regularization and Sparsity', content: 'A post on our SAAS Education blog.', 
             link: 'https://saas-ed-sp25.vercel.app/blog/regularization-and-sparsity', date: 'March 25, 2025', backgroundImage: 'https://saas-ed-sp25.vercel.app/regularization.png',
             category: ['ml']
         },
-        { 
-            title: 'Comments Enabled', content: 'You can now comment!', 
-            link: 'blog/comments-enabled', date: 'March 22, 2025', backgroundImage: 'img/pics/IMG_8039.jpg', 
-            category: ['life']
-        },
-        { 
-            title: 'Annealing', content: '.', 
-            link: 'blog/annealing', date: 'March 16, 2025', backgroundImage: 'img/pics/IMG_8040.jpg',
-            category: ['life']
-        },
-        { 
-            title: 'Proof by Bureaucracy', content: 'My only critique of Lee.', 
-            link: 'blog/proof-by-bureaucracy', date: 'March 16, 2025', backgroundImage: 'img/pics/riemannian-struggles-031625.jpg', 
-            category: ['geometry', 'math']
-        },
-        { 
-            title: 'From Water to Soil', content: 'Systems', 
-            link: 'blog/from-water-to-soil', date: 'February 23, 2025', backgroundImage: 'img/pics/IMG_7795.jpg',
-            category: ['plants']
-        },
+        // { 
+        //     title: 'Comments Enabled', content: 'You can now comment!', 
+        //     link: 'blog/comments-enabled', date: 'March 22, 2025', backgroundImage: 'img/pics/IMG_8039.jpg', 
+        //     category: ['life']
+        // },
+        // { 
+        //     title: 'Annealing', content: '.', 
+        //     link: 'blog/annealing', date: 'March 16, 2025', backgroundImage: 'img/pics/IMG_8040.jpg',
+        //     category: ['life']
+        // },
+        // { 
+        //     title: 'Proof by Bureaucracy', content: 'My only critique of Lee.', 
+        //     link: 'blog/proof-by-bureaucracy', date: 'March 16, 2025', backgroundImage: 'img/pics/riemannian-struggles-031625.jpg', 
+        //     category: ['geometry', 'math']
+        // },
+        // { 
+        //     title: 'From Water to Soil', content: 'Systems', 
+        //     link: 'blog/from-water-to-soil', date: 'February 23, 2025', backgroundImage: 'img/pics/IMG_7795.jpg',
+        //     category: ['plants']
+        // },
         { 
             title: 'CJ: MSE Min', content: 'A post on our SAAS Education blog.', 
             link: 'https://saas-ed-sp25.vercel.app/blog/mse-min', date: 'February 19, 2025', backgroundImage: 'img/pics/mse-min.png',
@@ -83,111 +83,111 @@ export const blogPosts = [
             link: 'https://saas-ed-sp25.vercel.app/blog/zero', date: 'February 9, 2025', backgroundImage: 'img/pics/IMG_5399.jpg',
             category: ['ml']
         },
-        { 
-            title: 'Zen Koan', content: 'Wyatt Roy\'s Mu Mirror.', 
-            link: 'blog/zen-koan', date: 'January 10, 2025', backgroundImage: 'img/pics/20240808-random-quantum-mechanics-notecards.jpg',
-            category: ['philosophy']
-        },
-        { 
-            title: 'SLAHMR and New Years Updates', content: 'Investigations', 
-            link: 'blog/slahmr', date: 'January 7, 2025', backgroundImage: 'img/pics/000084_001.png',
-            category: ['ml']
-        },
-        { 
-            title: 'USD Scripting', content: 'Thank You Pixar', 
-            link: 'blog/usd', date: 'December 30, 2024', backgroundImage: 'img/pics/IMG_6417.jpg',
-            category: ['cs']
-        },
-        { 
-            title: 'Ketchup, Holiday, Life', content: 'Who are you?', 
-            link: 'blog/ketchup-holiday-life', date: 'December 27, 2024', backgroundImage: 'img/pics/20240808-cardboard-box-gardens.jpg',
-            category: ['life']
-        },
-        { 
-            title: 'Satisfying Sip', content: 'My New Tea Station!', 
-            link: 'blog/satisfying-sip', date: 'November 5, 2024', backgroundImage: 'img/pics/IMG_6417.jpg',
-            category: ['tea']
-        },
-        { 
-            title: 'Fomenko\'s Art', content: 'Anatoly Fomenko', 
-            link: 'blog/goated-reincarnation', date: 'September 28, 2024', backgroundImage: 'img/pics/20240918-new-book.jpg',
-            category: ['math']
-        },
-        { 
-            title: 'Truth and Orientation', content: 'Does truth exist? Is G(125,34) orientable?', 
-            link: 'blog/truth-and-orientation', date: 'September 18, 2024', backgroundImage: 'img/pics/20240918-new-book.jpg',
-            category: ['life']
-        },
-        { 
-            title: 'Ghee and Ethics', content: 'Good food and Utilitarianism.', 
-            link: 'blog/ghee-and-ethics', date: 'September 2, 2024', backgroundImage: 'img/pics/20240902-ghee-and-ethics.jpg',
-            category: ['philosophy']
-        },
-        { 
-            title: 'Difference Rings', content: 'I wish we could automatically prove things for differences and differentials simultaneously.', 
-            link: 'blog/difference-rings', date: 'August 25, 2024', backgroundImage: 'img/pics/IMG_5637.jpg',
-            category: ['math']
-        },
-        { 
-            title: 'Cloud Simulation', content: 'A cool website.', 
-            link: 'blog/cloud-simulation', date: 'August 23, 2024', backgroundImage: 'img/pics/IMG_4768.jpg',
-            category: ['cs']
-        },
-        { 
-            title: 'Updates and .vscode', content: 'I can\'t decide if I like nature, and also I learned of a cool feature!', 
-            link: 'blog/updates-and-vscode', date: 'August 21, 2024', backgroundImage: 'img/pics/20240821-updates-and-vscode.jpg',
-            category: ['cs']
-        },
-        { 
-            title: 'Notions of Smoothness', content: 'Slightly different but equally interesting intuitions.', 
-            link: 'blog/notions-of-smoothness', date: 'August 11, 2024', backgroundImage: 'img/pics/20240811-clouds.jpg',
-            category: ['math']
-        },
-        { 
-            title: 'Understanding Lyapunov Functionals', content: 'Apparently Lyapunov functionals are great.', 
-            link: 'blog/understanding-lyapunov-functionals', date: 'August 11, 2024', backgroundImage: 'img/pics/20240810-funny-do-not-peel-peel-thing.jpg',
-            category: ['geometry', 'math']
-        },
-        { 
-            title: 'A Cool Way to Garden', content: 'Check out this video I saw!', 
-            link: 'blog/a-cool-way-to-garden', date: 'August 8, 2024', backgroundImage: 'img/pics/20240808-cardboard-box-gardens.jpg',
-            category: ['plants']
-        },
-        { 
-            title: 'Life and Basil Limeade', content: 'Things I\'ve been thinking about, with a side of basil limeade.', 
-            link: 'blog/life-and-basil-limeade', date: 'August 8, 2024', backgroundImage: 'img/pics/20240808-life-and-basil-limeade.jpg',
-            category: ['life']
-        },
-        { 
-            title: 'Motivating Ladder Operators', content: 'Trying to understand ladder operators better.', 
-            link: 'blog/motivating-ladder-operators', date: 'August 5, 2024', backgroundImage: 'img/pics/IMG_4612.jpg',
-            category: ['math']
-        },
-        { 
-            title: 'Migrated to AstroJS', content: 'I moved everything from NextJS to AstroJS!', 
-            link: 'blog/migrated-to-astro', date: 'August 4, 2024', backgroundImage: 'img/pics/astrojs.png',
-            category: ['cs']
-        },
-        { 
-            title: 'It Turns Out Measure Theory Actually Is Useful', content: 'Warning! This will take you to another world!', 
-            link: 'https://www.ocf.berkeley.edu/~aathreyak/orange-juice/sketches/sketch-7/', date: 'June 20, 2024', backgroundImage: 'img/pics/sketch.jpeg',
-            category: ['math']
-        },
-        { 
-            title: 'Paradoxical Areas I', content: 'Resolving a confusion I had when thinking about areas.', 
-            link: '../rlog/paradoxical-areas.html', date: 'June 4, 2024', backgroundImage: 'img/pics/paradoxical-areas-i.png',
-            category: ['geometry', 'math']
-        },
-        { 
-            title: 'Grafting and GPUs', content: 'The coolest planting technique and some interesting articles I saw.', 
-            link: 'blog/grafting-and-gpus', date: 'May 18, 2024', backgroundImage: 'img/pics/IMG_3880.jpg',
-            category: ['ml', 'plants']
-        },
-        { 
-            title: 'Roses and Radiance Fields', content: 'Visiting Berkeley Hort and reading the NeRF paper.', 
-            link: 'blog/roses-and-radiance-fields', date: 'April 27, 2024', backgroundImage: 'img/pics/20240427-berkeley-hort.jpg',
-            category: ['ml', 'plants']
-        },
+        // { 
+        //     title: 'Zen Koan', content: 'Wyatt Roy\'s Mu Mirror.', 
+        //     link: 'blog/zen-koan', date: 'January 10, 2025', backgroundImage: 'img/pics/20240808-random-quantum-mechanics-notecards.jpg',
+        //     category: ['philosophy']
+        // },
+        // { 
+        //     title: 'SLAHMR and New Years Updates', content: 'Investigations', 
+        //     link: 'blog/slahmr', date: 'January 7, 2025', backgroundImage: 'img/pics/000084_001.png',
+        //     category: ['ml']
+        // },
+        // { 
+        //     title: 'USD Scripting', content: 'Thank You Pixar', 
+        //     link: 'blog/usd', date: 'December 30, 2024', backgroundImage: 'img/pics/IMG_6417.jpg',
+        //     category: ['cs']
+        // },
+        // { 
+        //     title: 'Ketchup, Holiday, Life', content: 'Who are you?', 
+        //     link: 'blog/ketchup-holiday-life', date: 'December 27, 2024', backgroundImage: 'img/pics/20240808-cardboard-box-gardens.jpg',
+        //     category: ['life']
+        // },
+        // { 
+        //     title: 'Satisfying Sip', content: 'My New Tea Station!', 
+        //     link: 'blog/satisfying-sip', date: 'November 5, 2024', backgroundImage: 'img/pics/IMG_6417.jpg',
+        //     category: ['tea']
+        // },
+        // { 
+        //     title: 'Fomenko\'s Art', content: 'Anatoly Fomenko', 
+        //     link: 'blog/goated-reincarnation', date: 'September 28, 2024', backgroundImage: 'img/pics/20240918-new-book.jpg',
+        //     category: ['math']
+        // },
+        // { 
+        //     title: 'Truth and Orientation', content: 'Does truth exist? Is G(125,34) orientable?', 
+        //     link: 'blog/truth-and-orientation', date: 'September 18, 2024', backgroundImage: 'img/pics/20240918-new-book.jpg',
+        //     category: ['life']
+        // },
+        // { 
+        //     title: 'Ghee and Ethics', content: 'Good food and Utilitarianism.', 
+        //     link: 'blog/ghee-and-ethics', date: 'September 2, 2024', backgroundImage: 'img/pics/20240902-ghee-and-ethics.jpg',
+        //     category: ['philosophy']
+        // },
+        // { 
+        //     title: 'Difference Rings', content: 'I wish we could automatically prove things for differences and differentials simultaneously.', 
+        //     link: 'blog/difference-rings', date: 'August 25, 2024', backgroundImage: 'img/pics/IMG_5637.jpg',
+        //     category: ['math']
+        // },
+        // { 
+        //     title: 'Cloud Simulation', content: 'A cool website.', 
+        //     link: 'blog/cloud-simulation', date: 'August 23, 2024', backgroundImage: 'img/pics/IMG_4768.jpg',
+        //     category: ['cs']
+        // },
+        // { 
+        //     title: 'Updates and .vscode', content: 'I can\'t decide if I like nature, and also I learned of a cool feature!', 
+        //     link: 'blog/updates-and-vscode', date: 'August 21, 2024', backgroundImage: 'img/pics/20240821-updates-and-vscode.jpg',
+        //     category: ['cs']
+        // },
+        // { 
+        //     title: 'Notions of Smoothness', content: 'Slightly different but equally interesting intuitions.', 
+        //     link: 'blog/notions-of-smoothness', date: 'August 11, 2024', backgroundImage: 'img/pics/20240811-clouds.jpg',
+        //     category: ['math']
+        // },
+        // { 
+        //     title: 'Understanding Lyapunov Functionals', content: 'Apparently Lyapunov functionals are great.', 
+        //     link: 'blog/understanding-lyapunov-functionals', date: 'August 11, 2024', backgroundImage: 'img/pics/20240810-funny-do-not-peel-peel-thing.jpg',
+        //     category: ['geometry', 'math']
+        // },
+        // { 
+        //     title: 'A Cool Way to Garden', content: 'Check out this video I saw!', 
+        //     link: 'blog/a-cool-way-to-garden', date: 'August 8, 2024', backgroundImage: 'img/pics/20240808-cardboard-box-gardens.jpg',
+        //     category: ['plants']
+        // },
+        // { 
+        //     title: 'Life and Basil Limeade', content: 'Things I\'ve been thinking about, with a side of basil limeade.', 
+        //     link: 'blog/life-and-basil-limeade', date: 'August 8, 2024', backgroundImage: 'img/pics/20240808-life-and-basil-limeade.jpg',
+        //     category: ['life']
+        // },
+        // { 
+        //     title: 'Motivating Ladder Operators', content: 'Trying to understand ladder operators better.', 
+        //     link: 'blog/motivating-ladder-operators', date: 'August 5, 2024', backgroundImage: 'img/pics/IMG_4612.jpg',
+        //     category: ['math']
+        // },
+        // { 
+        //     title: 'Migrated to AstroJS', content: 'I moved everything from NextJS to AstroJS!', 
+        //     link: 'blog/migrated-to-astro', date: 'August 4, 2024', backgroundImage: 'img/pics/astrojs.png',
+        //     category: ['cs']
+        // },
+        // { 
+        //     title: 'It Turns Out Measure Theory Actually Is Useful', content: 'Warning! This will take you to another world!', 
+        //     link: 'https://www.ocf.berkeley.edu/~aathreyak/orange-juice/sketches/sketch-7/', date: 'June 20, 2024', backgroundImage: 'img/pics/sketch.jpeg',
+        //     category: ['math']
+        // },
+        // { 
+        //     title: 'Paradoxical Areas I', content: 'Resolving a confusion I had when thinking about areas.', 
+        //     link: '../rlog/paradoxical-areas.html', date: 'June 4, 2024', backgroundImage: 'img/pics/paradoxical-areas-i.png',
+        //     category: ['geometry', 'math']
+        // },
+        // { 
+        //     title: 'Grafting and GPUs', content: 'The coolest planting technique and some interesting articles I saw.', 
+        //     link: 'blog/grafting-and-gpus', date: 'May 18, 2024', backgroundImage: 'img/pics/IMG_3880.jpg',
+        //     category: ['ml', 'plants']
+        // },
+        // { 
+        //     title: 'Roses and Radiance Fields', content: 'Visiting Berkeley Hort and reading the NeRF paper.', 
+        //     link: 'blog/roses-and-radiance-fields', date: 'April 27, 2024', backgroundImage: 'img/pics/20240427-berkeley-hort.jpg',
+        //     category: ['ml', 'plants']
+        // },
         { 
             title: 'The Coolest Proof', content: 'The euphoria from getting this proof is amazing.', 
             link: 'blog/the-coolest-proof', date: 'July 9, 2023',
