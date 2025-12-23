@@ -203,11 +203,12 @@ export const otherPosts = [
             link: 'blog/well-ordering-i', date: 'February 13, 2023',
             category: ['math']
         },
-        { 
-            title: 'P.E.K.K.A.s and Determinants', content: 'What do a P.E.K.K.A. and a Determinant have in common? What is Linear Algebra Done Right', 
-            link: 'blog/determinants-i', date: 'January 15, 2023', backgroundImage: 'img/pics/pekkas-and-determinants.jpeg',
-            category: ['math']
-        },
+        // DONE MOVING TO BLOG!
+        // { 
+        //     title: 'P.E.K.K.A.s and Determinants', content: 'What do a P.E.K.K.A. and a Determinant have in common? What is Linear Algebra Done Right', 
+        //     link: 'blog/determinants-i', date: 'January 15, 2023', backgroundImage: 'img/pics/pekkas-and-determinants.jpeg',
+        //     category: ['math']
+        // },
         { 
             title: 'Investigating the Fast Inverse Square Root', content: 'Benchmarking one of my favorite algorithms.', 
             link: 'blog/investigating-the-fast-inverse-square-root', date: 'December 27, 2022',

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from "react";
 import type { Category, BlogPost, BlogPageProps, BlogPostCardProps } from "../types/blog"
+import { categories } from "../types/blog"
 
 export default function BlogPage({ posts }: BlogPageProps) {
   const [selected, setSelected] = useState<Set<Category>>(
@@ -22,16 +23,11 @@ export default function BlogPage({ posts }: BlogPageProps) {
           post.category.some(c => selected.has(c))
         );
 
-  const allCategories: Category[] = [
-    "math", "geometry", "ml", "cs", "philosophy",
-    "music", "life", "plants", "science", "tea", "nt"
-  ];
-
   return (
     <>
       {/* Category Toggles */}
       <div className="flex flex-wrap gap-2 mb-6">
-        {allCategories.map(cat => {
+        {categories.map(cat => {
           const active = selected.has(cat);
           return (
             <button
