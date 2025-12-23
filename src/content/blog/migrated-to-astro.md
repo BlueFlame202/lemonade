@@ -1,10 +1,10 @@
 ---
-
 title: "Migrated to AstroJS!"
 description: "I moved the blog from NextJS to AstroJS!"
 image: "/img/pics/astrojs.png"
 author: "Aathreya Kadambi"
 date: "August 4, 2024"
+category: ['cs']
 ---
 
 I just migrated my blog to AstroJS! This has a lot of benefits for me. The main reason I switched was just to experiment with the tech and see how it felt. So far, it feels good. And boy do they know how to make a VS Code theme!

@@ -5,6 +5,7 @@ description: "Wealth, Fame, and Power."
 image: "/img/pics/20240902-ghee-and-ethics.jpg"
 author: "Aathreya Kadambi"
 date: "September 2, 2024"
+category: ['philosophy']
 ---
 
 Here's some music you can listen to while reading if you're logged into Spotify:

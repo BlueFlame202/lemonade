@@ -1,10 +1,10 @@
 ---
-
 title: "Zen Koan"
 description: "Wyatt Roy's Mu Mirror."
 image: "/img/pics/20240808-random-quantum-mechanics-notecards.jpg"
 author: "Aathreya Kadambi"
 date: "January 10, 2025"
+category: ['philosophy', "artistic"]
 ---
 
 https://wyattroy.github.io/mu-mirror/

@@ -1,11 +1,11 @@
 ---
-
 title: "Life and Basil Limeade"
 description: "Things I've been thinking about, with a side of basil limeade."
 image: "/img/pics/20240808-life-and-basil-limeade.jpg"
 author: "Aathreya Kadambi"
 slug: "life-and-basil-limeade"
 date: "August 8, 2024"
+category: ['life']
 ---
 
 Check this out, if you have a Spotify account and are logged into this browser, you can listen to this song while you read:

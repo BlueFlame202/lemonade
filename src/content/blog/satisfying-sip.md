@@ -1,11 +1,11 @@
 ---
-
 title: "Satisfying Sip"
 description: "My New Tea Station!"
 image: "/img/pics/IMG_6417.jpg"
 author: "Aathreya Kadambi"
 slug: "satisfying-sip"
 date: "November 5, 2024"
+category: ['tea']
 ---
 
 Two days ago, I made a tea station for myself! Check it out:

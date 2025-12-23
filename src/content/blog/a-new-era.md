@@ -4,6 +4,7 @@ description: "Lemonade for a Broader Audience"
 image: "/img/pics/IMG_9053.jpg"
 author: "Aathreya Kadambi"
 date: "June 6, 2025"
+category: ['life']
 ---
 
 Up till now, my posts have been a bit unorganized. I have had a long-standing issue that the posts I make on this blog sometimes feel esoteric, which has led me to be a bit disoriented about how to write posts. Should I keep in high-level technical details, as Terry Tao does in his posts? Would borderline insane (but fun) philosophical remarks be appropriate for articles that claim to have some level of scholarly value? Is it better to keep posts "authentic" and write about "normal" things happening in my life?

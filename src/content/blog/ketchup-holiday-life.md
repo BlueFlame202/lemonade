@@ -6,6 +6,7 @@ image: "/img/pics/20240808-cardboard-box-gardens.jpg"
 author: "Aathreya Kadambi"
 slug: "ketchup-holiday-life"
 date: "December 27, 2024"
+category: ['life']
 ---
 
 Recently, I read something interesting: apparently ketchup is so hard to get out of bottles because it primarily acts like a liquid under compression! It's an example of something called a "shear-thinning" fluid. I'm reading about complex fluids right now, which has been quite fun. I really wanted to start this earlier but somehow I never got to make the time for it. There's so much to learn, from fluids and numerics to probability theory to homology and modern geometry/topology, I guess I have to get much faster at learning if I want my freshman year dreams to come true.

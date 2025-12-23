@@ -4,6 +4,7 @@ description: "Inspired by Klartag and Lehec's resolution of Bourgain's slicing p
 image: "/img/pics/IMG_9074.jpg"
 author: "Aathreya Kadambi"
 date: "June 6, 2025"
+category: ['geometry', 'math']
 ---
 
 Today I was reminded by a mentor of the importance of interacting with scientific and mathematical communities that we are interested in. I was inspired by them to take my relationship with research on a more livelihood level and to start reading and blogging more about magazines and general articles.

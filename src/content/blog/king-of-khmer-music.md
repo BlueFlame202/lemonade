@@ -4,6 +4,7 @@ description: "Cambodian music I've listened to recently."
 image: "/img/pics/sinn-sisamouth.png"
 author: "Aathreya Kadambi"
 date: "June 6, 2025"
+category: ['music', "artistic"]
 ---
 
 Why do you like music?

@@ -6,6 +6,7 @@ image: "/img/pics/IMG_3880.jpg"
 author: "Aathreya Kadambi"
 slug: "grafting-and-gpus"
 date: "May 18, 2024"
+category: ['ml', 'plants']
 ---
 
 I'm currently writing to you from SFO Terminal 1, as I wait for my flight to Texas! I can't wait to learn about PDEs this summer.

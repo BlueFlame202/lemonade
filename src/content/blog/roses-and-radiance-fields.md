@@ -1,11 +1,11 @@
 ---
-
 title: "Roses and Radiance Fields"
 description: "I visited Berkeley Horticultural! I've also been thinking about NeRFs...."
 image: "/img/pics/20240427-berkeley-hort.jpg"
 author: "Aathreya Kadambi"
 slug: "roses-and-radiance-fields"
 date: "April 27, 2024"
+category: ['ml', 'plants']
 ---
 
 On Thursday, I happened to get 3 stems (two from a rose, and one from some other unrecognizable flower) because of an event on the glade at Berkeley. Since I've adopted so many succulents recently, I decided it couldn't hurt to try re-planting them also, to give my plant collection a bit more variety. But after consulting my mom and the internet, I found that actually, I probably needed a "root hormone", so today, I went to the Berkeley Horticultural Nursery for the first time to get some.

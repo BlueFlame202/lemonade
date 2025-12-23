@@ -1,11 +1,11 @@
 ---
-
 title: "Updates and .vscode"
 description: "I can't decide if I like nature, and also I learned of a cool feature!"
 image: "/img/pics/20240821-updates-and-vscode.jpg"
 author: "Aathreya Kadambi"
 slug: "updates-and-vscode"
 date: "August 21, 2024"
+category: ['cs']
 ---
 
 Here's some music you can listen to while reading if you're logged into Spotify:

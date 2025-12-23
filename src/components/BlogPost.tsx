@@ -1,31 +1,6 @@
 import React from 'react'
 import { useState } from "react";
-
-type Category =
-  | "math"
-  | "geometry"
-  | "ml"
-  | "cs"
-  | "philosophy"
-  | "music"
-  | "life"
-  | "plants"
-  | "science"
-  | "tea"
-  | "nt";
-
-type BlogPost = {
-    title: string;
-    content: string;
-    link: string;
-    date: string;
-    backgroundImage?: string; // Optional background image for each blog post
-    category: Category[];
-};
-
-type BlogPageProps = {
-    posts: BlogPost[];
-};
+import type { Category, BlogPost, BlogPageProps, BlogPostCardProps } from "../types/blog"
 
 export default function BlogPage({ posts }: BlogPageProps) {
   const [selected, setSelected] = useState<Set<Category>>(
@@ -83,14 +58,6 @@ export default function BlogPage({ posts }: BlogPageProps) {
     </>
   );
 }
-
-type BlogPostCardProps = {
-    title: string;
-    content: string;
-    link: string;
-    date: string;
-    backgroundImage?: string; // Optional background image for each blog post
-};
 
 const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, content, link, date, backgroundImage }) => {
     return (

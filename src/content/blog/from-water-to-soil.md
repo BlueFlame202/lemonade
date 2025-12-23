@@ -5,6 +5,7 @@ description: "Systems"
 image: "/img/pics/IMG_7795.jpg"
 author: "Aathreya Kadambi"
 date: "February 23, 2025"
+category: ['plants', 'life']
 ---
 
 I recently transplanted two of my basil plants which were growing in water to soil from my compost bin (which admittedly contains too much browns to greens to be considered proper compost). So far, it looks like they're really enjoying it! Not only that, but it seems a baby plant has also sprouted right near one of my basils! I'm excited to see what it will grow into. I think the soil is giving the basils much more structure, support, and nutrients to grow. 
