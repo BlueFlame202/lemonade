@@ -115,7 +115,7 @@ export default function BlogPage({ posts, postsPerPage = 9 }: BlogPageProps) {
             </span>
           ) : (
             <button
-              key={p}
+              key={`${p}-${i}`}
               onClick={() => setPage(p as number)}
               className={`px-3 py-1 border rounded ${
                 page === p ? "bg-blue-600 text-white border-blue-600" : ""
@@ -155,7 +155,7 @@ export default function BlogPage({ posts, postsPerPage = 9 }: BlogPageProps) {
 
         {getPageNumbers(page, totalPages).map((p, i) =>
           p === "..." ? (
-            <span key={i} className="px-3 py-1">
+            <span key={`${p}-${i}`} className="px-3 py-1">
               ...
             </span>
           ) : (
