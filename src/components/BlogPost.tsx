@@ -29,14 +29,13 @@ type BlogPageProps = {
 
 export default function BlogPage({ posts }: BlogPageProps) {
   const [selected, setSelected] = useState<Set<Category>>(
-    new Set(["math"]) // default selection (optional)
+    new Set([]) // default selection (optional)
   );
 
   const toggleCategory = (cat: Category) => {
     setSelected(prev => {
       const next = new Set(prev);
       next.has(cat) ? next.delete(cat) : next.add(cat);
-      console.log(next);
       return next;
     });
   };
