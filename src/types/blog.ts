@@ -2,16 +2,16 @@ export const categories = [
   "math",
   "geometry",
   "probability",
+  "nt",
   "ml",
   "cs",
-  "philosophy",
-  "music",
   "life",
+  "philosophy",
+  "tea",
+  "artistic",
+  "music",
   "plants",
   "science",
-  "tea",
-  "nt",
-  "artistic",
 ] as const;
 
 export type Category = typeof categories[number];
