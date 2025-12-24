@@ -2,7 +2,7 @@
 
 My blog and website! I've been working on this for a long time, and have learned many things in the process.
 
-## 2025-2026 Vision/Roadmap
+## 2026 Vision/Roadmap
 - [ ] Make better use of Astro types
 - [ ] Create a 3D home page
   - [ ] Create 3D Assets via Blender or Recent Vision Transformer Methods
