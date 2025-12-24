@@ -38,5 +38,8 @@ The second thing to notice is the use of pagination. This is a feature I've been
 
 On the implementation side of things, I was doing a silly thing where I was adding each post manually, so that I could also include posts from our SAAS education blog and my old posts. This was in part because originally, I didn't know how Astro schemas worked. I started using Astro schemas a while ago for updating the News widget, but was still thinking about how to integrate reposts and old posts. I've finally done it by creating a file called `posts.ts` along with better cross-file types in `types/blog.ts`. `posts.ts` just includes the old posts and reposts, and then I can integrate them via logic in `blog.astro`. This slightly reduces the barrier to posting because to be honest, the growing list was getting out of hand! I kept the full list at this point in time in `posts.ts` for the memories. In the future, I plan to move towards having all types in `types/`; I haven't done it so far because while it feels nice programmatically, it won't really have any forseeable impact on the website aside from code readability.
 
+## Boundaries
+
+On a deeper level, I realized what I was missing, both in my personal life and on this website: boundaries. At least for this website, these features solve that.
 
 With all these changes, I'm looking forward to getting back to writing about what I enjoy! :)
