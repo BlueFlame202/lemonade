@@ -25,5 +25,10 @@ export default defineConfig({
       include: ['maplibre-gl'],
       exclude: []
     }
-  }
+  },
+  markdown: {
+    components: {
+      Decryptor: "./src/components/Decryptor.astro",
+    },
+  },
 });
