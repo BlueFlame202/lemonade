@@ -8,6 +8,12 @@ export const otherPosts = [
         // { title: 'Motivating Ladder Operators II', content: 'Trying again to understand ladder operators better.', link: 'blog/motivating-ladder-operators-ii', date: 'January 10, 2025', backgroundImage: 'img/pics/20240808-random-quantum-mechanics-notecards.jpg' },
         // { title: 'What is dx', content: 'Sus Calculus Things', link: 'blog/what-is-dx', date: 'December 30, 2024', backgroundImage: 'img/pics/IMG_6417.jpg' },
 
+        { 
+            title: 'Modular Hack Weekend', content: 'A post on the Modular Forums.', 
+            link: 'https://forum.modular.com/t/hackathon-very-initial-progress-towards-stable-diffusion-in-max/1842', date: 'June 29, 2025', backgroundImage: 'img/pics/modular-hack-weekend.png',
+            category: ['ml']
+        },
+
         // { 
         //     title: 'Economics of Efficiency', content: 'The ethics of maximizing resource efficiency.', 
         //     link: 'blog/economics-of-efficiency', date: 'August 29, 2025', backgroundImage: 'img/pics/algae-placeholder.jpeg',
