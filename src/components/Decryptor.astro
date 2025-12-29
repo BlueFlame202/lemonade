@@ -1,0 +1,88 @@
+---
+interface Props {
+  cipherText: string;
+}
+
+const { cipherText } = Astro.props;
+---
+
+<div class="max-w-xl mx-auto mt-10 p-6 rounded-xl bg-quaternary text-zinc-100 shadow-lg">
+  <h2 class="text-2xl font-semibold mb-6">Vigenère Decryptor</h2>
+
+  <!-- Cipher Text (Read-only display) -->
+  <div class="mb-4">
+    <span class="text-sm font-medium text-zinc-300">Cipher Text</span>
+    <div
+      id="cipher"
+      class="mt-1 rounded-md bg-zinc-800 border border-zinc-700 p-3 whitespace-pre-wrap"
+      data-cipher={cipherText}
+    >
+      {cipherText}
+    </div>
+  </div>
+
+  <!-- Key Input -->
+  <label class="block mb-4">
+    <span class="text-sm font-medium text-zinc-300">Key</span>
+    <input
+      id="key"
+      type="text"
+      class="mt-1 w-full rounded-md bg-zinc-800 border border-zinc-700 p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      placeholder="Enter key"
+    />
+  </label>
+
+  <!-- Output -->
+  <div>
+    <span class="text-sm font-medium text-zinc-300">Plain Text</span>
+    <div
+      id="output"
+      class="mt-1 min-h-[80px] rounded-md bg-zinc-800 border border-zinc-700 p-3 whitespace-pre-wrap"
+    ></div>
+  </div>
+</div>
+
+<script>
+  const cipherEl = document.getElementById("cipher");
+  const keyInput = document.getElementById("key");
+  const output = document.getElementById("output");
+
+  const cipherText = cipherEl.dataset.cipher || "";
+
+  function decryptVigenere(cipher, key) {
+    key = key.toLowerCase().replace(/[^a-z]/g, "");
+    if (!key) return "";
+
+    let result = "";
+    let keyIndex = 0;
+
+    for (let i = 0; i < cipher.length; i++) {
+      const code = cipher.charCodeAt(i);
+
+      if (code >= 65 && code <= 90) {
+        const shift = key.charCodeAt(keyIndex % key.length) - 97;
+        result += String.fromCharCode(
+          ((code - 65 - shift + 26) % 26) + 65
+        );
+        keyIndex++;
+      } else if (code >= 97 && code <= 122) {
+        const shift = key.charCodeAt(keyIndex % key.length) - 97;
+        result += String.fromCharCode(
+          ((code - 97 - shift + 26) % 26) + 97
+        );
+        keyIndex++;
+      } else {
+        result += cipher[i];
+      }
+    }
+
+    return result;
+  }
+
+  keyInput.addEventListener("input", () => {
+    output.textContent = decryptVigenere(
+      cipherText,
+      keyInput.value
+    );
+  });
+</script>

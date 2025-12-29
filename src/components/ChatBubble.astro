@@ -1,0 +1,30 @@
+---
+const { type } = Astro.props;
+---
+
+<style>
+  .sms-bubble {
+    font-family: "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0rem 1rem;
+    border-radius: 16px;
+    display: inline-block;
+    max-width: 70%;
+    margin: 0.5rem 0;
+  }
+
+  .received {
+    background-color: #e5e5ea;
+    color: #000;
+  }
+
+  .sent {
+    background-color: #007aff;
+    color: #fff;
+  }
+</style>
+
+<div class={`sms-bubble ${type}`}>
+  <slot />
+</div>
