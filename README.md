@@ -12,3 +12,5 @@ My blog and website! I've been working on this for a long time, and have learned
   - [ ] Make special objects interactive
 - [ ] Begin working on sea
 - [ ] Loading screen with funny hints for sea (see https://www.facebook.com/reel/886555103274273?fs=e&mibextid=0NULKw&fs=e&s=TIeQ9V)
+- [ ] A better system for feature requests, more use of Github issues
+- [ ] A better system for prereleasing blogs and also help localhost show more details for me when drafting and can see unpublished articles
