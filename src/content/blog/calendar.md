@@ -1,7 +1,7 @@
 ---
 title: "Calendar"
 description: "Being More Diligent"
-image: "/img/pics/IMG_8717.jpg"
+image: "/img/pics/IMG_0634.jpg"
 author: "Aathreya Kadambi"
 date: "December 28, 2025"
 category: ['life']
