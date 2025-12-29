@@ -43,13 +43,16 @@ const { cipherText } = Astro.props;
 </div>
 
 <script>
-  const cipherEl = document.getElementById("cipher");
-  const keyInput = document.getElementById("key");
-  const output = document.getElementById("output");
+  // Use type assertions so TypeScript knows these exist and have correct types
+  const cipherEl = document.getElementById("cipher") as HTMLDivElement;
+  const keyInput = document.getElementById("key") as HTMLInputElement;
+  const output = document.getElementById("output") as HTMLDivElement;
 
-  const cipherText = cipherEl.dataset.cipher || "";
+  // Make sure cipherEl exists before accessing dataset
+  const cipherText = cipherEl?.dataset.cipher || "";
 
-  function decryptVigenere(cipher, key) {
+  // Add types for parameters
+  function decryptVigenere(cipher: string, key: string): string {
     key = key.toLowerCase().replace(/[^a-z]/g, "");
     if (!key) return "";
 
@@ -61,15 +64,11 @@ const { cipherText } = Astro.props;
 
       if (code >= 65 && code <= 90) {
         const shift = key.charCodeAt(keyIndex % key.length) - 97;
-        result += String.fromCharCode(
-          ((code - 65 - shift + 26) % 26) + 65
-        );
+        result += String.fromCharCode(((code - 65 - shift + 26) % 26) + 65);
         keyIndex++;
       } else if (code >= 97 && code <= 122) {
         const shift = key.charCodeAt(keyIndex % key.length) - 97;
-        result += String.fromCharCode(
-          ((code - 97 - shift + 26) % 26) + 97
-        );
+        result += String.fromCharCode(((code - 97 - shift + 26) % 26) + 97);
         keyIndex++;
       } else {
         result += cipher[i];
@@ -80,9 +79,6 @@ const { cipherText } = Astro.props;
   }
 
   keyInput.addEventListener("input", () => {
-    output.textContent = decryptVigenere(
-      cipherText,
-      keyInput.value
-    );
+    output.textContent = decryptVigenere(cipherText, keyInput.value);
   });
 </script>
