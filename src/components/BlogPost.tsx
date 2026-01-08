@@ -41,7 +41,6 @@ function getPageNumbers(current: number, total: number, maxVisible = 7) {
   } else {
     for (let i = current+1; i <= right; i++) pages.push(i);
   }
-  console.log(pages)
   return pages
 }
 

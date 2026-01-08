@@ -112,10 +112,6 @@ Profiling PyTorch and JAX on linear layers actually shows some interesting resul
 
 **Naive JIT JAX Implementation:**
 <img src="/img/pics/ml-low-level-software-5.png"/>
-<!-- ![PyTorch Linear Module](/img/pics/ml-low-level-software-2.png)
-![Eager JAX](/img/pics/ml-low-level-software-3.png)
-![Eager JAX value_and_grad](/img/pics/ml-low-level-software-4.png)
-![jit JAX](/img/pics/ml-low-level-software-5.png) -->
 
 Interestingly, these results show that for linear layers, PyTorch actually outperforms even JIT compiled JAX, after warmup. We also see that naive PyTorch actually tends to be better performing than using PyTorch's modules, which is unfortunate: PyTorch's abstractions don't make easiness correlated with good performance (of course, that is a challenging goal especially for an interpretted language like Python).
 
