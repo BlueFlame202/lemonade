@@ -21,7 +21,8 @@ export const server = {
             theEmail = session.user.email ?? 'drstrange@aathslemonade.vercel.app';  // Default to empty string if email is null/undefined
         }
 
-        const theSlug : string = Astro.originPathname.split('/').pop() ?? 'nowhere-1209513094123';
+        const url = new URL(Astro.request.url);
+        const theSlug : string = url.pathname.split('/').pop() ?? 'nowhere-1209513094123';
 
         const comment = await db
             .insert(Comment)
