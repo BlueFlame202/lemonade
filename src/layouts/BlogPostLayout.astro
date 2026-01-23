@@ -25,11 +25,12 @@ import '../styles/bstyles.css'
 	<body>
         <main>
         <Navbar active="blog" client:load />
-        <div class="container-fluid flex flex-wrap bg-white pb-8">
-            <div class="order-2 md:order-1 w-full md:w-1/4 gx-5">
+        <div class="container-fluid flex flex-wrap bg-white pb-8 px-20">
+            <div class="w-full">
+            <!-- <div class="order-2 md:order-1 w-full md:w-1/4 gx-5">
             <NewsWidget></NewsWidget>
-            </div>
-            <div class="order-1 md:order-2 w-full md:w-3/4 gx-5">
+            </div> -->
+            <!-- <div class="order-1 md:order-2 w-full md:w-3/4 gx-5"> -->
                 <div class="mx-4">
                     <div class="cover-image mt-4 rounded-lg" style={{ backgroundImage: `url(${image})` }}></div>
                     <h1 class="display-1 mt-5">{title}</h1>

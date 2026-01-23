@@ -3,7 +3,7 @@ export const prerender = false;
 
 import { getEntry, render } from "astro:content";
 
-import LectureNotesLayout from "../../layouts/LectureNotesLayout.astro";
+import NotesLayout from "../../layouts/NotesLayout.astro";
 
 const { slug } = Astro.params;
 
@@ -20,6 +20,6 @@ if (!post) {
 const { Content } = await render(post);
 ---
 
-<LectureNotesLayout {...post.data}>
+<NotesLayout {...post.data}>
   <Content />
-</LectureNotesLayout>
+</NotesLayout>

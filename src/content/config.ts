@@ -23,8 +23,8 @@ const notesCollection = defineCollection({
     description: z.string(),
     date: z.string(),
     writer: z.string(),
-    lecturer: z.string(),
     image: z.string(),
+    category: z.array(z.enum(categories)),
     tags: z.array(z.string()).optional(),
   }),
 });

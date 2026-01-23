@@ -1,50 +1,34 @@
 ---
 import ClassicLayout from "../layouts/BaseLayout.astro";
-/**
 import BlogPage from "../components/BlogPost";
+import type { BlogPost, Category } from "../types/blog"
 
-const ana_notes = [
-    { title: 'Functional Analysis', content: 'Where linear algebra and analysis meet.', link: 'notes/functional-anal', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
-    { title: 'Fluid Dynamics', content: 'The study of words and strings.', link: 'notes/fluid-dynamics', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
-    { title: 'CIPS Seminar', content: 'Center for Integrative Planetary Studies Seminar.', link: 'notes/cips-seminar-fa-2024', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' }
-]
+import { getCollection } from 'astro:content';
 
-const alg_notes = [
-    { title: 'Algebraic Topology', content: 'The algebra of shapes.', link: 'notes/alg-top', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
-    // { title: 'Lie Groups', content: 'Mixing continuity and symmetry together.', link: 'notes/lie-groups', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
-    // { title: 'Commutative Algebra', content: 'The study of words and strings.', link: 'notes/comm-alg', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
-]
+const mdPosts = await getCollection('notes');
 
-const opt_ml_notes = [
-    { title: 'Machine Learning', content: 'Introductory methods and background.', link: 'notes/machine-learning', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
-    { title: 'Convex Optimization', content: 'Officially Solvable Convex Problems.', link: 'notes/convex-opt', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
-]
-
-const philosophy_notes = [
-    { title: 'Philosophy of Probability', content: 'Inductive Logic.', link: 'notes/philosophy-of-probability', date: 'Fall 2024', backgroundImage: 'img/pics/20240811-clouds.jpg' },
-]
-**/
+const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({
+  title: post.data.title,
+  content: post.data.description,
+  link: `notes/${post.slug}`,
+  date: post.data.date,
+  category: post.data.category as Category[],
+  backgroundImage: post.data.image, // optional
+}));
+const allPosts: BlogPost[] = [...normalizedMdPosts]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 ---
 <ClassicLayout title="Notes">
     <p id="date"><b>Project</b></p>
-    
-    As of Fall 2024, I've decided to try and make notes that make better use of multimedia. After my recent switch to AstroJS, markdown, and <a href="https://mdxjs.com/" target="_blank">MDX</a>, I can include much more sophisticated visuals even in my digital notes. I've started notes for each of the subjects I'm taking classes for or auditing, which you can find here!
-
-    <p>December 31st Update: 😂 I can dream big but this ended up being a lot more work than I initially thought! I'll post an update here when I finally finish!!</p>
 
     <h2>Table of Contents</h2>
     <ol>
-        <li><a href="#personal">Personal Expositions</a></li>
-        <li><a href="#courses">Course/Seminar Notes</a></li>
+        <li><a href="#personal">Personal Notes</a></li>
         <li><a href="#older">Older Notes</a></li>
     </ol>
 
-    <h2 id="personal">Personal Expositions</h2>
-
-
-    <h2 id="courses">Course/Seminar Notes</h2>
-
-    <p>Temporarily, I've hidden this section because I have a lot of work to do to make these more clean! I'll restore it once I'm done! :D</p>
+    <h2 id="personal">Personal Notes</h2>
+    <BlogPage posts={allPosts} client:load />
 
     <!-- These notes follow the flow and storyline of a course I took at UC Berkeley, but I enhanced them with my own research, studies, and thoughts outside of class.
 
@@ -69,9 +53,9 @@ const philosophy_notes = [
 
     <h2 id="older">Older Notes</h2>
 
-    In the past, my notes were okay, but not the best quality. I started to notice in graduate classes that the method of notes I had used previously started to distract me from having enough time to think deeply about what was being said in the moment. As such, in future notes, I decided to stop taking verbatim notes or copying as much as I could down during class, and instead just noting down the most important terms, theorems, statements, whatever the case might be, and refining them outside of class. I hope this will be a better form of notetaking that will result in better and more original notes (not sure if it was to be honest... the best form of notetaking still evades me *sigh*).
+    <!-- In the past, my notes were okay, but not the best quality. I started to notice in graduate classes that the method of notes I had used previously started to distract me from having enough time to think deeply about what was being said in the moment. As such, in future notes, I decided to stop taking verbatim notes or copying as much as I could down during class, and instead just noting down the most important terms, theorems, statements, whatever the case might be, and refining them outside of class. I hope this will be a better form of notetaking that will result in better and more original notes (not sure if it was to be honest... the best form of notetaking still evades me *sigh*). -->
 
-    <h3>Math: Longer Expositions</h3>
+    <p><b><u>Math</u></b></p>
 
     <ul>
     <li>Mathematical Methods of Optimization (UC Berkeley MATH 170): <a href="/notes/UCB-MATH-170-Notes/index.html">Teleport!</a></li>
@@ -83,7 +67,7 @@ const philosophy_notes = [
     <li>AP Calculus BC (High School): <a href="https://inthesolved.wordpress.com/ap-calculus-bc-notes/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
     </ul>
 
-    <h3>Math: Shorter Worksheets/Notes</h3>
+    <!-- <h3>Math: Shorter Worksheets/Notes</h3> -->
 
     <ul>
     <li>The Combo Formula Sheet: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/07/the-combo-formula-sheet.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
@@ -92,7 +76,7 @@ const philosophy_notes = [
     <li>Arithmetic and Geometric Progressions: Strategies: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/06/arithmetic_and_geometric_progressions.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
     </ul>
 
-    <h3>Computer Science</h3>
+    <p><b><u>Computer Science</u></b></p>
 
     <ul>
         <li>Notes for USACO: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2021/04/notes_for_usaco-2.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
@@ -101,14 +85,14 @@ const philosophy_notes = [
     </ul>
 
 
-    <h3>Physics</h3>
+    <p><b><u>Physics</u></b></p>
 
     <ul>
     <li>Honors Physics Notes (High School): <a href="https://inthesolved.wordpress.com/honors-physics-notes/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
     <li>A few Electromagnetism Notes: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/08/electromagnetics_i_lectures_1_4__ee3310_.pdf">Teleport!</a></li>
     </ul>
 
-    <h3>Chemistry</h3>
+    <p><b><u>Chemistry</u></b></p>
 
     <ul>
     <li>General Chemistry Notes (High School): <a href="https://inthesolved.wordpress.com/general-chemistry-notes/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
@@ -116,13 +100,13 @@ const philosophy_notes = [
     <li>Brief Notes on Steady State Kinetics: <a href="https://inthesolved.wordpress.com/wp-content/uploads/2020/08/steady_states.pdf" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
     </ul>
 
-    <h3>Biology</h3>
+    <p><b><u>Biology</u></b></p>
 
     <ul>
     <li>An MIT OCW Biology Course (High School): <a href="https://inthesolved.wordpress.com/mit-ocw-introductory-biology-7-016/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>
     </ul>
 
-    <h3>Language and Literature</h3>
+    <p><b><u>Language and Literature</u></b></p>
 
     <ul>
     <li>AP Lang (High School): <a href="https://inthesolved.wordpress.com/ap-language-and-composition-hs/" target="_blank">Teleport!</a> (this will take you to my old blog)</li>

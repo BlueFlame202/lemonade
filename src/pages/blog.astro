@@ -22,5 +22,6 @@ const allPosts: BlogPost[] = [...otherPosts, ...normalizedMdPosts]
 ---
 
 <ClassicLayout title="Blog">
-    <BlogPage posts={allPosts} client:load />
+  <p id="date"><b>Project</b></p>
+  <BlogPage posts={allPosts} client:load />
 </ClassicLayout>
