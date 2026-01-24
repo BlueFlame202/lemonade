@@ -7,3 +7,85 @@ date: "January 2026"
 category: ["math", "probability"]
 ---
 
+On my reading list for a long time has been the books by Oksendal and Hairer. While reading, these are my personal notes for future recollection.
+
+## A Primer On Probability
+
+In my opinion, the primary barrier to understanding SDE theory is the measure theoretic notation. Even after I'd taken a course on measure theory, some of the material in Oksendal's book lacked qualitative descriptions and ties to classical probability theory, which made it more difficult to parse. I aim to fill that gap here.
+
+I will aim to reach an audience that has seen classical probability theory at the level of UC Berkeley's CS 70 course, and is interested in SDEs. All the while, I'll seek to do this rigorously. However, I recommend skimming the measure theory sections of Oksendal (Chapter 2 and the Appendix) and/or the first chapter or so of Rudin's analysis book and/or Bartle's book. Having seen the definitions for $\sigma$-algebras and measurable functions is important, but I won't ask for understanding. I like to use the aformentioned books as references until I start to remember results.
+
+I have written on some related topics in this sketch on my academic blog: <a href="http://localhost:8000/orange-juice/thoughts/sketches/sketch-7/">Teleport!</a> But it's not necessary for reading these notes.
+
+### Classical Probability
+
+In classical probability at an introductory level, we often follow the following program: (I base this on the UC Berkeley CS 70 Notes)
+1. <span className="text-red-700">**Discrete probability**</span> (Probability spaces, Events, Random variables, Properties of probability, Conditional probability, Bayes rule, Independence, Expectation, Joint Distributions, Variance, Covariance, Concentration Inequalities, Law of Large Numbers)
+2. <span className="text-red-700">**Examples of well-understood discrete random variables**</span> (Bernoulli, Binomial, Hypergeometric, Geometric, Poisson)
+3. <span className="text-red-700">**Continuous probability**</span> (*Continuous Probability spaces*, Random variables, Cumulative Distribution Function, Expectation, Variance, Joint Density, Independence, Central limit theorem, Buffons needle, Markov chains)
+4. <span className="text-red-700">**Examples of well-understood continuous random variables**</span> (Exponential, Normal)
+
+It is important for us as students to see that in these introductory classes, our teachers often abstract away the details of continuous probability spaces and instead only look at cumulative distribution functions. This allows us to explore the vast power of the cumulative distribution functions themselves, without needing more tools from measure theory.
+
+Recall: (if you don't recall, see <a href="https://sp25.eecs70.org/assets/pdf/notes/n15.pdf">this note from CS 70</a>)
+
+<b>Definition (Random Variable).</b> Given a sample space $\Omega$, a <b>random variable</b> is a (measurable) map from $\Omega$ to $\R$.
+
+I say measurable in parentheses to be technically correct in a general setting, but you can safely ignore it for now, for reasons I describe more concretely in the next section. You can also replace instances of "almost everywhere" by "everywhere", though this is slightly more important and might not actually require the fully power of measure theory to define.
+
+<div class="strat">
+**Power 1: Cumulative Distribution Functions Tell Us All About Distribution-Level Properties of Random Variables.** 
+
+The cumulative distribution function (CDF) for a random variable $X : \Omega \rightarrow \R$ is the function $F_X : \R \rightarrow [0,1]$, defined by $F_X(c) = \mathbb{P}\{X < c\}$.
+
+The CDF tells us about *distributional equivalence* by giving us a proxy through *function equivalence*, which we understand much more intuitively. Notice how $X$ involves us thinking about $\Omega$, but $F_X$ does not. Distributional equivalence is a concept which prefers to ignore $\Omega$ and CDFs give us the language to do this safely.
+
+Two random variables are equal in distribution ($X \overset{d}{=} Y$) if and only if their CDFs are equal almost everywhere ($F_X = F_Y$ a.e.).
+
+Other distributional concepts can also be fully described with the CDF. For example, the expectation of nonnegative random variables is:
+<center>$$\mathbb{E}[X] = \int_0^\infty 1 - F_X(t)\;dt$$</center>
+and this can be extended to arbitrary random variables by splitting the functions into their negative and nonnegative parts:
+<center>$$\mathbb{E}[X] = \int_0^\infty 1 - F_X(t)\;dt - \int_0^\infty F_X(-t)\;dt$$.</center>
+Very importantly, related reasoning also gives us variance, higher moments, and other order statistics.
+
+In intro classes, we often describe the probability distribution function (PDF): $f_X(a) = \partial_a F_X(a)$. This gives us a much simpler formula for expectation:
+<center>$$\mathbb{E}[X] = \int_{\R} tf_X(t) \; dt$$.</center>
+However as you might see, this requires taking a derivative of $F_X$, which isn't guaranteed. Often, we have such regularity by construction because the PDF is much more intuitive and well-motivated in the discrete case.
+</div>
+
+Realistically, the CDF (and by extension the PDF) is the only major tool or construction introduced by CS 70, from which we obtain all kinds of qualitative statistical results about distributions (means, medians, modes, concentration inequalities, CLT, etc.). See the last appendix piece for more on how to use the incredible power which comes with CDFs.
+
+< add picture here to show interesting qualitative statistics you can see from the CDF and PDF like mean, median, mode, variance, etc. >
+
+<div class="remark">
+**Remark.** This remark can be safely skipped, but I thought I should at least mention or tease at some of the following results so that interested readers can investigate further. I will not define terms, so feel free to use ChatGPT, the internet, and library books to find definitions.
+
+There are probably even more applications of the CDF, but here are some:
+- Convergence of CDFs gives us distributional convergence,
+- CDFs give us 1D optimal transport couplings,
+- CDFs give rise to a partial ordering on random variables and yield inequality principles,
+- CDFs characterize tail behavior of distributions.
+
+At a deeper level, CDFs essentially describe the pushforward measure and factor through the uniform distribution/Lebesgue measure, relating measures to relevant cumulative distribution functions via the Radon-Nikodym theorem.
+</div>
+
+### Measure theory for SDEs
+
+When I started reading Oksendal, I was asking the question why we even need it. At least when learning the subject, it seemed to me like 
+- if we don't believe in full uncountable Axiom of Choice, (which is quite reasonable for most things)
+- most of the concepts should actually be quite intuitive, and maybe even completely trivial,
+- because I've heard anecdotally that Solovay showed there is a model of ZF+DC where the entire power set of $\R$ is Lebesgue measurable!
+
+So why does everyone use it?!
+
+In the case of SDEs, the reason is that there seems to be a sort of logistical power from keeping track of more than one $\sigma$-algebra. <span className="text-red-700">Knowing which $\sigma$-algebras your function is measurable with respect to actually tells you something about the resolution of your function, and vice versa!</span> And this is why measure theoretic probability reinvented the notation for expected values to accomodate this newfound power.
+
+There are many other reasons to appreciate measure theoretic approaches to probability, like nuanced notions of convergence and Fourier transform ideas, which I will reserve for future notes on probability theory. But for now, I think this power of $\sigma$-algebra magic below will suffice. 
+
+<div class="strat">
+**Power 2: $\sigma$-Algebra Magic Helps Relate Random Variables Via The Qualitative Property of Resolution.**
+</div>
+
+
+
+

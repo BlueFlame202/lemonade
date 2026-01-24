@@ -102,7 +102,7 @@ main {
 table { table-layout: fixed; }
 td { width: 50%; }
 figure figcaption { text-align: center; font-size: small; }
-a { text-decoration: none; color: cadetblue; }
+a { text-decoration: none; color: dodgerblue; }
 
 .expanding-underline::after {
   content: '';

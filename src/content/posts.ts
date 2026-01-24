@@ -174,16 +174,16 @@ export const otherPosts = [
         //     link: 'blog/migrated-to-astro', date: 'August 4, 2024', backgroundImage: 'img/pics/astrojs.png',
         //     category: ['cs']
         // },
-        // { 
-        //     title: 'It Turns Out Measure Theory Actually Is Useful', content: 'Warning! This will take you to another world!', 
-        //     link: 'https://www.ocf.berkeley.edu/~aathreyak/orange-juice/sketches/sketch-7/', date: 'June 20, 2024', backgroundImage: 'img/pics/sketch.jpeg',
-        //     category: ['math']
-        // },
-        // { 
-        //     title: 'Paradoxical Areas I', content: 'Resolving a confusion I had when thinking about areas.', 
-        //     link: '../rlog/paradoxical-areas.html', date: 'June 4, 2024', backgroundImage: 'img/pics/paradoxical-areas-i.png',
-        //     category: ['geometry', 'math']
-        // },
+        { 
+            title: 'It Turns Out Measure Theory Actually Is Necessary', content: 'Warning! This will take you to another world!', 
+            link: 'https://www.ocf.berkeley.edu/~aathreyak/orange-juice/sketches/sketch-7/', date: 'June 20, 2024', backgroundImage: 'img/pics/sketch.jpeg',
+            category: ['math']
+        },
+        { 
+            title: 'Paradoxical Areas I', content: 'Resolving a confusion I had when thinking about areas.', 
+            link: '../rlog/paradoxical-areas.html', date: 'June 4, 2024', backgroundImage: 'img/pics/paradoxical-areas-i.png',
+            category: ['geometry', 'math']
+        },
         // { 
         //     title: 'Grafting and GPUs', content: 'The coolest planting technique and some interesting articles I saw.', 
         //     link: 'blog/grafting-and-gpus', date: 'May 18, 2024', backgroundImage: 'img/pics/IMG_3880.jpg',
