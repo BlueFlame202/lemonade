@@ -13,8 +13,8 @@ interface PokeMapEntry {
   notes?: string;
   link?: string;
   thoughts?: string;
-  minZoom?: number; // Minimum zoom level to show this marker (default based on type)
-  color?: "red" | "blue"; // Marker color (default based on zoom level)
+  minZoom?: number;
+  color?: "red" | "blue";
 }
 
 interface MarkerInfo {
@@ -23,18 +23,25 @@ interface MarkerInfo {
   element: HTMLDivElement;
 }
 
-// Map styles for different zoom levels
-const MAP_STYLE_LARGE_SCALE = "https://demotiles.maplibre.org/style.json"; // For zoomed out
-const MAP_STYLE_DETAILED = "https://api.maptiler.com/maps/basic-v2/style.json?key=TgZ6XLtzXrDMsQIKPVXc"; // For zoomed in (detailed)
+const MAP_STYLE_LARGE_SCALE = "https://demotiles.maplibre.org/style.json";
+const MAP_STYLE_DETAILED = "https://api.maptiler.com/maps/basic-v2/style.json?key=TgZ6XLtzXrDMsQIKPVXc";
+
+// ----------
+// The hover radius is now a clear function of zoom, see findMarkerAtPoint for details
+// ----------
 
 export default function PokeMap() {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [entries, setEntries] = useState<PokeMapEntry[]>([]);
   const [selected, setSelected] = useState<PokeMapEntry | null>(null);
+  const [hovered, setHovered] = useState<PokeMapEntry | null>(null);
   const setSelectedRef = useRef(setSelected);
 
-  // Keep ref updated
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   useEffect(() => {
     setSelectedRef.current = setSelected;
   }, [setSelected]);
@@ -53,75 +60,75 @@ export default function PokeMap() {
     let entriesData: PokeMapEntry[] = [];
     const markers: MarkerInfo[] = [];
 
-    // Blue marker zoom level (much more zoomed in)
     const BLUE_MARKER_MIN_ZOOM = 13;
-    
-    // Track current map style to avoid unnecessary updates
     let currentMapStyle = MAP_STYLE_LARGE_SCALE;
 
-    // Helper to get min zoom for an entry (default based on type or explicit)
-    const getMinZoom = (entry: PokeMapEntry): number => {
-      if (entry.minZoom !== undefined) return entry.minZoom;
-      // Default: red markers (large scale) at zoom 0-10, blue markers (small scale) at zoom >= 11
-      return entry.color === "red" ? 0 : BLUE_MARKER_MIN_ZOOM;
-    };
+    const getMinZoom = (entry: PokeMapEntry): number =>
+      entry.minZoom !== undefined
+        ? entry.minZoom
+        : (entry.color === "red" ? 0 : BLUE_MARKER_MIN_ZOOM);
 
-    // Helper to get color for an entry
     const getColor = (entry: PokeMapEntry): "red" | "blue" => {
       if (entry.color) return entry.color;
-      // Default: red for large scale, blue for small scale
       const minZoom = getMinZoom(entry);
       return minZoom < BLUE_MARKER_MIN_ZOOM ? "red" : "blue";
     };
 
-    // Update map style based on zoom level
     const updateMapStyle = () => {
       const currentZoom = map.getZoom();
       const shouldUseDetailed = currentZoom >= BLUE_MARKER_MIN_ZOOM;
       const targetStyle = shouldUseDetailed ? MAP_STYLE_DETAILED : MAP_STYLE_LARGE_SCALE;
-      
       if (targetStyle !== currentMapStyle) {
         currentMapStyle = targetStyle;
         map.setStyle(targetStyle);
       }
     };
 
-    // Update marker visibility based on current zoom
     const updateMarkerVisibility = () => {
       const currentZoom = map.getZoom();
-      markers.forEach(({ entry, marker, element }) => {
+      markers.forEach(({ entry, marker }) => {
         const minZoom = getMinZoom(entry);
         const shouldBeVisible = currentZoom >= minZoom;
-        
-        // Show/hide marker
-        if (shouldBeVisible) {
-          marker.getElement().style.display = "block";
-        } else {
-          marker.getElement().style.display = "none";
-        }
+        marker.getElement().style.display = shouldBeVisible ? "block" : "none";
       });
     };
 
-    // Combined update function for zoom changes
     const handleZoomChange = () => {
       updateMapStyle();
       updateMarkerVisibility();
     };
 
-    // Function to find marker near click point (only visible ones)
-    const findMarkerAtPoint = (lng: number, lat: number, includeAllMarkers: boolean = false): PokeMapEntry | null => {
+    // Dynamically set the hover radius based on the zoom level
+    // Now: At low zoom, hover radius is even bigger; at high zoom, much smaller for precision.
+    const getHoverThreshold = (zoom: number) => {
+      // New: At zoom 2: ~2.2 deg, zoom 6: ~0.63, zoom 10: ~0.13, zoom 14+: ~0.004
+      // MIN is much lower than before for high zoom, MAX is slightly larger for low zoom.
+      const MIN = 0.004;  // Allow very small threshold at high zoom (precise)
+      const MAX = 2.2;    // Slightly larger at low zoom
+      const threshold = Math.min(
+        MAX,
+        Math.max(
+          MIN,
+          2.2 / Math.pow(2, (zoom - 2) * 0.85)
+        )
+      );
+      return threshold;
+    };
+
+    const findMarkerAtPoint = (
+      lng: number,
+      lat: number,
+      includeAllMarkers: boolean = false
+    ): PokeMapEntry | null => {
       const currentZoom = map.getZoom();
-      // Calculate threshold based on zoom: smaller threshold when zoomed in
-      const threshold = Math.max(0.1, 2.0 / Math.pow(2, currentZoom - 2));
-      
+      const threshold = getHoverThreshold(currentZoom);
       let closestEntry: PokeMapEntry | null = null;
       let closestDistance = Infinity;
-      
+
       for (const entry of entriesData) {
         const minZoom = getMinZoom(entry);
-        // Only consider markers that should be visible at current zoom (unless includeAllMarkers is true)
         if (!includeAllMarkers && currentZoom < minZoom) continue;
-        
+
         const distance = Math.sqrt(
           Math.pow(entry.longitude - lng, 2) + Math.pow(entry.latitude - lat, 2)
         );
@@ -133,24 +140,18 @@ export default function PokeMap() {
       return closestEntry;
     };
 
-    // Listen for map clicks
     const handleMapClick = (e: maplibregl.MapMouseEvent) => {
-      // First check visible markers, then check all markers (for red markers when zoomed out)
       let clickedEntry = findMarkerAtPoint(e.lngLat.lng, e.lngLat.lat, false);
       if (!clickedEntry) {
-        // If no visible marker found, check all markers (for red markers)
         clickedEntry = findMarkerAtPoint(e.lngLat.lng, e.lngLat.lat, true);
       }
-      
+
       if (clickedEntry) {
         const clickedColor = getColor(clickedEntry);
-        const clickedMinZoom = getMinZoom(clickedEntry);
         const currentZoom = map.getZoom();
-        
-        console.log("Marker clicked via map:", clickedEntry.name);
+
         setSelectedRef.current(clickedEntry);
-        
-        // If red marker clicked and we're zoomed out, center and zoom in to blue marker level
+
         if (clickedColor === "red" && currentZoom < BLUE_MARKER_MIN_ZOOM) {
           map.flyTo({
             center: [clickedEntry.longitude, clickedEntry.latitude],
@@ -162,26 +163,45 @@ export default function PokeMap() {
     };
     map.on('click', handleMapClick);
 
-    // Listen for zoom changes to update map style and marker visibility
+    // ✨ Stable map-based HOVER logic, hover radius changes with zoom!
+    let lastHovered: PokeMapEntry | null = null;
+
+    const handleMapMouseMove = (e: maplibregl.MapMouseEvent) => {
+      const hoveredEntry =
+        findMarkerAtPoint(e.lngLat.lng, e.lngLat.lat, false) ||
+        findMarkerAtPoint(e.lngLat.lng, e.lngLat.lat, true);
+
+      if (hoveredEntry?.name !== lastHovered?.name) {
+        lastHovered = hoveredEntry;
+        setHovered(hoveredEntry);
+      }
+    };
+
+    const handleMapMouseLeave = () => {
+      lastHovered = null;
+      setHovered(null);
+    };
+
+    map.on('mousemove', handleMapMouseMove);
+    map.on('mouseleave', handleMapMouseLeave);
+
     map.on('zoom', handleZoomChange);
     map.on('zoomend', handleZoomChange);
-    
-    // Also listen for style load to re-add markers after style change
+
     map.on('style.load', () => {
-      // Re-add all markers after style change
-      markers.forEach(({ entry, marker }) => {
+      markers.forEach(({ marker }) => {
         marker.addTo(map);
       });
       updateMarkerVisibility();
     });
 
-    // Fetch marker data
+    // --- Main Markers Fetch and Creation ---
     fetch("/data/comp-bio-pokemap.json")
       .then((res) => res.json())
       .then((data: PokeMapEntry[]) => {
         entriesData = data;
         setEntries(data);
-        
+
         data.forEach((point) => {
           const color = getColor(point);
           const minZoom = getMinZoom(point);
@@ -189,10 +209,28 @@ export default function PokeMap() {
           const isVisible = currentZoom >= minZoom;
 
           const el = document.createElement("div");
-          el.className = `w-3 h-3 ${color === "red" ? "bg-red-600" : "bg-blue-600"} rounded-full cursor-pointer`;
+          el.className = [
+            "w-4", "h-4",
+            "rounded-full",
+            "cursor-pointer",
+            color === "red" ? "bg-red-600" : "bg-blue-600",
+            "marker-for-pokemap",
+          ].join(" ");
+          el.tabIndex = 0;
+
+          el.style.position = "relative";
+          el.style.left = "0";
+          el.style.top = "0";
           el.style.pointerEvents = "auto";
-          el.style.zIndex = "1000";
+          el.style.zIndex = "9999";
           el.style.display = isVisible ? "block" : "none";
+          el.style.width = "16px";
+          el.style.height = "16px";
+          el.style.cursor = "pointer";
+          el.style.backgroundColor = color === "red" ? "#dc2626" : "#2563eb";
+          el.style.borderRadius = "9999px";
+
+          el.addEventListener("click", () => {});
 
           const marker = new maplibregl.Marker(el)
             .setLngLat([point.longitude, point.latitude])
@@ -200,46 +238,86 @@ export default function PokeMap() {
 
           markers.push({ entry: point, marker, element: el });
         });
-        
-        // Initial visibility update
+
+        // Update the markersRef for use in other effects
+        markersRef.current = markers;
+
         updateMarkerVisibility();
       })
       .catch((err) => console.error("Failed to load markers:", err));
 
     return () => {
+      map.off('mousemove', handleMapMouseMove);
+      map.off('mouseleave', handleMapMouseLeave);
       map.off('click', handleMapClick);
-      map.off('zoom', updateMarkerVisibility);
-      map.off('zoomend', updateMarkerVisibility);
+      map.off('zoom', handleZoomChange);
+      map.off('zoomend', handleZoomChange);
       map.remove();
     };
   }, []);
 
+  // ✨ Update marker hover ring on hovered change
+  useEffect(() => {
+    if (!mapRef.current) return;
+    const markerEls = document.querySelectorAll<HTMLDivElement>('.marker-for-pokemap');
+    markerEls.forEach((el) => {
+      const entryName = el.getAttribute("data-marker-name");
+      if (hovered && el.textContent === hovered.name) {
+        el.classList.add("ring", "ring-yellow-400", "ring-2");
+      } else {
+        el.classList.remove("ring", "ring-yellow-400", "ring-2");
+      }
+    });
+  }, [hovered]);
+
+  const markersRef = useRef<MarkerInfo[]>([]);
+  useEffect(() => {
+    if (mapRef.current) {
+      // No operation needed; marker ref is updated during marker creation
+    }
+  }, [entries]);
+
+  useEffect(() => {
+    if (!markersRef.current.length) return;
+    markersRef.current.forEach(({ entry, element }) => {
+      if (hovered && entry.name === hovered.name) {
+        element.classList.add("ring", "ring-yellow-400", "ring-2");
+      } else {
+        element.classList.remove("ring", "ring-yellow-400", "ring-2");
+      }
+    });
+  }, [hovered]);
+
+  useEffect(() => {
+    if (!mapRef.current || !mapContainer.current) return;
+    // No effect body needed as before.
+  }, []);
+
+  const infoEntry = hovered || selected;
+
   return (
     <div className="flex w-full h-[90vh]">
-      {/* Map container with full height */}
       <div ref={mapContainer} className="flex-1 h-full" />
-
-      {/* Sidebar */}
       <aside className="w-1/3 p-4 bg-white overflow-auto border-l border-gray-200">
-        {selected ? (
+        {infoEntry ? (
           <>
-            <h2 className="text-xl font-bold">{selected.name}</h2>
-            {selected.leader && (
-              <p className="text-sm text-gray-600 mb-1">{selected.leader}</p>
+            <h2 className="text-xl font-bold">{infoEntry.name}</h2>
+            {infoEntry.leader && (
+              <p className="text-sm text-gray-600 mb-1">{infoEntry.leader}</p>
             )}
-            {selected.notes && <p className="mt-2 text-sm">{selected.notes}</p>}
-            {selected.link && (
+            {infoEntry.notes && <p className="mt-2 text-sm">{infoEntry.notes}</p>}
+            {infoEntry.link && (
               <a
-                href={selected.link}
+                href={infoEntry.link}
                 target="_blank"
                 className="text-blue-600 hover:underline mt-2 block"
               >
                 Visit site →
               </a>
             )}
-            {selected.thoughts && (
+            {infoEntry.thoughts && (
               <a
-                href={selected.thoughts}
+                href={infoEntry.thoughts}
                 target="_blank"
                 className="text-blue-300 hover:underline mt-1 block"
               >
@@ -248,16 +326,26 @@ export default function PokeMap() {
             )}
             <div className="mt-3 text-xs text-gray-500">
               <span className="font-semibold">Domain:</span>{" "}
-              {selected.domain.join(", ")}
+              {infoEntry.domain.join(", ")}
             </div>
-            {selected.tags && (
+            {infoEntry.tags && (
               <div className="mt-1 text-xs text-gray-400">
-                {selected.tags.join(", ")}
+                {infoEntry.tags.join(", ")}
+              </div>
+            )}
+            {hovered && !selected && (
+              <div className="mt-4 text-xs text-yellow-600 italic">
+                Hovering (click marker to persist info)
+              </div>
+            )}
+            {hovered && selected && hovered.name !== selected.name && (
+              <div className="mt-4 text-xs text-yellow-600 italic">
+                Hovering (click marker to persist info, or move away to return to selection)
               </div>
             )}
           </>
         ) : (
-          <p className="text-gray-500 italic">Click a marker to see details</p>
+          <p className="text-gray-500 italic">Click or hover a marker to see details</p>
         )}
       </aside>
     </div>
