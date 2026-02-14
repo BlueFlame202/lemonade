@@ -178,3 +178,18 @@ a { text-decoration: none; color: dodgerblue; }
   border: none;
   display: block;
 }
+
+/* container that lays items out in a row */
+.tiktok-row {
+  display: flex;              /* enable Flexbox layout */
+  justify-content: space-evenly; /* space them evenly */
+  flex-wrap: wrap;            /* allow wrap on narrow screens */
+  gap: 10px;                  /* spacing between embeds */
+  margin: 20px 0;
+}
+
+/* optional: limit width so embeds scale well */
+.tiktok-row > .tiktok-item {
+  flex: 1 1 300px;            /* grow/shrink, base width ~300px */
+  max-width: 350px;
+}
