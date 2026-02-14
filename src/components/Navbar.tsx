@@ -50,7 +50,7 @@ export default function Navbar(props : NavbarProps) {
             Sea
           </a>
           <a href="https://www.ocf.berkeley.edu/~aathreyak/orange-juice" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue-darker group-hover:text-white group-hover:no-underline ${props.active === 'orange-juice' ? 'active' : ''}`}>
-            Juice
+            Academia
             {/* <img src="/img/juice-5397880_1920.png" alt="orange-juice" id="orange-juice" width={50} height={50} /> */}
           </a>
         </div>
