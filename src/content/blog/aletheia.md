@@ -4,7 +4,7 @@ description: "Aletheia, Unverborgenheit, gedacht als die Öffnung des Anwesen, i
 image: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Vincent_Willem_van_Gogh_118.jpg"
 author: "Aathreya Kadambi"
 date: "February 2, 2026"
-category: ['life']
+category: ['life', 'philosophy']
 ---
 <div><figure><iframe src="https://open.spotify.com/embed/playlist/1kLP8Z4u1Vvfuy56G5Tv1F?utm_source=generator&theme=0" width="300" height="100px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></figure></div>
 
