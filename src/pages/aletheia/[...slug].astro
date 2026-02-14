@@ -1,6 +1,4 @@
 ---
-export const prerender = false;
-
 import { getEntry, render } from "astro:content";
 
 import NotesLayout from "../../layouts/NotesLayout.astro";
@@ -11,7 +9,7 @@ if (!slug) {
   return Astro.redirect("/404");
 }
 
-const post = await getEntry("notes", slug);
+const post = await getEntry("aletheia", slug);
 
 if (!post) {
   return Astro.redirect("/404");

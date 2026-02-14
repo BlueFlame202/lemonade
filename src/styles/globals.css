@@ -153,6 +153,7 @@ a { text-decoration: none; color: dodgerblue; }
   align-items: center;
   box-sizing: border-box;
   height: 200px; 
+  /* background-color: rgb(var(--secondary-rgb)); */
   background-image: url("/img/lemonade-header.png");
   background-position: center;
   background-size: cover;

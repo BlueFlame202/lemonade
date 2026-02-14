@@ -40,8 +40,8 @@ export default function Navbar(props : NavbarProps) {
           <a href="/blog" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue-darker group-hover:text-white group-hover:no-underline ${props.active === 'blog' ? 'active' : ''}`}>
             Blog
           </a>
-          <a href="/notes" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue-darker group-hover:text-white group-hover:no-underline ${props.active === 'notes' ? 'active' : ''}`}>
-            Notes
+          <a href="/aletheia" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue-darker group-hover:text-white group-hover:no-underline ${props.active === 'aletheia' ? 'active' : ''}`}>
+            Aletheia
           </a>
           {/* <a href="/projects" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-blue group-hover:text-white group-hover:no-underline ${props.active === 'work' ? 'active' : ''}`}>
             Projects

@@ -176,7 +176,7 @@ export const otherPosts = [
         // },
         { 
             title: 'It Turns Out Measure Theory Actually Is Necessary', content: 'Warning! This will take you to another world!', 
-            link: 'https://www.ocf.berkeley.edu/~aathreyak/orange-juice/sketches/sketch-7/', date: 'June 20, 2024', backgroundImage: 'img/pics/sketch.jpeg',
+            link: 'https://www.ocf.berkeley.edu/~aathreyak/orange-juice/thoughts/sketches/it-turns-out-measure-theory-actually-is-necessary/', date: 'June 20, 2024', backgroundImage: 'img/pics/sketch.jpeg',
             category: ['math']
         },
         { 

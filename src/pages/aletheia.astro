@@ -5,12 +5,12 @@ import type { BlogPost, Category } from "../types/blog"
 
 import { getCollection } from 'astro:content';
 
-const mdPosts = await getCollection('notes');
+const mdPosts = await getCollection('aletheia');
 
 const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({
   title: post.data.title,
   content: post.data.description,
-  link: `notes/${post.slug}`,
+  link: `aletheia/${post.slug}`,
   date: post.data.date,
   category: post.data.category as Category[],
   backgroundImage: post.data.image, // optional
@@ -18,8 +18,20 @@ const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({
 const allPosts: BlogPost[] = [...normalizedMdPosts]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 ---
-<ClassicLayout title="Notes">
+<ClassicLayout title="Aletheia">
     <p id="date"><b>Project</b></p>
+
+    <div><figure><iframe src="https://open.spotify.com/embed/playlist/1kLP8Z4u1Vvfuy56G5Tv1F?utm_source=generator" width="300" height="100px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></figure></div>
+
+    <p><i>Eureka!</i></p>
+
+    <p>
+      For centuries, epiphany was the glory of philosophy around the world.
+
+      But the frame of mind underlying machine learning and mathematical analysis seem to tell a different story. The purpose of this project is to reject the myth of epiphany and replace it with an "opening of presence".
+    </p>
+
+    <a href="https://chatgpt.com/share/69816a49-e300-8012-89ca-b25f262b9657">My conversation with ChatGPT about the name for this page.</a>
 
     <h2>Table of Contents</h2>
     <ol>
@@ -28,6 +40,9 @@ const allPosts: BlogPost[] = [...normalizedMdPosts]
     </ol>
 
     <h2 id="personal">Personal Notes</h2>
+
+    These are my personal notes. I write them to show others what I'm personally curious about.
+
     <BlogPage posts={allPosts} client:load />
 
     <!-- These notes follow the flow and storyline of a course I took at UC Berkeley, but I enhanced them with my own research, studies, and thoughts outside of class.
@@ -47,9 +62,6 @@ const allPosts: BlogPost[] = [...normalizedMdPosts]
 
     <h3>Philosophy</h3>
     <BlogPage posts={philosophy_notes} /> -->
-
-
-    <h4></h4>
 
     <h2 id="older">Older Notes</h2>
 
