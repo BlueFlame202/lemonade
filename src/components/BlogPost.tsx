@@ -195,13 +195,13 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, content, link, date,
                 ></div>
             )}
             <div 
-                className="absolute inset-0 transition-colors duration-500 bg-transparent group-hover:bg-special-blue"
+                className="absolute inset-0 transition-colors duration-500 bg-transparent group-hover:bg-special-color"
             ></div>
             <div className="relative z-10 p-8">
                 <h2 className="text-xl font-semibold mb-2 group-hover:text-white">{title}</h2>
                 <p className="text-gray-600 mb-4 group-hover:text-white">{date}</p>
                 <p className="text-gray-600 mb-4 group-hover:text-white">{content}</p>
-                <a href={link} className="text-blue-500 inline-block group-hover:text-yellow-100">
+                <a href={link} className="inline-block group-hover:text-yellow-100">
                     Read More
                 </a>
             </div>

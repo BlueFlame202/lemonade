@@ -60,7 +60,7 @@ const ProjectPostCard: React.FC<ProjectPostCardProps> = ({
             {backgroundImage && (
                 <div className="absolute inset-0 bg-cover bg-center opacity-15 blur-none" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
             )}
-            <div className="absolute inset-0 transition-colors duration-500 bg-transparent group-hover:bg-special-blue"></div>
+            <div className="absolute inset-0 transition-colors duration-500 bg-transparent group-hover:bg-special-color"></div>
             <div className="relative z-10 p-8">
                 <h2 className="text-xl font-semibold mb-2 group-hover:text-white">{title}</h2>
                 <p className="text-gray-600 mb-4 group-hover:text-white">{status}</p>

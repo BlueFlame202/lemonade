@@ -13,8 +13,8 @@ export default {
 			quarterrotate: 'quarterrotate 0.5s linear forwards;',
 		  },
 		  colors: {
-			'special-blue': '#489fdd',// '#56b9ff',
-			'special-blue-darker': '#3577a6',
+			'special-color': 'rgba(var(--accent-rgb), 1)', //'#8a9a5b', // '#590016', //'#489fdd', // '#56b9ff',
+			'special-color-darker': 'rgba(var(--accent-darker-rgb), 1)', // '#7e7e5a', //'#590016', // '#3577a6',
 			'solved-blue': '#aeecff',
 			'solved-blue-darker': '#abddf6',
 			'header-image-bg': '#ffeed9',
@@ -22,7 +22,8 @@ export default {
 			'primary': 'rgba(var(--primary-rgb), 1)',
 			'secondary': 'rgba(var(--secondary-rgb), 1)',
 			'tertiary': 'rgba(var(--tertiary-rgb), 1)',
-			'quaternary': 'rgba(var(--quaternary-rgb), 1)'
+			'quaternary': 'rgba(var(--quaternary-rgb), 1)',
+			'soul': 'rgba(var(--soul-rgb), 1)',
 		  },
 		  // backgroundImage: {
 		  //   'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
