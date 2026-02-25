@@ -26,8 +26,20 @@
   --accent-dark-rgb: 126, 126, 90;
 } */
 
-/* denim lemonade */
+/* candy denim lemonade */
 :root {
+  --primary-rgb: 210, 232, 245;
+  --secondary-rgb: 255, 231, 224; 
+  --tertiary-rgb: 110, 170, 230;
+  --quaternary-rgb: 28, 38, 55;
+  --soul-rgb: 255, 255, 255;
+  --primary-text-rgb: 12, 16, 22;
+  --accent-rgb: 178, 34, 34;
+  --accent-dark-rgb: 89, 0, 22;
+}
+
+/* denim lemonade */
+/* :root {
   --primary-rgb: 210, 232, 245;
   --secondary-rgb: 255, 255, 250; 
   --tertiary-rgb: 110, 170, 230;
@@ -36,7 +48,7 @@
   --primary-text-rgb: 12, 16, 22;
   --accent-rgb: 90, 150, 210;
   --accent-dark-rgb: 45, 85, 140;
-}
+} */
 
 /* classic lemonade */
 /* :root {
