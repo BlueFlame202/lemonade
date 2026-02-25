@@ -1,0 +1,151 @@
+---
+title: "Miscellaneous Notes"
+description: ""
+image: "/img/pics/oppenheimer-misc-notes.jpg"
+writer: "Aathreya Kadambi"
+date: "February 2026"
+category: ["math", "cs"]
+---
+
+This note feels criminal to my mission of organizing my notes in a clean way, but alas, I think it's necessary.
+
+# Computer Science
+
+## Floating Point Representation: IEEE 754
+
+The floating point representation system is crucial to scientific computing. The vibe of this topic shouldn't actually be new: IEEE-754 is really just glorified and slightly modified scientific notation. The implementation, however, utilizes several nuances that are specific to computer representations.
+
+<div class="strat">
+<b>Vibe.</b> Scientific notation (representing real decimal numbers in the form $a.bcde... \times 10^k$) is a useful way to represent a broad range of numbers with consistent <i>relative</i> (as opposed to absolute) precision.
+</div>
+
+<div class="skill">
+<b>Nuance.</b> Computer representations are binary.
+</div>
+
+Since computers can't represent "decimal points", "times", and "exponentiation" in an easily human-readable format, we need a sort of standardized way to interpret a collection of bits as a real number. That's where IEEE-754 comes in.
+
+Check out <a href="https://lukaskollmer.de/ieee-754-visualizer/">Lukas Kollmer's</a> visualizer for a good visual on how to interpret IEEE 754.
+
+Another good resource is the table at <a href="https://electronics.stackexchange.com/questions/226320/normalized-and-denormalized-floating-point-numbers">this link</a> which I reproduce here for ease:
+<table style="border-collapse: collapse; margin: 20px auto; text-align: center; width: 100%; max-width: 900px;">
+  
+  <colgroup>
+    <col style="width: 12%;"/>
+    <col style="width: 12%;"/>
+    <col style="width: 12%;"/>
+    <col style="width: 12%;"/>
+    <col style="width: 52%;"/>
+  </colgroup>
+
+  <thead>
+    <tr>
+      <th colspan="2" style="border: 1px solid black; padding: 8px;">
+        Single Precision (32-bit)
+      </th>
+      <th colspan="2" style="border: 1px solid black; padding: 8px;">
+        Double Precision (64-bit)
+      </th>
+      <th rowspan="2" style="border: 1px solid black; padding: 8px;">
+        Object Represented
+      </th>
+    </tr>
+    <tr>
+      <th style="border: 1px solid black; padding: 8px;">E (8)</th>
+      <th style="border: 1px solid black; padding: 8px;">F (23)</th>
+      <th style="border: 1px solid black; padding: 8px;">E (11)</th>
+      <th style="border: 1px solid black; padding: 8px;">F (52)</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">0</td>
+      <td style="border: 1px solid black; padding: 8px;">0</td>
+      <td style="border: 1px solid black; padding: 8px;">0</td>
+      <td style="border: 1px solid black; padding: 8px;">0</td>
+      <td style="border: 1px solid black; padding: 8px;">true zero (±0)</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">0</td>
+      <td style="border: 1px solid black; padding: 8px;">nonzero</td>
+      <td style="border: 1px solid black; padding: 8px;">0</td>
+      <td style="border: 1px solid black; padding: 8px;">nonzero</td>
+      <td style="border: 1px solid black; padding: 8px;">denormalized (subnormal) number</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">1–254</td>
+      <td style="border: 1px solid black; padding: 8px;">anything</td>
+      <td style="border: 1px solid black; padding: 8px;">1–2046</td>
+      <td style="border: 1px solid black; padding: 8px;">anything</td>
+      <td style="border: 1px solid black; padding: 8px;">normalized floating point number</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">255</td>
+      <td style="border: 1px solid black; padding: 8px;">0</td>
+      <td style="border: 1px solid black; padding: 8px;">2047</td>
+      <td style="border: 1px solid black; padding: 8px;">0</td>
+      <td style="border: 1px solid black; padding: 8px;">infinity (±∞)</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid black; padding: 8px;">255</td>
+      <td style="border: 1px solid black; padding: 8px;">nonzero</td>
+      <td style="border: 1px solid black; padding: 8px;">2047</td>
+      <td style="border: 1px solid black; padding: 8px;">nonzero</td>
+      <td style="border: 1px solid black; padding: 8px;">not a number (NaN)</td>
+    </tr>
+  </tbody>
+</table>
+
+An introductory experiment to try on Kollmer's visualizer: flip all the exponents to zero. Can you use the chart to explain why the green number in the centered formula is still one, despite it technically being zero in binary? 
+
+The purpose of denormalized or subnormal numbers is to allow a much larger range at small magnitudes by utilizing the full length of the mantissa for improved precision.
+
+To simply explain the standard, there are two pieces. But first, let us introduce a new type of scientific notation:
+
+First, the usual scientific notation corresponds to normalized representations:
+<center>$$\pm 1.m \times 2^e$$</center>
+and the new one corresponds to what we call <b>denormalized representations</b>:
+<center>$$\pm 0.m \times 2^{e+1}$$</center>
+
+For the following, let us say that we are using a floating point representation with a bias of $b$. For our convention, $b < 0$ and is a negative number. This is what I've seen at UC Berkeley, but different opinions seem to exist. If your bias is positive, it likely means that you should be swapping all the signs in front of $b$ in the formulas below, or you've encountered a very strange exam question. 🪦
+
+### From Human Representations to IEEE 754 Floating Point Representations
+
+As you might have noticed above, regardless of whether we use the normalized or denormalized representations, there are three components:
+1. $\pm$: the sign of your number. This takes one bit to represent.
+2. $m$: the "mantissa" or "significand" of your number.
+3. $e$: the "exponent" of your number.
+
+Mantissa is a historically loaded word, so the word significand is often slightly preferred, but to be honest at UC Berkeley people seem to say mantissa more frequently in my experience.
+
+We need to put these three pieces into the three pieces of the IEEE 754 representation, which are conveniently named to refer to which part of the number they store information about. $S$ is a single bit representing the sign, $E$ consists of bits representing the exponent, and $M$ consists of bits representing the mantissa.
+
+<div class="skill">
+<b>Nuance.</b> Since binary strings are most easily understood as nonnegative integers, we utilize the "bias" to offset the raw number in $E$ to obtain $e$.
+</div>
+
+In the end, we will try to compute $S$, $E$, and $M$, which are binary strings representing the pieces of information above. Then, our number can be stored as $SEM$ in memory. 
+1. $S$ is simply 0 if your number is positive and 1 if your number is negative.
+2. $E$ is:
+    - Normalized case: If $e > b$, $E = e - b$.
+    - Denormalized case: If $e \le b$, rearrange your number into the denormalized representation above to make $e = b$, and set $E = 0$.
+3. $M$ is always $m$, however what $m$ means corresponds to either the normalized or denormalized human representation above.
+
+And boom! If you use these, you should get your IEEE 754 representation. 
+
+### From IEEE 754 Floating Point Representations
+
+Suppose you are now given an IEEE 754 representations, with binary strings: $S$, $E$, and $M$. We now want to recover the sign, $e$, and $m$ of our number.
+
+1. If $S$ is 0, our number is positive, and if it's 1, it's negative.
+2. $e$ is always $E + b$. 
+    - If $E = 0$, you should convert into the denormalized human representation, 
+    - If $E > 0$, you should convert into the normalized human representation.
+3. $m$ is always $M$, but be careful to use the normalized or denormalized human representation above.
+
+And that's it! 
+
+### Some Other Useful Formulas
+
+Another interesting point of discussion is the "step size". Suppose your representation has $p$ mantissa bits. If your exponent is $e$, then the step size is $2^{e - p}$ in the normalized case, and $2^{1+e-p}$ in the denormalized case. Alternatively, since $e = E + b$, the step size is also $2^{E + b - p}$ in the normalized case, and $2^{1+E+b-p}$ in the denormalized case. Since $E = 0$ for denormalized numbers, this is $2^{1 + b - p}$.
