@@ -157,6 +157,10 @@ td { width: 50%; }
 figure figcaption { text-align: center; font-size: small; }
 a { text-decoration: none; color: rgb(var(--tertiary-rgb)); }
 
+.enbario {
+  font-family: "Barrio", sans-serif;
+}
+
 .expanding-underline::after {
   content: '';
   position: absolute;
