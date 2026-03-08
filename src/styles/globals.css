@@ -15,7 +15,7 @@
 } */
 
 /* classic earth */
-:root {
+/* :root {
   --primary-rgb: 214,190,168;
   --secondary-rgb: 235, 235, 205;
   --tertiary-rgb: 138, 154, 91;
@@ -24,7 +24,7 @@
   --primary-text-rgb: 0, 0, 0;
   --accent-rgb: 138, 154, 91;
   --accent-dark-rgb: 126, 126, 90;
-}
+} */
 
 /* candy denim lemonade */
 /* :root {
@@ -39,7 +39,7 @@
 } */
 
 /* denim lemonade */
-/* :root {
+:root {
   --primary-rgb: 210, 232, 245;
   --secondary-rgb: 255, 255, 250; 
   --tertiary-rgb: 110, 170, 230;
@@ -48,7 +48,7 @@
   --primary-text-rgb: 12, 16, 22;
   --accent-rgb: 90, 150, 210;
   --accent-dark-rgb: 45, 85, 140;
-} */
+}
 
 /* classic lemonade */
 /* :root {
