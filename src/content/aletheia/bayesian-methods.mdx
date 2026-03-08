@@ -3,7 +3,51 @@ title: "Bayesian Methods"
 description: ""
 image: "/img/pics/IMG_0732.jpg"
 writer: "Aathreya Kadambi"
-date: "January 2026"
+date: "March 2026"
 category: ["math", "probability"]
 ---
 
+## The Bayesian Update
+
+The main idea behind Bayesian inference is Bayes' rule:
+<center>$$p(y \mid x) = \dfrac{p(x \mid y)p(y)}{p(x)} \propto p(x \mid y)p(y)$$</center>
+The symbols are interpretted in the following way:
+- $x$: observed data,
+- $y$: modeling parameters/the underlying universe state/something else depending on your philosophy,
+- $p(y\mid x)$: the *posterior* distribution of universe states given observation of data $x$,
+- $p(y)$: a *prior* belief about the distribution of universe states before observing $x$,
+- $p(x \mid y)$: the *likelihood* of obesrving some data $x$ given the universe state being $y$,
+- $p(x)$: the *evidence* for data $x$.
+
+The evidence term is usually computed by integrating over the joint distribution $p(x, y)$, which is computationally expensive. As such, we often prefer the form:
+<center>$$\log p(y \mid x) \overset{+C}{=} \log p(x \mid y) + \log p(y)$$</center>
+In other words, we can specify the log posterior up to a constant, if we know the log likelihood and log prior.
+
+According to Andrew Gelman's book (and Professor Alexander Strang whose course I took), there are three important pieces to Bayesian statistics:
+1. **Model Specification:** This is a specification of what distributions will be used for the prior and likelihood.
+2. **Bayesian Update:** This is computing or approximating the posterior given by the Bayesian update.
+3. **Model Evaluation:** This is the evaluation of the model and interpretation of the results.
+
+Each of these broad questions sits on top of large bodies of research, analysis, and thought. I hope to explore some of that in these notes.
+
+In my opinion, Bayesian statistics is one of the most philosophically pleasing subjects one can study in life because it seems to give a very casual and stable interpretation of the absence of meaning or objective truth. It also explains several phenomena that people might initially view as signs of inexplicable complexity. It is also very flexible, allowing the user to impose their own ideas or truths while also giving enough room for the data to tell its own story.
+
+## Large Sample Theory and Convergence: The Big Data Case [Model Sepcficiation]
+
+<div class="strat">
+**Vibe.** In the big data case (when we have a lot of data $x$), the power of Bayesian inference comes from convergence: the modeling paramters will converge to the parameters which minimize some notion of distributional distance to true phenomenon underlying the data. 
+</div>
+
+We will make this precise with several theorems below.
+
+## Importance of Prior: The Small Data Case [Model Specification]
+
+<div class="strat">
+**Vibe.** In the small data case (when we don't have much data $x$), the power of Bayesian inference comes from the power of the user to specify an informative prior. A prior can be thought of as a model fit on virtual data points, with stronger priors corresponding to more virtual data.
+</div>
+
+We will again make this precise with several theorems below. 
+
+## Conjugate Priors Are Invariant to Bayesian Updates [Model Specification]
+
+## Weighted Update Rules Can Also Make Sense [Bayesian Update]
