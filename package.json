@@ -42,6 +42,7 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "@types/three": "^0.168.0"
+    "@types/three": "^0.168.0",
+    "baseline-browser-mapping": "^2.10.27"
   }
 }

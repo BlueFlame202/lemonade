@@ -16,7 +16,7 @@ export default function Navbar(props : NavbarProps) {
   return (
     <div className="bg-soul p-4">
     <div id="banner" className="flex justify-center md:justify-start rounded-lg">
-      <img src="/img/AK-circle.png" className="logo" alt="lemonade"></img>
+      <img src="/img/icons/lemonade-mark/lemonade-circle.png" className="logo" alt="lemonade"></img>
         <div>
           <h1 className="enbario text-4xl hidden md:block">Lemonade</h1>
           <h3 className="hidden md:block">Aathreya Kadambi's Blog</h3>
