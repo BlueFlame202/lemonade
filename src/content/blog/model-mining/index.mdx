@@ -17,6 +17,8 @@ Little did I know that even the marginal differences sometimes came from genuine
 
 I've been reading the forums more closely, and I realized that while single models often get very far, a very large part of the game is ensembling. It's honestly quite beautiful: finding models that are equally "good" but by capturing different aspects of the signal can get massive ensemble boosts. And you can find equally "good" models that still capture different aspects of the signal by capturing models with **different inductive biases** (AKA trying different model classes).
 
+The interesting step is learning the weights of the ensemble themselves: it's as if we are learning a distribution on the collections of assumptions we are playing with themselves, instead of confining ourselves to one theory!
+
 This mindset is what I've been terming in my head as "model mining": the idea that if you train hundreds of models to do the same task and ensemble a diverse collection of good-performing ones, you can obtain an ensembled model that's far better than any of them by hedging on the very assumptions that aren't *necessary* for good predictive performance.
 
 This is brilliant to me because it feels like discovering ensemble boosts is equivalent to throwing away unnecessary axioms. It's like we're isolating the true assumptions and derivations necessary for the theory that produces our observations: just like mathematicians!
