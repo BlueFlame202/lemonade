@@ -1,0 +1,34 @@
+---
+title: "Kaggle and Model Mining"
+description: "Absurdism in modeling"
+image: "/img/pics/IMG_1953.jpg"
+author: "Aathreya Kadambi"
+date: "June 7, 2026"
+category: ['life', 'philosophy', 'cs', 'ml']
+---
+
+Recently, I've been trying to become a Kaggle grandmaster. I'm not sure if I'm fully committed to the dream yet, but so far I've actually learned a lot just from playing around on the current playground prediction competition.
+
+## What's the Difference Between 0.968 and 0.971?
+
+When I first looked at Kaggle competitions, I would always be discouraged from playing because I would see that the leaderboard scores were super close: often with only a marginal difference in the test metric between the top 5 or top 10 submissions. I noticed this was in part probably because of the large discussions in the forums. 
+
+Little did I know that even the marginal differences sometimes came from genuine signal discovery and substantial modeling effort.
+
+I've been reading the forums more closely, and I realized that while single models often get very far, a very large part of the game is ensembling. It's honestly quite beautiful: finding models that are equally "good" but by capturing different aspects of the signal can get massive ensemble boosts. And you can find equally "good" models that still capture different aspects of the signal by capturing models with **different inductive biases** (AKA trying different model classes).
+
+This mindset is what I've been terming in my head as "model mining": the idea that if you train hundreds of models to do the same task and ensemble a diverse collection of good-performing ones, you can obtain an ensembled model that's far better than any of them by hedging on the very assumptions that aren't *necessary* for good predictive performance.
+
+This is brilliant to me because it feels like discovering ensemble boosts is equivalent to throwing away unnecessary axioms. It's like we're isolating the true assumptions and derivations necessary for the theory that produces our observations: just like mathematicians!
+
+## Absurdism in Modeling
+
+I realized the impact of this shift on my personal modeling philosophy when I was reading a paper. Ordinarily, extra assumptions and choices bother me: if we are making choices in the theory itself, doesn't that mean that our model class may not even be expressive enough to capture the true phenomenon?
+
+But these days, I've been noticing that maybe our model classes don't really have to capture the true phenomenon. As long as we're close, that's good enough. And if we're not close, as long as we capture multiple model classes that capture different projections of the phenomenon, we can use them in combination to reconstruct the true phenomenon!
+
+In some way, this strikes me as a form of absurdism: maybe as humans we hope that data (and life) can be explained away by a perfect class of models that we understand logically. But real life is often exponentially complex. Ensembling gives us a way to chip away at the gap, though a perfect and simple explanation probably doesn't exist.
+
+## That being said...
+
+I wonder if there's a way to quantify diversity. Can we know ahead of time when introducing a new model class will genuinely improve our generalization and help capture real signal? These are my thoughts on @cdeotte's thread <a href="https://www.kaggle.com/competitions/playground-series-s6e6/discussion/704527">here</a>.
