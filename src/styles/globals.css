@@ -122,9 +122,9 @@ body {
 
 main.comic-page {
   position: relative;
-  width: 92%;
-  margin-left: 4%;
-  margin-right: 4%;
+  width: 86%;
+  margin-left: 7%;
+  margin-right: 7%;
   min-height: 100vh;
   background: rgb(var(--soul-rgb));
   padding-bottom: 2rem;
@@ -132,14 +132,24 @@ main.comic-page {
 
 .comic-nav {
   box-shadow: 0 5px 0 rgba(23, 20, 31, 0.08);
+  background: var(--comic-paper);
 }
 
-:root:not([data-theme="classic"]) .comic-nav {
-  background: #e0f2c9;
+.comic-nav .bg-secondary {
+  background-color: var(--comic-paper);
+  transition: background-color 300ms ease;
 }
 
-:root:not([data-theme="classic"]) .comic-nav .bg-secondary {
-  background-color: #c9e8b8;
+:root:not([data-theme="classic"]) .comic-nav .bg-secondary:hover {
+  background-color: #e0f2c9;
+}
+
+:root:not([data-theme="classic"]) .comic-nav .bg-secondary:hover .expanding-underline {
+  color: var(--comic-ink);
+}
+
+:root:not([data-theme="classic"]) .comic-nav .bg-secondary:hover .expanding-underline::after {
+  background-color: var(--comic-ink);
 }
 
 .theme-toggle {
@@ -201,6 +211,10 @@ main.comic-page {
 
 .comic-panel--yellow {
   background: var(--comic-yellow);
+}
+
+.comments-section {
+  background: var(--comic-paper);
 }
 
 .comic-section-title {
@@ -321,9 +335,9 @@ p {
 main {
   color: rgb(var(--primary-text-rg));
   
-  margin-left: 10%;
-  margin-right: 10%;
-  width: 80%;
+  margin-left: 7%;
+  margin-right: 7%;
+  width: 86%;
 }
 
 table { table-layout: fixed; }
