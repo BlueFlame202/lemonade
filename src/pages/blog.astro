@@ -11,7 +11,7 @@ const mdPosts = await getCollection('blog');
 const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({
   title: post.data.title,
   content: post.data.description,
-  link: `blog/${post.slug}`,
+  link: `blog/${post.id.replace(/\/index$/, '')}`,
   date: post.data.date,
   category: post.data.category as Category[],
   backgroundImage: post.data.image, // optional

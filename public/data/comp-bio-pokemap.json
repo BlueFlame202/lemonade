@@ -102,5 +102,16 @@
     "link": "http://drorlab.stanford.edu",
     "thoughts": "https://www.ocf.berkeley.edu/~aathreyak/orange-juice/thoughts/comp-bio-research/dror-lab",
     "color": "blue"
+  },
+  {
+    "name": "Scripps Research Institute",
+    "type":"institution",
+    "latitude": 32.8929,
+    "longitude": -117.2427,
+    "domain": ["computational_biology"],
+    "tags": ["research_institute"],
+    "notes": "Scripps University, home to a diverse range of biology research",
+    "link": "https://www.scripps.edu",
+    "color": "red"
   }
 ]

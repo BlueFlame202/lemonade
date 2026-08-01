@@ -9,6 +9,9 @@ const Comment = defineTable({
     message: column.text(),
     createdAt: column.date({ default: new Date() }),
     parentId: column.number({ default: -1 }),
+    status: column.text({ default: "pending" }),
+    ipHash: column.text({ default: "" }),
+    actorHash: column.text({ default: "" }),
   },
 });
 

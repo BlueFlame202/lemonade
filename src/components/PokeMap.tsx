@@ -261,7 +261,6 @@ export default function PokeMap() {
     if (!mapRef.current) return;
     const markerEls = document.querySelectorAll<HTMLDivElement>('.marker-for-pokemap');
     markerEls.forEach((el) => {
-      const entryName = el.getAttribute("data-marker-name");
       if (hovered && el.textContent === hovered.name) {
         el.classList.add("ring", "ring-yellow-400", "ring-2");
       } else {

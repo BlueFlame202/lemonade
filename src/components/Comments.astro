@@ -15,13 +15,13 @@ interface Props {
 const { postSlug } = Astro.props;
 ---
 
-<div class="comments-section">
-    <h2>Comments</h2>
+<section class="comments-section comic-panel comic-panel--yellow">
+    <h2 class="comic-section-title">Comments</h2>
     <div>
     {session ? (
-        <p>Welcome {session.user?.name}. Feel free to leave a comment! If you would like to remain anonymous, log out!</p>
+        <p>Welcome {session.user?.name}. Comments are moderated before they appear. Signing in records your Google email with this comment for identification. It is stored privately, not displayed, and not used for notifications.</p>
     ) : (
-        <p>Not signed in. Sign in with Google to make comments unanonymously!</p>
+        <p>Not signed in. Comments are moderated before they appear. Sign in with Google to associate your email with the comment for identification. Anonymous comments do not store an email.</p>
     )}
 
     <Auth>
@@ -47,7 +47,7 @@ const { postSlug } = Astro.props;
     </div>
 
     <div>
-        <CommentForm server:defer />
+        <CommentForm postSlug={postSlug} server:defer />
         <CommentList postSlug={postSlug} server:defer />
     </div>
-</div>
+</section>

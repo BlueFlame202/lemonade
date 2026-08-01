@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type NavbarProps = {
     active: string; // You can adjust the type as needed
@@ -8,13 +8,21 @@ type NavbarProps = {
 export default function Navbar(props : NavbarProps) {
 
   const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState<'classic' | 'lemonade-yellow'>('lemonade-yellow');
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem('lemonade-theme');
+    const nextTheme = savedTheme === 'classic' ? 'classic' : 'lemonade-yellow';
+    document.documentElement.dataset.theme = nextTheme;
+    setTheme(nextTheme);
+  }, []);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className="bg-soul p-4">
+    <div className="bg-soul p-4 comic-nav">
     <div id="banner" className="flex justify-center md:justify-start rounded-lg">
       <img src="/img/icons/lemonade-mark/lemonade-circle.png" className="logo" alt="lemonade"></img>
         <div>
@@ -53,6 +61,19 @@ export default function Navbar(props : NavbarProps) {
             Academia
             {/* <img src="/img/juice-5397880_1920.png" alt="orange-juice" id="orange-juice" width={50} height={50} /> */}
           </a>
+          <button
+            type="button"
+            className="theme-toggle p-2 relative flex items-center justify-center"
+            aria-pressed={theme === 'classic'}
+            onClick={() => {
+              const nextTheme = theme === 'classic' ? 'lemonade-yellow' : 'classic';
+              document.documentElement.dataset.theme = nextTheme;
+              window.localStorage.setItem('lemonade-theme', nextTheme);
+              setTheme(nextTheme);
+            }}
+          >
+            {theme === 'classic' ? 'Lemonade Yellow' : 'Classic Denim'}
+          </button>
         </div>
       </div>
     </div>

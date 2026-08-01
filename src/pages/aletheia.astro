@@ -10,7 +10,7 @@ const mdPosts = await getCollection('aletheia');
 const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({
   title: post.data.title,
   content: post.data.description,
-  link: `aletheia/${post.slug}`,
+  link: `aletheia/${post.id.replace(/\/index$/, '')}`,
   date: post.data.date,
   category: post.data.category as Category[],
   backgroundImage: post.data.image, // optional
@@ -21,7 +21,7 @@ const allPosts: BlogPost[] = [...normalizedMdPosts]
 <ClassicLayout title="Aletheia">
     <p id="date"><b>Project</b></p>
 
-    <div><figure><iframe src="https://open.spotify.com/embed/playlist/1kLP8Z4u1Vvfuy56G5Tv1F?utm_source=generator" width="300" height="100px" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></figure></div>
+    <div><figure><iframe src="https://open.spotify.com/embed/playlist/1kLP8Z4u1Vvfuy56G5Tv1F?utm_source=generator" width="300" height="100px" style="border: 0" allowtransparency="true" allow="encrypted-media"></iframe></figure></div>
 
     <p><i>Eureka!</i></p>
 
@@ -127,4 +127,3 @@ const allPosts: BlogPost[] = [...normalizedMdPosts]
 
     <p></p>
 </ClassicLayout>
-

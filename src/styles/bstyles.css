@@ -104,3 +104,28 @@ b {
     border-radius: 0.25rem;
     background: linear-gradient(90deg, rgba(255,242,0,0.35), rgba(0,0,0,0));;
 }
+
+.comment-content p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.comment-content pre {
+    overflow-x: auto;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.comment-content code {
+    font-family: monospace;
+}
+
+.comment-content blockquote {
+    padding-left: 0.75rem;
+    border-left: 0.2rem solid rgba(var(--accent-rgb), 0.6);
+}
+
+.comment-content a {
+    text-decoration: underline;
+}

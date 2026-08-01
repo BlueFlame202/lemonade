@@ -15,7 +15,7 @@ const latestPosts = allPosts
   <p>
     {latestPosts.map((post) => (
           <span>
-            [{post.data.date}:] <a href={`/blog/${post.slug}`}>{post.data.title}</a><br />
+            [{post.data.date}:] <a href={`/blog/${post.id.replace(/\/index$/, '')}`}>{post.data.title}</a><br />
           </span>
         ))}
   </p>
@@ -23,7 +23,7 @@ const latestPosts = allPosts
   <p>
   Rebranding this portion of my website. See <a href="/blog/aletheia">my blog post about it.</a>
   </p>
-  <h3 class="text-muted">Sea 🌊</h3>
+  <h3 class="text-muted">Sea</h3>
   <p>This is something I'm working on!</p>
   <h3 class="text-muted">Academia</h3>
   <p>This tab leads to my professional website, codenamed "orange juice".</p>

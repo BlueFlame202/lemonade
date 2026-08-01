@@ -9,7 +9,7 @@ if (!slug) {
   return Astro.redirect("/404");
 }
 
-const post = await getEntry("aletheia", slug);
+const post = await getEntry("aletheia", slug) ?? await getEntry("aletheia", `${slug}/index`);
 
 if (!post) {
   return Astro.redirect("/404");

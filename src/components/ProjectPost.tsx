@@ -56,13 +56,13 @@ const ProjectPostCard: React.FC<ProjectPostCardProps> = ({
     websiteIcon2
 }) => {
     return (
-        <div className="relative group rounded-lg shadow-lg overflow-hidden" style={{ backgroundColor: backgroundImage ? 'transparent' : 'white' }}>
+        <div className="relative group rounded-lg shadow-lg overflow-hidden comic-card" style={{ backgroundColor: backgroundImage ? 'transparent' : 'white' }}>
             {backgroundImage && (
                 <div className="absolute inset-0 bg-cover bg-center opacity-15 blur-none" style={{ backgroundImage: `url(${backgroundImage})` }}></div>
             )}
             <div className="absolute inset-0 transition-colors duration-500 bg-transparent group-hover:bg-special-color"></div>
             <div className="relative z-10 p-8">
-                <h2 className="text-xl font-semibold mb-2 group-hover:text-white">{title}</h2>
+                <h2 className="text-xl font-semibold mb-2 group-hover:text-white comic-card__title">{title}</h2>
                 <p className="text-gray-600 mb-4 group-hover:text-white">{status}</p>
                 <p className="text-gray-600 mb-4 group-hover:text-white">{content}</p>
                 <div className="space-y-4">
@@ -99,4 +99,3 @@ const ProjectPostCard: React.FC<ProjectPostCardProps> = ({
         </div>
     );
 };
-

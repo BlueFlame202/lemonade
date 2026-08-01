@@ -2,26 +2,32 @@
 import { actions, isInputError } from "astro:actions";
 import { getSession } from 'auth-astro/server';
 
+interface Props {
+  postSlug: string;
+}
+
+const { postSlug } = Astro.props as Props;
 const result = Astro.getActionResult(actions.addComment);
 const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 
-let theName = "Sans Nom"
-let theEmail = "anon@aathslemonade.vercel.app"
+let theName = "Anonymous"
+let theEmail = ""
 
 const session = await getSession(Astro.request);
 if (session?.user) {
-  theName = session.user.name ?? 'Dr. Strange';  // Default to empty string if name is null/undefined
-  theEmail = session.user.email ?? 'drstrange@aathslemonade.vercel.app';  // Default to empty string if email is null/undefined
+  theName = session.user.name ?? 'Anonymous';
+  theEmail = session.user.email ?? '';
 }
 ---
 
 <form method="POST" action={actions.addComment} class="mb-8">
+  <input type="hidden" name="postSlug" value={postSlug} />
   <div class="grid grid-cols-2 gap-4">
     <div class="mb-4">
       <p class="flex-grow pl-2 pr-2 rounded break-all">Name: <span class="border-b">{theName}</span></p>
     </div>
     <div class="mb-4">
-      <p class="flex-grow pl-2 pr-2 rounded break-all">Email: <span class="border-b">{theEmail}</span></p>
+      <p class="flex-grow pl-2 pr-2 rounded break-all">Email: <span class="border-b">{theEmail ? "stored privately for identity" : "not stored"}</span></p>
     </div>
   </div>
 
@@ -36,9 +42,12 @@ if (session?.user) {
     { inputErrors.message && (
     <p class="text-red-500">{inputErrors.message}</p>
     ) }
+    { result?.error && !isInputError(result.error) && (
+    <p class="text-red-500">{result.error.message}</p>
+    ) }
   </div>
 
-  <button type="submit" class="px-4 py-2 bg-tertiary text-white rounded">
+  <button type="submit" class="px-4 py-2 bg-tertiary text-white rounded comic-button">
     Add Comment
   </button>
 </form>

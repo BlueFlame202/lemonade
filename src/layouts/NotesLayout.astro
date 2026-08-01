@@ -2,7 +2,6 @@
 import Analytics from '@vercel/analytics/astro'
 import SpeedInsights from "@vercel/speed-insights/astro"
 import Navbar from "../components/Navbar";
-import NewsWidget from "../components/NewsWidget.astro";
 import Footbar from "../components/Footbar.astro";
 const { title, image, writer, date } = Astro.props;
 
@@ -24,8 +23,8 @@ import '../styles/bstyles.css'
               crossorigin="anonymous">
 		<title>{title}</title>
 	</head>
-	<body>
-        <main>
+    <body class="comic-site">
+        <main class="comic-page">
         <Navbar active="aletheia" client:load />
         <div class="container-fluid flex flex-wrap bg-soul pb-8 px-20">
             <div class="w-full">
@@ -38,6 +37,7 @@ import '../styles/bstyles.css'
                     <h1 class="display-1 mt-5">{title}</h1>
                     <p id="frontmatter"><b>{date}</b><br />
                         <b>{writer}</b><br />
+                    </p>
                     <slot />
                 </div>
             </div>

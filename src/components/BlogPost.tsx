@@ -185,7 +185,7 @@ export default function BlogPage({ posts, postsPerPage = 9 }: BlogPageProps) {
 const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, content, link, date, backgroundImage }) => {
     return (
         <div 
-            className="relative group rounded-lg shadow-lg overflow-hidden"
+            className="relative group rounded-lg shadow-lg overflow-hidden comic-card"
             style={{ backgroundColor: backgroundImage ? 'transparent' : 'white' }}
         >
             {backgroundImage && (

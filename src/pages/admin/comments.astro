@@ -1,0 +1,53 @@
+---
+import { actions } from "astro:actions";
+import { db, Comment, desc, eq } from "astro:db";
+import { getSession } from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+const adminEmail = import.meta.env.ADMIN_EMAIL?.trim().toLocaleLowerCase();
+const sessionEmail = session?.user?.email?.trim().toLocaleLowerCase();
+
+if (!adminEmail || !sessionEmail || sessionEmail !== adminEmail) {
+  return new Response("Forbidden", { status: 403 });
+}
+
+const pendingComments = await db
+  .select()
+  .from(Comment)
+  .where(eq(Comment.status, "pending"))
+  .orderBy(desc(Comment.createdAt));
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Pending comments</title>
+  </head>
+  <body>
+    <main>
+      <h1>Pending comments</h1>
+      <p><a href="/blog">Back to blog</a></p>
+      <p>Signed-in email addresses are retained only for identity association. No comment notifications are sent.</p>
+
+      {pendingComments.length ? pendingComments.map((comment) => (
+        <article>
+          <h2>{comment.name}</h2>
+          <p>{comment.postSlug}</p>
+          <time datetime={comment.createdAt.toISOString()}>{comment.createdAt.toLocaleString()}</time>
+          <p>{comment.message}</p>
+          <form method="POST" action={actions.moderateComment}>
+            <input type="hidden" name="commentId" value={comment.id} />
+            <input type="hidden" name="status" value="approved" />
+            <button type="submit">Approve</button>
+          </form>
+          <form method="POST" action={actions.moderateComment}>
+            <input type="hidden" name="commentId" value={comment.id} />
+            <input type="hidden" name="status" value="rejected" />
+            <button type="submit">Reject</button>
+          </form>
+        </article>
+      )) : <p>No comments are waiting for approval.</p>}
+    </main>
+  </body>
+</html>
