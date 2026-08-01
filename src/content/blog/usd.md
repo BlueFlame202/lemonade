@@ -1,7 +1,7 @@
 ---
 title: "USD Scripting"
 description: "Thank You Pixar"
-image: "/img/pics/20240902-ghee-and-ethics.jpg"
+image: "/img/pics/20240902-ghee-and-ethics.webp"
 author: "Aathreya Kadambi"
 date: "December 30, 2024"
 category: ['cs']

@@ -1,7 +1,7 @@
 ---
 title: "A New Era"
 description: "Lemonade for a Broader Audience"
-image: "/img/pics/IMG_9053.jpg"
+image: "/img/pics/IMG_9053.webp"
 author: "Aathreya Kadambi"
 date: "June 6, 2025"
 category: ['life']

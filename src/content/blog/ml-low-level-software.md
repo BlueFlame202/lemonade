@@ -1,7 +1,7 @@
 ---
 title: "ML Low Level Software"
 description: "Exposing PyTorch and JAX"
-image: "/img/pics/ml-low-level-software-1.png"
+image: "/img/pics/ml-low-level-software-1.webp"
 author: "Aathreya Kadambi"
 date: "January 2, 2026"
 category: ['cs', 'ml']
@@ -99,7 +99,7 @@ For profiling tools, I want to [relive my game programming days](https://aathrey
 Profiling PyTorch and JAX on linear layers actually shows some interesting results. 
 
 **Naive PyTorch Implementation:**
-<img src="/img/pics/ml-low-level-software-1.png"/>
+<img src="/img/pics/ml-low-level-software-1.webp"/>
 
 **PyTorch's Linear Layer Implementation:**
 <img src="/img/pics/ml-low-level-software-2.png"/>

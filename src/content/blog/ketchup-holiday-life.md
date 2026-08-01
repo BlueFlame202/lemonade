@@ -2,7 +2,7 @@
 
 title: "Ketchup, Holiday, Life"
 description: "Who are you?"
-image: "/img/pics/20240808-cardboard-box-gardens.jpg"
+image: "/img/pics/20240808-cardboard-box-gardens.webp"
 author: "Aathreya Kadambi"
 slug: "ketchup-holiday-life"
 date: "December 27, 2024"

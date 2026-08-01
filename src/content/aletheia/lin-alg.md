@@ -4,7 +4,7 @@ title: "MAT 217 Notes: Honors Linear Algebra"
 description: ""
 date: "December 2021"
 writer: "Aathreya Kadambi"
-image: "/img/pics/20240427-berkeley-hort.jpg"
+image: "/img/pics/20240427-berkeley-hort.webp"
 category: ["math"]
 ---
 

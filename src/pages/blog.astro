@@ -6,6 +6,8 @@ import type { BlogPost, Category } from "../types/blog"
 import { otherPosts } from "../content/posts"
 import { getCollection } from 'astro:content';
 
+export const prerender = true;
+
 const mdPosts = await getCollection('blog');
 
 const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({

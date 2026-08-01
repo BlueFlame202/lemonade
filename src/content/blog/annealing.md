@@ -1,7 +1,7 @@
 ---
 title: "Annealing"
 description: "."
-image: "/img/pics/IMG_8040.jpg"
+image: "/img/pics/IMG_8040.webp"
 author: "Aathreya Kadambi"
 date: "March 20, 2025"
 category: ['life']

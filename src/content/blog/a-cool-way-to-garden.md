@@ -1,7 +1,7 @@
 ---
 title: "A Cool Way to Garden"
 description: "Check out this video I saw!"
-image: "/img/pics/20240808-cardboard-box-gardens.jpg"
+image: "/img/pics/20240808-cardboard-box-gardens.webp"
 author: "Aathreya Kadambi"
 slug: "a-cool-way-to-garden"
 date: "August 8, 2024"

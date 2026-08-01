@@ -1,7 +1,7 @@
 ---
 title: "Proof by Bureaucracy"
 description: "My only critique of Lee."
-image: "/img/pics/riemannian-struggles-031625.jpg"
+image: "/img/pics/riemannian-struggles-031625.webp"
 author: "Aathreya Kadambi"
 date: "March 16, 2025"
 category: ['geometry', 'math']

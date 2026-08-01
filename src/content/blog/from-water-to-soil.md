@@ -2,7 +2,7 @@
 
 title: "From Water to Soil"
 description: "Systems"
-image: "/img/pics/IMG_7795.jpg"
+image: "/img/pics/IMG_7795.webp"
 author: "Aathreya Kadambi"
 date: "February 23, 2025"
 category: ['plants', 'life']

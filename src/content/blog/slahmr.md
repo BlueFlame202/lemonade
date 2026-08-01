@@ -1,7 +1,7 @@
 ---
 title: "SLAHMR and New Years Updates"
 description: "Investigations"
-image: "/img/pics/000084_001.png"
+image: "/img/pics/000084_001.webp"
 author: "Aathreya Kadambi"
 date: "January 7, 2025"
 category: ['ml', 'cs']

@@ -1,7 +1,7 @@
 ---
 title: "King of Khmer Music: Part 1"
 description: "Cambodian music I've listened to recently."
-image: "/img/pics/sinn-sisamouth.png"
+image: "/img/pics/sinn-sisamouth.webp"
 author: "Aathreya Kadambi"
 date: "June 6, 2025"
 category: ['music', "artistic"]

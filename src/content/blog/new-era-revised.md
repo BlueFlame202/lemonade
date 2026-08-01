@@ -1,7 +1,7 @@
 ---
 title: "New Era Revised"
 description: "My Vision"
-image: "/img/pics/IMG_0448.jpg"
+image: "/img/pics/IMG_0448.webp"
 author: "Aathreya Kadambi"
 date: "December 23, 2025"
 category: ['cs', 'life', 'philosophy']

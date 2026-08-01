@@ -5,6 +5,8 @@ import type { BlogPost, Category } from "../types/blog"
 
 import { getCollection } from 'astro:content';
 
+export const prerender = true;
+
 const mdPosts = await getCollection('aletheia');
 
 const normalizedMdPosts: BlogPost[] = mdPosts.map(post => ({
@@ -21,7 +23,7 @@ const allPosts: BlogPost[] = [...normalizedMdPosts]
 <ClassicLayout title="Aletheia">
     <p id="date"><b>Project</b></p>
 
-    <div><figure><iframe src="https://open.spotify.com/embed/playlist/1kLP8Z4u1Vvfuy56G5Tv1F?utm_source=generator" width="300" height="100px" style="border: 0" allowtransparency="true" allow="encrypted-media"></iframe></figure></div>
+    <div><figure><iframe src="https://open.spotify.com/embed/playlist/1kLP8Z4u1Vvfuy56G5Tv1F" width="300" height="100px" loading="lazy" referrerpolicy="no-referrer" style="border: 0" allowtransparency="true" allow="encrypted-media"></iframe></figure></div>
 
     <p><i>Eureka!</i></p>
 

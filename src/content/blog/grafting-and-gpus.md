@@ -2,7 +2,7 @@
 
 title: "Grafting and GPUs"
 description: "Things to consider when growing limes and lemons, and thinking about my GPU limitations."
-image: "/img/pics/IMG_3880.jpg"
+image: "/img/pics/IMG_3880.webp"
 author: "Aathreya Kadambi"
 slug: "grafting-and-gpus"
 date: "May 18, 2024"

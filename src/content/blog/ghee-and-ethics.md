@@ -2,7 +2,7 @@
 
 title: "Ghee and Ethics"
 description: "Wealth, Fame, and Power."
-image: "/img/pics/20240902-ghee-and-ethics.jpg"
+image: "/img/pics/20240902-ghee-and-ethics.webp"
 author: "Aathreya Kadambi"
 date: "September 2, 2024"
 category: ['philosophy']

@@ -1,7 +1,7 @@
 ---
 title: "Cloud Simulation"
 description: "A cool website."
-image: "/img/pics/IMG_4768.jpg"
+image: "/img/pics/IMG_4768.webp"
 author: "Aathreya Kadambi"
 date: "August 23, 2024"
 category: ['cs', "artistic"]

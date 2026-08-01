@@ -1,7 +1,7 @@
 ---
 title: "Roses and Radiance Fields"
 description: "I visited Berkeley Horticultural! I've also been thinking about NeRFs...."
-image: "/img/pics/20240427-berkeley-hort.jpg"
+image: "/img/pics/20240427-berkeley-hort.webp"
 author: "Aathreya Kadambi"
 slug: "roses-and-radiance-fields"
 date: "April 27, 2024"

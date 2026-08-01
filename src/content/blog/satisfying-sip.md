@@ -1,7 +1,7 @@
 ---
 title: "Satisfying Sip"
 description: "My New Tea Station!"
-image: "/img/pics/IMG_6417.jpg"
+image: "/img/pics/IMG_6417.webp"
 author: "Aathreya Kadambi"
 slug: "satisfying-sip"
 date: "November 5, 2024"
@@ -10,7 +10,7 @@ category: ['tea']
 
 Two days ago, I made a tea station for myself! Check it out:
 <center>
-<img src="/img/pics/IMG_6417.jpg" style="width: 60%;"></img>
+<img src="/img/pics/IMG_6417.webp" style="width: 60%;"></img>
 </center>
 
 It's pretty fun! I look forward to making different teas. It definitely makes me enjoy drinking water more, and the boiling water is pretty relaxing.

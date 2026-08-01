@@ -7,6 +7,8 @@ import Footbar from "../components/Footbar.astro"
 import '@fontsource/bitter'
 import "@fontsource/barrio";
 import '../styles/globals.css'
+
+export const prerender = true;
 ---
 
 <html lang="en">
@@ -21,11 +23,11 @@ import '../styles/globals.css'
 	<body>
     <div class="definitelyNotANotVeryHiddenComment"><!-- Oh hey, fancy seeing you here. Hmmm, I wonder, what would you do if I told you that I hid a(nother) comment in here? Who knows though, I might be trolling. :P --></div>
     <main class="comic-page">
-      <Navbar active="home" client:load />
+      <Navbar active="home" client:idle />
       <div class="container-fluid flex flex-wrap bg-soul">
         <div class="flex justify-center items-center w-full md:w-1/4 hidden md:flex">
           <div class="w-full mx-4 relative pb-[100%] overflow-hidden">
-            <img src="/img/aathreyakadambi-circle.png" alt="A picture of me" class="absolute object-cover top-0 left-0" />
+            <img src="/img/aathreyakadambi-circle.webp" alt="A picture of me" class="absolute object-cover top-0 left-0" />
           </div>
         </div>
 

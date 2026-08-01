@@ -1,7 +1,7 @@
 ---
 title: "Migrated to AstroJS!"
 description: "I moved the blog from NextJS to AstroJS!"
-image: "/img/pics/astrojs.png"
+image: "/img/pics/astrojs.webp"
 author: "Aathreya Kadambi"
 date: "August 4, 2024"
 category: ['cs']

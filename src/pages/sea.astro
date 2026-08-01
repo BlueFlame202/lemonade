@@ -1,10 +1,12 @@
 ---
 import SeaLayout from "../layouts/SeaLayout.astro";
 import PokeMap from "../components/PokeMap";
+
+export const prerender = true;
 ---
 <SeaLayout title="Sea">
     <p id="date"><b>Project</b></p>
     <p>More coming soon!</p>
 
-    <PokeMap client:load />
+    <PokeMap client:visible />
 </SeaLayout>

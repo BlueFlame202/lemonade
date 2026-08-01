@@ -1,7 +1,7 @@
 ---
 title: "Comments Enabled"
 description: "You can now comment!"
-image: "/img/pics/IMG_8039.jpg"
+image: "/img/pics/IMG_8039.webp"
 author: "Aathreya Kadambi"
 date: "March 22, 2025"
 category: ['cs', 'life']

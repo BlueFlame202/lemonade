@@ -1,7 +1,7 @@
 ---
 title: "New Jersey Style"
 description: "Software Engineering Principles"
-image: "/img/pics/IMG_3147.JPG"
+image: "/img/pics/IMG_3147.webp"
 author: "Aathreya Kadambi"
 date: "December 28, 2025"
 category: ['cs', 'philosophy']
