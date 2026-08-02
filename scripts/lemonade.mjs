@@ -153,6 +153,7 @@ async function processImage(sourcePath, options) {
   const meta = await sharp(source).metadata();
   const scale = Math.min(1, maxWidth / Math.max(meta.width, meta.height));
   await sharp(source)
+    .rotate()
     .resize({
       width: Math.round(meta.width * scale),
       height: Math.round(meta.height * scale),

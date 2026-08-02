@@ -80,7 +80,7 @@ export default function Navbar(props : NavbarProps) {
           <button
             type="button"
             className="theme-toggle p-2 relative flex items-center justify-center"
-            aria-label={`Switch theme to ${THEME_LABELS[THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length]]}`}
+            aria-label={`Current theme: ${THEME_LABELS[theme]}`}
             onClick={() => {
               const nextTheme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
               document.documentElement.dataset.theme = nextTheme;
@@ -88,7 +88,7 @@ export default function Navbar(props : NavbarProps) {
               setTheme(nextTheme);
             }}
           >
-            {THEME_LABELS[THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length]]}
+            {THEME_LABELS[theme]}
           </button>
         </div>
       </div>
