@@ -5,14 +5,25 @@ type NavbarProps = {
     active: string; // You can adjust the type as needed
 };
 
+const THEMES = ['lemonade-yellow', 'classic', 'earth'] as const;
+type Theme = (typeof THEMES)[number];
+
+const THEME_LABELS: Record<Theme, string> = {
+  'lemonade-yellow': 'Lemonade Yellow',
+  classic: 'Classic Denim',
+  earth: 'Classic Earth',
+};
+
 export default function Navbar(props : NavbarProps) {
 
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState<'classic' | 'lemonade-yellow'>('lemonade-yellow');
+  const [theme, setTheme] = useState<Theme>('lemonade-yellow');
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem('lemonade-theme');
-    const nextTheme = savedTheme === 'classic' ? 'classic' : 'lemonade-yellow';
+    const nextTheme = (THEMES as readonly string[]).includes(savedTheme ?? '')
+      ? (savedTheme as Theme)
+      : 'lemonade-yellow';
     document.documentElement.dataset.theme = nextTheme;
     setTheme(nextTheme);
   }, []);
@@ -59,7 +70,7 @@ export default function Navbar(props : NavbarProps) {
           </a>
           <a href="https://www.ocf.berkeley.edu/~aathreyak/orange-juice" target="_blank" rel="noopener noreferrer" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-color-darker group-hover:no-underline ${props.active === 'orange-juice' ? 'active' : ''}`}>
             Academia
-            <svg class="inline-block w-3 h-3 ml-1 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg className="inline-block w-3 h-3 ml-1 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M15 3h6v6" />
               <path d="M10 14 21 3" />
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -69,15 +80,15 @@ export default function Navbar(props : NavbarProps) {
           <button
             type="button"
             className="theme-toggle p-2 relative flex items-center justify-center"
-            aria-pressed={theme === 'classic'}
+            aria-label={`Switch theme to ${THEME_LABELS[THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length]]}`}
             onClick={() => {
-              const nextTheme = theme === 'classic' ? 'lemonade-yellow' : 'classic';
+              const nextTheme = THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length];
               document.documentElement.dataset.theme = nextTheme;
               window.localStorage.setItem('lemonade-theme', nextTheme);
               setTheme(nextTheme);
             }}
           >
-            {theme === 'classic' ? 'Lemonade Yellow' : 'Classic Denim'}
+            {THEME_LABELS[THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length]]}
           </button>
         </div>
       </div>

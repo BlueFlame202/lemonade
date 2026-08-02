@@ -13,9 +13,8 @@
   --accent-dark-rgb: 70, 80, 95;
 } */
 
-/* classic earth */
-/* :root {
-  --primary-rgb: 214,190,168;
+:root[data-theme="earth"] {
+  --primary-rgb: 214, 190, 168;
   --secondary-rgb: 235, 235, 205;
   --tertiary-rgb: 138, 154, 91;
   --quaternary-rgb: 89, 0, 22;
@@ -23,7 +22,12 @@
   --primary-text-rgb: 0, 0, 0;
   --accent-rgb: 138, 154, 91;
   --accent-dark-rgb: 126, 126, 90;
-} */
+  --comic-ink: #33261a;
+  --comic-paper: #fffff5;
+  --comic-yellow: #d9c36a;
+  --comic-red: #a4502e;
+  --comic-cyan: #8a9a5b;
+}
 
 /* candy denim lemonade */
 /* :root {
@@ -163,15 +167,24 @@ main.comic-page {
   position: relative;
   padding: clamp(1rem, 3vw, 2.5rem);
   border: 3px solid var(--comic-ink);
-  background: rgba(255, 248, 223, 0.9);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 251, 240, 0.8));
   box-shadow: 10px 10px 0 var(--comic-ink);
   animation: comic-pop 500ms cubic-bezier(0.2, 1.4, 0.4, 1) both;
 }
 
+.comic-story .comic-title {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border: 3px solid var(--comic-ink);
+  background: var(--comic-paper);
+  box-shadow: 7px 7px 0 var(--comic-ink);
+  text-shadow: none;
+  transform: rotate(-1deg);
+}
+
 .comic-hero {
   position: relative;
-  padding-bottom: 1rem;
-  border-bottom: 3px dashed var(--comic-ink);
+  padding-bottom: 1.25rem;
 }
 
 .comic-hero::after {
@@ -256,6 +269,12 @@ main.comic-page {
 
 .comic-card__title {
   font-family: "Barrio", sans-serif;
+}
+
+.edited-note {
+  font-weight: normal;
+  font-size: 0.9em;
+  opacity: 0.7;
 }
 
 .comic-button {
@@ -358,7 +377,10 @@ main {
 table { table-layout: fixed; }
 td { width: 50%; }
 figure figcaption { text-align: center; font-size: small; }
-a { text-decoration: none; color: rgb(var(--tertiary-rgb)); }
+
+@layer base {
+  a { text-decoration: none; color: rgb(var(--tertiary-rgb)); }
+}
 
 .enbario {
   font-family: "Barrio", sans-serif;

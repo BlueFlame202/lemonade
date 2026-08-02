@@ -23,5 +23,5 @@ const { Content } = await render(post);
 
 <BlogPostLayout {...post.data}>
   <Content />
-  <Comments postSlug={slug} />
+  <Comments postSlug={slug} slot="below" />
 </BlogPostLayout>

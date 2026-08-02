@@ -18,6 +18,19 @@ Post creation also accepts JSON for automation:
 npm run lemonade -- post create my-new-post --input post.json
 ```
 
+`post image` converts a photo from any directory into a post cover (WebP, max 1200px) in `public/img/pics/`, and optionally sets it as the post's cover:
+
+```sh
+npm run lemonade -- post image ~/Downloads/vacation.jpg --slug my-new-post
+npm run lemonade -- post image photo.png --name custom-name --collection aletheia --force
+```
+
+Dates are stamped on first push: `post create` writes a local-time placeholder, and `post publish` replaces `date:` with the actual first-push date (local time, matching the `"April 12, 2026"` format). Subsequent edits never change `date`; pass `--edited` to mark a major revision with an "Edited on ..." line:
+
+```sh
+npm run lemonade -- post publish my-new-post --push --edited
+```
+
 Comment moderation reads Turso directly and does not send email notifications:
 
 ```sh
