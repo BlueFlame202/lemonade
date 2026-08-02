@@ -42,7 +42,7 @@
   --primary-rgb: 255, 244, 196;
   --secondary-rgb: 255, 248, 223;
   --tertiary-rgb: 239, 71, 111;
-  --quaternary-rgb: 23, 20, 31;
+  --quaternary-rgb: 91, 70, 54;
   --soul-rgb: 255, 255, 255;
   --primary-text-rgb: 23, 20, 31;
   --accent-rgb: 85, 214, 230;
@@ -140,16 +140,12 @@ main.comic-page {
   transition: background-color 300ms ease;
 }
 
-:root:not([data-theme="classic"]) .comic-nav .bg-secondary:hover {
-  background-color: #e0f2c9;
+.comic-nav .bg-secondary:hover {
+  background-color: rgba(var(--quaternary-rgb), 1);
 }
 
-:root:not([data-theme="classic"]) .comic-nav .bg-secondary:hover .expanding-underline {
-  color: var(--comic-ink);
-}
-
-:root:not([data-theme="classic"]) .comic-nav .bg-secondary:hover .expanding-underline::after {
-  background-color: var(--comic-ink);
+.comic-nav .bg-secondary:hover .expanding-underline {
+  color: rgba(var(--soul-rgb), 1);
 }
 
 .theme-toggle {
