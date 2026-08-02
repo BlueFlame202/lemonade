@@ -32,3 +32,4 @@ pnpm-debug.log*
 
 # compiled binaries
 public/blog/investigating-the-fast-inverse-square-root/results/*.exe
+.env*

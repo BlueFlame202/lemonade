@@ -6,6 +6,8 @@ My blog and website! I've been working on this for a long time, and have learned
 
 Use Node `22.12.0` from `.nvmrc`.
 
+**Important:** `npm run dev` uses a *local* database file (`.astro/content.db`), and astro:db wipes that file's tables every time the dev server restarts. Comments you post on localhost never reach Turso. To develop against the real (Turso) database, use `npm run dev:remote` instead.
+
 ```sh
 npm run lemonade -- post create my-new-post --title "My New Post" --description "A short summary" --category math
 npm run lemonade -- post preview my-new-post

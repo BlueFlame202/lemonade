@@ -14,13 +14,16 @@ const blogDir = resolve(root, 'src/content/blog');
 const notesDir = resolve(root, 'src/content/aletheia');
 
 function loadDotEnv() {
-  const envPath = resolve(root, '.env');
-  if (!existsSync(envPath)) return;
+  const envFiles = ['.env.local', '.env'];
+  for (const file of envFiles) {
+    const envPath = resolve(root, file);
+    if (!existsSync(envPath)) continue;
 
-  for (const line of readFileSync(envPath, 'utf8').split(/\r?\n/)) {
-    const match = line.match(/^\s*([A-Z0-9_]+)=(.*)\s*$/);
-    if (!match || process.env[match[1]]) continue;
-    process.env[match[1]] = match[2].replace(/^['"]|['"]$/g, '');
+    for (const line of readFileSync(envPath, 'utf8').split(/\r?\n/)) {
+      const match = line.match(/^\s*([A-Z0-9_]+)=(.*)\s*$/);
+      if (!match || process.env[match[1]]) continue;
+      process.env[match[1]] = match[2].replace(/^['"]|['"]$/g, '');
+    }
   }
 }
 
