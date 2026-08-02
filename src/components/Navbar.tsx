@@ -57,8 +57,13 @@ export default function Navbar(props : NavbarProps) {
           <a href="/sea" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-color-darker group-hover:no-underline ${props.active === 'sea' ? 'active' : ''}`}>
             Sea
           </a>
-          <a href="https://www.ocf.berkeley.edu/~aathreyak/orange-juice" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-color-darker group-hover:no-underline ${props.active === 'orange-juice' ? 'active' : ''}`}>
+          <a href="https://www.ocf.berkeley.edu/~aathreyak/orange-juice" target="_blank" rel="noopener noreferrer" className={`p-2 relative flex items-center no-underline overflow-hidden expanding-underline text-special-color-darker group-hover:no-underline ${props.active === 'orange-juice' ? 'active' : ''}`}>
             Academia
+            <svg class="inline-block w-3 h-3 ml-1 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M15 3h6v6" />
+              <path d="M10 14 21 3" />
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            </svg>
             {/* <img src="/img/juice-5397880_1920.png" alt="orange-juice" id="orange-juice" width={50} height={50} /> */}
           </a>
           <button
