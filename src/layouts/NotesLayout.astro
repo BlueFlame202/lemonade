@@ -4,6 +4,7 @@ import SpeedInsights from "@vercel/speed-insights/astro"
 import Navbar from "../components/Navbar";
 import Footbar from "../components/Footbar.astro";
 const { title, image, writer, date } = Astro.props;
+const isNewIssue = Date.now() - new Date(date).getTime() < 7 * 24 * 60 * 60 * 1000;
 
 import '@fontsource/bitter'
 import "@fontsource/barrio";
@@ -30,7 +31,7 @@ import '../styles/bstyles.css'
             </div>
             <div class="order-1 md:order-2 w-full md:w-3/4 gx-5"> -->
                 <article class="comic-story w-full">
-                    <header class="comic-hero">
+                    <header class={`comic-hero${isNewIssue ? '' : ' comic-hero--old'}`}>
                     <div class="cover-image mt-4 rounded-lg" style={{ backgroundImage: `url(${image})` }}></div>
                     <h1 class="display-1 mt-5 comic-title">{title}</h1>
                     <p id="frontmatter"><b>{date}</b><br />

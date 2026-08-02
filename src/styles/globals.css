@@ -189,6 +189,10 @@ main.comic-page {
   box-shadow: 3px 3px 0 var(--comic-ink);
 }
 
+.comic-hero--old::after {
+  content: none;
+}
+
 .comic-title {
   color: var(--comic-ink);
   font-family: "Barrio", sans-serif;
