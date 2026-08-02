@@ -193,6 +193,21 @@ main.comic-page {
   content: none;
 }
 
+.comic-card__badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 20;
+  padding: 0.35rem 0.6rem;
+  border: 2px solid var(--comic-ink);
+  background: var(--comic-red);
+  color: white;
+  font-family: "Barrio", sans-serif;
+  font-size: 0.8rem;
+  transform: rotate(4deg);
+  box-shadow: 3px 3px 0 var(--comic-ink);
+}
+
 .comic-title {
   color: var(--comic-ink);
   font-family: "Barrio", sans-serif;

@@ -183,11 +183,13 @@ export default function BlogPage({ posts, postsPerPage = 9 }: BlogPageProps) {
 }
 
 const BlogPostCard: React.FC<BlogPostCardProps> = ({ title, content, link, date, backgroundImage }) => {
+    const isNew = Date.now() - new Date(date).getTime() < 7 * 24 * 60 * 60 * 1000;
     return (
         <div 
             className="relative group rounded-lg shadow-lg overflow-hidden comic-card"
             style={{ backgroundColor: backgroundImage ? 'transparent' : 'white' }}
         >
+            {isNew && <span className="comic-card__badge">NEW ISSUE</span>}
             {backgroundImage && (
                 <div 
                     className="absolute inset-0 bg-cover bg-center opacity-15 blur-none"
