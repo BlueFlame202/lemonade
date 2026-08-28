@@ -33,3 +33,7 @@ pnpm-debug.log*
 # compiled binaries
 public/blog/investigating-the-fast-inverse-square-root/results/*.exe
 .env*
+
+# local auth session artifacts
+auth
+auth-wal
