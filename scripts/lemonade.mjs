@@ -3,12 +3,14 @@
 import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { loadDotEnv } from '../../../lib/env.mjs';
-import { getProject, projects } from '../../../lib/config.mjs';
-import { createPost, deletePost, listPosts, previewPost, publishPost, slugify } from '../../../lib/posts.mjs';
-import { attachImage } from '../../../lib/images.mjs';
-import { formatComment, getComment, listComments, setCommentStatus } from '../../../lib/comments.mjs';
-import { appendLog } from '../../../lib/session.mjs';
+import { loadDotEnv } from '../../../tools/lib/env.mjs';
+import { getProject, projects } from '../../../tools/lib/config.mjs';
+import { createPost, deletePost, listPosts, slugify } from '../../../tools/lib/posts.mjs';
+import { attachImage } from '../../../tools/lib/images.mjs';
+import { formatComment, getComment, listComments, setCommentStatus } from '../../../tools/lib/comments.mjs';
+import { appendLog } from '../../../tools/lib/session.mjs';
+import { publishPost } from '../../../tools/lib/publish.mjs';
+import { previewPost } from '../../../tools/lib/preview.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -97,11 +99,33 @@ async function main() {
   if (!resource || resource === 'help' || resource === '--help') return usage();
 
   if (resource === 'post' && action === 'list') return listPostsCli(projectId, options);
-  if (resource === 'post' && action === 'create') return finish(() => createPost(projectId, collection, value ?? slugify(options.title ?? ''), options));
-  if (resource === 'post' && action === 'image') return finish(() => attachImage(projectId, collection, options.slug, value, options));
-  if (resource === 'post' && action === 'preview') return previewPost(projectId, collection, value, options);
-  if (resource === 'post' && action === 'publish') return finish(() => publishPost(projectId, collection, value, options));
-  if (resource === 'post' && action === 'delete') return finish(() => deletePost(projectId, collection, value));
+  if (resource === 'post' && action === 'create') {
+    return finish(() => createPost(projectId, collection, value ?? slugify(options.title ?? ''), options, { logger: console.log }));
+  }
+  if (resource === 'post' && action === 'image') return finish(() => attachImage(projectId, collection, options.slug, value, options, { logger: console.log }));
+  if (resource === 'post' && action === 'preview') {
+    const { url, child } = previewPost(projectId, collection, value, options, {
+      onEvent: (event) => {
+        if (event.type === 'ready') console.log(`Preview: ${event.url}`);
+        else if (event.type === 'log') process.stdout.write(event.text);
+      },
+    });
+    console.log(url);
+    process.on('SIGINT', () => child.kill('SIGINT'));
+    return;
+  }
+  if (resource === 'post' && action === 'publish') {
+    return finish(() => publishPost(projectId, collection, value, options, {
+      onEvent: (event) => {
+        if (event.type === 'step') console.log(event.message);
+        else if (event.type === 'log') process.stdout.write(event.text);
+      },
+    }).then((result) => {
+      console.log(`Published ${result.relativePath}`);
+      return result;
+    }));
+  }
+  if (resource === 'post' && action === 'delete') return finish(() => deletePost(projectId, collection, value, { logger: console.log }));
   if (resource === 'comments' && action === 'list') {
     const rows = await listComments(options);
     console.log('ID\tSTATUS\tPOST\tNAME\tCREATED\tMESSAGE');

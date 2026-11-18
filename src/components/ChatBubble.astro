@@ -1,5 +1,34 @@
 ---
-const { type } = Astro.props;
+/**
+ * iMessage-style bubble for MDX posts.
+ *
+ *   <ChatBubble type="sent">hey</ChatBubble>
+ *   <ChatBubble type="received" color="green">ok</ChatBubble>
+ *   <ChatBubble type="sent" color="#8b5cf6">custom hex</ChatBubble>
+ *   <ChatBubble type="sent" color="pink" text="#111">pink bg, dark text</ChatBubble>
+ *
+ * Named colors: blue, green, pink, purple, orange, teal, yellow, gray, black.
+ * Or any CSS color (hex / rgb / …). Defaults: sent = iMessage blue, received = gray.
+ */
+const PRESETS = {
+  blue: '#007aff',
+  green: '#34c759',
+  pink: '#ff2d55',
+  purple: '#af52de',
+  orange: '#ff9500',
+  teal: '#5ac8fa',
+  yellow: '#ffcc00',
+  gray: '#e5e5ea',
+  black: '#1c1c1e',
+};
+
+const { type = 'received', color, text } = Astro.props;
+const bg = color ? (PRESETS[color] ?? color) : undefined;
+const fg = text ? (PRESETS[text] ?? text) : undefined;
+const style = [
+  bg ? `--bubble-bg: ${bg}` : null,
+  fg ? `--bubble-fg: ${fg}` : null,
+].filter(Boolean).join('; ');
 ---
 
 <style>
@@ -15,16 +44,16 @@ const { type } = Astro.props;
   }
 
   .received {
-    background-color: #e5e5ea;
-    color: #000;
+    background-color: var(--bubble-bg, #e5e5ea);
+    color: var(--bubble-fg, #000);
   }
 
   .sent {
-    background-color: #007aff;
-    color: #fff;
+    background-color: var(--bubble-bg, #007aff);
+    color: var(--bubble-fg, #fff);
   }
 </style>
 
-<div class={`sms-bubble ${type}`}>
+<div class={`sms-bubble ${type}`} style={style || undefined}>
   <slot />
 </div>
