@@ -10,6 +10,12 @@
  * Named colors: blue, green, pink, purple, orange, teal, yellow, gray, black.
  * Or any CSS color (hex / rgb / …). Defaults: sent = iMessage blue, received = gray.
  */
+interface Props {
+  type?: 'sent' | 'received';
+  color?: string;
+  text?: string;
+}
+
 const PRESETS = {
   blue: '#007aff',
   green: '#34c759',
@@ -20,11 +26,18 @@ const PRESETS = {
   yellow: '#ffcc00',
   gray: '#e5e5ea',
   black: '#1c1c1e',
-};
+} as const;
+
+type Preset = keyof typeof PRESETS;
+
+function resolveColor(value?: string) {
+  if (!value) return undefined;
+  return value in PRESETS ? PRESETS[value as Preset] : value;
+}
 
 const { type = 'received', color, text } = Astro.props;
-const bg = color ? (PRESETS[color] ?? color) : undefined;
-const fg = text ? (PRESETS[text] ?? text) : undefined;
+const bg = resolveColor(color);
+const fg = resolveColor(text);
 const style = [
   bg ? `--bubble-bg: ${bg}` : null,
   fg ? `--bubble-fg: ${fg}` : null,
